@@ -1939,7 +1939,7 @@ Koh476_indeltype <- structure(
 #' @param simplify_labels Simplify peak labels by removing prefix (default = TRUE)
 #' @return A 476-channel indel profile plot
 #' @export
-plot_476_v3 <- function(
+plot_476 <- function(
   Koh476.catalog,
   text_size = 3,
   plot_title = "test",

@@ -35,7 +35,7 @@ R -e "devtools::install()"
 ### Core Functions
 
 - `PlotKoh89Catalog()` - Main 89-channel plotting function (R/Koh89_Koh476_Plotting_Functions.R)
-- `plot_476_v3()` - Main 476-channel plotting function with smart labeling (R/plot_476_v3.R)
+- `plot_476()` - Main 476-channel plotting function with smart labeling (R/plot_476.R)
 - `PlotKoh89CatalogtoPdf()` - Batch PDF export for 89-channel plots
 - `plot_476_pdf()` - Batch PDF export for 476-channel plots (R/plot_476_pdf.R)
 

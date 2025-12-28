@@ -9,7 +9,7 @@ plot_476_pdf <- function(
   label_threshold_denominator = 7
 ) {
   plot_list <- lapply(1:ncol(Koh476_catalog), function(i) {
-    plot_476_v3(
+    plot_476(
       Koh476.catalog = Koh476_catalog[, i],
       text_size = 3,
       plot_title = colnames(Koh476_catalog)[i],
