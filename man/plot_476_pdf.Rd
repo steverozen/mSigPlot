@@ -5,7 +5,7 @@
 \title{Export 476-channel indel profiles to PDF}
 \usage{
 plot_476_pdf(
-  Koh476_catalog,
+  catalog,
   filename,
   num_labels = 4,
   simplify_labels = FALSE,
@@ -13,7 +13,7 @@ plot_476_pdf(
 )
 }
 \arguments{
-\item{Koh476_catalog}{A matrix or data frame with 476 rows (indel types) and
+\item{catalog}{A matrix or data frame with 476 rows (indel types) and
 one column per sample. Column names are used as plot titles.}
 
 \item{filename}{Character. Path to the output PDF file.}

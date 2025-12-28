@@ -7,7 +7,7 @@ library(Cairo)
 #' for multiple samples. Plots are arranged with 5 samples per page. Uses
 #' Cairo for high-quality PDF rendering.
 #'
-#' @param Koh476_catalog A matrix or data frame with 476 rows (indel types) and
+#' @param catalog A matrix or data frame with 476 rows (indel types) and
 #'   one column per sample. Column names are used as plot titles.
 #' @param filename Character. Path to the output PDF file.
 #' @param num_labels Integer. Number of top peaks to label per category block.
@@ -21,17 +21,17 @@ library(Cairo)
 #'
 #' @export
 plot_476_pdf <- function(
-  Koh476_catalog,
+  catalog,
   filename,
   num_labels = 4,
   simplify_labels = FALSE,
   label_threshold_denominator = 7
 ) {
-  plot_list <- lapply(1:ncol(Koh476_catalog), function(i) {
+  plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
-      Koh476.catalog = Koh476_catalog[, i],
+      catalog = catalog[, i],
       text_size = 3,
-      plot_title = colnames(Koh476_catalog)[i],
+      plot_title = colnames(catalog)[i],
       num_labels = num_labels,
       simplify_labels = simplify_labels,
       label_threshold_denominator = label_threshold_denominator
