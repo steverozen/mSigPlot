@@ -1,6 +1,25 @@
 library(gridExtra)
 library(Cairo)
 
+#' Export 476-channel indel profiles to PDF
+#'
+#' Creates a multi-page PDF file containing 476-channel indel profile plots
+#' for multiple samples. Plots are arranged with 5 samples per page. Uses
+#' Cairo for high-quality PDF rendering.
+#'
+#' @param Koh476_catalog A matrix or data frame with 476 rows (indel types) and
+#'   one column per sample. Column names are used as plot titles.
+#' @param filename Character. Path to the output PDF file.
+#' @param num_labels Integer. Number of top peaks to label per category block.
+#'   Default is 4.
+#' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
+#'   the indel type prefix. Default is FALSE.
+#' @param label_threshold_denominator Numeric. Peaks with values less than
+#'   max/label_threshold_denominator are not labeled. Default is 7.
+#'
+#' @return NULL. Called for side effect of creating a PDF file.
+#'
+#' @export
 plot_476_pdf <- function(
   Koh476_catalog,
   filename,

@@ -5,14 +5,23 @@ library(data.table)
 library(ICAMS)
 library(ggplot2)
 library(dplyr)
-#' Plot indel profile in a 89-channel bar plot for single sample
-#' Show all x labels
-#' @param muts_basis A indel catalogue of a single sample
-#' @param text_size Size of text
-#' @param plot_title Title of the plot
-#' @return A 89-channel indel profile plot
+#' Plot 89-channel indel profile
+#'
+#' Creates a bar plot visualization of an 89-channel indel mutational signature
+#' for a single sample. The plot shows mutation counts or proportions across
+#' all 89 indel categories with color-coded category blocks.
+#'
+#' @param ID89.catalog Numeric vector of length 89 containing indel counts or
+#'   proportions for a single sample.
+#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
+#' @param plot_title Character. Title displayed above the plot. Default is "ID89".
+#' @param setyaxis Numeric or NULL. If provided, sets a fixed y-axis maximum.
+#'   If NULL, y-axis scales automatically to the data. Default is NULL.
+#' @param ylabel Character. Label for the y-axis. Default is "Counts".
+#'
+#' @return A ggplot2 object containing the 89-channel indel profile plot.
+#'
 #' @export
-
 plot_89 <- function(
   ID89.catalog,
   text_size = 3,
@@ -498,6 +507,18 @@ Mo_PlotID89toPdf <- function(ID89_catalog, filename) {
   dev.off()
 }
 
+#' Export 89-channel indel profiles to PDF
+#'
+#' Creates a multi-page PDF file containing 89-channel indel profile plots
+#' for multiple samples. Plots are arranged with 5 samples per page.
+#'
+#' @param ID89_catalog A matrix or data frame with 89 rows (indel types) and
+#'   one column per sample. Column names are used as plot titles.
+#' @param filename Character. Path to the output PDF file.
+#'
+#' @return NULL. Called for side effect of creating a PDF file.
+#'
+#' @export
 plot_89_pdf <- function(ID89_catalog, filename) {
   plot_list <- lapply(1:ncol(ID89_catalog), function(i) {
     plot_89(

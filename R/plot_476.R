@@ -1927,17 +1927,29 @@ Koh476_indeltype <- structure(
 )
 
 
-#' Plot indel profile in a 476-channel bar plot for single sample
-#' with grouped flanking base labels below the x-axis
-#' @param Koh476.catalog A indel catalogue of a single sample (476 values)
-#' @param text_size Size of text
-#' @param plot_title Title of the plot
-#' @param num_labels Number of top peaks to label per block (NULL = none)
-#' @param label_size Size of peak labels
-#' @param label_threshold_denominator Denominator for minimum threshold calculation for when to plot a label (default = 7)
-#' @param vline_labels Character vector of IndelType labels at which to draw vertical lines
-#' @param simplify_labels Simplify peak labels by removing prefix (default = TRUE)
-#' @return A 476-channel indel profile plot
+#' Plot 476-channel indel profile
+#'
+#' Creates a bar plot visualization of a 476-channel indel mutational signature
+#' for a single sample. The plot shows mutation counts or proportions across
+#' all 476 indel categories with color-coded category blocks and flanking base
+#' annotations. Includes smart peak labeling using ggrepel.
+#'
+#' @param Koh476.catalog Numeric vector of length 476 containing indel counts or
+#'   proportions for a single sample.
+#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
+#' @param plot_title Character. Title displayed above the plot. Default is "test".
+#' @param num_labels Integer. Number of top peaks to label per category block.
+#'   Set to 0 or NULL to disable labels. Default is 3.
+#' @param label_size Numeric. Size of peak labels. Default is 2.
+#' @param label_threshold_denominator Numeric. Peaks with values less than
+#'   max/label_threshold_denominator are not labeled. Default is 7.
+#' @param vline_labels Character vector. IndelType labels at which to draw
+#'   vertical reference lines. Default is empty.
+#' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
+#'   the indel type prefix. Default is TRUE.
+#'
+#' @return A ggplot2 object containing the 476-channel indel profile plot.
+#'
 #' @export
 plot_476 <- function(
   Koh476.catalog,
