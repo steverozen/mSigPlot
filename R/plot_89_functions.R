@@ -13,7 +13,7 @@ library(dplyr)
 #' @return A 89-channel indel profile plot
 #' @export
 
-PlotKoh89Catalog <- function(
+plot_89 <- function(
   ID89.catalog,
   text_size = 3,
   plot_title = "ID89",
@@ -498,9 +498,9 @@ Mo_PlotID89toPdf <- function(ID89_catalog, filename) {
   dev.off()
 }
 
-PlotKoh89CatalogtoPdf <- function(ID89_catalog, filename) {
+plot_89_pdf <- function(ID89_catalog, filename) {
   plot_list <- lapply(1:ncol(ID89_catalog), function(i) {
-    PlotKoh89Catalog(
+    plot_89(
       ID89.catalog = ID89_catalog[, i],
       text_size = 3,
       plot_title = colnames(ID89_catalog)[i]
