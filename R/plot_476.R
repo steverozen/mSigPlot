@@ -1934,7 +1934,7 @@ Koh476_indeltype <- structure(
 #' all 476 indel categories with color-coded category blocks and flanking base
 #' annotations. Includes smart peak labeling using ggrepel.
 #'
-#' @param Koh476.catalog Numeric vector of length 476 containing indel counts or
+#' @param catalog Numeric vector of length 476 containing indel counts or
 #'   proportions for a single sample.
 #' @param text_size Numeric. Size of text labels in the plot. Default is 3.
 #' @param plot_title Character. Title displayed above the plot. Default is "test".
@@ -1947,12 +1947,13 @@ Koh476_indeltype <- structure(
 #'   vertical reference lines. Default is empty.
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
 #'   the indel type prefix. Default is TRUE.
+#' @param base_size Base font size for ggplot2's theme.
 #'
 #' @return A ggplot2 object containing the 476-channel indel profile plot.
 #'
 #' @export
 plot_476 <- function(
-  Koh476.catalog,
+  catalog,
   text_size = 3,
   plot_title = "test",
   num_labels = 3,
@@ -1962,25 +1963,20 @@ plot_476 <- function(
   simplify_labels = TRUE,
   base_size = 11
 ) {
-  # Load Koh476_indeltype if not already in environment
-  if (!exists("Koh476_indeltype")) {
-    source("code/Koh89_Koh476_Plotting_Functions.R")
-  }
-
   # Ensure catalog is a numeric vector
-  if (is.data.frame(Koh476.catalog) || is.matrix(Koh476.catalog)) {
-    Koh476.catalog <- as.numeric(Koh476.catalog[, 1])
+  if (is.data.frame(catalog) || is.matrix(catalog)) {
+    catalog <- as.numeric(catalog[, 1])
   }
 
   # Determine y-axis label based on sum
-  ylabel <- if (sum(Koh476.catalog, na.rm = TRUE) < 1.1) {
+  ylabel <- if (sum(catalog, na.rm = TRUE) < 1.1) {
     "Proportion"
   } else {
     "Count"
   }
 
   my_vector <- Koh476_indeltype$IndelType
-  muts_basis <- data.frame(Sample = Koh476.catalog, IndelType = my_vector)
+  muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
   muts_basis_melt <- reshape2::melt(muts_basis, "IndelType")
   muts_basis_melt <- merge(
     Koh476_indeltype,

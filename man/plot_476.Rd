@@ -5,18 +5,19 @@
 \title{Plot 476-channel indel profile}
 \usage{
 plot_476(
-  Koh476.catalog,
+  catalog,
   text_size = 3,
   plot_title = "test",
   num_labels = 3,
   label_size = 2,
   label_threshold_denominator = 7,
   vline_labels = c(),
-  simplify_labels = TRUE
+  simplify_labels = TRUE,
+  base_size = 11
 )
 }
 \arguments{
-\item{Koh476.catalog}{Numeric vector of length 476 containing indel counts or
+\item{catalog}{Numeric vector of length 476 containing indel counts or
 proportions for a single sample.}
 
 \item{text_size}{Numeric. Size of text labels in the plot. Default is 3.}
@@ -36,6 +37,8 @@ vertical reference lines. Default is empty.}
 
 \item{simplify_labels}{Logical. If TRUE, simplifies peak labels by removing
 the indel type prefix. Default is TRUE.}
+
+\item{base_size}{Base font size for ggplot2's theme.}
 }
 \value{
 A ggplot2 object containing the 476-channel indel profile plot.
