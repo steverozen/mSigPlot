@@ -1959,7 +1959,8 @@ plot_476 <- function(
   label_size = 2,
   label_threshold_denominator = 7,
   vline_labels = c(), # c("A[Del(C):R1]A", "G[Del(C):R1]A")
-  simplify_labels = TRUE
+  simplify_labels = TRUE,
+  base_size = 11
 ) {
   # Load Koh476_indeltype if not already in environment
   if (!exists("Koh476_indeltype")) {
@@ -2178,7 +2179,8 @@ plot_476 <- function(
       legend.position = "none",
       axis.title.x = ggplot2::element_text(size = 10, margin = margin(t = 10)),
       axis.title.y = ggplot2::element_text(size = 10),
-      plot.margin = margin(t = 10, r = 10, b = 80, l = 10)
+      plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
+      base_size = base_size
     ) +
     ggplot2::scale_colour_manual(
       values = c("black" = "black", "white" = "white")
