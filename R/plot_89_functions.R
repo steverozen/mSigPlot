@@ -5,6 +5,7 @@ library(data.table)
 library(ICAMS)
 library(ggplot2)
 library(dplyr)
+
 #' Plot 89-channel indel profile
 #'
 #' Creates a bar plot visualization of an 89-channel indel mutational signature
