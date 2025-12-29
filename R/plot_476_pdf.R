@@ -15,7 +15,9 @@ library(Cairo)
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
 #'   the indel type prefix. Default is FALSE.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
-#'   max/label_threshold_denominator are not labeled. Default is 7.
+#'   max/label_threshold_denominator are not labeled.
+#' @param vline_labels Character vector. IndelType labels at which to draw
+#'   vertical reference lines. Default is empty.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
@@ -25,7 +27,8 @@ plot_476_pdf <- function(
   filename,
   num_labels = 4,
   simplify_labels = FALSE,
-  label_threshold_denominator = 7
+  label_threshold_denominator = 7,
+  vline_labels
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
@@ -34,7 +37,8 @@ plot_476_pdf <- function(
       plot_title = colnames(catalog)[i],
       num_labels = num_labels,
       simplify_labels = simplify_labels,
-      label_threshold_denominator = label_threshold_denominator
+      label_threshold_denominator = label_threshold_denominator,
+      vline_labels = vline_labels
     )
   })
   plots_per_page <- 5

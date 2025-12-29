@@ -96,7 +96,7 @@ test_that("plot_476 handles base_size", {
   p <- plot_476(
     catalog = catalog,
     plot_title = "With base_size",
-    base_size = 20
+    base_size = 30
   )
 
   expect_s3_class(p, "ggplot")
@@ -121,7 +121,7 @@ test_that("plot_476_pdf creates PDF file", {
   temp_pdf <- tempfile(fileext = ".pdf")
 
   plot_476_pdf(
-    Koh476_catalog = catalog_subset,
+    catalog = catalog_subset,
     filename = temp_pdf,
     num_labels = 2
   )
