@@ -20,7 +20,8 @@ library(ggrepel)
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled. Default is 7.
 #' @param vline_labels Character vector. IndelType labels at which to draw
-#'   vertical reference lines. Default is empty.
+#'   vertical reference lines. For example, c("A[Del(C):R1]A", "G[Del(C):R1]A").
+#'   Default is empty.
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
 #'   the indel type prefix. Default is TRUE.
 #' @param base_size Base font size for ggplot2's theme.
@@ -35,7 +36,7 @@ plot_476 <- function(
   num_labels = 3,
   label_size = 2,
   label_threshold_denominator = 7,
-  vline_labels = c(), # c("A[Del(C):R1]A", "G[Del(C):R1]A")
+  vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11
 ) {
@@ -305,10 +306,16 @@ plot_476 <- function(
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
       segment.color = "gray50",
-      segment.size = 0.3 * base_size / 111,
-      arrow = grid::arrow(length = unit(0.02, "npc"), type = "closed"),
+      segment.size = 0.5 * base_size / 11,
+      arrow = grid::arrow(length = unit(0.01, "npc"), type = "closed"),
       max.overlaps = 50,
       min.segment.length = 0,
+
+      box.padding = 1, # Padding around label box
+      point.padding = 1, # Padding from data point
+      force = 2, # Repulsion force between labels
+      force_pull = 0.5, # Pull toward data point (lower = less pull)
+
       inherit.aes = FALSE
     )
 
