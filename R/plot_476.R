@@ -178,14 +178,14 @@ plot_476 <- function(
     "C\\[Ins"
   )
   flanking_labels <- c(
-    "|A...",
-    "|G...",
-    "|T...",
-    "|A...",
-    "|G...",
-    "|T...",
-    "|C...",
-    "|C..."
+    " A...",
+    " G...",
+    " T...",
+    " A...",
+    " G...",
+    " T...",
+    " C...",
+    " C..."
   )
 
   # Find runs of each pattern
@@ -235,8 +235,8 @@ plot_476 <- function(
     ggplot2::xlab("Indel Type") +
     ggplot2::ylab(ylabel) +
     ggplot2::scale_x_continuous(
-      breaks = NULL,
-      labels = NULL,
+      breaks = flanking_blocks$xmin,
+      labels = flanking_blocks$label,
       limits = c(0.5, length(indel_positions) + 0.5)
     ) +
     ggplot2::ggtitle(plot_title) +
@@ -244,8 +244,13 @@ plot_476 <- function(
     ggplot2::coord_cartesian(ylim = c(0, max(blocks$ymax)), clip = "off") +
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks.x = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_text(
+        size = rel(0.8),
+        angle = 0,
+        hjust = 0,
+        vjust = 0.5
+      ),
+      axis.ticks.x = ggplot2::element_line(),
       axis.text.y = ggplot2::element_text(size = rel(0.7), colour = "black"),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
@@ -281,17 +286,6 @@ plot_476 <- function(
       ),
       size = text_size * base_size / 15,
       fontface = "bold",
-      inherit.aes = FALSE
-    ) +
-    # Add flanking base labels below x-axis
-    ggplot2::geom_text(
-      data = flanking_blocks,
-      ggplot2::aes(
-        x = xmin + 5,
-        y = y,
-        label = label
-      ),
-      size = 2 * base_size / 11,
       inherit.aes = FALSE
     ) +
     ggrepel::geom_text_repel(
