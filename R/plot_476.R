@@ -248,9 +248,10 @@ plot_476 <- function(
         size = rel(0.8),
         angle = 0,
         hjust = 0,
-        vjust = 0.5
+        vjust = 8, # Anchor text at bottom (above axis)
       ),
       axis.ticks.x = ggplot2::element_line(),
+      axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
       axis.text.y = ggplot2::element_text(size = rel(0.7), colour = "black"),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
