@@ -175,7 +175,10 @@ plot_476 <- function(
     "G\\[Ins",
     "T\\[Ins",
     "C\\[Del",
-    "C\\[Ins"
+    "C\\[Ins",
+    "Del2:U1:R1",
+    "Ins\\(2,4\\):M",
+    "Del2:M1"
   )
   flanking_labels <- c(
     " A...",
@@ -185,7 +188,10 @@ plot_476 <- function(
     " G...",
     " T...",
     " C...",
-    " C..."
+    " C...",
+    "",
+    "",
+    ""
   )
 
   # Find runs of each pattern
@@ -238,6 +244,9 @@ plot_476 <- function(
       breaks = flanking_blocks$xmin,
       labels = flanking_blocks$label,
       limits = c(0.5, length(indel_positions) + 0.5)
+    ) +
+    ggplot2::scale_y_continuous(
+      expand = expansion(mult = c(0.03, 0)) # No padding at bottom, 5% at top
     ) +
     ggplot2::ggtitle(plot_title) +
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
