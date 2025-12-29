@@ -28,7 +28,7 @@ plot_476_pdf <- function(
   num_labels = 4,
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
-  vline_labels
+  vline_labels = c()
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
