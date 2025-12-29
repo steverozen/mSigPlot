@@ -1,14 +1,19 @@
 test_that("plot_476 returns a ggplot object", {
   # Load fixture data
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
-  sig_data <- read.table(fixture_path, header = TRUE, sep = "\t",
-                         row.names = 1, check.names = FALSE)
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
 
   # Test with first signature column
   catalog <- as.numeric(sig_data[, 1])
 
   p <- plot_476(
-    Koh476.catalog = catalog,
+    catalog = catalog,
     text_size = 3,
     plot_title = colnames(sig_data)[1]
   )
@@ -18,14 +23,19 @@ test_that("plot_476 returns a ggplot object", {
 
 test_that("plot_476 handles different label options", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
-  sig_data <- read.table(fixture_path, header = TRUE, sep = "\t",
-                         row.names = 1, check.names = FALSE)
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
 
   catalog <- as.numeric(sig_data[, 1])
 
   # Test with no labels
   p_no_labels <- plot_476(
-    Koh476.catalog = catalog,
+    catalog = catalog,
     plot_title = "No labels",
     num_labels = 0
   )
@@ -33,7 +43,7 @@ test_that("plot_476 handles different label options", {
 
   # Test with simplified labels
   p_simplified <- plot_476(
-    Koh476.catalog = catalog,
+    catalog = catalog,
     plot_title = "Simplified labels",
     num_labels = 5,
     simplify_labels = TRUE
@@ -42,7 +52,7 @@ test_that("plot_476 handles different label options", {
 
   # Test with full labels
   p_full <- plot_476(
-    Koh476.catalog = catalog,
+    catalog = catalog,
     plot_title = "Full labels",
     num_labels = 3,
     simplify_labels = FALSE
@@ -52,13 +62,18 @@ test_that("plot_476 handles different label options", {
 
 test_that("plot_476 handles vertical line annotations", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
-  sig_data <- read.table(fixture_path, header = TRUE, sep = "\t",
-                         row.names = 1, check.names = FALSE)
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
 
   catalog <- as.numeric(sig_data[, 1])
 
   p <- plot_476(
-    Koh476.catalog = catalog,
+    catalog = catalog,
     plot_title = "With vlines",
     vline_labels = c("A[Del(C):R1]A", "G[Del(C):R1]A")
   )
@@ -66,10 +81,37 @@ test_that("plot_476 handles vertical line annotations", {
   expect_s3_class(p, "ggplot")
 })
 
+test_that("plot_476 handles base_size", {
+  fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  catalog <- as.numeric(sig_data[, 1])
+
+  p <- plot_476(
+    catalog = catalog,
+    plot_title = "With base_size",
+    base_size = 20
+  )
+
+  expect_s3_class(p, "ggplot")
+})
+
+
 test_that("plot_476_pdf creates PDF file", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
-  sig_data <- read.table(fixture_path, header = TRUE, sep = "\t",
-                         row.names = 1, check.names = FALSE)
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
 
   # Use first 3 signatures for faster test
   catalog_subset <- sig_data[, 1:3, drop = FALSE]

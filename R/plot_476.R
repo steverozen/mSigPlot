@@ -2167,7 +2167,7 @@ plot_476 <- function(
     ggplot2::ggtitle(plot_title) +
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
     ggplot2::coord_cartesian(ylim = c(0, max(blocks$ymax)), clip = "off") +
-    ggplot2::theme_classic() +
+    ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank(),
@@ -2175,8 +2175,7 @@ plot_476 <- function(
       legend.position = "none",
       axis.title.x = ggplot2::element_text(size = 10, margin = margin(t = 10)),
       axis.title.y = ggplot2::element_text(size = 10),
-      plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
-      base_size = base_size
+      plot.margin = margin(t = 10, r = 10, b = 80, l = 10)
     ) +
     ggplot2::scale_colour_manual(
       values = c("black" = "black", "white" = "white")
