@@ -1,10 +1,6 @@
-library(magrittr)
 library(indelsig.tools.lib)
 library(gridExtra)
 library(data.table)
-library(ICAMS)
-library(ggplot2)
-library(dplyr)
 
 #' Plot 89-channel indel profile
 #'
@@ -19,20 +15,34 @@ library(dplyr)
 #' @param setyaxis Numeric or NULL. If provided, sets a fixed y-axis maximum.
 #'   If NULL, y-axis scales automatically to the data. Default is NULL.
 #' @param ylabel Character. Label for the y-axis. Default is "Counts".
+#' @param base_size Base font size for ggplot2's `theme_classic()`.
+#' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
+#' @param show_top_bar Logical. If `TRUE`, display the category bar above the
+#'   plot.
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
 #' @export
 #'
-#' @import ggplot2
+#' @import ggplot2 dplyr magrittr
 #'
 plot_89 <- function(
   ID89.catalog,
   text_size = 3,
-  plot_title = "ID89",
+  plot_title = colnames(ID89.catalog)[1],
   setyaxis = NULL,
-  ylabel = "Counts"
+  ylabel = NULL,
+  base_size = 11,
+  show_x_axis_text = TRUE,
+  show_top_bar = FALSE
 ) {
+  if (is.null(ylabel)) {
+    if (sum(ID89.catalog) < 1.1 && max(ID89.catalog) != 1) {
+      ylabel = "Proportion"
+    } else {
+      ylabel = "Counts"
+    }
+  }
   # === 1. Define Indel Type Labels and Categories ===
   indel_type_4_figurelabel <- structure(
     list(
@@ -327,8 +337,8 @@ plot_89 <- function(
     "Ins 1bp C",
     "Ins 1bp T",
     "Del >=2bp",
-    "Del >=2bp",
-    "Mh",
+    "Ins >=2bp",
+    "Del Mh",
     "X"
   )
   blocks$cl <- c(
@@ -397,7 +407,7 @@ plot_89 <- function(
     ggplot2::aes(x = IndelType, y = freq, fill = Indel)
   ) +
     ggplot2::geom_bar(stat = "identity", position = "dodge", width = .7) +
-    ggplot2::xlab("Indel Types") +
+    ggplot2::xlab("Indel Type") +
     ggplot2::ylab(ylabel) +
     ggplot2::scale_x_discrete(
       limits = indel_positions,
@@ -413,19 +423,33 @@ plot_89 <- function(
       labels = scales::number_format(accuracy = 0.01),
       expand = c(0, 0)
     ) +
-    ggplot2::theme_classic() +
+    ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
-      axis.text.x = ggplot2::element_text(
-        angle = 90,
-        vjust = 0.5,
-        size = 5,
-        colour = "black",
-        hjust = 1
-      ),
+      axis.text.x = if (show_x_axis_text) {
+        ggplot2::element_text(
+          angle = 90,
+          vjust = 0.5,
+          size = rel(0.6),
+          colour = "black",
+          hjust = 1
+        )
+      } else {
+        ggplot2::element_blank()
+      },
+      axis.ticks.x = if (show_x_axis_text) {
+        ggplot2::element_line()
+      } else {
+        ggplot2::element_blank()
+      },
       axis.text.y = ggplot2::element_text(size = 10, colour = "black"),
       legend.position = "none",
-      axis.title.x = ggplot2::element_text(size = 15),
-      axis.title.y = ggplot2::element_text(size = 15)
+      axis.title.x = ggplot2::element_text(
+        size = rel(0.9),
+        margin = margin(t = ifelse(show_x_axis_text, -12, 1), b = 0)
+        # -12 on the margin works because some of the x axix text
+        # extends down a lot but it is at the the far right
+      ),
+      axis.title.y = ggplot2::element_text(size = rel(0.9))
     ) +
     ggplot2::geom_rect(
       data = blocks3,
@@ -476,6 +500,33 @@ plot_89 <- function(
       fontface = "bold",
       inherit.aes = FALSE
     )
+
+  # Add top bar conditionally
+  if (show_top_bar) {
+    p <- p +
+      ggplot2::geom_rect(
+        data = blocks,
+        ggplot2::aes(
+          xmin = xmin,
+          ymin = ymin,
+          xmax = xmax,
+          ymax = ymax,
+          fill = Type
+        ),
+        inherit.aes = FALSE
+      ) +
+      ggplot2::geom_text(
+        data = blocks,
+        ggplot2::aes(
+          x = (xmax + xmin) / 2,
+          y = (ymax + ymin) / 2,
+          label = labels
+        ),
+        size = text_size * base_size / 11,
+        fontface = "bold",
+        inherit.aes = FALSE
+      )
+  }
 
   return(p)
 }

@@ -1,12 +1,3 @@
-library(magrittr)
-library(indelsig.tools.lib)
-library(gridExtra)
-library(data.table)
-library(ICAMS)
-library(ggplot2)
-library(dplyr)
-
-
 #' Export 89-channel indel profiles to PDF
 #'
 #' Creates a multi-page PDF file containing 89-channel indel profile plots
@@ -15,19 +6,29 @@ library(dplyr)
 #' @param ID89_catalog A matrix or data frame with 89 rows (indel types) and
 #'   one column per sample. Column names are used as plot titles.
 #' @param filename Character. Path to the output PDF file.
+#' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
+#' @param show_top_bar Logical. If `TRUE`, display the category bar above the
+#'   plot.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
 #' @export
 #'
-#' @import Cairo
+#' @import Cairo dplyr
 #' @importFrom grDevices dev.off cairo_pdf
-plot_89_pdf <- function(ID89_catalog, filename) {
+plot_89_pdf <- function(
+  ID89_catalog,
+  filename,
+  show_x_axis_text = TRUE,
+  show_top_bar = FALSE
+) {
   plot_list <- lapply(1:ncol(ID89_catalog), function(i) {
     plot_89(
       ID89.catalog = ID89_catalog[, i],
       text_size = 3,
-      plot_title = colnames(ID89_catalog)[i]
+      plot_title = colnames(ID89_catalog)[i],
+      show_x_axis_text = show_x_axis_text,
+      show_top_bar = show_top_bar
     )
   })
   plots_per_page <- 5

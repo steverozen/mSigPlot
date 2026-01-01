@@ -4,13 +4,16 @@
 \alias{plot_89_pdf}
 \title{Export 89-channel indel profiles to PDF}
 \usage{
-plot_89_pdf(ID89_catalog, filename)
+plot_89_pdf(ID89_catalog, filename, show_x_axis_text = TRUE)
 }
 \arguments{
 \item{ID89_catalog}{A matrix or data frame with 89 rows (indel types) and
 one column per sample. Column names are used as plot titles.}
 
 \item{filename}{Character. Path to the output PDF file.}
+
+\item{show_x_axis_text}{Logical. If \code{TRUE}, display x-axis tick labels.
+Default is \code{TRUE}.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.
