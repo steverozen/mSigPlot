@@ -9,7 +9,8 @@ plot_476_pdf(
   filename,
   num_labels = 4,
   simplify_labels = FALSE,
-  label_threshold_denominator = 7
+  label_threshold_denominator = 7,
+  vline_labels = c()
 )
 }
 \arguments{
@@ -25,7 +26,10 @@ Default is 4.}
 the indel type prefix. Default is FALSE.}
 
 \item{label_threshold_denominator}{Numeric. Peaks with values less than
-max/label_threshold_denominator are not labeled. Default is 7.}
+max/label_threshold_denominator are not labeled.}
+
+\item{vline_labels}{Character vector. IndelType labels at which to draw
+vertical reference lines. Default is empty.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

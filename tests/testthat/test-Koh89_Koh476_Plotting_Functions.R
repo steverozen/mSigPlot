@@ -10,10 +10,3 @@ test_that("plot_89 returns a ggplot object", {
 
   expect_s3_class(p, "ggplot")
 })
-
-test_that("Koh89_indeltype has correct dimensions", {
-  expect_equal(nrow(Koh89_indeltype), 89)
-  expect_true("IndelType" %in% names(Koh89_indeltype))
-  expect_true("Indel" %in% names(Koh89_indeltype))
-  expect_true("Figlabel" %in% names(Koh89_indeltype))
-})

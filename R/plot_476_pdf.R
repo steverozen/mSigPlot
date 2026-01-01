@@ -22,6 +22,9 @@ library(Cairo)
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
 #' @export
+#'
+#' @import Cairo
+#' @importFrom grDevices dev.off cairo_pdf
 plot_476_pdf <- function(
   catalog,
   filename,
@@ -57,7 +60,7 @@ plot_476_pdf <- function(
     plots_on_page <- plot_list[start_index:end_index]
 
     # Arrange the plots in a grid (2 rows x 4 columns)
-    do.call(grid.arrange, c(plots_on_page, nrow = 5, ncol = 1))
+    do.call(gridExtra::grid.arrange, c(plots_on_page, nrow = 5, ncol = 1))
   }
 
   # Close the PDF device

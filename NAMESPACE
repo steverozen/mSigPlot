@@ -2,5 +2,13 @@
 
 export(plot_476)
 export(plot_476_pdf)
+export(plot_83)
 export(plot_89)
 export(plot_89_pdf)
+import(Cairo)
+import(dplyr)
+import(ggplot2)
+import(ggrepel)
+import(reshape2)
+importFrom(grDevices,cairo_pdf)
+importFrom(grDevices,dev.off)

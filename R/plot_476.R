@@ -1,8 +1,3 @@
-library(ggplot2)
-library(reshape2)
-library(dplyr)
-library(ggrepel)
-
 #' Plot 476-channel indel profile
 #'
 #' Creates a bar plot visualization of a 476-channel indel mutational signature
@@ -20,7 +15,7 @@ library(ggrepel)
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled. Default is 7.
 #' @param vline_labels Character vector. IndelType labels at which to draw
-#'   vertical reference lines. For example, c("A[Del(C):R1]A", "G[Del(C):R1]A").
+#'   vertical reference lines. For example, `c("A[Del(C):R1]A", "G[Del(C):R1]A")`.
 #'   Default is empty.
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
 #'   the indel type prefix. Default is TRUE.
@@ -29,6 +24,9 @@ library(ggrepel)
 #' @return A ggplot2 object containing the 476-channel indel profile plot.
 #'
 #' @export
+#'
+#' @import ggplot2 reshape2 dplyr ggrepel
+#'
 plot_476 <- function(
   catalog,
   text_size = 3,
@@ -117,8 +115,8 @@ plot_476 <- function(
     "Del 1bp T",
     "Ins 1bp C",
     "Ins 1bp T",
-    "Del ≥2bp",
-    "Ins ≥2bp",
+    "Del \u226522bp", # \u.... is >= character
+    "Ins \u226522bp",
     "Mh",
     "X"
   )

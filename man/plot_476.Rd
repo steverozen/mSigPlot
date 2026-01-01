@@ -33,7 +33,8 @@ Set to 0 or NULL to disable labels. Default is 3.}
 max/label_threshold_denominator are not labeled. Default is 7.}
 
 \item{vline_labels}{Character vector. IndelType labels at which to draw
-vertical reference lines. Default is empty.}
+vertical reference lines. For example, \code{c("A[Del(C):R1]A", "G[Del(C):R1]A")}.
+Default is empty.}
 
 \item{simplify_labels}{Logical. If TRUE, simplifies peak labels by removing
 the indel type prefix. Default is TRUE.}
