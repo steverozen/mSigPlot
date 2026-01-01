@@ -35,7 +35,6 @@ plot_89_pdf <- function(
 
   # Total number of pages
   total_pages <- ceiling(length(plot_list) / plots_per_page)
-  library(gridExtra)
   # Open a PDF device
   cairo_pdf(filename, width = 8.2677, height = 14.61613)
 

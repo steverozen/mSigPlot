@@ -1,5 +1,7 @@
 #' Plot 83-type indel catalog using ggplot2 and return the ggplot object
 #' @param catalog An 83-row, 1 - column indel catalog
+#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
+#' @param plot_title Character. Title displayed above the plot. Default is "test".
 #' @param grid Logical, draw grid lines
 #' @param upper Logical, draw category labels above bars
 #' @param xlabels Logical, draw x-axis labels

@@ -19,6 +19,10 @@ plot_83(
 \arguments{
 \item{catalog}{An 83-row, 1 - column indel catalog}
 
+\item{text_size}{Numeric. Size of text labels in the plot. Default is 3.}
+
+\item{plot_title}{Character. Title displayed above the plot. Default is "test".}
+
 \item{grid}{Logical, draw grid lines}
 
 \item{upper}{Logical, draw category labels above bars}

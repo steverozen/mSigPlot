@@ -1,6 +1,3 @@
-library(gridExtra)
-library(Cairo)
-
 #' Export 476-channel indel profiles to PDF
 #'
 #' Creates a multi-page PDF file containing 476-channel indel profile plots

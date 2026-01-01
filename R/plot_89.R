@@ -1,7 +1,3 @@
-library(indelsig.tools.lib)
-library(gridExtra)
-library(data.table)
-
 #' Plot 89-channel indel profile
 #'
 #' Creates a bar plot visualization of an 89-channel indel mutational signature

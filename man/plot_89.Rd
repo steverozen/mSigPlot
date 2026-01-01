@@ -8,10 +8,11 @@ plot_89(
   ID89.catalog,
   text_size = 3,
   plot_title = colnames(ID89.catalog)[1],
+  setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
   show_x_axis_text = TRUE,
-  show_top_bar = TRUE
+  show_top_bar = FALSE
 )
 }
 \arguments{
@@ -22,18 +23,17 @@ proportions for a single sample.}
 
 \item{plot_title}{Character. Title displayed above the plot. Default is "ID89".}
 
+\item{setyaxis}{Numeric or NULL. If provided, sets a fixed y-axis maximum.
+If NULL, y-axis scales automatically to the data. Default is NULL.}
+
 \item{ylabel}{Character. Label for the y-axis. Default is "Counts".}
 
 \item{base_size}{Base font size for ggplot2's \code{theme_classic()}.}
 
-\item{show_x_axis_text}{Logical. If \code{TRUE}, display x-axis tick labels.
-Default is \code{TRUE}.}
+\item{show_x_axis_text}{Logical. If \code{TRUE}, display x-axis tick labels.}
 
 \item{show_top_bar}{Logical. If \code{TRUE}, display the category bar above the
-plot. Default is \code{TRUE}.}
-
-\item{setyaxis}{Numeric or NULL. If provided, sets a fixed y-axis maximum.
-If NULL, y-axis scales automatically to the data. Default is NULL.}
+plot.}
 }
 \value{
 A ggplot2 object containing the 89-channel indel profile plot.

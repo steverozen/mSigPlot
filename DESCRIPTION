@@ -6,13 +6,10 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: GPL (>= 3)
 Imports: Cairo,
-    data.table,
     dplyr,
     ggplot2,
     ggrepel,
     gridExtra,
-    ICAMS,
-    indelsig.tools.lib,
     magrittr,
     reshape2,
     scales
