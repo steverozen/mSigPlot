@@ -209,7 +209,15 @@ plot_83 <- function(
       limits = c(0.5, 83.5),
       expand = c(0, 0)
     ) +
-    coord_cartesian(ylim = c(0, ymax * 1.35), clip = "off") +
+    scale_y_continuous(
+      limits = c(-ymax * 0.3, ymax * 1.35),
+      breaks = function(x) {
+        b <- scales::extended_breaks()(c(0, ymax))
+        b[b >= 0]
+      },
+      expand = c(0, 0)
+    ) +
+    coord_cartesian(ylim = c(-ymax * 0.3, ymax * 1.35), clip = "off") +
     theme_classic(base_size = base_size) +
     theme(
       axis.line.x = element_blank(),
@@ -227,11 +235,15 @@ plot_83 <- function(
   # Add x-axis label
   p <- p + xlab(NULL)
 
-  # Add grid lines
+  # Add grid lines that match the y-axis ticks
   if (grid) {
+    # Get the y-axis breaks that ggplot2 will use
+    y_breaks <- ggplot2::ggplot_build(p)$layout$panel_params[[1]]$y$breaks
+    y_breaks <- y_breaks[!is.na(y_breaks) & y_breaks >= 0 & y_breaks <= ymax]
+
     p <- p +
       geom_hline(
-        yintercept = seq(0, ymax, ymax / 4),
+        yintercept = y_breaks,
         color = "grey60",
         linewidth = 0.25
       ) +
