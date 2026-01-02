@@ -20,7 +20,7 @@ plot_89_pdf <- function(
   ID89_catalog,
   filename,
   show_x_axis_text = TRUE,
-  show_top_bar = FALSE
+  show_top_bar = TRUE
 ) {
   plot_list <- lapply(1:ncol(ID89_catalog), function(i) {
     plot_89(

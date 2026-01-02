@@ -14,7 +14,10 @@
 #' @param base_size Base font size for ggplot2's `theme_classic()`.
 #' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
 #' @param show_top_bar Logical. If `TRUE`, display the category bar above the
-#'   plot.
+#'   plot (e.g., "Del 1bp C", "Ins 1bp T").
+#' @param show_extra_top_bar Logical. If `TRUE`, display the extra summary bar
+#'   above the category bar (e.g., "Del", "Ins"). Only shown if `show_top_bar`
+#'   is also `TRUE`. This is really for backward compatibility.
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
@@ -30,7 +33,8 @@ plot_89 <- function(
   ylabel = NULL,
   base_size = 11,
   show_x_axis_text = TRUE,
-  show_top_bar = FALSE
+  show_top_bar = TRUE,
+  show_extra_top_bar = FALSE
 ) {
   if (is.null(ylabel)) {
     if (sum(ID89.catalog) < 1.1 && max(ID89.catalog) != 1) {
@@ -414,9 +418,21 @@ plot_89 <- function(
     ggplot2::scale_y_continuous(
       limits = c(
         0,
-        ifelse(!is.null(setyaxis), setyaxis * 1.32, unique(blocks3$ymax))
+        if (show_top_bar && show_extra_top_bar) {
+          ifelse(!is.null(setyaxis), setyaxis * 1.32, unique(blocks3$ymax))
+        } else if (show_top_bar) {
+          ifelse(!is.null(setyaxis), setyaxis * 1.2, unique(blocks$ymax))
+        } else {
+          ifelse(
+            !is.null(setyaxis),
+            setyaxis * 1.05,
+            max(muts_basis_melt$freq) * 1.05
+          )
+        }
       ),
-      labels = scales::number_format(accuracy = 0.01),
+      labels = scales::number_format(
+        accuracy = if (ylabel == "Counts") 1 else 0.01
+      ),
       expand = c(0, 0)
     ) +
     ggplot2::theme_classic(base_size = base_size) +
@@ -442,63 +458,14 @@ plot_89 <- function(
       axis.title.x = ggplot2::element_text(
         size = rel(0.9),
         margin = margin(t = ifelse(show_x_axis_text, -12, 1), b = 0)
-        # -12 on the margin works because some of the x axix text
-        # extends down a lot but it is at the the far right
       ),
       axis.title.y = ggplot2::element_text(size = rel(0.9))
     ) +
-    ggplot2::geom_rect(
-      data = blocks3,
-      ggplot2::aes(
-        xmin = xmin,
-        ymin = ymin,
-        xmax = xmax,
-        ymax = ymax,
-        fill = Type,
-        colour = "white"
-      ),
-      inherit.aes = FALSE
-    ) +
-    ggplot2::geom_text(
-      data = blocks3,
-      ggplot2::aes(
-        x = (xmax + xmin) / 2,
-        y = (ymax + ymin) / 2,
-        label = labels,
-        colour = cl
-      ),
-      size = text_size,
-      fontface = "bold",
-      inherit.aes = FALSE
-    ) +
-    ggplot2::scale_colour_manual(values = c("black", "white")) +
-    ggplot2::geom_rect(
-      data = blocks,
-      ggplot2::aes(
-        xmin = xmin,
-        ymin = ymin,
-        xmax = xmax,
-        ymax = ymax,
-        fill = Type,
-        colour = "white"
-      ),
-      inherit.aes = FALSE
-    ) +
-    ggplot2::geom_text(
-      data = blocks,
-      ggplot2::aes(
-        x = (xmax + xmin) / 2,
-        y = (ymax + ymin) / 2,
-        label = labels,
-        colour = cl
-      ),
-      size = text_size,
-      fontface = "bold",
-      inherit.aes = FALSE
-    )
+    ggplot2::scale_colour_manual(values = c("black", "white"))
 
   # Add top bar conditionally
   if (show_top_bar) {
+    # Always add the second bar (e.g., "Del 1bp C")
     p <- p +
       ggplot2::geom_rect(
         data = blocks,
@@ -507,7 +474,8 @@ plot_89 <- function(
           ymin = ymin,
           xmax = xmax,
           ymax = ymax,
-          fill = Type
+          fill = Type,
+          colour = "white"
         ),
         inherit.aes = FALSE
       ) +
@@ -516,12 +484,42 @@ plot_89 <- function(
         ggplot2::aes(
           x = (xmax + xmin) / 2,
           y = (ymax + ymin) / 2,
-          label = labels
+          label = labels,
+          colour = cl
         ),
         size = text_size * base_size / 11,
         fontface = "bold",
         inherit.aes = FALSE
       )
+
+    # Add extra top bar only if requested (e.g., "Del", "Ins")
+    if (show_extra_top_bar) {
+      p <- p +
+        ggplot2::geom_rect(
+          data = blocks3,
+          ggplot2::aes(
+            xmin = xmin,
+            ymin = ymin,
+            xmax = xmax,
+            ymax = ymax,
+            fill = Type,
+            colour = "white"
+          ),
+          inherit.aes = FALSE
+        ) +
+        ggplot2::geom_text(
+          data = blocks3,
+          ggplot2::aes(
+            x = (xmax + xmin) / 2,
+            y = (ymax + ymin) / 2,
+            label = labels,
+            colour = cl
+          ),
+          size = text_size * base_size / 11,
+          fontface = "bold",
+          inherit.aes = FALSE
+        )
+    }
   }
 
   return(p)
