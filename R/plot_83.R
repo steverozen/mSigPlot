@@ -294,14 +294,14 @@ plot_83 <- function(
       ) +
       geom_text(
         aes(x = x, y = -ymax * 0.15, label = mut_type),
-        size = 2,
+        size = 2 * base_size / 11,
         inherit.aes = FALSE,
         data = data.frame(x = 1:83, mut_type = mut_type)
       ) +
       geom_text(
         data = bottom_labels,
         aes(x = x, y = y, label = label),
-        size = 2.5,
+        size = 2.5 * base_size / 11,
         inherit.aes = FALSE
       ) +
       theme(axis.text.x = element_blank())
