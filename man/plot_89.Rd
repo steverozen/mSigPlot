@@ -12,7 +12,8 @@ plot_89(
   ylabel = NULL,
   base_size = 11,
   show_x_axis_text = TRUE,
-  show_top_bar = FALSE
+  show_top_bar = TRUE,
+  show_extra_top_bar = FALSE
 )
 }
 \arguments{
@@ -33,7 +34,11 @@ If NULL, y-axis scales automatically to the data. Default is NULL.}
 \item{show_x_axis_text}{Logical. If \code{TRUE}, display x-axis tick labels.}
 
 \item{show_top_bar}{Logical. If \code{TRUE}, display the category bar above the
-plot.}
+plot (e.g., "Del 1bp C", "Ins 1bp T").}
+
+\item{show_extra_top_bar}{Logical. If \code{TRUE}, display the extra summary bar
+above the category bar (e.g., "Del", "Ins"). Only shown if \code{show_top_bar}
+is also \code{TRUE}. This is really for backward compatibility.}
 }
 \value{
 A ggplot2 object containing the 89-channel indel profile plot.

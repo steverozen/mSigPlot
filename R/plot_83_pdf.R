@@ -19,7 +19,9 @@
 #'
 #' @export
 #'
-#' @import ggplot2 gridExtra Cairo
+#' @importFrom gridExtra grid.arrange
+#' @importFrom Cairo CairoPDF
+#' @importFrom grDevices dev.off
 plot_83_pdf <- function(
   catalog,
   filename,

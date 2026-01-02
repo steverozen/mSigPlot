@@ -23,7 +23,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr magrittr
+#' @import ggplot2 reshape2 dplyr ggrepel
 #'
 plot_89 <- function(
   ID89.catalog,

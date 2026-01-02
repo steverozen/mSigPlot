@@ -8,7 +8,7 @@ plot_89_pdf(
   ID89_catalog,
   filename,
   show_x_axis_text = TRUE,
-  show_top_bar = FALSE
+  show_top_bar = TRUE
 )
 }
 \arguments{
