@@ -453,7 +453,7 @@ plot_89 <- function(
       } else {
         ggplot2::element_blank()
       },
-      axis.text.y = ggplot2::element_text(size = 10, colour = "black"),
+      axis.text.y = ggplot2::element_text(size = rel(0, 8), colour = "black"),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
         size = rel(0.9),
