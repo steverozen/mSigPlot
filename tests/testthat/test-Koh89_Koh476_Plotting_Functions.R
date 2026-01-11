@@ -9,4 +9,11 @@ test_that("plot_89 returns a ggplot object", {
   )
 
   expect_s3_class(p, "ggplot")
+
+  p <- plot_89(
+    ID89.catalog = test_catalog,
+    text_size = 3,
+    plot_title = "Test ID89",
+    setyaxis = .03
+  )
 })
