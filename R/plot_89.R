@@ -4,7 +4,7 @@
 #' for a single sample. The plot shows mutation counts or proportions across
 #' all 89 indel categories with color-coded category blocks.
 #'
-#' @param ID89.catalog Numeric vector of length 89 containing indel counts or
+#' @param catalog Numeric vector of length 89 containing indel counts or
 #'   proportions for a single sample.
 #' @param text_size Numeric. Size of text labels in the plot. Default is 3.
 #' @param plot_title Character. Title displayed above the plot. Default is "ID89".
@@ -26,9 +26,9 @@
 #' @import ggplot2 reshape2 dplyr ggrepel
 #'
 plot_89 <- function(
-  ID89.catalog,
+  catalog,
   text_size = 3,
-  plot_title = colnames(ID89.catalog)[1],
+  plot_title = colnames(catalog)[1],
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
@@ -37,7 +37,7 @@ plot_89 <- function(
   show_extra_top_bar = FALSE
 ) {
   if (is.null(ylabel)) {
-    if (sum(ID89.catalog) < 1.1 && max(ID89.catalog) != 1) {
+    if (sum(catalog) < 1.1 && max(catalog) != 1) {
       ylabel = "Proportion"
     } else {
       ylabel = "Counts"
@@ -264,7 +264,7 @@ plot_89 <- function(
 
   # === 2. Prepare Data for Plotting ===
   my_vector <- indel_type_4_figurelabel$IndelType
-  muts_basis <- data.frame(Sample = ID89.catalog, IndelType = my_vector)
+  muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
   muts_basis_melt <- reshape2::melt(muts_basis, "IndelType")
   muts_basis_melt <- merge(
     indel_type_4_figurelabel,
@@ -336,8 +336,8 @@ plot_89 <- function(
     "Del 1bp T",
     "Ins 1bp C",
     "Ins 1bp T",
-    "Del >=2bp",
-    "Ins >=2bp",
+    "Del \u22652bp",
+    "Ins \u22652bp",
     "Del Mh",
     "X"
   )
