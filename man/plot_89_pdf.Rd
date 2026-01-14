@@ -8,6 +8,7 @@ plot_89_pdf(
   catalog,
   text_size = 3,
   top_bar_text_size = text_size,
+  title_text_size = 1,
   filename,
   show_x_axis_text = TRUE,
   show_top_bar = TRUE
@@ -20,6 +21,8 @@ one column per sample. Column names are used as plot titles.}
 \item{text_size}{Numeric. Size of text labels in the plot.}
 
 \item{top_bar_text_size}{Numeric shows the size of the labels in the colored top bar.}
+
+\item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
 
 \item{filename}{Character. Path to the output PDF file.}
 

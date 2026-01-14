@@ -8,6 +8,7 @@ plot_89(
   catalog,
   text_size = 3,
   top_bar_text_size = text_size,
+  title_text_size = 1,
   plot_title = colnames(catalog)[1],
   setyaxis = NULL,
   ylabel = NULL,
@@ -24,6 +25,8 @@ proportions for a single sample.}
 \item{text_size}{Numeric. Size of text labels in the plot.}
 
 \item{top_bar_text_size}{Numeric shows the size of the labels in the colored top bar.}
+
+\item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 

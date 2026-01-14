@@ -10,7 +10,8 @@ plot_476_pdf(
   num_labels = 4,
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
-  vline_labels = c()
+  vline_labels = c(),
+  title_text_size = 1
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ max/label_threshold_denominator are not labeled.}
 
 \item{vline_labels}{Character vector. IndelType labels at which to draw
 vertical reference lines. Default is empty.}
+
+\item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

@@ -129,6 +129,16 @@ test_that("plot_476_pdf creates PDF file", {
   expect_true(file.exists(temp_pdf))
   expect_gt(file.size(temp_pdf), 0)
 
+  plot_476_pdf(
+    catalog = catalog_subset,
+    filename = temp_pdf,
+    num_labels = 2,
+    title_text_size = 0.8
+  )
+
+  expect_true(file.exists(temp_pdf))
+  expect_gt(file.size(temp_pdf), 0)
+
   # Cleanup
   unlink(temp_pdf)
 })

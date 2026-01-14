@@ -20,6 +20,7 @@
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
 #'   the indel type prefix. Default is TRUE.
 #' @param base_size Base font size for ggplot2's theme.
+#' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
 #'
 #' @return A ggplot2 object containing the 476-channel indel profile plot.
 #'
@@ -36,7 +37,8 @@ plot_476 <- function(
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
-  base_size = 11
+  base_size = 11,
+  title_text_size = 1.0
 ) {
   # Ensure catalog is a numeric vector
   if (is.data.frame(catalog) || is.matrix(catalog)) {
@@ -268,7 +270,8 @@ plot_476 <- function(
       ),
       axis.title.y = ggplot2::element_text(size = rel(0.9)),
       plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
-      axis.line = ggplot2::element_line(linewidth = rel(0.5))
+      axis.line = ggplot2::element_line(linewidth = rel(0.5)),
+      plot.title = ggplot2::element_text(size = rel(title_text_size))
     ) +
     ggplot2::scale_colour_manual(
       values = c("black" = "black", "white" = "white")

@@ -15,6 +15,7 @@
 #'   max/label_threshold_denominator are not labeled.
 #' @param vline_labels Character vector. IndelType labels at which to draw
 #'   vertical reference lines. Default is empty.
+#' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
@@ -28,7 +29,8 @@ plot_476_pdf <- function(
   num_labels = 4,
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
-  vline_labels = c()
+  vline_labels = c(),
+  title_text_size = 1.0
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
@@ -38,7 +40,8 @@ plot_476_pdf <- function(
       num_labels = num_labels,
       simplify_labels = simplify_labels,
       label_threshold_denominator = label_threshold_denominator,
-      vline_labels = vline_labels
+      vline_labels = vline_labels,
+      title_text_size = title_text_size
     )
   })
   plots_per_page <- 5

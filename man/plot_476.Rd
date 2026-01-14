@@ -13,7 +13,8 @@ plot_476(
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
-  base_size = 11
+  base_size = 11,
+  title_text_size = 1
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ Default is empty.}
 the indel type prefix. Default is TRUE.}
 
 \item{base_size}{Base font size for ggplot2's theme.}
+
+\item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
 }
 \value{
 A ggplot2 object containing the 476-channel indel profile plot.
