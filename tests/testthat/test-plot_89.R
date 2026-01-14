@@ -3,17 +3,17 @@ test_that("plot_89 returns a ggplot object", {
   test_catalog <- rep(0.01, 89)
 
   p <- plot_89(
-    ID89.catalog = test_catalog,
+    catalog = test_catalog,
     text_size = 3,
-    plot_title = "Test ID89"
+    plot_title = "Test 89 type plot"
   )
 
   expect_s3_class(p, "ggplot")
 
   p <- plot_89(
-    ID89.catalog = test_catalog,
+    catalog = test_catalog,
     text_size = 3,
-    plot_title = "Test ID89",
+    plot_title = "Test 89 type plot",
     setyaxis = .03
   )
 })
@@ -37,6 +37,17 @@ test_that("plot_89_pdf creates PDF file", {
   plot_89_pdf(
     catalog_subset,
     filename = temp_pdf
+  )
+
+  expect_true(file.exists(temp_pdf))
+  expect_gt(file.size(temp_pdf), 0)
+
+  plot_89_pdf(
+    catalog_subset,
+    filename = temp_pdf,
+    top_bar_text_size = 2.5,
+    text_size = 3.5,
+    title_text_size = 0.9
   )
 
   expect_true(file.exists(temp_pdf))

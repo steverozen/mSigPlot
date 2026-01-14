@@ -6,8 +6,10 @@
 #'
 #' @param catalog Numeric vector of length 89 containing indel counts or
 #'   proportions for a single sample.
-#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
-#' @param plot_title Character. Title displayed above the plot. Default is "ID89".
+#' @param text_size Numeric. Size of text labels in the plot.
+#' @param top_bar_text_size Numeric shows the size of the labels in the colored top bar.
+#' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param plot_title Character. Title displayed above the plot.
 #' @param setyaxis Numeric or NULL. If provided, sets a fixed y-axis maximum.
 #'   If NULL, y-axis scales automatically to the data. Default is NULL.
 #' @param ylabel Character. Label for the y-axis. Default is "Counts".
@@ -28,6 +30,8 @@
 plot_89 <- function(
   catalog,
   text_size = 3,
+  top_bar_text_size = text_size,
+  title_text_size = 1.0,
   plot_title = colnames(catalog)[1],
   setyaxis = NULL,
   ylabel = NULL,
@@ -332,12 +336,12 @@ plot_89 <- function(
   ) *
     1.2
   blocks$labels <- c(
-    "Del 1bp C",
-    "Del 1bp T",
-    "Ins 1bp C",
-    "Ins 1bp T",
-    "Del \u22652bp",
-    "Ins \u22652bp",
+    "Del 1 C",
+    "Del 1 T",
+    "Ins 1 C",
+    "Ins 1 T",
+    "Del \u22652",
+    "Ins \u22652",
     "Del Mh",
     "X"
   )
@@ -459,7 +463,8 @@ plot_89 <- function(
         size = rel(0.9),
         margin = margin(t = ifelse(show_x_axis_text, -12, 1), b = 0)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(0.9))
+      axis.title.y = ggplot2::element_text(size = rel(0.9)),
+      plot.title = ggplot2::element_text(size = rel(title_text_size))
     ) +
     ggplot2::scale_colour_manual(values = c("black", "white"))
 
@@ -487,7 +492,7 @@ plot_89 <- function(
           label = labels,
           colour = cl
         ),
-        size = text_size * base_size / 11,
+        size = top_bar_text_size * base_size / 11,
         fontface = "bold",
         inherit.aes = FALSE
       )

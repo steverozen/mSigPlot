@@ -5,9 +5,10 @@
 \title{Plot 89-channel indel profile}
 \usage{
 plot_89(
-  ID89.catalog,
+  catalog,
   text_size = 3,
-  plot_title = colnames(ID89.catalog)[1],
+  top_bar_text_size = text_size,
+  plot_title = colnames(catalog)[1],
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
@@ -17,12 +18,14 @@ plot_89(
 )
 }
 \arguments{
-\item{ID89.catalog}{Numeric vector of length 89 containing indel counts or
+\item{catalog}{Numeric vector of length 89 containing indel counts or
 proportions for a single sample.}
 
-\item{text_size}{Numeric. Size of text labels in the plot. Default is 3.}
+\item{text_size}{Numeric. Size of text labels in the plot.}
 
-\item{plot_title}{Character. Title displayed above the plot. Default is "ID89".}
+\item{top_bar_text_size}{Numeric shows the size of the labels in the colored top bar.}
+
+\item{plot_title}{Character. Title displayed above the plot.}
 
 \item{setyaxis}{Numeric or NULL. If provided, sets a fixed y-axis maximum.
 If NULL, y-axis scales automatically to the data. Default is NULL.}

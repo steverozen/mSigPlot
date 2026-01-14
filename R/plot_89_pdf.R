@@ -5,6 +5,9 @@
 #'
 #' @param catalog A matrix or data frame with 89 rows (indel types) and
 #'   one column per sample. Column names are used as plot titles.
+#' @param text_size Numeric. Size of text labels in the plot.
+#' @param top_bar_text_size Numeric shows the size of the labels in the colored top bar.
+#' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
 #' @param filename Character. Path to the output PDF file.
 #' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
 #' @param show_top_bar Logical. If `TRUE`, display the category bar above the
@@ -18,15 +21,20 @@
 #' @importFrom grDevices dev.off cairo_pdf
 plot_89_pdf <- function(
   catalog,
+  text_size = 3,
+  top_bar_text_size = text_size,
+  title_text_size = 1.0,
   filename,
   show_x_axis_text = TRUE,
   show_top_bar = TRUE
 ) {
-  plot_list <- lapply(1:ncol(ID89_catalog), function(i) {
+  plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_89(
       catalog = catalog[, i],
-      text_size = 3,
-      plot_title = colnames(ID89_catalog)[i],
+      text_size = text_size,
+      top_bar_text_size = top_bar_text_size,
+      title_text_size = title_text_size,
+      plot_title = colnames(catalog)[i],
       show_x_axis_text = show_x_axis_text,
       show_top_bar = show_top_bar
     )
