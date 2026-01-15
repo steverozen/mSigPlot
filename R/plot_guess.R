@@ -22,6 +22,7 @@
 #' }
 #'
 #' @seealso [plot_476()], [plot_89()], [plot_83()]
+#'
 #' @export
 plot_guess = function(catalog, ...) {
   n_rows = nrow(catalog)
