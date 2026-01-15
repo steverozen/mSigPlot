@@ -25,6 +25,9 @@
 #'
 #' @export
 plot_guess = function(catalog, ...) {
+  if (is.numeric(catalog)) {
+    catalog = data.frame(catalog)
+  }
   n_rows = nrow(catalog)
   if (n_rows == 476) {
     plot_476(catalog, ...)
