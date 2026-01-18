@@ -117,8 +117,8 @@ plot_476 <- function(
     "Del 1bp T",
     "Ins 1bp C",
     "Ins 1bp T",
-    "Del \u226522bp", # \u.... is >= character
-    "Ins \u226522bp",
+    "Del \u22652bp", # \u.... is >= character
+    "Ins \u22652bp",
     "Mh",
     "X"
   )
