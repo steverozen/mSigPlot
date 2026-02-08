@@ -7,13 +7,14 @@
 #' @param catalog A matrix or data frame with 83 rows (indel types) and
 #'   one column per sample. Column names are used as plot titles.
 #' @param filename Character. Path to the output PDF file.
-#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
-#' @param grid Logical. Draw grid lines. Default is `TRUE`.
-#' @param upper Logical. Draw category labels above bars. Default is `TRUE`.
-#' @param xlabels Logical. Draw x-axis labels. Default is `TRUE`.
-#' @param ylabels Logical. Draw y-axis labels. Default is `TRUE`.
-#' @param ylim Optional y-axis limits. Default is `NULL`.
-#' @param base_size Base font size for ggplot2's `theme_classic()`. Default is 11.
+#' @param text_size Numeric. Size of text labels in the plot.
+#' @param count_label_size Numeric. Size of the labels that show counts of mutations for each major mutation type.
+#' @param grid Logical. Draw grid lines.
+#' @param upper Logical. Draw category labels above bars.
+#' @param xlabels Logical. Draw x-axis labels.
+#' @param ylabels Logical. Draw y-axis labels.
+#' @param ylim Optional y-axis limits.
+#' @param base_size Base font size for ggplot2's `theme_classic()`.
 #'
 #' @return Invisibly returns `NULL`. Called for side effect of creating PDF file.
 #'
@@ -26,6 +27,7 @@ plot_83_pdf <- function(
   catalog,
   filename,
   text_size = 3,
+  count_label_size = 0.8 * text_size,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,

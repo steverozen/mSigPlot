@@ -1,7 +1,8 @@
 #' Plot 83-type indel catalog using ggplot2 and return the ggplot object
 #' @param catalog An 83-row, 1 - column indel catalog
-#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
-#' @param plot_title Character. Title displayed above the plot. Default is "test".
+#' @param text_size Numeric. Size of plot_title.
+#' @param count_label_size Numeric. Size of the labels that show counts of mutations for each major mutation type.
+#' @param plot_title Character. Title displayed above the plot.
 #' @param grid Logical, draw grid lines
 #' @param upper Logical, draw category labels above bars
 #' @param xlabels Logical, draw x-axis labels
@@ -15,6 +16,7 @@
 plot_83 <- function(
   catalog,
   text_size = 3,
+  count_label_size = 0.8 * text_size,
   plot_title = colnames(catalog)[1],
   grid = TRUE,
   upper = TRUE,
@@ -315,7 +317,7 @@ plot_83 <- function(
       geom_text(
         data = count_labels,
         aes(x = x, y = y, label = label),
-        size = 2.5,
+        size = count_label_size,
         hjust = 1,
         inherit.aes = FALSE
       )
@@ -329,7 +331,7 @@ plot_83 <- function(
       y = ymax * 7.4 / 8,
       label = plot_title,
       hjust = 0,
-      fontface = "bold",
+      # fontface = "bold",
       size = text_size
     )
 

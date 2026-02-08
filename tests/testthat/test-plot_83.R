@@ -49,6 +49,33 @@ test_that("plot_83 handles base_size", {
   expect_s3_class(p, "ggplot")
 })
 
+test_that("plot_83 handles count_text_size", {
+  fixture_path <- testthat::test_path(
+    "fixtures",
+    "COSMIC_v3.5_ID_GRCh37_signatures.tsv"
+  )
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  catalog <- sig_data[, 1, drop = FALSE]
+
+  p <- plot_83(
+    catalog = catalog,
+    plot_title = "With base_size",
+    base_size = 30,
+    text_size = 7,
+    count_label_size = 7
+  )
+
+  expect_s3_class(p, "ggplot")
+})
+
+
 test_that("plot_83 handles count vs proportion ylabel", {
   fixture_path <- testthat::test_path(
     "fixtures",
