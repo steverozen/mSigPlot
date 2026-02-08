@@ -7,6 +7,7 @@
 plot_83(
   catalog,
   text_size = 3,
+  count_label_size = 0.8 * text_size,
   plot_title = colnames(catalog)[1],
   grid = TRUE,
   upper = TRUE,
@@ -19,9 +20,11 @@ plot_83(
 \arguments{
 \item{catalog}{An 83-row, 1 - column indel catalog}
 
-\item{text_size}{Numeric. Size of text labels in the plot. Default is 3.}
+\item{text_size}{Numeric. Size of plot_title.}
 
-\item{plot_title}{Character. Title displayed above the plot. Default is "test".}
+\item{count_label_size}{Numeric. Size of the labels that show counts of mutations for each major mutation type.}
+
+\item{plot_title}{Character. Title displayed above the plot.}
 
 \item{grid}{Logical, draw grid lines}
 

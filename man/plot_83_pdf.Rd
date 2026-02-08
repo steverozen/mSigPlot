@@ -8,6 +8,7 @@ plot_83_pdf(
   catalog,
   filename,
   text_size = 3,
+  count_label_size = 0.8 * text_size,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
@@ -22,19 +23,21 @@ one column per sample. Column names are used as plot titles.}
 
 \item{filename}{Character. Path to the output PDF file.}
 
-\item{text_size}{Numeric. Size of text labels in the plot. Default is 3.}
+\item{text_size}{Numeric. Size of text labels in the plot.}
 
-\item{grid}{Logical. Draw grid lines. Default is \code{TRUE}.}
+\item{count_label_size}{Numeric. Size of the labels that show counts of mutations for each major mutation type.}
 
-\item{upper}{Logical. Draw category labels above bars. Default is \code{TRUE}.}
+\item{grid}{Logical. Draw grid lines.}
 
-\item{xlabels}{Logical. Draw x-axis labels. Default is \code{TRUE}.}
+\item{upper}{Logical. Draw category labels above bars.}
 
-\item{ylabels}{Logical. Draw y-axis labels. Default is \code{TRUE}.}
+\item{xlabels}{Logical. Draw x-axis labels.}
 
-\item{ylim}{Optional y-axis limits. Default is \code{NULL}.}
+\item{ylabels}{Logical. Draw y-axis labels.}
 
-\item{base_size}{Base font size for ggplot2's \code{theme_classic()}. Default is 11.}
+\item{ylim}{Optional y-axis limits.}
+
+\item{base_size}{Base font size for ggplot2's \code{theme_classic()}.}
 }
 \value{
 Invisibly returns \code{NULL}. Called for side effect of creating PDF file.
