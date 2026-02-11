@@ -6,20 +6,27 @@
 #'
 #' @param catalog Numeric vector of length 89 containing indel counts or
 #'   proportions for a single sample.
-#' @param text_size Numeric. Size of text labels in the plot.
-#' @param top_bar_text_size Numeric shows the size of the labels in the colored top bar.
+#' @param text_size Numeric. Size of text labels in the plot. Used as default
+#'   for `top_bar_text_size`.
+#' @param top_bar_text_size Numeric. Size of labels in the colored top bars
+#'   (both the category bar and the extra summary bar).
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param setyaxis Numeric or NULL. If provided, sets a fixed y-axis maximum.
-#'   If NULL, y-axis scales automatically to the data. Default is NULL.
-#' @param ylabel Character. Label for the y-axis. Default is "Counts".
+#'   If NULL, y-axis scales automatically to the data.
+#' @param ylabel Character. Label for the y-axis.
 #' @param base_size Base font size for ggplot2's `theme_classic()`.
+#' @param x_axis_tick_label_size Numeric. Relative size of x-axis tick labels, passed to `rel()`.
+#' @param y_axis_tick_label_size Numeric. Relative size of y-axis tick labels, passed to `rel()`.
+#' @param x_title_size Numeric. Relative size of x-axis title, passed to `rel()`.
+#' @param y_title_size Numeric. Relative size of y-axis title, passed to `rel()`.
 #' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
 #' @param show_top_bar Logical. If `TRUE`, display the category bar above the
 #'   plot (e.g., "Del 1bp C", "Ins 1bp T").
 #' @param show_extra_top_bar Logical. If `TRUE`, display the extra summary bar
 #'   above the category bar (e.g., "Del", "Ins"). Only shown if `show_top_bar`
 #'   is also `TRUE`. This is really for backward compatibility.
+#' @param plot_complex Logical. If `TRUE`, include the Complex indel channel.
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
@@ -36,9 +43,14 @@ plot_89 <- function(
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
+  x_axis_tick_label_size = 0.6,
+  y_axis_tick_label_size = 0.8,
+  x_title_size = 0.9,
+  y_title_size = 0.9,
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
-  show_extra_top_bar = FALSE
+  show_extra_top_bar = FALSE,
+  plot_complex = FALSE
 ) {
   if (is.null(ylabel)) {
     if (sum(catalog) < 1.1 && max(catalog) != 1) {
@@ -405,6 +417,18 @@ plot_89 <- function(
     "Complex" = "black"
   )
 
+  if (!plot_complex) {
+    muts_basis_melt <- muts_basis_melt[muts_basis_melt$Indel != "Complex", ]
+    complex_idx <- which(indel_type_4_figurelabel$Indel == "Complex")
+    indel_positions <- indel_positions[-complex_idx]
+    indel_positions_labels <- indel_positions_labels[-complex_idx]
+    blocks <- blocks[blocks$Type != "Complex", ]
+    blocks3 <- blocks3[blocks3$Type != "X", ]
+    indel_mypalette_fill_all <- indel_mypalette_fill_all[
+      !names(indel_mypalette_fill_all) %in% c("Complex", "X")
+    ]
+  }
+
   # === 5. Plotting ===
   p <- ggplot2::ggplot(
     data = muts_basis_melt,
@@ -445,7 +469,7 @@ plot_89 <- function(
         ggplot2::element_text(
           angle = 90,
           vjust = 0.5,
-          size = rel(0.6),
+          size = rel(x_axis_tick_label_size),
           colour = "black",
           hjust = 1
         )
@@ -457,13 +481,13 @@ plot_89 <- function(
       } else {
         ggplot2::element_blank()
       },
-      axis.text.y = ggplot2::element_text(size = rel(0.8), colour = "black"),
+      axis.text.y = ggplot2::element_text(size = rel(y_axis_tick_label_size), colour = "black"),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
-        size = rel(0.9),
+        size = rel(x_title_size),
         margin = margin(t = ifelse(show_x_axis_text, -12, 1), b = 0)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(0.9)),
+      axis.title.y = ggplot2::element_text(size = rel(y_title_size)),
       plot.title = ggplot2::element_text(size = rel(title_text_size))
     ) +
     ggplot2::scale_colour_manual(values = c("black", "white"))
@@ -520,7 +544,7 @@ plot_89 <- function(
             label = labels,
             colour = cl
           ),
-          size = text_size * base_size / 11,
+          size = top_bar_text_size * base_size / 11,
           fontface = "bold",
           inherit.aes = FALSE
         )
