@@ -46,6 +46,13 @@ R -e "devtools::install()"
 
 Both data objects contain columns: IndelType, Indel, Indel3, Figlabel
 
+### Test Data
+
+Test signature data is in `tests/testthat/fixtures/`:
+- `COSMIC_v3.5_ID_GRCh37_signatures.tsv`
+- `type476_liu_et_al_sigs.tsv`
+- `type89_liu_et_al_sigs.tsv`
+
 ### Dependencies (used in code but not yet in DESCRIPTION)
 
 ggplot2, dplyr, reshape2, ggrepel, magrittr, gridExtra, Cairo
