@@ -11,7 +11,14 @@ plot_476_pdf(
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
   vline_labels = c(),
+  base_size = 11,
+  block_text_size = 3,
+  ggrepel_size = 2,
   title_text_size = 1,
+  x_axis_tick_label_size = 0.8,
+  y_axis_tick_label_size = 0.7,
+  x_title_size = 0.7,
+  y_title_size = 0.9,
   plot_complex = FALSE
 )
 }
@@ -21,19 +28,35 @@ one column per sample. Column names are used as plot titles.}
 
 \item{filename}{Character. Path to the output PDF file.}
 
-\item{num_labels}{Integer. Number of top peaks to label per category block.
-Default is 4.}
+\item{num_labels}{Integer. Number of top peaks to label per category block.}
 
 \item{simplify_labels}{Logical. If TRUE, simplifies peak labels by removing
-the indel type prefix. Default is FALSE.}
+the indel type prefix.}
 
 \item{label_threshold_denominator}{Numeric. Peaks with values less than
 max/label_threshold_denominator are not labeled.}
 
 \item{vline_labels}{Character vector. IndelType labels at which to draw
-vertical reference lines. Default is empty.}
+vertical reference lines.}
+
+\item{base_size}{Base font size for ggplot2's theme. All text sizes scale
+relative to this value.}
+
+\item{block_text_size}{Numeric. Size of category block labels. Scaled by
+\code{base_size / 11}.}
+
+\item{ggrepel_size}{Numeric. Size of ggrepel peak labels. Scaled by
+\code{base_size / 11}.}
 
 \item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
+
+\item{x_axis_tick_label_size}{Numeric. Relative size of x-axis tick labels, passed to \code{rel()}.}
+
+\item{y_axis_tick_label_size}{Numeric. Relative size of y-axis tick labels, passed to \code{rel()}.}
+
+\item{x_title_size}{Numeric. Relative size of x-axis title, passed to \code{rel()}.}
+
+\item{y_title_size}{Numeric. Relative size of y-axis title, passed to \code{rel()}.}
 
 \item{plot_complex}{Logical. If TRUE, include the 5 Complex indel channels.}
 }
