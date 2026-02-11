@@ -7,20 +7,22 @@
 #'
 #' @param catalog Numeric vector of length 476 containing indel counts or
 #'   proportions for a single sample.
-#' @param text_size Numeric. Size of text labels in the plot. Default is 3.
-#' @param plot_title Character. Title displayed above the plot. Default is "test".
+#' @param block_text_size Numeric. Size of category block labels (e.g. "Del 1bp C").
+#' @param plot_title Character. Title displayed above the plot.
 #' @param num_labels Integer. Number of top peaks to label per category block.
-#'   Set to 0 or NULL to disable labels. Default is 3.
-#' @param label_size Numeric. Size of peak labels. Default is 2.
+#'   Set to 0 or NULL to disable labels.
+#' @param ggrepel_size Numeric. Size of ggrepel peak labels.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
-#'   max/label_threshold_denominator are not labeled. Default is 7.
+#'   max/label_threshold_denominator are not labeled.
 #' @param vline_labels Character vector. IndelType labels at which to draw
 #'   vertical reference lines. For example, `c("A[Del(C):R1]A", "G[Del(C):R1]A")`.
-#'   Default is empty.
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
-#'   the indel type prefix. Default is TRUE.
+#'   the indel type prefix.
 #' @param base_size Base font size for ggplot2's theme.
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
+#' @param text_size Deprecated. Use `block_text_size` instead.
+#' @param label_size Deprecated. Use `ggrepel_size` instead.
 #'
 #' @return A ggplot2 object containing the 476-channel indel profile plot.
 #'
@@ -30,16 +32,37 @@
 #'
 plot_476 <- function(
   catalog,
-  text_size = 3,
+  block_text_size = 3,
   plot_title = "test",
   num_labels = 3,
-  label_size = 2,
+  ggrepel_size = 2,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11,
-  title_text_size = 1.0
+  title_text_size = 1.0,
+  plot_complex = FALSE,
+  text_size = NULL,
+  label_size = NULL
 ) {
+  # Handle deprecated text_size
+  if (!is.null(text_size)) {
+    if (!missing(block_text_size)) {
+      stop("Cannot specify both 'text_size' and 'block_text_size'.")
+    }
+    warning("'text_size' is deprecated. Use 'block_text_size' instead.")
+    block_text_size <- text_size
+  }
+
+  # Handle deprecated label_size
+  if (!is.null(label_size)) {
+    if (!missing(ggrepel_size)) {
+      stop("Cannot specify both 'label_size' and 'ggrepel_size'.")
+    }
+    warning("'label_size' is deprecated. Use 'ggrepel_size' instead.")
+    ggrepel_size <- label_size
+  }
+
   # Ensure catalog is a numeric vector
   if (is.data.frame(catalog) || is.matrix(catalog)) {
     catalog <- as.numeric(catalog[, 1])
@@ -77,6 +100,10 @@ plot_476 <- function(
     muts_basis_melt$IndelType,
     Koh476_indeltype$IndelType
   )
+
+  if (!plot_complex) {
+    muts_basis_melt <- muts_basis_melt[muts_basis_melt$Indel != "Complex", ]
+  }
 
   indel_mypalette_fill <- c(
     "#000000",
@@ -143,6 +170,13 @@ plot_476 <- function(
     "Ins(T)" = "#36a12e",
     "Complex" = "black"
   )
+
+  if (!plot_complex) {
+    blocks <- blocks[blocks$Type != "Complex", ]
+    indel_mypalette_fill_all <- indel_mypalette_fill_all[names(indel_mypalette_fill_all) != "Complex"]
+  }
+
+  n_channels <- max(muts_basis_melt$x_pos)
 
   # Create label data: top num_labels per block, excluding peaks < 1/10 max
   max_freq <- max(muts_basis_melt$freq)
@@ -244,7 +278,7 @@ plot_476 <- function(
     ggplot2::scale_x_continuous(
       breaks = flanking_blocks$xmin,
       labels = flanking_blocks$label,
-      limits = c(0.5, length(indel_positions) + 0.5)
+      limits = c(0.5, n_channels + 0.5)
     ) +
     ggplot2::scale_y_continuous(
       expand = expansion(mult = c(0.03, 0)) # No padding at bottom, 5% at top
@@ -296,14 +330,14 @@ plot_476 <- function(
         label = labels,
         colour = cl
       ),
-      size = text_size * base_size / 15,
+      size = block_text_size * base_size / 15,
       fontface = "bold",
       inherit.aes = FALSE
     ) +
     ggrepel::geom_text_repel(
       data = label_data,
       ggplot2::aes(x = x_pos, y = freq, label = Figlabel),
-      size = label_size * base_size / 11,
+      size = ggrepel_size * base_size / 11,
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
       segment.color = "gray50",

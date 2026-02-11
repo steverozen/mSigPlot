@@ -6,11 +6,11 @@
 #'
 #' @param catalog Numeric vector of length 476 containing indel counts or
 #'   proportions for a single sample. Only positions 343-476 are plotted.
-#' @param text_size Numeric. Size of text labels in the plot.
+#' @param block_text_size Numeric. Size of category block labels (e.g. "Del >=2bp").
 #' @param plot_title Character. Title displayed above the plot.
 #' @param num_labels Integer. Number of top peaks to label per category block.
 #'   Set to 0 or NULL to disable labels.
-#' @param label_size Numeric. Size of peak labels.
+#' @param ggrepel_size Numeric. Size of ggrepel peak labels.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled.
 #' @param vline_labels Character vector. IndelType labels at which to draw
@@ -20,6 +20,9 @@
 #'   the indel type prefix.
 #' @param base_size Base font size for ggplot2's theme.
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
+#' @param text_size Deprecated. Use `block_text_size` instead.
+#' @param label_size Deprecated. Use `ggrepel_size` instead.
 #'
 #' @return A ggplot2 object containing the right portion of the 476-channel
 #'   indel profile plot.
@@ -30,16 +33,37 @@
 #'
 plot_476_right <- function(
   catalog,
-  text_size = 3,
+  block_text_size = 3,
   plot_title = "test",
   num_labels = 3,
-  label_size = 2,
+  ggrepel_size = 2,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11,
-  title_text_size = 1.0
+  title_text_size = 1.0,
+  plot_complex = FALSE,
+  text_size = NULL,
+  label_size = NULL
 ) {
+  # Handle deprecated text_size
+  if (!is.null(text_size)) {
+    if (!missing(block_text_size)) {
+      stop("Cannot specify both 'text_size' and 'block_text_size'.")
+    }
+    warning("'text_size' is deprecated. Use 'block_text_size' instead.")
+    block_text_size <- text_size
+  }
+
+  # Handle deprecated label_size
+  if (!is.null(label_size)) {
+    if (!missing(ggrepel_size)) {
+      stop("Cannot specify both 'label_size' and 'ggrepel_size'.")
+    }
+    warning("'label_size' is deprecated. Use 'ggrepel_size' instead.")
+    ggrepel_size <- label_size
+  }
+
   # Ensure catalog is a numeric vector
   if (is.data.frame(catalog) || is.matrix(catalog)) {
     catalog <- as.numeric(catalog[, 1])
@@ -81,6 +105,10 @@ plot_476_right <- function(
   # Filter to right portion (positions >= 343) and re-index
   muts_basis_melt <- muts_basis_melt[muts_basis_melt$x_pos >= 343, ]
   muts_basis_melt$x_pos <- muts_basis_melt$x_pos - 342
+
+  if (!plot_complex) {
+    muts_basis_melt <- muts_basis_melt[muts_basis_melt$Indel != "Complex", ]
+  }
 
   indel_mypalette_fill <- c(
     "#f14432",
@@ -127,6 +155,11 @@ plot_476_right <- function(
     "Del(2,):M(1,)" = "#61409b",
     "Complex" = "black"
   )
+
+  if (!plot_complex) {
+    blocks <- blocks[blocks$Type != "Complex", ]
+    indel_mypalette_fill_all <- indel_mypalette_fill_all[names(indel_mypalette_fill_all) != "Complex"]
+  }
 
   # Create label data: top num_labels per block, excluding peaks < 1/10 max
   max_freq <- max(muts_basis_melt$freq)
@@ -200,7 +233,7 @@ plot_476_right <- function(
     pos[pos >= 1]
   }))
 
-  n_channels <- 134
+  n_channels <- max(muts_basis_melt$x_pos)
 
   p <- ggplot2::ggplot(
     data = muts_basis_melt,
@@ -269,14 +302,14 @@ plot_476_right <- function(
         label = labels,
         colour = cl
       ),
-      size = text_size * base_size / 15,
+      size = block_text_size * base_size / 15,
       fontface = "bold",
       inherit.aes = FALSE
     ) +
     ggrepel::geom_text_repel(
       data = label_data,
       ggplot2::aes(x = x_pos, y = freq, label = Figlabel),
-      size = label_size * base_size / 11,
+      size = ggrepel_size * base_size / 11,
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
       segment.color = "gray50",

@@ -14,7 +14,7 @@ test_that("plot_476 returns a ggplot object", {
 
   p <- plot_476(
     catalog = catalog,
-    text_size = 3,
+    block_text_size = 3,
     plot_title = colnames(sig_data)[1]
   )
 

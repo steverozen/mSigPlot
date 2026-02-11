@@ -16,6 +16,7 @@
 #' @param vline_labels Character vector. IndelType labels at which to draw
 #'   vertical reference lines. Default is empty.
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
@@ -30,18 +31,20 @@ plot_476_pdf <- function(
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
   vline_labels = c(),
-  title_text_size = 1.0
+  title_text_size = 1.0,
+  plot_complex = FALSE
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
       catalog = catalog[, i],
-      text_size = 3,
+      block_text_size = 3,
       plot_title = colnames(catalog)[i],
       num_labels = num_labels,
       simplify_labels = simplify_labels,
       label_threshold_denominator = label_threshold_denominator,
       vline_labels = vline_labels,
-      title_text_size = title_text_size
+      title_text_size = title_text_size,
+      plot_complex = plot_complex
     )
   })
   plots_per_page <- 5
