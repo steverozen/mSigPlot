@@ -143,9 +143,9 @@ plot_476_right <- function(
     "X"
   )
   blocks$cl <- c(
-    "black",
-    "black",
-    "black",
+    "white",
+    "white",
+    "white",
     "white"
   )
 

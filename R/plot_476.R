@@ -154,9 +154,9 @@ plot_476 <- function(
     "black",
     "black",
     "black",
-    "black",
-    "black",
-    "black",
+    "white",
+    "white",
+    "white",
     "white"
   )
 
