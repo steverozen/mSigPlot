@@ -7,10 +7,12 @@
 #' @param catalog Numeric vector of length 476 containing indel counts or
 #'   proportions for a single sample. Only positions 343-476 are plotted.
 #' @param block_text_size Numeric. Size of category block labels (e.g. "Del >=2bp").
+#'   Scaled by `base_size / 11`.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param num_labels Integer. Number of top peaks to label per category block.
 #'   Set to 0 or NULL to disable labels.
-#' @param ggrepel_size Numeric. Size of ggrepel peak labels.
+#' @param ggrepel_size Numeric. Size of ggrepel peak labels. Scaled by
+#'   `base_size / 11`.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled.
 #' @param vline_labels Character vector. IndelType labels at which to draw
@@ -18,8 +20,13 @@
 #'   space.
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
 #'   the indel type prefix.
-#' @param base_size Base font size for ggplot2's theme.
+#' @param base_size Base font size for ggplot2's theme. All text sizes scale
+#'   relative to this value.
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param x_axis_tick_label_size Numeric. Relative size of x-axis tick labels, passed to `rel()`.
+#' @param y_axis_tick_label_size Numeric. Relative size of y-axis tick labels, passed to `rel()`.
+#' @param x_title_size Numeric. Relative size of x-axis title, passed to `rel()`.
+#' @param y_title_size Numeric. Relative size of y-axis title, passed to `rel()`.
 #' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
 #' @param text_size Deprecated. Use `block_text_size` instead.
 #' @param label_size Deprecated. Use `ggrepel_size` instead.
@@ -42,6 +49,10 @@ plot_476_right <- function(
   simplify_labels = TRUE,
   base_size = 11,
   title_text_size = 1.0,
+  x_axis_tick_label_size = 0.8,
+  y_axis_tick_label_size = 0.7,
+  x_title_size = 0.7,
+  y_title_size = 0.9,
   plot_complex = FALSE,
   text_size = NULL,
   label_size = NULL
@@ -261,20 +272,20 @@ plot_476_right <- function(
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
-        size = rel(0.8),
+        size = rel(x_axis_tick_label_size),
         angle = 0,
         hjust = 0,
         vjust = 8, # Anchor text at bottom (above axis)
       ),
       axis.ticks.x = ggplot2::element_line(),
       axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
-      axis.text.y = ggplot2::element_text(size = rel(0.7), colour = "black"),
+      axis.text.y = ggplot2::element_text(size = rel(y_axis_tick_label_size), colour = "black"),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
-        size = rel(0.7),
+        size = rel(x_title_size),
         margin = margin(t = 10)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(0.9)),
+      axis.title.y = ggplot2::element_text(size = rel(y_title_size)),
       plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
       axis.line = ggplot2::element_line(linewidth = rel(0.5)),
       plot.title = ggplot2::element_text(size = rel(title_text_size))
@@ -302,7 +313,7 @@ plot_476_right <- function(
         label = labels,
         colour = cl
       ),
-      size = block_text_size * base_size / 15,
+      size = block_text_size * base_size / 11,
       fontface = "bold",
       inherit.aes = FALSE
     ) +

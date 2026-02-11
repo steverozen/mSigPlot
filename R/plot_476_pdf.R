@@ -8,14 +8,23 @@
 #'   one column per sample. Column names are used as plot titles.
 #' @param filename Character. Path to the output PDF file.
 #' @param num_labels Integer. Number of top peaks to label per category block.
-#'   Default is 4.
 #' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
-#'   the indel type prefix. Default is FALSE.
+#'   the indel type prefix.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled.
 #' @param vline_labels Character vector. IndelType labels at which to draw
-#'   vertical reference lines. Default is empty.
+#'   vertical reference lines.
+#' @param base_size Base font size for ggplot2's theme. All text sizes scale
+#'   relative to this value.
+#' @param block_text_size Numeric. Size of category block labels. Scaled by
+#'   `base_size / 11`.
+#' @param ggrepel_size Numeric. Size of ggrepel peak labels. Scaled by
+#'   `base_size / 11`.
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param x_axis_tick_label_size Numeric. Relative size of x-axis tick labels, passed to `rel()`.
+#' @param y_axis_tick_label_size Numeric. Relative size of y-axis tick labels, passed to `rel()`.
+#' @param x_title_size Numeric. Relative size of x-axis title, passed to `rel()`.
+#' @param y_title_size Numeric. Relative size of y-axis title, passed to `rel()`.
 #' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
@@ -31,19 +40,32 @@ plot_476_pdf <- function(
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
   vline_labels = c(),
+  base_size = 11,
+  block_text_size = 3,
+  ggrepel_size = 2,
   title_text_size = 1.0,
+  x_axis_tick_label_size = 0.8,
+  y_axis_tick_label_size = 0.7,
+  x_title_size = 0.7,
+  y_title_size = 0.9,
   plot_complex = FALSE
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
       catalog = catalog[, i],
-      block_text_size = 3,
+      block_text_size = block_text_size,
       plot_title = colnames(catalog)[i],
       num_labels = num_labels,
+      ggrepel_size = ggrepel_size,
       simplify_labels = simplify_labels,
       label_threshold_denominator = label_threshold_denominator,
       vline_labels = vline_labels,
+      base_size = base_size,
       title_text_size = title_text_size,
+      x_axis_tick_label_size = x_axis_tick_label_size,
+      y_axis_tick_label_size = y_axis_tick_label_size,
+      x_title_size = x_title_size,
+      y_title_size = y_title_size,
       plot_complex = plot_complex
     )
   })
