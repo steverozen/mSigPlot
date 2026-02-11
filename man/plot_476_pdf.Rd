@@ -11,7 +11,8 @@ plot_476_pdf(
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
   vline_labels = c(),
-  title_text_size = 1
+  title_text_size = 1,
+  plot_complex = FALSE
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ max/label_threshold_denominator are not labeled.}
 vertical reference lines. Default is empty.}
 
 \item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
+
+\item{plot_complex}{Logical. If TRUE, include the 5 Complex indel channels.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

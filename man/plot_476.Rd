@@ -6,43 +6,51 @@
 \usage{
 plot_476(
   catalog,
-  text_size = 3,
+  block_text_size = 3,
   plot_title = "test",
   num_labels = 3,
-  label_size = 2,
+  ggrepel_size = 2,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11,
-  title_text_size = 1
+  title_text_size = 1,
+  plot_complex = FALSE,
+  text_size = NULL,
+  label_size = NULL
 )
 }
 \arguments{
 \item{catalog}{Numeric vector of length 476 containing indel counts or
 proportions for a single sample.}
 
-\item{text_size}{Numeric. Size of text labels in the plot. Default is 3.}
+\item{block_text_size}{Numeric. Size of category block labels (e.g. "Del 1bp C").}
 
-\item{plot_title}{Character. Title displayed above the plot. Default is "test".}
+\item{plot_title}{Character. Title displayed above the plot.}
 
 \item{num_labels}{Integer. Number of top peaks to label per category block.
-Set to 0 or NULL to disable labels. Default is 3.}
+Set to 0 or NULL to disable labels.}
 
-\item{label_size}{Numeric. Size of peak labels. Default is 2.}
+\item{ggrepel_size}{Numeric. Size of ggrepel peak labels.}
 
 \item{label_threshold_denominator}{Numeric. Peaks with values less than
-max/label_threshold_denominator are not labeled. Default is 7.}
+max/label_threshold_denominator are not labeled.}
 
 \item{vline_labels}{Character vector. IndelType labels at which to draw
-vertical reference lines. For example, \code{c("A[Del(C):R1]A", "G[Del(C):R1]A")}.
-Default is empty.}
+vertical reference lines. For example, \code{c("A[Del(C):R1]A", "G[Del(C):R1]A")}.}
 
 \item{simplify_labels}{Logical. If TRUE, simplifies peak labels by removing
-the indel type prefix. Default is TRUE.}
+the indel type prefix.}
 
 \item{base_size}{Base font size for ggplot2's theme.}
 
 \item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
+
+\item{plot_complex}{Logical. If TRUE, include the 5 Complex indel channels.}
+
+\item{text_size}{Deprecated. Use \code{block_text_size} instead.}
+
+\item{label_size}{Deprecated. Use \code{ggrepel_size} instead.}
 }
 \value{
 A ggplot2 object containing the 476-channel indel profile plot.

@@ -6,29 +6,32 @@
 \usage{
 plot_476_right(
   catalog,
-  text_size = 3,
+  block_text_size = 3,
   plot_title = "test",
   num_labels = 3,
-  label_size = 2,
+  ggrepel_size = 2,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11,
-  title_text_size = 1
+  title_text_size = 1,
+  plot_complex = FALSE,
+  text_size = NULL,
+  label_size = NULL
 )
 }
 \arguments{
 \item{catalog}{Numeric vector of length 476 containing indel counts or
 proportions for a single sample. Only positions 343-476 are plotted.}
 
-\item{text_size}{Numeric. Size of text labels in the plot.}
+\item{block_text_size}{Numeric. Size of category block labels (e.g. "Del >=2bp").}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
 \item{num_labels}{Integer. Number of top peaks to label per category block.
 Set to 0 or NULL to disable labels.}
 
-\item{label_size}{Numeric. Size of peak labels.}
+\item{ggrepel_size}{Numeric. Size of ggrepel peak labels.}
 
 \item{label_threshold_denominator}{Numeric. Peaks with values less than
 max/label_threshold_denominator are not labeled.}
@@ -43,6 +46,12 @@ the indel type prefix.}
 \item{base_size}{Base font size for ggplot2's theme.}
 
 \item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
+
+\item{plot_complex}{Logical. If TRUE, include the 5 Complex indel channels.}
+
+\item{text_size}{Deprecated. Use \code{block_text_size} instead.}
+
+\item{label_size}{Deprecated. Use \code{ggrepel_size} instead.}
 }
 \value{
 A ggplot2 object containing the right portion of the 476-channel

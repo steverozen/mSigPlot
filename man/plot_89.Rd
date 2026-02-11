@@ -13,29 +13,44 @@ plot_89(
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
+  x_axis_tick_label_size = 0.6,
+  y_axis_tick_label_size = 0.8,
+  x_title_size = 0.9,
+  y_title_size = 0.9,
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
-  show_extra_top_bar = FALSE
+  show_extra_top_bar = FALSE,
+  plot_complex = FALSE
 )
 }
 \arguments{
 \item{catalog}{Numeric vector of length 89 containing indel counts or
 proportions for a single sample.}
 
-\item{text_size}{Numeric. Size of text labels in the plot.}
+\item{text_size}{Numeric. Size of text labels in the plot. Used as default
+for \code{top_bar_text_size}.}
 
-\item{top_bar_text_size}{Numeric shows the size of the labels in the colored top bar.}
+\item{top_bar_text_size}{Numeric. Size of labels in the colored top bars
+(both the category bar and the extra summary bar).}
 
 \item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
 \item{setyaxis}{Numeric or NULL. If provided, sets a fixed y-axis maximum.
-If NULL, y-axis scales automatically to the data. Default is NULL.}
+If NULL, y-axis scales automatically to the data.}
 
-\item{ylabel}{Character. Label for the y-axis. Default is "Counts".}
+\item{ylabel}{Character. Label for the y-axis.}
 
 \item{base_size}{Base font size for ggplot2's \code{theme_classic()}.}
+
+\item{x_axis_tick_label_size}{Numeric. Relative size of x-axis tick labels, passed to \code{rel()}.}
+
+\item{y_axis_tick_label_size}{Numeric. Relative size of y-axis tick labels, passed to \code{rel()}.}
+
+\item{x_title_size}{Numeric. Relative size of x-axis title, passed to \code{rel()}.}
+
+\item{y_title_size}{Numeric. Relative size of y-axis title, passed to \code{rel()}.}
 
 \item{show_x_axis_text}{Logical. If \code{TRUE}, display x-axis tick labels.}
 
@@ -45,6 +60,8 @@ plot (e.g., "Del 1bp C", "Ins 1bp T").}
 \item{show_extra_top_bar}{Logical. If \code{TRUE}, display the extra summary bar
 above the category bar (e.g., "Del", "Ins"). Only shown if \code{show_top_bar}
 is also \code{TRUE}. This is really for backward compatibility.}
+
+\item{plot_complex}{Logical. If \code{TRUE}, include the Complex indel channel.}
 }
 \value{
 A ggplot2 object containing the 89-channel indel profile plot.
