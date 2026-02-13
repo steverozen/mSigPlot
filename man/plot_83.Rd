@@ -14,7 +14,7 @@ plot_83(
   ylim = NULL,
   base_size = 11,
   title_cex = 0.8,
-  count_label_cex = 0.6,
+  count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   x_label_cex = 0.5,

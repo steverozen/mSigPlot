@@ -6,10 +6,10 @@
 \usage{
 plot_476(
   catalog,
-  block_text_size = 3,
+  block_text_size = 0.78,
   plot_title = "test",
   num_labels = 3,
-  ggrepel_size = 2,
+  ggrepel_size = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -23,23 +23,23 @@ plot_476(
   text_size = NULL,
   label_size = NULL,
   show_counts = NULL,
-  count_label_size = 2
+  count_label_size = 0.52
 )
 }
 \arguments{
 \item{catalog}{Numeric vector of length 476 containing indel counts or
 proportions for a single sample.}
 
-\item{block_text_size}{Numeric. Size of category block labels (e.g. "Del 1bp C").
-Scaled by \code{base_size / 11}.}
+\item{block_text_size}{Numeric. Size of category block labels (e.g. "Del 1bp C"),
+as a fraction of \code{base_size}.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
 \item{num_labels}{Integer. Number of top peaks to label per category block.
 Set to 0 or NULL to disable labels.}
 
-\item{ggrepel_size}{Numeric. Size of ggrepel peak labels. Scaled by
-\code{base_size / 11}.}
+\item{ggrepel_size}{Numeric. Size of ggrepel peak labels, as a fraction of
+\code{base_size}.}
 
 \item{label_threshold_denominator}{Numeric. Peaks with values less than
 max/label_threshold_denominator are not labeled.}
@@ -74,8 +74,8 @@ mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
 (the default), display them only when the catalog contains counts
 (sum > 1.1).}
 
-\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
-\code{base_size / 11}.}
+\item{count_label_size}{Numeric. Size of per-class count labels, as a
+fraction of \code{base_size}.}
 }
 \value{
 A ggplot2 object containing the 476-channel indel profile plot.

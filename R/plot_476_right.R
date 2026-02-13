@@ -6,13 +6,13 @@
 #'
 #' @param catalog Numeric vector of length 476 containing indel counts or
 #'   proportions for a single sample. Only positions 343-476 are plotted.
-#' @param block_text_size Numeric. Size of category block labels (e.g. "Del >=2bp").
-#'   Scaled by `base_size / 11`.
+#' @param block_text_size Numeric. Size of category block labels (e.g. "Del >=2bp"),
+#'   as a fraction of `base_size`.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param num_labels Integer. Number of top peaks to label per category block.
 #'   Set to 0 or NULL to disable labels.
-#' @param ggrepel_size Numeric. Size of ggrepel peak labels. Scaled by
-#'   `base_size / 11`.
+#' @param ggrepel_size Numeric. Size of ggrepel peak labels, as a fraction of
+#'   `base_size`.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled.
 #' @param vline_labels Character vector. IndelType labels at which to draw
@@ -34,8 +34,8 @@
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
 #'   (sum > 1.1).
-#' @param count_label_size Numeric. Size of per-class count labels. Scaled by
-#'   `base_size / 11`.
+#' @param count_label_size Numeric. Size of per-class count labels, as a
+#'   fraction of `base_size`.
 #'
 #' @return A ggplot2 object containing the right portion of the 476-channel
 #'   indel profile plot.
@@ -46,10 +46,10 @@
 #'
 plot_476_right <- function(
   catalog,
-  block_text_size = 3,
+  block_text_size = 0.78,
   plot_title = "test",
   num_labels = 3,
-  ggrepel_size = 2,
+  ggrepel_size = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -63,7 +63,7 @@ plot_476_right <- function(
   text_size = NULL,
   label_size = NULL,
   show_counts = NULL,
-  count_label_size = 2
+  count_label_size = 1.03
 ) {
   # Handle deprecated text_size
   if (!is.null(text_size)) {
@@ -177,7 +177,9 @@ plot_476_right <- function(
 
   if (!plot_complex) {
     blocks <- blocks[blocks$Type != "Complex", ]
-    indel_mypalette_fill_all <- indel_mypalette_fill_all[names(indel_mypalette_fill_all) != "Complex"]
+    indel_mypalette_fill_all <- indel_mypalette_fill_all[
+      names(indel_mypalette_fill_all) != "Complex"
+    ]
   }
 
   # Create label data: top num_labels per block, excluding peaks < 1/10 max
@@ -287,7 +289,10 @@ plot_476_right <- function(
       ),
       axis.ticks.x = ggplot2::element_line(),
       axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
-      axis.text.y = ggplot2::element_text(size = rel(y_axis_tick_label_size), colour = "black"),
+      axis.text.y = ggplot2::element_text(
+        size = rel(y_axis_tick_label_size),
+        colour = "black"
+      ),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
         size = rel(x_title_size),
@@ -321,18 +326,18 @@ plot_476_right <- function(
         label = labels,
         colour = cl
       ),
-      size = block_text_size * base_size / 11,
+      size = block_text_size * base_size / ggplot2::.pt,
       fontface = "bold",
       inherit.aes = FALSE
     ) +
     ggrepel::geom_text_repel(
       data = label_data,
       ggplot2::aes(x = x_pos, y = freq, label = Figlabel),
-      size = ggrepel_size * base_size / 11,
+      size = ggrepel_size * base_size / ggplot2::.pt,
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
       segment.color = "gray50",
-      segment.size = 0.5 * base_size / 11,
+      segment.size = 0.13 * base_size / ggplot2::.pt,
       arrow = grid::arrow(length = unit(0.01, "npc"), type = "closed"),
       max.overlaps = 50,
       min.segment.length = 0,
@@ -346,7 +351,9 @@ plot_476_right <- function(
     )
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  if (is.null(show_counts)) show_counts <- (ylabel == "Count")
+  if (is.null(show_counts)) {
+    show_counts <- (ylabel == "Count")
+  }
 
   # Add count labels
   if (show_counts) {
@@ -356,7 +363,8 @@ plot_476_right <- function(
       FUN = sum
     )
     names(counts_by_block) <- c("Type", "count")
-    counts_by_block$count <- round(counts_by_block$count)
+    counts_by_block$count <- ifelse(counts_by_block$count > 0 & counts_by_block$count < 1,
+      signif(counts_by_block$count, 2), round(counts_by_block$count))
     count_label_df <- merge(blocks, counts_by_block, by = "Type")
     count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
     count_label_df$y <- max_freq * 1.2
@@ -365,7 +373,7 @@ plot_476_right <- function(
       ggplot2::geom_text(
         data = count_label_df,
         ggplot2::aes(x = x, y = y, label = count),
-        size = count_label_size * base_size / 11,
+        size = count_label_size * base_size / ggplot2::.pt,
         inherit.aes = FALSE
       )
   }

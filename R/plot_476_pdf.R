@@ -16,10 +16,10 @@
 #'   vertical reference lines.
 #' @param base_size Base font size for ggplot2's theme. All text sizes scale
 #'   relative to this value.
-#' @param block_text_size Numeric. Size of category block labels. Scaled by
-#'   `base_size / 11`.
-#' @param ggrepel_size Numeric. Size of ggrepel peak labels. Scaled by
-#'   `base_size / 11`.
+#' @param block_text_size Numeric. Size of category block labels, as a fraction
+#'   of `base_size`.
+#' @param ggrepel_size Numeric. Size of ggrepel peak labels, as a fraction of
+#'   `base_size`.
 #' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
 #' @param x_axis_tick_label_size Numeric. Relative size of x-axis tick labels, passed to `rel()`.
 #' @param y_axis_tick_label_size Numeric. Relative size of y-axis tick labels, passed to `rel()`.
@@ -30,8 +30,8 @@
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
 #'   (sum > 1.1).
-#' @param count_label_size Numeric. Size of per-class count labels. Scaled by
-#'   `base_size / 11`.
+#' @param count_label_size Numeric. Size of per-class count labels, as a
+#'   fraction of `base_size`.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
@@ -47,8 +47,8 @@ plot_476_pdf <- function(
   label_threshold_denominator = 7,
   vline_labels = c(),
   base_size = 11,
-  block_text_size = 3,
-  ggrepel_size = 2,
+  block_text_size = 0.78,
+  ggrepel_size = 0.52,
   title_text_size = 1.0,
   x_axis_tick_label_size = 0.8,
   y_axis_tick_label_size = 0.7,
@@ -56,7 +56,7 @@ plot_476_pdf <- function(
   y_title_size = 0.9,
   plot_complex = FALSE,
   show_counts = NULL,
-  count_label_size = 2
+  count_label_size = 0.52
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(

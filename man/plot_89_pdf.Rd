@@ -13,7 +13,7 @@ plot_89_pdf(
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
   show_counts = NULL,
-  count_label_size = 2
+  count_label_size = 1.03
 )
 }
 \arguments{
@@ -38,8 +38,8 @@ mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
 (the default), display them only when the catalog contains counts
 (sum > 1.1).}
 
-\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
-\code{base_size / 11}.}
+\item{count_label_size}{Numeric. Size of per-class count labels, as a
+fraction of \code{base_size}.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

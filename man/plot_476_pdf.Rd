@@ -12,8 +12,8 @@ plot_476_pdf(
   label_threshold_denominator = 7,
   vline_labels = c(),
   base_size = 11,
-  block_text_size = 3,
-  ggrepel_size = 2,
+  block_text_size = 0.78,
+  ggrepel_size = 0.52,
   title_text_size = 1,
   x_axis_tick_label_size = 0.8,
   y_axis_tick_label_size = 0.7,
@@ -21,7 +21,7 @@ plot_476_pdf(
   y_title_size = 0.9,
   plot_complex = FALSE,
   show_counts = NULL,
-  count_label_size = 2
+  count_label_size = 0.52
 )
 }
 \arguments{
@@ -44,11 +44,11 @@ vertical reference lines.}
 \item{base_size}{Base font size for ggplot2's theme. All text sizes scale
 relative to this value.}
 
-\item{block_text_size}{Numeric. Size of category block labels. Scaled by
-\code{base_size / 11}.}
+\item{block_text_size}{Numeric. Size of category block labels, as a fraction
+of \code{base_size}.}
 
-\item{ggrepel_size}{Numeric. Size of ggrepel peak labels. Scaled by
-\code{base_size / 11}.}
+\item{ggrepel_size}{Numeric. Size of ggrepel peak labels, as a fraction of
+\code{base_size}.}
 
 \item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
 
@@ -67,8 +67,8 @@ mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
 (the default), display them only when the catalog contains counts
 (sum > 1.1).}
 
-\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
-\code{base_size / 11}.}
+\item{count_label_size}{Numeric. Size of per-class count labels, as a
+fraction of \code{base_size}.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

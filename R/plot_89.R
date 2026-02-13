@@ -31,8 +31,8 @@
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
 #'   (sum > 1.1).
-#' @param count_label_size Numeric. Size of per-class count labels. Scaled by
-#'   `base_size / 11`.
+#' @param count_label_size Numeric. Size of per-class count labels, as a
+#'   fraction of `base_size`.
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
@@ -58,7 +58,7 @@ plot_89 <- function(
   show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   show_counts = NULL,
-  count_label_size = 2
+  count_label_size = 1.03
 ) {
   if (is.null(ylabel)) {
     if (sum(catalog) < 1.1 && max(catalog) != 1) {
@@ -489,7 +489,10 @@ plot_89 <- function(
       } else {
         ggplot2::element_blank()
       },
-      axis.text.y = ggplot2::element_text(size = rel(y_axis_tick_label_size), colour = "black"),
+      axis.text.y = ggplot2::element_text(
+        size = rel(y_axis_tick_label_size),
+        colour = "black"
+      ),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
         size = rel(x_title_size),
@@ -560,7 +563,9 @@ plot_89 <- function(
   }
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  if (is.null(show_counts)) show_counts <- (ylabel == "Counts")
+  if (is.null(show_counts)) {
+    show_counts <- (ylabel == "Counts")
+  }
 
   # Add count labels
   if (show_counts) {
@@ -570,7 +575,8 @@ plot_89 <- function(
       FUN = sum
     )
     names(counts_by_block) <- c("Type", "count")
-    counts_by_block$count <- round(counts_by_block$count)
+    counts_by_block$count <- ifelse(counts_by_block$count > 0 & counts_by_block$count < 1,
+      signif(counts_by_block$count, 2), round(counts_by_block$count))
     count_label_df <- merge(blocks, counts_by_block, by = "Type")
     count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
     max_freq <- ifelse(!is.null(setyaxis), setyaxis, max(muts_basis_melt$freq))
@@ -580,7 +586,7 @@ plot_89 <- function(
       ggplot2::geom_text(
         data = count_label_df,
         ggplot2::aes(x = x, y = y, label = count),
-        size = count_label_size * base_size / 11,
+        size = count_label_size * base_size / ggplot2::.pt,
         inherit.aes = FALSE
       )
   }

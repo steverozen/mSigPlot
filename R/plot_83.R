@@ -39,7 +39,7 @@ plot_83 <- function(
   ylim = NULL,
   base_size = 11,
   title_cex = 0.8,
-  count_label_cex = 0.6,
+  count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   x_label_cex = 0.5,
@@ -212,7 +212,9 @@ plot_83 <- function(
   )
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  if (is.null(show_counts)) show_counts <- (catalog_type == "counts")
+  if (is.null(show_counts)) {
+    show_counts <- (catalog_type == "counts")
+  }
 
   # Calculate counts per class for annotation
   if (show_counts) {
@@ -229,7 +231,8 @@ plot_83 <- function(
     count_labels <- data.frame(
       x = (class_starts + class_ends) / 2,
       y = ymax * 0.8,
-      label = round(counts_per_class),
+      label = ifelse(counts_per_class > 0 & counts_per_class < 1,
+        signif(counts_per_class, 2), round(counts_per_class)),
       stringsAsFactors = FALSE
     )
   }
@@ -257,8 +260,10 @@ plot_83 <- function(
       axis.title.y = element_text(size = axis_title_cex * base_size),
       axis.text.y = element_text(size = axis_text_cex * base_size),
       plot.margin = margin(
-        t = 40 * base_size / 11, r = 10,
-        b = 50 * base_size / 11, l = 10
+        t = 40 * base_size / 11,
+        r = 10,
+        b = 50 * base_size / 11,
+        l = 10
       )
     )
 
