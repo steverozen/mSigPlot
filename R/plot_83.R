@@ -1,31 +1,53 @@
 #' Plot 83-type indel catalog using ggplot2 and return the ggplot object
-#' @param catalog An 83-row, 1 - column indel catalog
-#' @param text_size Numeric. Size of plot_title.
-#' @param count_label_size Numeric. Size of the labels that show counts of mutations for each major mutation type.
+#' @param catalog An 83-row, 1-column indel catalog
 #' @param plot_title Character. Title displayed above the plot.
-#' @param grid Logical, draw grid lines
-#' @param upper Logical, draw category labels above bars
-#' @param xlabels Logical, draw x-axis labels
-#' @param ylabels Logical, draw y-axis labels
-#' @param ylim Optional y-axis limits
-#' @param base_size Base font size for ggplot2's theme.
+#' @param grid Logical, draw grid lines.
+#' @param upper Logical, draw category labels above bars.
+#' @param xlabels Logical, draw x-axis labels.
+#' @param ylabels Logical, draw y-axis labels.
+#' @param ylim Optional y-axis limits.
+#' @param base_size Numeric. Base font size in points for ggplot2's theme. All
+#'   text element sizes scale relative to this value.
+#' @param title_cex Numeric. Multiplier for the plot title (sample name) size.
+#' @param count_label_cex Numeric. Multiplier for the per-class mutation count
+#'   labels.
+#' @param block_label_cex Numeric. Multiplier for the upper colored category
+#'   block labels (C, T, 2, 3, ...).
+#' @param class_label_cex Numeric. Multiplier for the major class labels
+#'   (e.g. "1bp deletion").
+#' @param x_label_cex Numeric. Multiplier for the x-axis channel labels
+#'   (repeat/homopolymer lengths).
+#' @param bottom_label_cex Numeric. Multiplier for the bottom category
+#'   description labels (e.g. "Homopolymer length").
+#' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
+#' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
 #' @return A ggplot object
 #' @export
 #'
 #' @import ggplot2 dplyr
 plot_83 <- function(
   catalog,
-  text_size = 3,
-  count_label_size = 0.8 * text_size,
   plot_title = colnames(catalog)[1],
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
   ylabels = TRUE,
   ylim = NULL,
-  base_size = 11
+  base_size = 11,
+  title_cex = 0.8,
+  count_label_cex = 0.6,
+  block_label_cex = 0.65,
+  class_label_cex = 0.8,
+  x_label_cex = 0.5,
+  bottom_label_cex = 0.65,
+  axis_title_cex = 1.0,
+  axis_text_cex = 0.8
 ) {
   stopifnot(nrow(catalog) == 83)
+
+  # Base text size in mm for use in geom_text
+  # (geom_text uses mm; base_size is in points; 1 pt = 25.4/72.27 mm)
+  base_mm <- base_size / (72.27 / 25.4)
 
   # Define colors for 16 indel classes
   indel_class_col <- c(
@@ -224,7 +246,12 @@ plot_83 <- function(
     theme(
       axis.line.x = element_blank(),
       axis.ticks.x = element_blank(),
-      plot.margin = margin(t = 40, r = 10, b = 50, l = 10)
+      axis.title.y = element_text(size = axis_title_cex * base_size),
+      axis.text.y = element_text(size = axis_text_cex * base_size),
+      plot.margin = margin(
+        t = 40 * base_size / 11, r = 10,
+        b = 50 * base_size / 11, l = 10
+      )
     )
 
   # Add y-axis label
@@ -274,13 +301,13 @@ plot_83 <- function(
         data = blocks,
         aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = label),
         color = blocks$label_col,
-        size = 2.5 * base_size / 11,
+        size = block_label_cex * base_mm,
         inherit.aes = FALSE
       ) +
       geom_text(
         data = maj_labels,
         aes(x = x, y = y, label = label),
-        size = 3 * base_size / 11,
+        size = class_label_cex * base_mm,
         inherit.aes = FALSE
       )
   }
@@ -296,14 +323,14 @@ plot_83 <- function(
       ) +
       geom_text(
         aes(x = x, y = -ymax * 0.15, label = mut_type),
-        size = 2 * base_size / 11,
+        size = x_label_cex * base_mm,
         inherit.aes = FALSE,
         data = data.frame(x = 1:83, mut_type = mut_type)
       ) +
       geom_text(
         data = bottom_labels,
         aes(x = x, y = y, label = label),
-        size = 2.5 * base_size / 11,
+        size = bottom_label_cex * base_mm,
         inherit.aes = FALSE
       ) +
       theme(axis.text.x = element_blank())
@@ -317,7 +344,7 @@ plot_83 <- function(
       geom_text(
         data = count_labels,
         aes(x = x, y = y, label = label),
-        size = count_label_size,
+        size = count_label_cex * base_mm,
         hjust = 1,
         inherit.aes = FALSE
       )
@@ -332,7 +359,7 @@ plot_83 <- function(
       label = plot_title,
       hjust = 0,
       # fontface = "bold",
-      size = text_size
+      size = title_cex * base_mm
     )
 
   return(p)
