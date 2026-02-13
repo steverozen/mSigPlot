@@ -26,6 +26,12 @@
 #' @param x_title_size Numeric. Relative size of x-axis title, passed to `rel()`.
 #' @param y_title_size Numeric. Relative size of y-axis title, passed to `rel()`.
 #' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
+#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
+#'   mutation count labels. If `FALSE`, never display them. If `NULL`
+#'   (the default), display them only when the catalog contains counts
+#'   (sum > 1.1).
+#' @param count_label_size Numeric. Size of per-class count labels. Scaled by
+#'   `base_size / 11`.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
@@ -48,7 +54,9 @@ plot_476_pdf <- function(
   y_axis_tick_label_size = 0.7,
   x_title_size = 0.7,
   y_title_size = 0.9,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  show_counts = NULL,
+  count_label_size = 2
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476(
@@ -66,7 +74,9 @@ plot_476_pdf <- function(
       y_axis_tick_label_size = y_axis_tick_label_size,
       x_title_size = x_title_size,
       y_title_size = y_title_size,
-      plot_complex = plot_complex
+      plot_complex = plot_complex,
+      show_counts = show_counts,
+      count_label_size = count_label_size
     )
   })
   plots_per_page <- 5

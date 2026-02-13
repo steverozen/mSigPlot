@@ -24,6 +24,10 @@
 #'   description labels.
 #' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
 #' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
+#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
+#'   mutation count labels. If `FALSE`, never display them. If `NULL`
+#'   (the default), display them only when the catalog contains counts
+#'   (sum > 1.1).
 #'
 #' @return Invisibly returns `NULL`. Called for side effect of creating PDF file.
 #'
@@ -48,7 +52,8 @@ plot_83_pdf <- function(
   x_label_cex = 0.5,
   bottom_label_cex = 0.65,
   axis_title_cex = 1.0,
-  axis_text_cex = 0.8
+  axis_text_cex = 0.8,
+  show_counts = NULL
 ) {
   stopifnot(nrow(catalog) == 83)
 
@@ -79,7 +84,8 @@ plot_83_pdf <- function(
         x_label_cex = x_label_cex,
         bottom_label_cex = bottom_label_cex,
         axis_title_cex = axis_title_cex,
-        axis_text_cex = axis_text_cex
+        axis_text_cex = axis_text_cex,
+        show_counts = show_counts
       )
       page_plots[[length(page_plots) + 1]] <- p
     }

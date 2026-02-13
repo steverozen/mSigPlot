@@ -56,3 +56,59 @@ test_that("plot_89_pdf creates PDF file", {
   # Cleanup
   unlink(temp_pdf)
 })
+
+test_that("plot_89 count labels render with count catalog", {
+  fixture_path <- testthat::test_path("fixtures", "type89_liu_et_al_sigs.tsv")
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  # Multiply by 100 to create a count-type catalog (sum >> 1.1)
+  catalog_count <- sig_data[, 1] * 100
+
+  p <- plot_89(
+    catalog = catalog_count,
+    plot_title = "Counts test"
+  )
+
+  expect_s3_class(p, "ggplot")
+
+  # Verify count labels layer is present
+  pb <- ggplot2::ggplot_build(p)
+  has_count_layer <- any(vapply(pb$data, function(d) {
+    "label" %in% names(d) && any(grepl("^[0-9]+$", as.character(d$label)))
+  }, logical(1)))
+  expect_true(has_count_layer)
+})
+
+test_that("plot_89 show_counts = FALSE suppresses count labels", {
+  fixture_path <- testthat::test_path("fixtures", "type89_liu_et_al_sigs.tsv")
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  catalog_count <- sig_data[, 1] * 100
+
+  p <- plot_89(
+    catalog = catalog_count,
+    plot_title = "No counts",
+    show_counts = FALSE
+  )
+
+  expect_s3_class(p, "ggplot")
+
+  # Count labels should NOT be present
+  pb <- ggplot2::ggplot_build(p)
+  has_count_layer <- any(vapply(pb$data, function(d) {
+    "label" %in% names(d) && any(grepl("^[0-9]+$", as.character(d$label)))
+  }, logical(1)))
+  expect_false(has_count_layer)
+})

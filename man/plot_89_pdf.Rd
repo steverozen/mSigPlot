@@ -11,7 +11,9 @@ plot_89_pdf(
   title_text_size = 1,
   filename,
   show_x_axis_text = TRUE,
-  show_top_bar = TRUE
+  show_top_bar = TRUE,
+  show_counts = NULL,
+  count_label_size = 2
 )
 }
 \arguments{
@@ -30,6 +32,14 @@ one column per sample. Column names are used as plot titles.}
 
 \item{show_top_bar}{Logical. If \code{TRUE}, display the category bar above the
 plot.}
+
+\item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
+mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
+(the default), display them only when the catalog contains counts
+(sum > 1.1).}
+
+\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
+\code{base_size / 11}.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

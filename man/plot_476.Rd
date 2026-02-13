@@ -21,7 +21,9 @@ plot_476(
   y_title_size = 0.9,
   plot_complex = FALSE,
   text_size = NULL,
-  label_size = NULL
+  label_size = NULL,
+  show_counts = NULL,
+  count_label_size = 2
 )
 }
 \arguments{
@@ -66,6 +68,14 @@ relative to this value.}
 \item{text_size}{Deprecated. Use \code{block_text_size} instead.}
 
 \item{label_size}{Deprecated. Use \code{ggrepel_size} instead.}
+
+\item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
+mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
+(the default), display them only when the catalog contains counts
+(sum > 1.1).}
+
+\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
+\code{base_size / 11}.}
 }
 \value{
 A ggplot2 object containing the 476-channel indel profile plot.

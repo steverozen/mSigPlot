@@ -19,7 +19,9 @@ plot_476_pdf(
   y_axis_tick_label_size = 0.7,
   x_title_size = 0.7,
   y_title_size = 0.9,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  show_counts = NULL,
+  count_label_size = 2
 )
 }
 \arguments{
@@ -59,6 +61,14 @@ relative to this value.}
 \item{y_title_size}{Numeric. Relative size of y-axis title, passed to \code{rel()}.}
 
 \item{plot_complex}{Logical. If TRUE, include the 5 Complex indel channels.}
+
+\item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
+mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
+(the default), display them only when the catalog contains counts
+(sum > 1.1).}
+
+\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
+\code{base_size / 11}.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

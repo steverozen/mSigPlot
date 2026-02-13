@@ -27,6 +27,12 @@
 #'   above the category bar (e.g., "Del", "Ins"). Only shown if `show_top_bar`
 #'   is also `TRUE`. This is really for backward compatibility.
 #' @param plot_complex Logical. If `TRUE`, include the Complex indel channel.
+#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
+#'   mutation count labels. If `FALSE`, never display them. If `NULL`
+#'   (the default), display them only when the catalog contains counts
+#'   (sum > 1.1).
+#' @param count_label_size Numeric. Size of per-class count labels. Scaled by
+#'   `base_size / 11`.
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
@@ -50,7 +56,9 @@ plot_89 <- function(
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
   show_extra_top_bar = FALSE,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  show_counts = NULL,
+  count_label_size = 2
 ) {
   if (is.null(ylabel)) {
     if (sum(catalog) < 1.1 && max(catalog) != 1) {
@@ -549,6 +557,32 @@ plot_89 <- function(
           inherit.aes = FALSE
         )
     }
+  }
+
+  # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
+  if (is.null(show_counts)) show_counts <- (ylabel == "Counts")
+
+  # Add count labels
+  if (show_counts) {
+    counts_by_block <- aggregate(
+      abs(freq) ~ Indel,
+      data = muts_basis_melt,
+      FUN = sum
+    )
+    names(counts_by_block) <- c("Type", "count")
+    counts_by_block$count <- round(counts_by_block$count)
+    count_label_df <- merge(blocks, counts_by_block, by = "Type")
+    count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
+    max_freq <- ifelse(!is.null(setyaxis), setyaxis, max(muts_basis_melt$freq))
+    count_label_df$y <- max_freq * 0.9
+
+    p <- p +
+      ggplot2::geom_text(
+        data = count_label_df,
+        ggplot2::aes(x = x, y = y, label = count),
+        size = count_label_size * base_size / 11,
+        inherit.aes = FALSE
+      )
   }
 
   return(p)

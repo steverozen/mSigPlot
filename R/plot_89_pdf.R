@@ -12,6 +12,12 @@
 #' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
 #' @param show_top_bar Logical. If `TRUE`, display the category bar above the
 #'   plot.
+#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
+#'   mutation count labels. If `FALSE`, never display them. If `NULL`
+#'   (the default), display them only when the catalog contains counts
+#'   (sum > 1.1).
+#' @param count_label_size Numeric. Size of per-class count labels. Scaled by
+#'   `base_size / 11`.
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
@@ -26,7 +32,9 @@ plot_89_pdf <- function(
   title_text_size = 1.0,
   filename,
   show_x_axis_text = TRUE,
-  show_top_bar = TRUE
+  show_top_bar = TRUE,
+  show_counts = NULL,
+  count_label_size = 2
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_89(
@@ -36,7 +44,9 @@ plot_89_pdf <- function(
       title_text_size = title_text_size,
       plot_title = colnames(catalog)[i],
       show_x_axis_text = show_x_axis_text,
-      show_top_bar = show_top_bar
+      show_top_bar = show_top_bar,
+      show_counts = show_counts,
+      count_label_size = count_label_size
     )
   })
   plots_per_page <- 5

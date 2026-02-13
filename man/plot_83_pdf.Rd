@@ -7,14 +7,21 @@
 plot_83_pdf(
   catalog,
   filename,
-  text_size = 3,
-  count_label_size = 0.8 * text_size,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
   ylabels = TRUE,
   ylim = NULL,
-  base_size = 11
+  base_size = 11,
+  title_cex = 0.8,
+  count_label_cex = 0.6,
+  block_label_cex = 0.65,
+  class_label_cex = 0.8,
+  x_label_cex = 0.5,
+  bottom_label_cex = 0.65,
+  axis_title_cex = 1,
+  axis_text_cex = 0.8,
+  show_counts = NULL
 )
 }
 \arguments{
@@ -22,10 +29,6 @@ plot_83_pdf(
 one column per sample. Column names are used as plot titles.}
 
 \item{filename}{Character. Path to the output PDF file.}
-
-\item{text_size}{Numeric. Size of text labels in the plot.}
-
-\item{count_label_size}{Numeric. Size of the labels that show counts of mutations for each major mutation type.}
 
 \item{grid}{Logical. Draw grid lines.}
 
@@ -37,7 +40,31 @@ one column per sample. Column names are used as plot titles.}
 
 \item{ylim}{Optional y-axis limits.}
 
-\item{base_size}{Base font size for ggplot2's \code{theme_classic()}.}
+\item{base_size}{Numeric. Base font size in points. All text scales
+relative to this value.}
+
+\item{title_cex}{Numeric. Multiplier for the plot title size.}
+
+\item{count_label_cex}{Numeric. Multiplier for the per-class count labels.}
+
+\item{block_label_cex}{Numeric. Multiplier for the upper colored category
+block labels.}
+
+\item{class_label_cex}{Numeric. Multiplier for the major class labels.}
+
+\item{x_label_cex}{Numeric. Multiplier for the x-axis channel labels.}
+
+\item{bottom_label_cex}{Numeric. Multiplier for the bottom category
+description labels.}
+
+\item{axis_title_cex}{Numeric. Multiplier for the y-axis title size.}
+
+\item{axis_text_cex}{Numeric. Multiplier for the y-axis tick label size.}
+
+\item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
+mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
+(the default), display them only when the catalog contains counts
+(sum > 1.1).}
 }
 \value{
 Invisibly returns \code{NULL}. Called for side effect of creating PDF file.

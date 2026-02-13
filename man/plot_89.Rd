@@ -20,7 +20,9 @@ plot_89(
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
   show_extra_top_bar = FALSE,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  show_counts = NULL,
+  count_label_size = 2
 )
 }
 \arguments{
@@ -62,6 +64,14 @@ above the category bar (e.g., "Del", "Ins"). Only shown if \code{show_top_bar}
 is also \code{TRUE}. This is really for backward compatibility.}
 
 \item{plot_complex}{Logical. If \code{TRUE}, include the Complex indel channel.}
+
+\item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
+mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
+(the default), display them only when the catalog contains counts
+(sum > 1.1).}
+
+\item{count_label_size}{Numeric. Size of per-class count labels. Scaled by
+\code{base_size / 11}.}
 }
 \value{
 A ggplot2 object containing the 89-channel indel profile plot.

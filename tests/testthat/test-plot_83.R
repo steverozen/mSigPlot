@@ -133,3 +133,35 @@ test_that("plot_83 count labels render with count catalog", {
   }, logical(1)))
   expect_true(has_count_layer)
 })
+
+test_that("plot_83 show_counts = FALSE suppresses count labels", {
+  fixture_path <- testthat::test_path(
+    "fixtures",
+    "COSMIC_v3.5_ID_GRCh37_signatures.tsv"
+  )
+  sig_data <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  catalog_count <- sig_data[, "ID6", drop = FALSE] * 100
+
+  p <- plot_83(
+    catalog = catalog_count,
+    plot_title = "No counts",
+    show_counts = FALSE
+  )
+
+  expect_s3_class(p, "ggplot")
+
+  # Count labels (multi-digit numbers) should NOT be present
+  # (single-digit "2", "3", "4" are block category labels, not count labels)
+  pb <- ggplot2::ggplot_build(p)
+  has_count_layer <- any(vapply(pb$data, function(d) {
+    "label" %in% names(d) && any(grepl("^[0-9]{2,}$", as.character(d$label)))
+  }, logical(1)))
+  expect_false(has_count_layer)
+})
