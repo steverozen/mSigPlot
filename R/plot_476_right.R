@@ -30,6 +30,8 @@
 #' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
 #' @param text_size Deprecated. Use `block_text_size` instead.
 #' @param label_size Deprecated. Use `ggrepel_size` instead.
+#' @param show_x_labels Logical. If `TRUE`, display the Figlabel for each
+#'   channel as a rotated x-axis tick label.
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
@@ -46,22 +48,23 @@
 #'
 plot_476_right <- function(
   catalog,
-  block_text_size = 0.78,
+  block_text_size = 1.0,
   plot_title = "test",
   num_labels = 3,
-  ggrepel_size = 0.52,
+  ggrepel_size = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11,
   title_text_size = 1.0,
-  x_axis_tick_label_size = 0.8,
+  x_axis_tick_label_size = 0.7,
   y_axis_tick_label_size = 0.7,
-  x_title_size = 0.7,
+  x_title_size = 0.9,
   y_title_size = 0.9,
   plot_complex = FALSE,
   text_size = NULL,
   label_size = NULL,
+  show_x_labels = FALSE,
   show_counts = NULL,
   count_label_size = 1.03
 ) {
@@ -269,8 +272,16 @@ plot_476_right <- function(
     ggplot2::xlab("Indel Type") +
     ggplot2::ylab(ylabel) +
     ggplot2::scale_x_continuous(
-      breaks = flanking_blocks$xmin,
-      labels = flanking_blocks$label,
+      breaks = if (show_x_labels) {
+        seq_len(n_channels)
+      } else {
+        flanking_blocks$xmin
+      },
+      labels = if (show_x_labels) {
+        muts_basis_melt$Figlabel[order(muts_basis_melt$x_pos)]
+      } else {
+        flanking_blocks$label
+      },
       limits = c(0.5, n_channels + 0.5)
     ) +
     ggplot2::scale_y_continuous(
@@ -283,12 +294,12 @@ plot_476_right <- function(
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
         size = rel(x_axis_tick_label_size),
-        angle = 0,
-        hjust = 0,
-        vjust = 8, # Anchor text at bottom (above axis)
+        angle = if (show_x_labels) 90 else 0,
+        hjust = if (show_x_labels) 1 else 0,
+        vjust = 0.5,
       ),
       axis.ticks.x = ggplot2::element_line(),
-      axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
+      axis.ticks.length.x = unit(0.3, "line"), # Downward ticks
       axis.text.y = ggplot2::element_text(
         size = rel(y_axis_tick_label_size),
         colour = "black"
@@ -363,8 +374,11 @@ plot_476_right <- function(
       FUN = sum
     )
     names(counts_by_block) <- c("Type", "count")
-    counts_by_block$count <- ifelse(counts_by_block$count > 0 & counts_by_block$count < 1,
-      signif(counts_by_block$count, 2), round(counts_by_block$count))
+    counts_by_block$count <- ifelse(
+      counts_by_block$count > 0 & counts_by_block$count < 1,
+      signif(counts_by_block$count, 2),
+      round(counts_by_block$count)
+    )
     count_label_df <- merge(blocks, counts_by_block, by = "Type")
     count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
     count_label_df$y <- max_freq * 1.2

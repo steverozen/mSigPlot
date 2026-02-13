@@ -286,6 +286,23 @@ plot_89 <- function(
     row.names = c(NA, -89L)
   )
 
+  # Add SubIndel column for finer block subdivision of Del(T) and Ins(T)
+  indel_type_4_figurelabel$SubIndel <- indel_type_4_figurelabel$Indel
+  del_t <- indel_type_4_figurelabel$Indel == "Del(T)"
+  indel_type_4_figurelabel$SubIndel[del_t] <- ifelse(
+    grepl("R\\(1,4\\)", indel_type_4_figurelabel$IndelType[del_t]),
+    "Del(T):R(1,4)",
+    ifelse(grepl("R\\(5,7\\)", indel_type_4_figurelabel$IndelType[del_t]),
+      "Del(T):R(5,7)", "Del(T):R(8,)")
+  )
+  ins_t <- indel_type_4_figurelabel$Indel == "Ins(T)"
+  indel_type_4_figurelabel$SubIndel[ins_t] <- ifelse(
+    grepl("R\\(0,4\\)", indel_type_4_figurelabel$IndelType[ins_t]),
+    "Ins(T):R(0,4)",
+    ifelse(grepl("R\\(5,7\\)", indel_type_4_figurelabel$IndelType[ins_t]),
+      "Ins(T):R(5,7)", "Ins(T):R(8,)")
+  )
+
   # === 2. Prepare Data for Plotting ===
   my_vector <- indel_type_4_figurelabel$IndelType
   muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
@@ -302,32 +319,37 @@ plot_89 <- function(
     "Indel",
     "Indel3",
     "Figlabel",
+    "SubIndel",
     "Sample",
     "freq"
   )
   muts_basis_melt$Sample <- as.character(muts_basis_melt$Sample)
 
   # === 3. Define Palettes and Block Positions ===
-  indel_mypalette_fill <- c(
-    "#000000",
-    "#61409b",
-    "#f14432",
-    "#fdbe6f",
-    "#ff8001",
-    "#4a98c9",
-    "#b0dd8b",
-    "#36a12e"
+  indel_mypalette_block_fill <- c(
+    "#fdbe6f",  # Del(C)
+    "#ffb34d",  # Del(T):R(1,4)
+    "#ff8001",  # Del(T):R(5,7)
+    "#cc6600",  # Del(T):R(8,)
+    "#b0dd8b",  # Ins(C)
+    "#6dcf65",  # Ins(T):R(0,4)
+    "#36a12e",  # Ins(T):R(5,7)
+    "#1a7a14",  # Ins(T):R(8,)
+    "#f14432",  # Del(2,):R(0,9)
+    "#4a98c9",  # Ins(2,)
+    "#61409b",  # Del(2,):M(1,)
+    "#000000"   # Complex
   )
 
   indel_positions <- indel_type_4_figurelabel$IndelType
   indel_positions_labels <- indel_type_4_figurelabel$Figlabel
 
-  entry <- table(indel_type_4_figurelabel$Indel)
+  entry <- table(indel_type_4_figurelabel$SubIndel)
   order_entry <- c(
     "Del(C)",
-    "Del(T)",
+    "Del(T):R(1,4)", "Del(T):R(5,7)", "Del(T):R(8,)",
     "Ins(C)",
-    "Ins(T)",
+    "Ins(T):R(0,4)", "Ins(T):R(5,7)", "Ins(T):R(8,)",
     "Del(2,):R(0,9)",
     "Ins(2,)",
     "Del(2,):M(1,)",
@@ -335,31 +357,27 @@ plot_89 <- function(
   )
   entry <- entry[order_entry]
   blocks <- data.frame(
-    Type = unique(indel_type_4_figurelabel$Indel),
-    fill = indel_mypalette_fill,
+    Type = names(entry),
+    fill = indel_mypalette_block_fill,
     xmin = c(0, cumsum(entry)[-length(entry)]) + 0.5,
     xmax = cumsum(entry) + 0.5
   )
-  # blocks$ymin <- max(muts_basis_melt$freq) * 1.08
-  #  blocks$ymax <- max(muts_basis_melt$freq) * 1.2
 
   blocks$ymin <- ifelse(
     !is.null(setyaxis),
     setyaxis,
     max(muts_basis_melt$freq)
-  ) *
-    1.08
+  ) * 1.08
   blocks$ymax <- ifelse(
     !is.null(setyaxis),
     setyaxis,
     max(muts_basis_melt$freq)
-  ) *
-    1.2
+  ) * 1.2
   blocks$labels <- c(
     "Del 1 C",
-    "Del 1 T",
+    "Del 1 T (2-4)", "Del 1 T (5-7)", "Del 1 T (8+)",
     "Ins 1 C",
-    "Ins 1 T",
+    "Ins 1 T (0-4)", "Ins 1 T (5-7)", "Ins 1 T (8+)",
     "Del \u22652",
     "Ins \u22652",
     "Del Mh",
@@ -367,9 +385,9 @@ plot_89 <- function(
   )
   blocks$cl <- c(
     "black",
+    "black", "black", "white",
     "black",
-    "black",
-    "black",
+    "black", "black", "white",
     "white",
     "white",
     "white",
@@ -382,10 +400,14 @@ plot_89 <- function(
   # === 4. Prepare Block3 for Overhead Labels ===
   blocks3 <- blocks %>%
     dplyr::mutate(
-      Type = ifelse(Type %in% c("Del(C)", "Del(T)"), "Del1", Type)
+      Type = ifelse(
+        Type == "Del(C)" | grepl("^Del\\(T\\)", Type), "Del1", Type
+      )
     ) %>%
     dplyr::mutate(
-      Type = ifelse(Type %in% c("Ins(C)", "Ins(T)"), "Ins1", Type)
+      Type = ifelse(
+        Type == "Ins(C)" | grepl("^Ins\\(T\\)", Type), "Ins1", Type
+      )
     ) %>%
     dplyr::group_by(Type) %>%
     dplyr::summarise(xmin = min(xmin), xmax = max(xmax)) %>%
@@ -396,14 +418,12 @@ plot_89 <- function(
     !is.null(setyaxis),
     setyaxis,
     max(muts_basis_melt$freq)
-  ) *
-    1.2
+  ) * 1.2
   blocks3$ymax <- ifelse(
     !is.null(setyaxis),
     setyaxis,
     max(muts_basis_melt$freq)
-  ) *
-    1.32
+  ) * 1.32
   blocks3$cl <- "white"
   blocks3$Type <- c("Del1", "Ins1", "Del2", "Ins2", "DelMH", "X")
   blocks3$cl[1:2] <- "black"
@@ -422,7 +442,13 @@ plot_89 <- function(
     "Ins(2,)" = "#4a98c9",
     "Ins(C)" = "#b0dd8b",
     "Ins(T)" = "#36a12e",
-    "Complex" = "black"
+    "Complex" = "black",
+    "Del(T):R(1,4)" = "#ffb34d",
+    "Del(T):R(5,7)" = "#ff8001",
+    "Del(T):R(8,)" = "#cc6600",
+    "Ins(T):R(0,4)" = "#6dcf65",
+    "Ins(T):R(5,7)" = "#36a12e",
+    "Ins(T):R(8,)" = "#1a7a14"
   )
 
   if (!plot_complex) {
@@ -570,7 +596,7 @@ plot_89 <- function(
   # Add count labels
   if (show_counts) {
     counts_by_block <- aggregate(
-      abs(freq) ~ Indel,
+      abs(freq) ~ SubIndel,
       data = muts_basis_melt,
       FUN = sum
     )
