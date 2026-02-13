@@ -61,10 +61,11 @@ plot_89 <- function(
   count_label_size = 1.03
 ) {
   if (is.null(ylabel)) {
-    if (sum(catalog) < 1.1 && max(catalog) != 1) {
-      ylabel = "Proportion"
-    } else {
+    if ((!is.null(setyaxis) && setyaxis > 1.5) ||
+        !(sum(catalog) < 1.1 && max(catalog) != 1)) {
       ylabel = "Counts"
+    } else {
+      ylabel = "Proportion"
     }
   }
   # === 1. Define Indel Type Labels and Categories ===

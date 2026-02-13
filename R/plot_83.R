@@ -91,10 +91,11 @@ plot_83 <- function(
   # Determine catalog type and y-axis label
   catalog_type <- attributes(catalog)$catalog.type
   if (is.null(catalog_type)) {
-    if (sum(df$value) < 1.1) {
-      catalog_type = "counts.signature"
-    } else {
+    if ((!is.null(ylim) && max(ylim) > 1.5) ||
+        !(sum(df$value) < 1.1)) {
       catalog_type <- "counts"
+    } else {
+      catalog_type <- "counts.signature"
     }
   }
 
