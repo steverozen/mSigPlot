@@ -4,3 +4,4 @@
 ^LICENSE\.md$
 ^development$
 ^.vscode$
+^\.claude$

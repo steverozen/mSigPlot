@@ -2,8 +2,8 @@ Package: mSigPlot
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.15
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Steven", "Rozen", , "steverozen@pm.me", role = c("aut", "cre"))
+Description: Plotting functions for mutational signatures and mutational spectra - currently only for indels.
 License: GPL (>= 3)
 Imports: Cairo,
     dplyr,

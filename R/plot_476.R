@@ -50,6 +50,7 @@
 #' @export
 #'
 #' @import ggplot2 reshape2 dplyr ggrepel
+#' @importFrom stats aggregate
 #'
 plot_476 <- function(
   catalog,

@@ -12,16 +12,24 @@ plot_476_pdf(
   label_threshold_denominator = 7,
   vline_labels = c(),
   base_size = 11,
-  block_text_size = 0.78,
-  ggrepel_size = 0.52,
-  title_text_size = 1,
-  x_axis_tick_label_size = 0.8,
-  y_axis_tick_label_size = 0.7,
-  x_title_size = 0.7,
-  y_title_size = 0.9,
+  block_text_cex = 0.78,
+  ggrepel_cex = 0.52,
+  title_text_cex = 1,
+  x_axis_tick_label_cex = 0.8,
+  y_axis_tick_label_cex = 0.7,
+  x_title_cex = 0.7,
+  y_title_cex = 0.9,
   plot_complex = FALSE,
   show_counts = NULL,
-  count_label_size = 0.52
+  count_label_cex = 0.52,
+  block_text_size = NULL,
+  ggrepel_size = NULL,
+  title_text_size = NULL,
+  x_axis_tick_label_size = NULL,
+  y_axis_tick_label_size = NULL,
+  x_title_size = NULL,
+  y_title_size = NULL,
+  count_label_size = NULL
 )
 }
 \arguments{
@@ -44,21 +52,21 @@ vertical reference lines.}
 \item{base_size}{Base font size for ggplot2's theme. All text sizes scale
 relative to this value.}
 
-\item{block_text_size}{Numeric. Size of category block labels, as a fraction
+\item{block_text_cex}{Numeric. Size of category block labels, as a fraction
 of \code{base_size}.}
 
-\item{ggrepel_size}{Numeric. Size of ggrepel peak labels, as a fraction of
+\item{ggrepel_cex}{Numeric. Size of ggrepel peak labels, as a fraction of
 \code{base_size}.}
 
-\item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
+\item{title_text_cex}{Numeric. Size of the plot title text, relative to \code{base_size}.}
 
-\item{x_axis_tick_label_size}{Numeric. Relative size of x-axis tick labels, passed to \code{rel()}.}
+\item{x_axis_tick_label_cex}{Numeric. Size of x-axis tick labels, relative to \code{base_size}.}
 
-\item{y_axis_tick_label_size}{Numeric. Relative size of y-axis tick labels, passed to \code{rel()}.}
+\item{y_axis_tick_label_cex}{Numeric. Size of y-axis tick labels, relative to \code{base_size}.}
 
-\item{x_title_size}{Numeric. Relative size of x-axis title, passed to \code{rel()}.}
+\item{x_title_cex}{Numeric. Size of x-axis title, relative to \code{base_size}.}
 
-\item{y_title_size}{Numeric. Relative size of y-axis title, passed to \code{rel()}.}
+\item{y_title_cex}{Numeric. Size of y-axis title, relative to \code{base_size}.}
 
 \item{plot_complex}{Logical. If TRUE, include the 5 Complex indel channels.}
 
@@ -67,8 +75,24 @@ mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
 (the default), display them only when the catalog contains counts
 (sum > 1.1).}
 
-\item{count_label_size}{Numeric. Size of per-class count labels, as a
+\item{count_label_cex}{Numeric. Size of per-class count labels, as a
 fraction of \code{base_size}.}
+
+\item{block_text_size}{Deprecated. Use \code{block_text_cex} instead.}
+
+\item{ggrepel_size}{Deprecated. Use \code{ggrepel_cex} instead.}
+
+\item{title_text_size}{Deprecated. Use \code{title_text_cex} instead.}
+
+\item{x_axis_tick_label_size}{Deprecated. Use \code{x_axis_tick_label_cex} instead.}
+
+\item{y_axis_tick_label_size}{Deprecated. Use \code{y_axis_tick_label_cex} instead.}
+
+\item{x_title_size}{Deprecated. Use \code{x_title_cex} instead.}
+
+\item{y_title_size}{Deprecated. Use \code{y_title_cex} instead.}
+
+\item{count_label_size}{Deprecated. Use \code{count_label_cex} instead.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.

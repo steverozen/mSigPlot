@@ -6,25 +6,29 @@
 \usage{
 plot_89_pdf(
   catalog,
-  text_size = 3,
-  top_bar_text_size = text_size,
-  title_text_size = 1,
+  text_cex = 3,
+  top_bar_text_cex = text_cex,
+  title_text_cex = 1,
   filename,
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
   show_counts = NULL,
-  count_label_size = 1.03
+  count_label_cex = 1.03,
+  text_size = NULL,
+  top_bar_text_size = NULL,
+  title_text_size = NULL,
+  count_label_size = NULL
 )
 }
 \arguments{
 \item{catalog}{A matrix or data frame with 89 rows (indel types) and
 one column per sample. Column names are used as plot titles.}
 
-\item{text_size}{Numeric. Size of text labels in the plot.}
+\item{text_cex}{Numeric. Size of text labels in the plot.}
 
-\item{top_bar_text_size}{Numeric shows the size of the labels in the colored top bar.}
+\item{top_bar_text_cex}{Numeric. Size of the labels in the colored top bar.}
 
-\item{title_text_size}{Numeric. Relative size of the plot title text, passed to \code{rel()}.}
+\item{title_text_cex}{Numeric. Size of the plot title text, relative to \code{base_size}.}
 
 \item{filename}{Character. Path to the output PDF file.}
 
@@ -38,8 +42,16 @@ mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
 (the default), display them only when the catalog contains counts
 (sum > 1.1).}
 
-\item{count_label_size}{Numeric. Size of per-class count labels, as a
+\item{count_label_cex}{Numeric. Size of per-class count labels, as a
 fraction of \code{base_size}.}
+
+\item{text_size}{Deprecated. Use \code{text_cex} instead.}
+
+\item{top_bar_text_size}{Deprecated. Use \code{top_bar_text_cex} instead.}
+
+\item{title_text_size}{Deprecated. Use \code{title_text_cex} instead.}
+
+\item{count_label_size}{Deprecated. Use \code{count_label_cex} instead.}
 }
 \value{
 NULL. Called for side effect of creating a PDF file.
