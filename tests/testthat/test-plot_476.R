@@ -14,7 +14,7 @@ test_that("plot_476 returns a ggplot object", {
 
   p <- plot_476(
     catalog = catalog,
-    block_text_size = 3,
+    block_text_cex = 3,
     plot_title = colnames(sig_data)[1]
   )
 
@@ -133,7 +133,7 @@ test_that("plot_476_pdf creates PDF file", {
     catalog = catalog_subset,
     filename = temp_pdf,
     num_labels = 2,
-    title_text_size = 0.8
+    title_text_cex = 0.8
   )
 
   expect_true(file.exists(temp_pdf))

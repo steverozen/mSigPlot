@@ -4,7 +4,7 @@ test_that("plot_89 returns a ggplot object", {
 
   p <- plot_89(
     catalog = test_catalog,
-    text_size = 3,
+    text_cex = 3,
     plot_title = "Test 89 type plot"
   )
 
@@ -12,7 +12,7 @@ test_that("plot_89 returns a ggplot object", {
 
   p <- plot_89(
     catalog = test_catalog,
-    text_size = 3,
+    text_cex = 3,
     plot_title = "Test 89 type plot",
     setyaxis = .03
   )
@@ -45,9 +45,9 @@ test_that("plot_89_pdf creates PDF file", {
   plot_89_pdf(
     catalog_subset,
     filename = temp_pdf,
-    top_bar_text_size = 2.5,
-    text_size = 3.5,
-    title_text_size = 0.9
+    top_bar_text_cex = 2.5,
+    text_cex = 3.5,
+    title_text_cex = 0.9
   )
 
   expect_true(file.exists(temp_pdf))

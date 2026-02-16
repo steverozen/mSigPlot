@@ -7,12 +7,12 @@
 #'
 #' @param catalog Numeric vector of length 476 containing indel counts or
 #'   proportions for a single sample.
-#' @param block_text_size Numeric. Size of category block labels (e.g. "Del 1bp C"),
+#' @param block_text_cex Numeric. Size of category block labels (e.g. "Del 1bp C"),
 #'   as a fraction of `base_size`.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param num_labels Integer. Number of top peaks to label per category block.
 #'   Set to 0 or NULL to disable labels.
-#' @param ggrepel_size Numeric. Size of ggrepel peak labels, as a fraction of
+#' @param ggrepel_cex Numeric. Size of ggrepel peak labels, as a fraction of
 #'   `base_size`.
 #' @param label_threshold_denominator Numeric. Peaks with values less than
 #'   max/label_threshold_denominator are not labeled.
@@ -22,20 +22,28 @@
 #'   the indel type prefix.
 #' @param base_size Base font size for ggplot2's theme. All text sizes scale
 #'   relative to this value.
-#' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
-#' @param x_axis_tick_label_size Numeric. Relative size of x-axis tick labels, passed to `rel()`.
-#' @param y_axis_tick_label_size Numeric. Relative size of y-axis tick labels, passed to `rel()`.
-#' @param x_title_size Numeric. Relative size of x-axis title, passed to `rel()`.
-#' @param y_title_size Numeric. Relative size of y-axis title, passed to `rel()`.
+#' @param title_text_cex Numeric. Size of the plot title text, relative to `base_size`.
+#' @param x_axis_tick_label_cex Numeric. Size of x-axis tick labels, relative to `base_size`.
+#' @param y_axis_tick_label_cex Numeric. Size of y-axis tick labels, relative to `base_size`.
+#' @param x_title_cex Numeric. Size of x-axis title, relative to `base_size`.
+#' @param y_title_cex Numeric. Size of y-axis title, relative to `base_size`.
 #' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
-#' @param text_size Deprecated. Use `block_text_size` instead.
-#' @param label_size Deprecated. Use `ggrepel_size` instead.
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
 #'   (sum > 1.1).
-#' @param count_label_size Numeric. Size of per-class count labels, as a
+#' @param count_label_cex Numeric. Size of per-class count labels, as a
 #'   fraction of `base_size`.
+#' @param block_text_size Deprecated. Use `block_text_cex` instead.
+#' @param ggrepel_size Deprecated. Use `ggrepel_cex` instead.
+#' @param title_text_size Deprecated. Use `title_text_cex` instead.
+#' @param x_axis_tick_label_size Deprecated. Use `x_axis_tick_label_cex` instead.
+#' @param y_axis_tick_label_size Deprecated. Use `y_axis_tick_label_cex` instead.
+#' @param x_title_size Deprecated. Use `x_title_cex` instead.
+#' @param y_title_size Deprecated. Use `y_title_cex` instead.
+#' @param count_label_size Deprecated. Use `count_label_cex` instead.
+#' @param text_size Deprecated. Use `block_text_cex` instead.
+#' @param label_size Deprecated. Use `ggrepel_cex` instead.
 #'
 #' @return A ggplot2 object containing the 476-channel indel profile plot.
 #'
@@ -45,42 +53,105 @@
 #'
 plot_476 <- function(
   catalog,
-  block_text_size = 0.78,
+  block_text_cex = 0.78,
   plot_title = "test",
   num_labels = 3,
-  ggrepel_size = 0.52,
+  ggrepel_cex = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   base_size = 11,
-  title_text_size = 1.0,
-  x_axis_tick_label_size = 0.8,
-  y_axis_tick_label_size = 0.7,
-  x_title_size = 0.7,
-  y_title_size = 0.9,
+  title_text_cex = 1.0,
+  x_axis_tick_label_cex = 0.8,
+  y_axis_tick_label_cex = 0.7,
+  x_title_cex = 0.7,
+  y_title_cex = 0.9,
   plot_complex = FALSE,
-  text_size = NULL,
-  label_size = NULL,
   show_counts = NULL,
-  count_label_size = 0.52
+  count_label_cex = 0.52,
+  block_text_size = NULL,
+  ggrepel_size = NULL,
+  title_text_size = NULL,
+  x_axis_tick_label_size = NULL,
+  y_axis_tick_label_size = NULL,
+  x_title_size = NULL,
+  y_title_size = NULL,
+  count_label_size = NULL,
+  text_size = NULL,
+  label_size = NULL
 ) {
-  # Handle deprecated text_size
+  # === start dealing with deprecated
   if (!is.null(text_size)) {
-    if (!missing(block_text_size)) {
-      stop("Cannot specify both 'text_size' and 'block_text_size'.")
+    if (!missing(block_text_cex)) {
+      stop("Cannot specify both 'text_size' and 'block_text_cex'.")
     }
-    warning("'text_size' is deprecated. Use 'block_text_size' instead.")
-    block_text_size <- text_size
+    warning("'text_size' is deprecated. Use 'block_text_cex' instead.")
+    block_text_cex <- text_size
   }
-
-  # Handle deprecated label_size
   if (!is.null(label_size)) {
-    if (!missing(ggrepel_size)) {
-      stop("Cannot specify both 'label_size' and 'ggrepel_size'.")
+    if (!missing(ggrepel_cex)) {
+      stop("Cannot specify both 'label_size' and 'ggrepel_cex'.")
     }
-    warning("'label_size' is deprecated. Use 'ggrepel_size' instead.")
-    ggrepel_size <- label_size
+    warning("'label_size' is deprecated. Use 'ggrepel_cex' instead.")
+    ggrepel_cex <- label_size
   }
+  if (!is.null(block_text_size)) {
+    if (!missing(block_text_cex)) {
+      stop("Cannot specify both 'block_text_size' and 'block_text_cex'.")
+    }
+    warning("'block_text_size' is deprecated. Use 'block_text_cex' instead.")
+    block_text_cex <- block_text_size
+  }
+  if (!is.null(ggrepel_size)) {
+    if (!missing(ggrepel_cex)) {
+      stop("Cannot specify both 'ggrepel_size' and 'ggrepel_cex'.")
+    }
+    warning("'ggrepel_size' is deprecated. Use 'ggrepel_cex' instead.")
+    ggrepel_cex <- ggrepel_size
+  }
+  if (!is.null(title_text_size)) {
+    if (!missing(title_text_cex)) {
+      stop("Cannot specify both 'title_text_size' and 'title_text_cex'.")
+    }
+    warning("'title_text_size' is deprecated. Use 'title_text_cex' instead.")
+    title_text_cex <- title_text_size
+  }
+  if (!is.null(x_axis_tick_label_size)) {
+    if (!missing(x_axis_tick_label_cex)) {
+      stop("Cannot specify both 'x_axis_tick_label_size' and 'x_axis_tick_label_cex'.")
+    }
+    warning("'x_axis_tick_label_size' is deprecated. Use 'x_axis_tick_label_cex' instead.")
+    x_axis_tick_label_cex <- x_axis_tick_label_size
+  }
+  if (!is.null(y_axis_tick_label_size)) {
+    if (!missing(y_axis_tick_label_cex)) {
+      stop("Cannot specify both 'y_axis_tick_label_size' and 'y_axis_tick_label_cex'.")
+    }
+    warning("'y_axis_tick_label_size' is deprecated. Use 'y_axis_tick_label_cex' instead.")
+    y_axis_tick_label_cex <- y_axis_tick_label_size
+  }
+  if (!is.null(x_title_size)) {
+    if (!missing(x_title_cex)) {
+      stop("Cannot specify both 'x_title_size' and 'x_title_cex'.")
+    }
+    warning("'x_title_size' is deprecated. Use 'x_title_cex' instead.")
+    x_title_cex <- x_title_size
+  }
+  if (!is.null(y_title_size)) {
+    if (!missing(y_title_cex)) {
+      stop("Cannot specify both 'y_title_size' and 'y_title_cex'.")
+    }
+    warning("'y_title_size' is deprecated. Use 'y_title_cex' instead.")
+    y_title_cex <- y_title_size
+  }
+  if (!is.null(count_label_size)) {
+    if (!missing(count_label_cex)) {
+      stop("Cannot specify both 'count_label_size' and 'count_label_cex'.")
+    }
+    warning("'count_label_size' is deprecated. Use 'count_label_cex' instead.")
+    count_label_cex <- count_label_size
+  }
+  # === end dealing with deprecated
 
   # Ensure catalog is a numeric vector
   if (is.data.frame(catalog) || is.matrix(catalog)) {
@@ -308,23 +379,23 @@ plot_476 <- function(
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
-        size = rel(x_axis_tick_label_size),
+        size = rel(x_axis_tick_label_cex),
         angle = 0,
         hjust = 0,
         vjust = 8, # Anchor text at bottom (above axis)
       ),
       axis.ticks.x = ggplot2::element_line(),
       axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
-      axis.text.y = ggplot2::element_text(size = rel(y_axis_tick_label_size), colour = "black"),
+      axis.text.y = ggplot2::element_text(size = rel(y_axis_tick_label_cex), colour = "black"),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
-        size = rel(x_title_size),
+        size = rel(x_title_cex),
         margin = margin(t = 10)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(y_title_size)),
+      axis.title.y = ggplot2::element_text(size = rel(y_title_cex)),
       plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
       axis.line = ggplot2::element_line(linewidth = rel(0.5)),
-      plot.title = ggplot2::element_text(size = rel(title_text_size))
+      plot.title = ggplot2::element_text(size = rel(title_text_cex))
     ) +
     ggplot2::scale_colour_manual(
       values = c("black" = "black", "white" = "white")
@@ -349,14 +420,14 @@ plot_476 <- function(
         label = labels,
         colour = cl
       ),
-      size = block_text_size * base_size / ggplot2::.pt,
+      size = block_text_cex * base_size / ggplot2::.pt,
       fontface = "bold",
       inherit.aes = FALSE
     ) +
     ggrepel::geom_text_repel(
       data = label_data,
       ggplot2::aes(x = x_pos, y = freq, label = Figlabel),
-      size = ggrepel_size * base_size / ggplot2::.pt,
+      size = ggrepel_cex * base_size / ggplot2::.pt,
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
       segment.color = "gray50",
@@ -394,7 +465,7 @@ plot_476 <- function(
       ggplot2::geom_text(
         data = count_label_df,
         ggplot2::aes(x = x, y = y, label = count),
-        size = count_label_size * base_size / ggplot2::.pt,
+        size = count_label_cex * base_size / ggplot2::.pt,
         inherit.aes = FALSE
       )
   }

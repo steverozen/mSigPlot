@@ -6,20 +6,20 @@
 #'
 #' @param catalog Numeric vector of length 89 containing indel counts or
 #'   proportions for a single sample.
-#' @param text_size Numeric. Size of text labels in the plot. Used as default
-#'   for `top_bar_text_size`.
-#' @param top_bar_text_size Numeric. Size of labels in the colored top bars
+#' @param text_cex Numeric. Size of text labels in the plot. Used as default
+#'   for `top_bar_text_cex`.
+#' @param top_bar_text_cex Numeric. Size of labels in the colored top bars
 #'   (both the category bar and the extra summary bar).
-#' @param title_text_size Numeric. Relative size of the plot title text, passed to `rel()`.
+#' @param title_text_cex Numeric. Size of the plot title text, relative to `base_size`.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param setyaxis Numeric or NULL. If provided, sets a fixed y-axis maximum.
 #'   If NULL, y-axis scales automatically to the data.
 #' @param ylabel Character. Label for the y-axis.
 #' @param base_size Base font size for ggplot2's `theme_classic()`.
-#' @param x_axis_tick_label_size Numeric. Relative size of x-axis tick labels, passed to `rel()`.
-#' @param y_axis_tick_label_size Numeric. Relative size of y-axis tick labels, passed to `rel()`.
-#' @param x_title_size Numeric. Relative size of x-axis title, passed to `rel()`.
-#' @param y_title_size Numeric. Relative size of y-axis title, passed to `rel()`.
+#' @param x_axis_tick_label_cex Numeric. Size of x-axis tick labels, relative to `base_size`.
+#' @param y_axis_tick_label_cex Numeric. Size of y-axis tick labels, relative to `base_size`.
+#' @param x_title_cex Numeric. Size of x-axis title, relative to `base_size`.
+#' @param y_title_cex Numeric. Size of y-axis title, relative to `base_size`.
 #' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
 #' @param show_top_bar Logical. If `TRUE`, display the category bar above the
 #'   plot (e.g., "Del 1bp C", "Ins 1bp T").
@@ -31,8 +31,16 @@
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
 #'   (sum > 1.1).
-#' @param count_label_size Numeric. Size of per-class count labels, as a
+#' @param count_label_cex Numeric. Size of per-class count labels, as a
 #'   fraction of `base_size`.
+#' @param text_size Deprecated. Use `text_cex` instead.
+#' @param top_bar_text_size Deprecated. Use `top_bar_text_cex` instead.
+#' @param title_text_size Deprecated. Use `title_text_cex` instead.
+#' @param x_axis_tick_label_size Deprecated. Use `x_axis_tick_label_cex` instead.
+#' @param y_axis_tick_label_size Deprecated. Use `y_axis_tick_label_cex` instead.
+#' @param x_title_size Deprecated. Use `x_title_cex` instead.
+#' @param y_title_size Deprecated. Use `y_title_cex` instead.
+#' @param count_label_size Deprecated. Use `count_label_cex` instead.
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
@@ -42,24 +50,91 @@
 #'
 plot_89 <- function(
   catalog,
-  text_size = 3,
-  top_bar_text_size = text_size,
-  title_text_size = 1.0,
+  text_cex = 3,
+  top_bar_text_cex = text_cex,
+  title_text_cex = 1.0,
   plot_title = colnames(catalog)[1],
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
-  x_axis_tick_label_size = 0.6,
-  y_axis_tick_label_size = 0.8,
-  x_title_size = 0.9,
-  y_title_size = 0.9,
+  x_axis_tick_label_cex = 0.6,
+  y_axis_tick_label_cex = 0.8,
+  x_title_cex = 0.9,
+  y_title_cex = 0.9,
   show_x_axis_text = TRUE,
   show_top_bar = TRUE,
   show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   show_counts = NULL,
-  count_label_size = 1.03
+  count_label_cex = 1.03,
+  text_size = NULL,
+  top_bar_text_size = NULL,
+  title_text_size = NULL,
+  x_axis_tick_label_size = NULL,
+  y_axis_tick_label_size = NULL,
+  x_title_size = NULL,
+  y_title_size = NULL,
+  count_label_size = NULL
 ) {
+  # === start dealing with deprecated
+  if (!is.null(text_size)) {
+    if (!missing(text_cex)) {
+      stop("Cannot specify both 'text_size' and 'text_cex'.")
+    }
+    warning("'text_size' is deprecated. Use 'text_cex' instead.")
+    text_cex <- text_size
+  }
+  if (!is.null(top_bar_text_size)) {
+    if (!missing(top_bar_text_cex)) {
+      stop("Cannot specify both 'top_bar_text_size' and 'top_bar_text_cex'.")
+    }
+    warning("'top_bar_text_size' is deprecated. Use 'top_bar_text_cex' instead.")
+    top_bar_text_cex <- top_bar_text_size
+  }
+  if (!is.null(title_text_size)) {
+    if (!missing(title_text_cex)) {
+      stop("Cannot specify both 'title_text_size' and 'title_text_cex'.")
+    }
+    warning("'title_text_size' is deprecated. Use 'title_text_cex' instead.")
+    title_text_cex <- title_text_size
+  }
+  if (!is.null(x_axis_tick_label_size)) {
+    if (!missing(x_axis_tick_label_cex)) {
+      stop("Cannot specify both 'x_axis_tick_label_size' and 'x_axis_tick_label_cex'.")
+    }
+    warning("'x_axis_tick_label_size' is deprecated. Use 'x_axis_tick_label_cex' instead.")
+    x_axis_tick_label_cex <- x_axis_tick_label_size
+  }
+  if (!is.null(y_axis_tick_label_size)) {
+    if (!missing(y_axis_tick_label_cex)) {
+      stop("Cannot specify both 'y_axis_tick_label_size' and 'y_axis_tick_label_cex'.")
+    }
+    warning("'y_axis_tick_label_size' is deprecated. Use 'y_axis_tick_label_cex' instead.")
+    y_axis_tick_label_cex <- y_axis_tick_label_size
+  }
+  if (!is.null(x_title_size)) {
+    if (!missing(x_title_cex)) {
+      stop("Cannot specify both 'x_title_size' and 'x_title_cex'.")
+    }
+    warning("'x_title_size' is deprecated. Use 'x_title_cex' instead.")
+    x_title_cex <- x_title_size
+  }
+  if (!is.null(y_title_size)) {
+    if (!missing(y_title_cex)) {
+      stop("Cannot specify both 'y_title_size' and 'y_title_cex'.")
+    }
+    warning("'y_title_size' is deprecated. Use 'y_title_cex' instead.")
+    y_title_cex <- y_title_size
+  }
+  if (!is.null(count_label_size)) {
+    if (!missing(count_label_cex)) {
+      stop("Cannot specify both 'count_label_size' and 'count_label_cex'.")
+    }
+    warning("'count_label_size' is deprecated. Use 'count_label_cex' instead.")
+    count_label_cex <- count_label_size
+  }
+  # === end dealing with deprecated
+
   if (is.null(ylabel)) {
     if ((!is.null(setyaxis) && setyaxis > 1.5) ||
         !(sum(catalog) < 1.1 && max(catalog) != 1)) {
@@ -504,7 +579,7 @@ plot_89 <- function(
         ggplot2::element_text(
           angle = 90,
           vjust = 0.5,
-          size = rel(x_axis_tick_label_size),
+          size = rel(x_axis_tick_label_cex),
           colour = "black",
           hjust = 1
         )
@@ -517,16 +592,16 @@ plot_89 <- function(
         ggplot2::element_blank()
       },
       axis.text.y = ggplot2::element_text(
-        size = rel(y_axis_tick_label_size),
+        size = rel(y_axis_tick_label_cex),
         colour = "black"
       ),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
-        size = rel(x_title_size),
+        size = rel(x_title_cex),
         margin = margin(t = ifelse(show_x_axis_text, -12, 1), b = 0)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(y_title_size)),
-      plot.title = ggplot2::element_text(size = rel(title_text_size))
+      axis.title.y = ggplot2::element_text(size = rel(y_title_cex)),
+      plot.title = ggplot2::element_text(size = rel(title_text_cex))
     ) +
     ggplot2::scale_colour_manual(values = c("black", "white"))
 
@@ -554,7 +629,7 @@ plot_89 <- function(
           label = labels,
           colour = cl
         ),
-        size = top_bar_text_size * base_size / 11,
+        size = top_bar_text_cex * base_size / 11,
         fontface = "bold",
         inherit.aes = FALSE
       )
@@ -582,7 +657,7 @@ plot_89 <- function(
             label = labels,
             colour = cl
           ),
-          size = top_bar_text_size * base_size / 11,
+          size = top_bar_text_cex * base_size / 11,
           fontface = "bold",
           inherit.aes = FALSE
         )
@@ -613,7 +688,7 @@ plot_89 <- function(
       ggplot2::geom_text(
         data = count_label_df,
         ggplot2::aes(x = x, y = y, label = count),
-        size = count_label_size * base_size / ggplot2::.pt,
+        size = count_label_cex * base_size / ggplot2::.pt,
         inherit.aes = FALSE
       )
   }
