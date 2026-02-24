@@ -3,8 +3,9 @@
 #' Automatically selects the appropriate plotting function based on the number
 #' of rows in the catalog.
 #'
-#' @param catalog A data frame or matrix containing mutational signature data.
-#'   The number of rows determines which plotting function is used:
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table. The number of rows (or length) determines which plotting
+#'   function is used:
 #'   - 1536 rows: calls `plot_SBS1536()`
 #'   - 476 rows: calls `plot_476()`
 #'   - 192 rows: calls `plot_SBS192()`
@@ -34,10 +35,11 @@
 #'
 #' @export
 plot_guess = function(catalog, ...) {
-  if (is.numeric(catalog)) {
-    catalog = data.frame(catalog)
+  if (is.numeric(catalog) && !is.matrix(catalog)) {
+    n_rows = length(catalog)
+  } else {
+    n_rows = nrow(catalog)
   }
-  n_rows = nrow(catalog)
   if (n_rows == 1536) {
     plot_SBS1536(catalog, ...)
   } else if (n_rows == 476) {

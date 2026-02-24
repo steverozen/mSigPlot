@@ -4,7 +4,8 @@
 #' genic (black) and intergenic (grey) regions. Rows 1-83 are genic,
 #' rows 84-166 are intergenic.
 #'
-#' @param catalog A 166-row, 1-column matrix or data frame.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param grid Logical, draw background color wash and grid lines.
 #' @param upper Logical, draw category labels above bars.
@@ -29,7 +30,7 @@
 #' @import ggplot2 dplyr
 plot_ID166 <- function(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
@@ -46,18 +47,9 @@ plot_ID166 <- function(
   axis_text_cex = 0.8,
   show_counts = NULL
 ) {
-  stopifnot(nrow(catalog) == 166)
-
-  # If catalog has row names, validate and reorder to canonical ID166 order
-  rn <- rownames(catalog)
-  if (!is.null(rn) && !all(rn == as.character(1:166))) {
-    canonical <- catalog_row_order()$ID166
-    if (!setequal(rn, canonical)) {
-      warning("Row names of catalog do not match canonical ID166 row names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical, , drop = FALSE]
-  }
+  catalog <- normalize_catalog(catalog, 166, catalog_row_order()$ID166, "ID166")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
   base_mm <- base_size / (72.27 / 25.4)
 

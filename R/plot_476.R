@@ -5,8 +5,8 @@
 #' all 476 indel categories with color-coded category blocks and flanking base
 #' annotations. Includes smart peak labeling using ggrepel.
 #'
-#' @param catalog Numeric vector of length 476 containing indel counts or
-#'   proportions for a single sample.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param block_text_cex Numeric. Size of category block labels (e.g. "Del 1bp C"),
 #'   as a fraction of `base_size`.
 #' @param plot_title Character. Title displayed above the plot.
@@ -55,7 +55,7 @@
 plot_476 <- function(
   catalog,
   block_text_cex = 0.78,
-  plot_title = "test",
+  plot_title = NULL,
   num_labels = 3,
   ggrepel_cex = 0.52,
   label_threshold_denominator = 7,
@@ -154,10 +154,10 @@ plot_476 <- function(
   }
   # === end dealing with deprecated
 
-  # Ensure catalog is a numeric vector
-  if (is.data.frame(catalog) || is.matrix(catalog)) {
-    catalog <- as.numeric(catalog[, 1])
-  }
+  catalog <- normalize_catalog(catalog, 476, NULL, "ID476")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  catalog <- catalog[, 1]
 
   # Determine y-axis label based on sum
   ylabel <- if (sum(catalog, na.rm = TRUE) < 1.1) {

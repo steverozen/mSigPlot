@@ -4,8 +4,8 @@
 #' for a single sample. The plot shows mutation counts or proportions across
 #' all 89 indel categories with color-coded category blocks.
 #'
-#' @param catalog Numeric vector of length 89 containing indel counts or
-#'   proportions for a single sample.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param text_cex Numeric. Size of text labels in the plot. Used as default
 #'   for `top_bar_text_cex`.
 #' @param top_bar_text_cex Numeric. Size of labels in the colored top bars
@@ -53,7 +53,7 @@ plot_89 <- function(
   text_cex = 3,
   top_bar_text_cex = text_cex,
   title_text_cex = 1.0,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
@@ -135,15 +135,10 @@ plot_89 <- function(
   }
   # === end dealing with deprecated
 
-  # If catalog is a named vector, validate and reorder to canonical ID89 order
-  if (is.numeric(catalog) && !is.null(names(catalog))) {
-    canonical <- catalog_row_order()$ID89
-    if (!setequal(names(catalog), canonical)) {
-      warning("Names of catalog do not match canonical ID89 names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical]
-  }
+  catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  catalog <- catalog[, 1]
 
   if (is.null(ylabel)) {
     if ((!is.null(setyaxis) && setyaxis > 1.5) ||

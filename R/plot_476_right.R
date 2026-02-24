@@ -4,8 +4,8 @@
 #' indel mutational signature. This covers the last 4 category blocks:
 #' Del(2,):R(1,9), Ins(2,):R(0,9), Del(2,):M(1,), and Complex.
 #'
-#' @param catalog Numeric vector of length 476 containing indel counts or
-#'   proportions for a single sample. Only positions 343-476 are plotted.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table. Only positions 343-476 are plotted.
 #' @param block_text_cex Numeric. Size of category block labels (e.g. "Del >=2bp"),
 #'   as a fraction of `base_size`.
 #' @param plot_title Character. Title displayed above the plot.
@@ -57,7 +57,7 @@
 plot_476_right <- function(
   catalog,
   block_text_cex = 1.0,
-  plot_title = "test",
+  plot_title = NULL,
   num_labels = 3,
   ggrepel_cex = 0.7,
   label_threshold_denominator = 7,
@@ -157,10 +157,10 @@ plot_476_right <- function(
   }
   # === end dealing with deprecated
 
-  # Ensure catalog is a numeric vector
-  if (is.data.frame(catalog) || is.matrix(catalog)) {
-    catalog <- as.numeric(catalog[, 1])
-  }
+  catalog <- normalize_catalog(catalog, 476, NULL, "ID476")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  catalog <- catalog[, 1]
 
   # Determine y-axis label based on sum
   ylabel <- if (sum(catalog, na.rm = TRUE) < 1.1) {

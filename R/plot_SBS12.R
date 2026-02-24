@@ -5,7 +5,8 @@
 #' transcribed/untranscribed strand. Optionally performs a binomial strand
 #' bias test and annotates significant results with asterisks.
 #'
-#' @param catalog A 192-row, 1-column matrix or data frame.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param abundance Optional named numeric vector of 64 3-mer counts. If
 #'   provided and the catalog is counts, a two-sided binomial test is
@@ -28,7 +29,7 @@
 #' @importFrom stats binom.test p.adjust
 plot_SBS12 <- function(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   abundance = NULL,
   ylabels = TRUE,
   ylim = NULL,
@@ -38,18 +39,9 @@ plot_SBS12 <- function(
   axis_title_cex = 1.0,
   axis_text_cex = 0.8
 ) {
-  stopifnot(nrow(catalog) == 192)
-
-  # If catalog has row names, validate and reorder to canonical SBS192 order
-  rn <- rownames(catalog)
-  if (!is.null(rn) && !all(rn == as.character(1:192))) {
-    canonical <- catalog_row_order()$SBS192
-    if (!setequal(rn, canonical)) {
-      warning("Row names of catalog do not match canonical SBS192 row names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical, , drop = FALSE]
-  }
+  catalog <- normalize_catalog(catalog, 192, catalog_row_order()$SBS192, "SBS192")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
   base_mm <- base_size / (72.27 / 25.4)
 

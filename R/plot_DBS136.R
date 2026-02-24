@@ -4,7 +4,8 @@
 #' AC, AT, GC, CC, CG, CT, TA, TC, TG, TT) using `geom_tile()` with a
 #' white-to-forestgreen color gradient. Includes a maxima-per-class summary.
 #'
-#' @param catalog A 136-row, 1-column matrix or data frame.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param plot_title Character. Title displayed at the top.
 #' @param base_size Numeric. Base font size in points.
 #' @param title_cex Numeric. Multiplier for the plot title size.
@@ -19,24 +20,15 @@
 #' @importFrom gridExtra grid.arrange arrangeGrob
 plot_DBS136 <- function(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   base_size = 11,
   title_cex = 1.2,
   axis_label_cex = 0.8,
   panel_label_cex = 1.0
 ) {
-  stopifnot(nrow(catalog) == 136)
-
-  # If catalog has row names, validate and reorder to canonical DBS136 order
-  rn <- rownames(catalog)
-  if (!is.null(rn) && !all(rn == as.character(1:136))) {
-    canonical <- catalog_row_order()$DBS136
-    if (!setequal(rn, canonical)) {
-      warning("Row names of catalog do not match canonical DBS136 row names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical, , drop = FALSE]
-  }
+  catalog <- normalize_catalog(catalog, 136, catalog_row_order()$DBS136, "DBS136")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
   base_mm <- base_size / (72.27 / 25.4)
 

@@ -4,7 +4,8 @@
 #' proportions, organized into 6 mutation classes (C>A, C>G, C>T, T>A, T>C,
 #' T>G) of 16 bars each.
 #'
-#' @param catalog A 96-row, 1-column matrix or data frame.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param grid Logical, draw grid lines.
 #' @param upper Logical, draw colored class rectangles and labels above bars.
@@ -29,7 +30,7 @@
 #' @import ggplot2 dplyr
 plot_SBS96 <- function(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
@@ -44,18 +45,9 @@ plot_SBS96 <- function(
   axis_text_cex = 0.8,
   show_counts = NULL
 ) {
-  stopifnot(nrow(catalog) == 96)
-
-  # If catalog has row names, validate and reorder to canonical SBS96 order
-  rn <- rownames(catalog)
-  if (!is.null(rn) && !all(rn == as.character(1:96))) {
-    canonical <- catalog_row_order()$SBS96
-    if (!setequal(rn, canonical)) {
-      warning("Row names of catalog do not match canonical SBS96 row names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical, , drop = FALSE]
-  }
+  catalog <- normalize_catalog(catalog, 96, catalog_row_order()$SBS96, "SBS96")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
   base_mm <- base_size / (72.27 / 25.4)
 

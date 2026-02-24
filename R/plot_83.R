@@ -1,5 +1,6 @@
 #' Plot 83-type indel catalog using ggplot2 and return the ggplot object
-#' @param catalog An 83-row, 1-column indel catalog
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param plot_title Character. Title displayed above the plot.
 #' @param grid Logical, draw grid lines.
 #' @param upper Logical, draw category labels above bars.
@@ -31,7 +32,7 @@
 #' @import ggplot2 dplyr
 plot_83 <- function(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
@@ -48,18 +49,9 @@ plot_83 <- function(
   axis_text_cex = 0.8,
   show_counts = NULL
 ) {
-  stopifnot(nrow(catalog) == 83)
-
-  # If catalog has row names, validate and reorder to canonical ID83 order
-  rn <- rownames(catalog)
-  if (!is.null(rn) && !all(rn == as.character(1:83))) {
-    canonical <- catalog_row_order()$ID
-    if (!setequal(rn, canonical)) {
-      warning("Row names of catalog do not match canonical ID83 row names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical, , drop = FALSE]
-  }
+  catalog <- normalize_catalog(catalog, 83, catalog_row_order()$ID, "ID83")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
   # Base text size in mm for use in geom_text
   # (geom_text uses mm; base_size is in points; 1 pt = 25.4/72.27 mm)

@@ -4,7 +4,8 @@
 #' C>T, T>A, T>C, T>G) using `geom_tile()` with a white-to-forestgreen
 #' color gradient. Axis labels show colored bases (A, C, G, T).
 #'
-#' @param catalog A 1536-row, 1-column matrix or data frame.
+#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
+#'   or data.table.
 #' @param plot_title Character. Title displayed at the top center.
 #' @param base_size Numeric. Base font size in points.
 #' @param title_cex Numeric. Multiplier for the plot title size.
@@ -19,24 +20,15 @@
 #' @importFrom gridExtra grid.arrange
 plot_SBS1536 <- function(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   base_size = 11,
   title_cex = 1.2,
   axis_label_cex = 0.8,
   panel_label_cex = 1.0
 ) {
-  stopifnot(nrow(catalog) == 1536)
-
-  # If catalog has row names, validate and reorder to canonical SBS1536 order
-  rn <- rownames(catalog)
-  if (!is.null(rn) && !all(rn == as.character(1:1536))) {
-    canonical <- catalog_row_order()$SBS1536
-    if (!setequal(rn, canonical)) {
-      warning("Row names of catalog do not match canonical SBS1536 row names; returning NULL")
-      return(NULL)
-    }
-    catalog <- catalog[canonical, , drop = FALSE]
-  }
+  catalog <- normalize_catalog(catalog, 1536, catalog_row_order()$SBS1536, "SBS1536")
+  if (is.null(catalog)) return(NULL)
+  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
   base_mm <- base_size / (72.27 / 25.4)
 
