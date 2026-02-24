@@ -48,6 +48,17 @@ plot_ID166 <- function(
 ) {
   stopifnot(nrow(catalog) == 166)
 
+  # If catalog has row names, validate and reorder to canonical ID166 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:166))) {
+    canonical <- catalog_row_order()$ID166
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical ID166 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   base_mm <- base_size / (72.27 / 25.4)
 
   # 16 indel class colors (same as ID83)

@@ -44,6 +44,17 @@ plot_DBS78 <- function(
 ) {
   stopifnot(nrow(catalog) == 78)
 
+  # If catalog has row names, validate and reorder to canonical DBS78 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:78))) {
+    canonical <- catalog_row_order()$DBS78
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical DBS78 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   base_mm <- base_size / (72.27 / 25.4)
 
   # 10 DBS class colors (RColorBrewer "Paired")

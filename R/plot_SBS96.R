@@ -46,6 +46,17 @@ plot_SBS96 <- function(
 ) {
   stopifnot(nrow(catalog) == 96)
 
+  # If catalog has row names, validate and reorder to canonical SBS96 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:96))) {
+    canonical <- catalog_row_order()$SBS96
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical SBS96 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   base_mm <- base_size / (72.27 / 25.4)
 
   # 6 SBS class colors

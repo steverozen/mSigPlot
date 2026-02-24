@@ -50,6 +50,17 @@ plot_83 <- function(
 ) {
   stopifnot(nrow(catalog) == 83)
 
+  # If catalog has row names, validate and reorder to canonical ID83 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:83))) {
+    canonical <- catalog_row_order()$ID
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical ID83 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   # Base text size in mm for use in geom_text
   # (geom_text uses mm; base_size is in points; 1 pt = 25.4/72.27 mm)
   base_mm <- base_size / (72.27 / 25.4)

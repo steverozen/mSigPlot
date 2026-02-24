@@ -40,6 +40,17 @@ plot_SBS12 <- function(
 ) {
   stopifnot(nrow(catalog) == 192)
 
+  # If catalog has row names, validate and reorder to canonical SBS192 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:192))) {
+    canonical <- catalog_row_order()$SBS192
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical SBS192 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   base_mm <- base_size / (72.27 / 25.4)
 
   strand_col <- c("#394398", "#e83020")

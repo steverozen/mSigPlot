@@ -27,6 +27,17 @@ plot_DBS136 <- function(
 ) {
   stopifnot(nrow(catalog) == 136)
 
+  # If catalog has row names, validate and reorder to canonical DBS136 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:136))) {
+    canonical <- catalog_row_order()$DBS136
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical DBS136 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   base_mm <- base_size / (72.27 / 25.4)
 
   bases <- c("A", "C", "G", "T")

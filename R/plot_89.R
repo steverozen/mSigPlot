@@ -135,6 +135,16 @@ plot_89 <- function(
   }
   # === end dealing with deprecated
 
+  # If catalog is a named vector, validate and reorder to canonical ID89 order
+  if (is.numeric(catalog) && !is.null(names(catalog))) {
+    canonical <- catalog_row_order()$ID89
+    if (!setequal(names(catalog), canonical)) {
+      warning("Names of catalog do not match canonical ID89 names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical]
+  }
+
   if (is.null(ylabel)) {
     if ((!is.null(setyaxis) && setyaxis > 1.5) ||
         !(sum(catalog) < 1.1 && max(catalog) != 1)) {

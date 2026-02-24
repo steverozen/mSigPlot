@@ -27,6 +27,17 @@ plot_SBS1536 <- function(
 ) {
   stopifnot(nrow(catalog) == 1536)
 
+  # If catalog has row names, validate and reorder to canonical SBS1536 order
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !all(rn == as.character(1:1536))) {
+    canonical <- catalog_row_order()$SBS1536
+    if (!setequal(rn, canonical)) {
+      warning("Row names of catalog do not match canonical SBS1536 row names; returning NULL")
+      return(NULL)
+    }
+    catalog <- catalog[canonical, , drop = FALSE]
+  }
+
   base_mm <- base_size / (72.27 / 25.4)
 
   # Base colors for axis labels
