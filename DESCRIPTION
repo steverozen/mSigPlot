@@ -1,9 +1,9 @@
 Package: mSigPlot
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.15
+Title: Plotting function for mutational signatures
+Version: 1.0.0
 Authors@R: 
     person("Steven", "Rozen", , "steverozen@pm.me", role = c("aut", "cre"))
-Description: Plotting functions for mutational signatures and mutational spectra - currently only for indels.
+Description: Plotting functions for mutational signatures and mutational spectra including SBS, DBS, and indel catalogs.
 License: GPL (>= 3)
 Imports: Cairo,
     dplyr,

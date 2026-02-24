@@ -2,13 +2,14 @@
 % Please edit documentation in R/plot_guess_pdf.R
 \name{plot_guess_pdf}
 \alias{plot_guess_pdf}
-\title{Export indel profiles to PDF with automatic channel detection}
+\title{Export mutational profiles to PDF with automatic type detection}
 \usage{
 plot_guess_pdf(catalog, filename, ...)
 }
 \arguments{
 \item{catalog}{A matrix or data frame with rows matching one of the
-supported channel schemes (476, 89, or 83 rows) and one column per sample.
+supported catalog types (96, 192, 1536, 78, 136, 144, 83, 89, 166,
+or 476 rows) and one column per sample.
 Column names are used as plot titles.}
 
 \item{filename}{Character. Path to the output PDF file.}
@@ -20,11 +21,14 @@ plotting function.}
 NULL. Called for side effect of creating a PDF file.
 }
 \description{
-Creates a multi-page PDF file containing indel profile plots for multiple
-samples. Automatically detects the channel scheme (476, 89, or 83) based
-on the number of rows in the catalog. Plots are arranged with 5 samples
-per page. Uses Cairo for high-quality PDF rendering.
+Creates a multi-page PDF file containing mutational profile plots for
+multiple samples. Automatically detects the catalog type based on the
+number of rows. Plots are arranged with 5 samples per page (except for
+heatmap types which use 1 per page). Uses Cairo for high-quality PDF
+rendering.
 }
 \seealso{
-\code{\link[=plot_guess]{plot_guess()}}, \code{\link[=plot_476_pdf]{plot_476_pdf()}}, \code{\link[=plot_89_pdf]{plot_89_pdf()}}
+\code{\link[=plot_guess]{plot_guess()}}, \code{\link[=plot_SBS96_pdf]{plot_SBS96_pdf()}}, \code{\link[=plot_SBS192_pdf]{plot_SBS192_pdf()}},
+\code{\link[=plot_SBS1536_pdf]{plot_SBS1536_pdf()}}, \code{\link[=plot_DBS78_pdf]{plot_DBS78_pdf()}}, \code{\link[=plot_DBS136_pdf]{plot_DBS136_pdf()}},
+\code{\link[=plot_DBS144_pdf]{plot_DBS144_pdf()}}, \code{\link[=plot_ID166_pdf]{plot_ID166_pdf()}}, \code{\link[=plot_476_pdf]{plot_476_pdf()}}, \code{\link[=plot_89_pdf]{plot_89_pdf()}}
 }

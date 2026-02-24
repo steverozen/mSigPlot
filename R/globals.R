@@ -15,5 +15,13 @@ utils::globalVariables(c(
   "value",
   "x",
   "y",
-  "labels"
+  "labels",
+  "ref2alt",
+  "minus1bs",
+  "minus2bs",
+  "plus1bs",
+  "plus2bs",
+  "strand",
+  "region",
+  "mut_type"
 ))

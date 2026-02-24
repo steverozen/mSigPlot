@@ -10,9 +10,16 @@ plot_guess(catalog, ...)
 \item{catalog}{A data frame or matrix containing mutational signature data.
 The number of rows determines which plotting function is used:
 \itemize{
+\item 1536 rows: calls \code{plot_SBS1536()}
 \item 476 rows: calls \code{plot_476()}
+\item 192 rows: calls \code{plot_SBS192()}
+\item 166 rows: calls \code{plot_ID166()}
+\item 144 rows: calls \code{plot_DBS144()}
+\item 136 rows: calls \code{plot_DBS136()}
+\item 96 rows: calls \code{plot_SBS96()}
 \item 89 rows: calls \code{plot_89()}
 \item 83 rows: calls \code{plot_83()}
+\item 78 rows: calls \code{plot_DBS78()}
 }}
 
 \item{...}{Additional arguments passed to the underlying plotting function.}
@@ -22,7 +29,7 @@ A ggplot object from the appropriate plotting function.
 }
 \description{
 Automatically selects the appropriate plotting function based on the number
-of rows in the catalog: 476-channel, 89-channel, or 83-channel.
+of rows in the catalog.
 }
 \examples{
 \dontrun{
@@ -35,5 +42,7 @@ plot_guess(my_catalog_89, title = "Sample Signature")
 
 }
 \seealso{
-\code{\link[=plot_476]{plot_476()}}, \code{\link[=plot_89]{plot_89()}}, \code{\link[=plot_83]{plot_83()}}
+\code{\link[=plot_SBS96]{plot_SBS96()}}, \code{\link[=plot_SBS192]{plot_SBS192()}}, \code{\link[=plot_SBS1536]{plot_SBS1536()}}, \code{\link[=plot_DBS78]{plot_DBS78()}},
+\code{\link[=plot_DBS136]{plot_DBS136()}}, \code{\link[=plot_DBS144]{plot_DBS144()}}, \code{\link[=plot_ID166]{plot_ID166()}}, \code{\link[=plot_476]{plot_476()}}, \code{\link[=plot_89]{plot_89()}},
+\code{\link[=plot_83]{plot_83()}}
 }

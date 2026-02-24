@@ -1,12 +1,14 @@
-#' Export indel profiles to PDF with automatic channel detection
+#' Export mutational profiles to PDF with automatic type detection
 #'
-#' Creates a multi-page PDF file containing indel profile plots for multiple
-#' samples. Automatically detects the channel scheme (476, 89, or 83) based
-#' on the number of rows in the catalog. Plots are arranged with 5 samples
-#' per page. Uses Cairo for high-quality PDF rendering.
+#' Creates a multi-page PDF file containing mutational profile plots for
+#' multiple samples. Automatically detects the catalog type based on the
+#' number of rows. Plots are arranged with 5 samples per page (except for
+#' heatmap types which use 1 per page). Uses Cairo for high-quality PDF
+#' rendering.
 #'
 #' @param catalog A matrix or data frame with rows matching one of the
-#'   supported channel schemes (476, 89, or 83 rows) and one column per sample.
+#'   supported catalog types (96, 192, 1536, 78, 136, 144, 83, 89, 166,
+#'   or 476 rows) and one column per sample.
 #'   Column names are used as plot titles.
 #' @param filename Character. Path to the output PDF file.
 #' @param ... Additional arguments passed to `plot_guess()` and the underlying
@@ -14,7 +16,9 @@
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
-#' @seealso [plot_guess()], [plot_476_pdf()], [plot_89_pdf()]
+#' @seealso [plot_guess()], [plot_SBS96_pdf()], [plot_SBS192_pdf()],
+#'   [plot_SBS1536_pdf()], [plot_DBS78_pdf()], [plot_DBS136_pdf()],
+#'   [plot_DBS144_pdf()], [plot_ID166_pdf()], [plot_476_pdf()], [plot_89_pdf()]
 #' @export
 #'
 #' @import Cairo
