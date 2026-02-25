@@ -1,4 +1,4 @@
-test_that("plot_SBS288_test returns a patchwork object", {
+test_that("plot_SBS288 returns a patchwork object", {
   fixture_path <- testthat::test_path("fixtures", "21BRCA.SBS96.tsv")
   sbs96 <- read.table(
     fixture_path,
@@ -19,12 +19,12 @@ test_that("plot_SBS288_test returns a patchwork object", {
     row.names = rn288
   )
 
-  p <- plot_SBS288_test(catalog_288, plot_title = "Test SBS288")
+  p <- plot_SBS288(catalog_288, plot_title = "Test SBS288")
 
   expect_s3_class(p, "patchwork")
 })
 
-test_that("plot_SBS288_test prints without error", {
+test_that("plot_SBS288 prints without error", {
   fixture_path <- testthat::test_path("fixtures", "21BRCA.SBS96.tsv")
   sbs96 <- read.table(
     fixture_path,
@@ -42,13 +42,13 @@ test_that("plot_SBS288_test prints without error", {
     row.names = rn288
   )
 
-  p <- plot_SBS288_test(catalog_288)
+  p <- plot_SBS288(catalog_288)
 
   # Printing/rendering should not error
   expect_no_error(print(p))
 })
 
-test_that("plot_SBS288_test works with real SBS288 signature file", {
+test_that("plot_SBS288 works with real SBS288 signature file", {
   fixture_path <- testthat::test_path("fixtures", "SBS288_De-Novo_Signatures.txt")
   sbs288 <- read.table(
     fixture_path,
@@ -58,7 +58,7 @@ test_that("plot_SBS288_test works with real SBS288 signature file", {
     check.names = FALSE
   )
 
-  p <- plot_SBS288_test(sbs288[, 1, drop = FALSE], plot_title = "SBS288A")
+  p <- plot_SBS288(sbs288[, 1, drop = FALSE], plot_title = "SBS288A")
 
   expect_s3_class(p, "patchwork")
   expect_no_error(print(p))

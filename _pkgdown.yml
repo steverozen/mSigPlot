@@ -18,7 +18,7 @@ reference:
       - plot_SBS192_pdf
       - plot_SBS12
       - plot_SBS12_pdf
-      - plot_SBS288_test
+      - plot_SBS288
       - plot_SBS1536
       - plot_SBS1536_pdf
 

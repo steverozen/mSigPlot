@@ -40,19 +40,20 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 
 | Channels | Function | Mutation type | Plot style |
 |----------|----------|---------------|------------|
-| 96 | [`plot_SBS96()`](#sbs96) | SBS trinucleotide context | Bar chart |
-| 192 | [`plot_SBS192()`](#sbs192) | SBS with transcription strand | Paired bar chart |
+| 96 | [`plot_SBS96()`](#sbs96) | SBS (single-base substitutions) in trinucleotide context | Bar chart |
+| 192 | [`plot_SBS192()`](#sbs192) | SBS in trinucleotide context with transcription strand | Paired bar chart |
 | 12 | [`plot_SBS12()`](man/plot_SBS12.Rd) | SBS strand bias (from 192-row input) | Paired bar chart |
-| 1536 | [`plot_SBS1536()`](#sbs1536) | SBS pentanucleotide context | 2x3 heatmap grid |
-| 78 | [`plot_DBS78()`](#dbs78) | Doublet base substitution | Bar chart |
+| 1536 | [`plot_SBS1536()`](#sbs1536) | SBS in pentanucleotide context | 2x3 heatmap grid |
+| 78 | [`plot_DBS78()`](#dbs78) | DBS (doublet base substitution) | Bar chart |
 | 136 | [`plot_DBS136()`](#dbs136) | DBS dinucleotide classes | 10-panel heatmap |
 | 144 | [`plot_DBS144()`](man/plot_DBS144.Rd) | DBS with transcription strand | Paired bar chart |
-| 83 | [`plot_83()`](#id83) | Indel (COSMIC ID83) | Bar chart |
-| 89 | [`plot_89()`](#id89) | Indel (Koh classification) | Bar chart |
-| 166 | [`plot_ID166()`](man/plot_ID166.Rd) | Indel genic/intergenic | Paired bar chart |
-| 476 | [`plot_476()`](#id476) | Indel with flanking base context | Bar chart + peak labels |
+| 83 | [`plot_83()`](#id83) | Indel (COSMIC 83 indel-type classification) | Bar chart |
+| 89 | [`plot_89()`](#id89) | Indel (89 indel-type classification) | Bar chart |
+| 166 | [`plot_ID166()`](man/plot_ID166.Rd) | Indel 83-type classification, genic/intergenic | Paired bar chart |
+| 476 | [`plot_476()`](#id476) | Indel 476-type classification | Bar chart + peak labels |
+| 288 | [`plot_SBS288()`](#sbs288) | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
 
-Every plot function has a corresponding `_pdf()` variant (e.g.,
+Every plot function except `plot_SBS288` has a corresponding `_pdf()` variant (e.g.,
 `plot_SBS96_pdf()`) that writes multi-sample PDFs with 5 plots per page.
 
 ## Gallery
@@ -76,6 +77,15 @@ untranscribed (red) for each trinucleotide context.
 Pentanucleotide-context SBS shown as six 16x16 heatmaps.
 
 <img src="man/figures/example_SBS1536.png" width="80%" />
+
+### SBS288
+
+288-channel SBS profile split by transcription strand: template
+(transcribed), non-template (untranscribed), and not-transcribed
+(intergenic). Displayed as three stacked SBS96 panels with a shared
+y-axis.
+
+<img src="man/figures/example_SBS288.png" width="100%" />
 
 ### DBS78
 

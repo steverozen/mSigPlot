@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @import patchwork
-plot_SBS288_test <- function(catalog, plot_title = NULL, ...) {
+plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   catalog <- normalize_catalog(catalog, 288, canonical_order = NULL)
   if (is.null(catalog)) return(NULL)
 
