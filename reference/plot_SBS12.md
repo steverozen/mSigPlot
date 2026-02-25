@@ -1,0 +1,74 @@
+# Plot a condensed SBS12 strand bias chart using ggplot2
+
+Creates a 12-bar chart from a 192-row SBS catalog, collapsing the 96
+trinucleotide contexts into 6 mutation classes, each split by
+transcribed/untranscribed strand. Optionally performs a binomial strand
+bias test and annotates significant results with asterisks.
+
+## Usage
+
+``` r
+plot_SBS12(
+  catalog,
+  plot_title = NULL,
+  abundance = NULL,
+  ylabels = TRUE,
+  ylim = NULL,
+  base_size = 11,
+  title_cex = 0.8,
+  x_label_cex = 1,
+  axis_title_cex = 1,
+  axis_text_cex = 0.8
+)
+```
+
+## Arguments
+
+- catalog:
+
+  Numeric vector, single-column data.frame, matrix, tibble, or
+  data.table.
+
+- plot_title:
+
+  Character. Title displayed above the plot.
+
+- abundance:
+
+  Optional named numeric vector of 64 3-mer counts. If provided and the
+  catalog is counts, a two-sided binomial test is performed for strand
+  bias.
+
+- ylabels:
+
+  Logical, draw y-axis labels.
+
+- ylim:
+
+  Optional y-axis limits.
+
+- base_size:
+
+  Numeric. Base font size in points.
+
+- title_cex:
+
+  Numeric. Multiplier for the plot title size.
+
+- x_label_cex:
+
+  Numeric. Multiplier for x-axis labels.
+
+- axis_title_cex:
+
+  Numeric. Multiplier for the y-axis title size.
+
+- axis_text_cex:
+
+  Numeric. Multiplier for the y-axis tick label size.
+
+## Value
+
+A ggplot object. If a binomial test was performed, the object has an
+attribute `"strand.bias.statistics"` containing a data frame of
+transcribed/untranscribed counts and q-values.
