@@ -96,13 +96,13 @@
 <tr class="odd">
 <td>96</td>
 <td><a href="#sbs96"><code>plot_SBS96()</code></a></td>
-<td>SBS trinucleotide context</td>
+<td>SBS (single-base substitutions) in trinucleotide context</td>
 <td>Bar chart</td>
 </tr>
 <tr class="even">
 <td>192</td>
 <td><a href="#sbs192"><code>plot_SBS192()</code></a></td>
-<td>SBS with transcription strand</td>
+<td>SBS in trinucleotide context with transcription strand</td>
 <td>Paired bar chart</td>
 </tr>
 <tr class="odd">
@@ -114,13 +114,13 @@
 <tr class="even">
 <td>1536</td>
 <td><a href="#sbs1536"><code>plot_SBS1536()</code></a></td>
-<td>SBS pentanucleotide context</td>
+<td>SBS in pentanucleotide context</td>
 <td>2x3 heatmap grid</td>
 </tr>
 <tr class="odd">
 <td>78</td>
 <td><a href="#dbs78"><code>plot_DBS78()</code></a></td>
-<td>Doublet base substitution</td>
+<td>DBS (doublet base substitution)</td>
 <td>Bar chart</td>
 </tr>
 <tr class="even">
@@ -138,30 +138,36 @@
 <tr class="even">
 <td>83</td>
 <td><a href="#id83"><code>plot_83()</code></a></td>
-<td>Indel (COSMIC ID83)</td>
+<td>Indel (COSMIC 83 indel-type classification)</td>
 <td>Bar chart</td>
 </tr>
 <tr class="odd">
 <td>89</td>
 <td><a href="#id89"><code>plot_89()</code></a></td>
-<td>Indel (Koh classification)</td>
+<td>Indel (89 indel-type classification)</td>
 <td>Bar chart</td>
 </tr>
 <tr class="even">
 <td>166</td>
 <td><a href="man/plot_ID166.Rd"><code>plot_ID166()</code></a></td>
-<td>Indel genic/intergenic</td>
+<td>Indel 83-type classification, genic/intergenic</td>
 <td>Paired bar chart</td>
 </tr>
 <tr class="odd">
 <td>476</td>
 <td><a href="#id476"><code>plot_476()</code></a></td>
-<td>Indel with flanking base context</td>
+<td>Indel 476-type classification</td>
 <td>Bar chart + peak labels</td>
+</tr>
+<tr class="even">
+<td>288</td>
+<td><a href="#sbs288"><code>plot_SBS288()</code></a></td>
+<td>SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions</td>
+<td>3-panel stacked bar chart</td>
 </tr>
 </tbody>
 </table>
-<p>Every plot function has a corresponding <code>_pdf()</code> variant (e.g., <code><a href="reference/plot_SBS96_pdf.html">plot_SBS96_pdf()</a></code>) that writes multi-sample PDFs with 5 plots per page.</p>
+<p>Every plot function except <code>plot_SBS288</code> has a corresponding <code>_pdf()</code> variant (e.g., <code><a href="reference/plot_SBS96_pdf.html">plot_SBS96_pdf()</a></code>) that writes multi-sample PDFs with 5 plots per page.</p>
 </div>
 <div class="section level2">
 <h2 id="gallery">Gallery<a class="anchor" aria-label="anchor" href="#gallery"></a>
@@ -183,6 +189,12 @@
 </h3>
 <p>Pentanucleotide-context SBS shown as six 16x16 heatmaps.</p>
 <p><img src="reference/figures/example_SBS1536.png" width="80%"></p>
+</div>
+<div class="section level3">
+<h3 id="sbs288">SBS288<a class="anchor" aria-label="anchor" href="#sbs288"></a>
+</h3>
+<p>288-channel SBS profile split by transcription strand: template (transcribed), non-template (untranscribed), and not-transcribed (intergenic). Displayed as three stacked SBS96 panels with a shared y-axis.</p>
+<p><img src="reference/figures/example_SBS288.png" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="dbs78">DBS78<a class="anchor" aria-label="anchor" href="#dbs78"></a>
