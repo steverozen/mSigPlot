@@ -95,22 +95,6 @@ head(catalog_id83)
 
 ``` r
 plot_SBS96(catalog_sbs96, plot_title = "HepG2 sample — SBS96")
-#> Warning: Removed 6 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
 ```
 
 ![](mSigPlot_files/figure-html/plot-sbs96-1.png)
@@ -149,22 +133,6 @@ plot_SBS96(
   show_counts = TRUE,
   grid        = FALSE
 )
-#> Warning: Removed 6 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
 ```
 
 ![](mSigPlot_files/figure-html/customize-1.png)
@@ -177,22 +145,6 @@ detects it from the number of rows:
 
 ``` r
 plot_guess(catalog_sbs96, plot_title = "Auto-detected SBS96")
-#> Warning: Removed 6 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
 ```
 
 ![](mSigPlot_files/figure-html/plot-guess-1.png)
@@ -226,22 +178,6 @@ if (requireNamespace("patchwork", quietly = TRUE)) {
   p2 <- plot_DBS78(catalog_dbs78, plot_title = "DBS78")
   p1 / p2
 }
-#> Warning: Removed 6 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 24 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text()`).
 #> Warning: Removed 10 rows containing missing values or values outside the scale range
 #> (`geom_text()`).
 #> Warning: Removed 78 rows containing missing values or values outside the scale range
