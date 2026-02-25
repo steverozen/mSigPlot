@@ -1,5 +1,6 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/steverozen/mSigPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/steverozen/mSigPlot/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/steverozen/mSigPlot/actions/workflows/pkgdown.yaml/badge.svg)](https://steverozen.github.io/mSigPlot/)
 <!-- badges: end -->
 
 # mSigPlot
