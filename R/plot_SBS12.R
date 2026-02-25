@@ -161,7 +161,8 @@ plot_SBS12 <- function(
     ) +
     scale_y_continuous(
       limits = c(0, ymax),
-      expand = c(0, 0)
+      expand = c(0, 0),
+      oob = scales::oob_keep
     ) +
     coord_cartesian(
       ylim = c(-ymax * 0.05, ymax * 1.15),
