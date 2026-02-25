@@ -23,6 +23,8 @@ Auto-detect catalog type and plot
   : Plot a condensed SBS12 strand bias chart using ggplot2
 - [`plot_SBS12_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS12_pdf.md)
   : Export SBS12 strand bias profiles to PDF
+- [`plot_SBS288_test()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS288_test.md)
+  : Plot an SBS288 catalog as a 3-panel stacked SBS96 plot
 - [`plot_SBS1536()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS1536.md)
   : Plot an SBS1536 catalog as a 2x3 heatmap grid using ggplot2
 - [`plot_SBS1536_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS1536_pdf.md)
