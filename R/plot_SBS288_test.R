@@ -46,14 +46,37 @@ plot_SBS288_test <- function(catalog, plot_title = NULL, ...) {
   # Shared y-axis max across all 3 panels
   global_max <- max(cat_t[, 1], cat_u[, 1], cat_n[, 1]) * 1.1
 
+  # Top panel: upper bars, no x-labels
+  # Middle panel: no upper bars, no x-labels
+  # Bottom panel: no upper bars, x-labels
   p1 <- plot_SBS96(cat_t, plot_title = "Template",
-                   ylim = c(0, global_max), ...)
+                   ylim = c(0, global_max),
+                   upper = TRUE, xlabels = FALSE, ...)
   p2 <- plot_SBS96(cat_u, plot_title = "Non-template",
-                   ylim = c(0, global_max), ...)
+                   ylim = c(0, global_max),
+                   upper = FALSE, xlabels = FALSE, ...)
   p3 <- plot_SBS96(cat_n, plot_title = "Not-transcribed",
-                   ylim = c(0, global_max), ...)
+                   ylim = c(0, global_max),
+                   upper = FALSE, xlabels = TRUE, ...)
 
-  combined <- patchwork::wrap_plots(p1, p2, p3, ncol = 1)
+  # Force identical y-axis breaks across all panels (ggplot2 auto-selects
+
+  # different breaks when panels have different physical heights)
+  shared_breaks <- pretty(c(0, global_max), n = 4)
+  shared_scale <- scale_y_continuous(
+    breaks = shared_breaks,
+    limits = c(0, global_max),
+    expand = c(0, 0),
+    oob = scales::oob_keep
+  )
+  p1 <- p1 + shared_scale
+  p2 <- p2 + shared_scale
+  p3 <- p3 + shared_scale
+
+  # Height ratios: top panel gets space for upper bars,
+  # bottom panel gets space for x-labels
+  combined <- patchwork::wrap_plots(p1, p2, p3, ncol = 1,
+                                    heights = c(1.2, 1, 1.4))
 
   if (!is.null(plot_title)) {
     combined <- combined + patchwork::plot_annotation(title = plot_title)
