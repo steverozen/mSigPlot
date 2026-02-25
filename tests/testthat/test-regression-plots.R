@@ -45,6 +45,12 @@ load_icams_catalog <- function(filename, type) {
   out
 }
 
+skip_if_no_pixi <- function() {
+  pixi_toml <- test_path("..", "..", "pixi.toml")
+  skip_if_not(file.exists(pixi_toml), "pixi.toml not found (running inside R CMD check?)")
+  skip_if(Sys.which("pixi") == "", "pixi not on PATH")
+}
+
 render_and_hash <- function(plot_obj, name) {
   tmpfile <- tempfile(fileext = ".png")
 
@@ -89,6 +95,7 @@ check_regression <- function(hash, name) {
 # -- Tests --------------------------------------------------------------------
 
 test_that("plot_SBS96 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.sbs.96.csv", "SBS96")
   p <- plot_SBS96(catalog)
   hash <- render_and_hash(p, "plot_SBS96")
@@ -96,6 +103,7 @@ test_that("plot_SBS96 regression", {
 })
 
 test_that("plot_SBS192 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.sbs.192.csv", "SBS192")
   p <- plot_SBS192(catalog)
   hash <- render_and_hash(p, "plot_SBS192")
@@ -103,6 +111,7 @@ test_that("plot_SBS192 regression", {
 })
 
 test_that("plot_SBS12 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.sbs.192.csv", "SBS192")
   p <- plot_SBS12(catalog)
   hash <- render_and_hash(p, "plot_SBS12")
@@ -110,6 +119,7 @@ test_that("plot_SBS12 regression", {
 })
 
 test_that("plot_SBS1536 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.sbs.1536.csv", "SBS1536")
   p <- plot_SBS1536(catalog)
   hash <- render_and_hash(p, "plot_SBS1536")
@@ -117,6 +127,7 @@ test_that("plot_SBS1536 regression", {
 })
 
 test_that("plot_DBS78 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.dbs.78.csv", "DBS78")
   p <- plot_DBS78(catalog)
   hash <- render_and_hash(p, "plot_DBS78")
@@ -124,6 +135,7 @@ test_that("plot_DBS78 regression", {
 })
 
 test_that("plot_DBS136 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.dbs.136.csv", "DBS136")
   p <- plot_DBS136(catalog)
   hash <- render_and_hash(p, "plot_DBS136")
@@ -131,6 +143,7 @@ test_that("plot_DBS136 regression", {
 })
 
 test_that("plot_DBS144 regression", {
+  skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.dbs.144.csv", "DBS144")
   p <- plot_DBS144(catalog)
   hash <- render_and_hash(p, "plot_DBS144")
@@ -138,6 +151,7 @@ test_that("plot_DBS144 regression", {
 })
 
 test_that("plot_83 regression", {
+  skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "COSMIC_v3.5_ID_GRCh37_signatures.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
@@ -149,6 +163,7 @@ test_that("plot_83 regression", {
 })
 
 test_that("plot_89 regression", {
+  skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "type89_liu_et_al_sigs.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
@@ -160,6 +175,7 @@ test_that("plot_89 regression", {
 })
 
 test_that("plot_476 regression", {
+  skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "type476_liu_et_al_sigs.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
@@ -172,6 +188,7 @@ test_that("plot_476 regression", {
 })
 
 test_that("plot_476_right regression", {
+  skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "type476_liu_et_al_sigs.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
@@ -184,6 +201,7 @@ test_that("plot_476_right regression", {
 })
 
 test_that("plot_ID166 regression", {
+  skip_if_no_pixi()
   set.seed(42)
   orders <- catalog_row_order()
   vals <- runif(166)

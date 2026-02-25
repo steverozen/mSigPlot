@@ -5,3 +5,12 @@
 ^development$
 ^.vscode$
 ^\.claude$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^vignettes/.*_cache$
+^\.pixi$
+^pixi\.toml$
+^pixi\.lock$
+^Rplots\.pdf$

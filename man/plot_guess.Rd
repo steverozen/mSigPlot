@@ -7,8 +7,9 @@
 plot_guess(catalog, ...)
 }
 \arguments{
-\item{catalog}{A data frame or matrix containing mutational signature data.
-The number of rows determines which plotting function is used:
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table. The number of rows (or length) determines which plotting
+function is used:
 \itemize{
 \item 1536 rows: calls \code{plot_SBS1536()}
 \item 476 rows: calls \code{plot_476()}

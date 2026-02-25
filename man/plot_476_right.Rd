@@ -7,7 +7,7 @@
 plot_476_right(
   catalog,
   block_text_cex = 1,
-  plot_title = "test",
+  plot_title = NULL,
   num_labels = 3,
   ggrepel_cex = 0.7,
   label_threshold_denominator = 7,
@@ -36,8 +36,8 @@ plot_476_right(
 )
 }
 \arguments{
-\item{catalog}{Numeric vector of length 476 containing indel counts or
-proportions for a single sample. Only positions 343-476 are plotted.}
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table. Only positions 343-476 are plotted.}
 
 \item{block_text_cex}{Numeric. Size of category block labels (e.g. "Del >=2bp"),
 as a fraction of \code{base_size}.}

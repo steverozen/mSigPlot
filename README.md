@@ -1,3 +1,7 @@
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/steverozen/mSigPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/steverozen/mSigPlot/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 # mSigPlot
 
 Publication-quality plots for mutational signatures and mutational spectra.

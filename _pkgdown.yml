@@ -1,0 +1,47 @@
+url: https://steverozen.github.io/mSigPlot/
+
+template:
+  bootstrap: 5
+
+reference:
+  - title: Auto-dispatch
+    desc: Auto-detect catalog type and plot
+    contents:
+      - plot_guess
+      - plot_guess_pdf
+
+  - title: SBS (single base substitution)
+    contents:
+      - plot_SBS96
+      - plot_SBS96_pdf
+      - plot_SBS192
+      - plot_SBS192_pdf
+      - plot_SBS12
+      - plot_SBS12_pdf
+      - plot_SBS1536
+      - plot_SBS1536_pdf
+
+  - title: DBS (doublet base substitution)
+    contents:
+      - plot_DBS78
+      - plot_DBS78_pdf
+      - plot_DBS136
+      - plot_DBS136_pdf
+      - plot_DBS144
+      - plot_DBS144_pdf
+
+  - title: Indel
+    contents:
+      - plot_83
+      - plot_83_pdf
+      - plot_89
+      - plot_89_pdf
+      - plot_476
+      - plot_476_pdf
+      - plot_476_right
+      - plot_ID166
+      - plot_ID166_pdf
+
+  - title: Utilities
+    contents:
+      - catalog_row_order

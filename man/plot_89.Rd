@@ -9,7 +9,7 @@ plot_89(
   text_cex = 3,
   top_bar_text_cex = text_cex,
   title_text_cex = 1,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   setyaxis = NULL,
   ylabel = NULL,
   base_size = 11,
@@ -34,8 +34,8 @@ plot_89(
 )
 }
 \arguments{
-\item{catalog}{Numeric vector of length 89 containing indel counts or
-proportions for a single sample.}
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table.}
 
 \item{text_cex}{Numeric. Size of text labels in the plot. Used as default
 for \code{top_bar_text_cex}.}

@@ -6,7 +6,7 @@
 \usage{
 plot_SBS12(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   abundance = NULL,
   ylabels = TRUE,
   ylim = NULL,
@@ -18,7 +18,8 @@ plot_SBS12(
 )
 }
 \arguments{
-\item{catalog}{A 192-row, 1-column matrix or data frame.}
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 

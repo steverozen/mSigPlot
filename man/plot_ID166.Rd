@@ -6,7 +6,7 @@
 \usage{
 plot_ID166(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
@@ -25,7 +25,8 @@ plot_ID166(
 )
 }
 \arguments{
-\item{catalog}{A 166-row, 1-column matrix or data frame.}
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 

@@ -6,7 +6,7 @@
 \usage{
 plot_DBS144(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -17,7 +17,8 @@ plot_DBS144(
 )
 }
 \arguments{
-\item{catalog}{A 144-row, 1-column matrix or data frame.}
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 

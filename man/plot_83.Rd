@@ -6,7 +6,7 @@
 \usage{
 plot_83(
   catalog,
-  plot_title = colnames(catalog)[1],
+  plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
   xlabels = TRUE,
@@ -25,7 +25,8 @@ plot_83(
 )
 }
 \arguments{
-\item{catalog}{An 83-row, 1-column indel catalog}
+\item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
+or data.table.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
