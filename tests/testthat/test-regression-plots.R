@@ -61,11 +61,13 @@ render_and_hash <- function(plot_obj, name) {
     grDevices::png(tmpfile, width = 800, height = 600, type = "cairo")
   }
 
-  if (inherits(plot_obj, "ggplot")) {
-    print(plot_obj)
-  } else {
-    grid::grid.draw(plot_obj)
-  }
+  suppressWarnings(
+    if (inherits(plot_obj, "ggplot")) {
+      print(plot_obj)
+    } else {
+      grid::grid.draw(plot_obj)
+    }
+  )
   grDevices::dev.off()
 
   hash <- system2(
