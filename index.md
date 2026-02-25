@@ -65,8 +65,9 @@ classes (C\>A, C\>G, C\>T, T\>A, T\>C, T\>G).
 
 ### SBS192
 
-Strand-aware SBS profile. Bars are paired: transcribed (blue) and
-untranscribed (red) for each trinucleotide context.
+Transcription strand-aware SBS profile. Bars are paired: transcribed
+(blue) and untranscribed (red) for each trinucleotide context.
+Intergenic regions not plotted.
 
 ![](reference/figures/example_SBS192.png)
 
@@ -87,8 +88,8 @@ y-axis.
 
 ### DBS78
 
-78-channel doublet base substitution profile across 10 dinucleotide
-reference classes.
+78-channel DBS (doublet base substitution) profile across 10
+dinucleotide reference classes.
 
 ![](reference/figures/example_DBS78.png)
 
@@ -101,22 +102,21 @@ maxima-per-class summary.
 
 ### ID83
 
-COSMIC 83-channel indel classification covering 1bp
-deletions/insertions, repeat-mediated indels, and microhomology-mediated
-deletions.
+COSMIC 83-type indel classification covering 1bp deletions/insertions,
+repeat-mediated indels, and microhomology-mediated deletions.
 
 ![](reference/figures/example_ID83.png)
 
 ### ID89
 
-89-channel indel profile using the Koh et al. classification system.
+89-type indel classification system.
 
 ![](reference/figures/example_ID89.png)
 
 ### ID476
 
-476-channel indel profile with flanking base context. Top peaks are
-automatically labeled using ggrepel.
+476-type indel classification system Top peaks are automatically labeled
+using ggrepel.
 
 ![](reference/figures/example_ID476.png)
 
