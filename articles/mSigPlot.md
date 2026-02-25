@@ -103,12 +103,6 @@ plot_SBS96(catalog_sbs96, plot_title = "HepG2 sample — SBS96")
 
 ``` r
 plot_DBS78(catalog_dbs78, plot_title = "HepG2 sample — DBS78")
-#> Warning: Removed 10 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 78 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 78 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
 ```
 
 ![](mSigPlot_files/figure-html/plot-dbs78-1.png)
@@ -178,12 +172,6 @@ if (requireNamespace("patchwork", quietly = TRUE)) {
   p2 <- plot_DBS78(catalog_dbs78, plot_title = "DBS78")
   p1 / p2
 }
-#> Warning: Removed 10 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Warning: Removed 78 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
-#> Removed 78 rows containing missing values or values outside the scale range
-#> (`geom_text()`).
 ```
 
 ![](mSigPlot_files/figure-html/patchwork-1.png)
