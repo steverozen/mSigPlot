@@ -16,7 +16,7 @@ remotes::install_github("steverozen/mSigPlot")
 
 Every plot function accepts a numeric vector, single-column data.frame,
 matrix, tibble, or data.table. The easiest entry point is
-[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md),
+[`plot_guess()`](https://steverozen.github.io/reference/plot_guess.md),
 which auto-detects the catalog type by row count:
 
 ``` r
@@ -34,24 +34,24 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 
 ## Supported catalog types
 
-| Channels | Function                                                                    | Mutation type                                                                                 | Plot style                |
-|----------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------|
-| 96       | [`plot_SBS96()`](#sbs96)                                                    | SBS (single-base substitutions) in trinucleotide context                                      | Bar chart                 |
-| 192      | [`plot_SBS192()`](#sbs192)                                                  | SBS in trinucleotide context with transcription strand                                        | Paired bar chart          |
-| 12       | [`plot_SBS12()`](https://steverozen.github.io/mSigPlot/man/plot_SBS12.Rd)   | SBS strand bias (from 192-row input)                                                          | Paired bar chart          |
-| 1536     | [`plot_SBS1536()`](#sbs1536)                                                | SBS in pentanucleotide context                                                                | 2x3 heatmap grid          |
-| 78       | [`plot_DBS78()`](#dbs78)                                                    | DBS (doublet base substitution)                                                               | Bar chart                 |
-| 136      | [`plot_DBS136()`](#dbs136)                                                  | DBS dinucleotide classes                                                                      | 10-panel heatmap          |
-| 144      | [`plot_DBS144()`](https://steverozen.github.io/mSigPlot/man/plot_DBS144.Rd) | DBS with transcription strand                                                                 | Paired bar chart          |
-| 83       | [`plot_83()`](#id83)                                                        | Indel (COSMIC 83 indel-type classification)                                                   | Bar chart                 |
-| 89       | [`plot_89()`](#id89)                                                        | Indel (89 indel-type classification)                                                          | Bar chart                 |
-| 166      | [`plot_ID166()`](https://steverozen.github.io/mSigPlot/man/plot_ID166.Rd)   | Indel 83-type classification, genic/intergenic                                                | Paired bar chart          |
-| 476      | [`plot_476()`](#id476)                                                      | Indel 476-type classification                                                                 | Bar chart + peak labels   |
-| 288      | [`plot_SBS288()`](#sbs288)                                                  | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
+| Channels | Function                                                           | Mutation type                                                                                 | Plot style                |
+|----------|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------|
+| 96       | [`plot_SBS96()`](#sbs96)                                           | SBS (single-base substitutions) in trinucleotide context                                      | Bar chart                 |
+| 192      | [`plot_SBS192()`](#sbs192)                                         | SBS in trinucleotide context with transcription strand                                        | Paired bar chart          |
+| 12       | [`plot_SBS12()`](https://steverozen.github.io/man/plot_SBS12.Rd)   | SBS strand bias (from 192-row input)                                                          | Paired bar chart          |
+| 1536     | [`plot_SBS1536()`](#sbs1536)                                       | SBS in pentanucleotide context                                                                | 2x3 heatmap grid          |
+| 78       | [`plot_DBS78()`](#dbs78)                                           | DBS (doublet base substitution)                                                               | Bar chart                 |
+| 136      | [`plot_DBS136()`](#dbs136)                                         | DBS dinucleotide classes                                                                      | 10-panel heatmap          |
+| 144      | [`plot_DBS144()`](https://steverozen.github.io/man/plot_DBS144.Rd) | DBS with transcription strand                                                                 | Paired bar chart          |
+| 83       | [`plot_83()`](#id83)                                               | Indel (COSMIC 83 indel-type classification)                                                   | Bar chart                 |
+| 89       | [`plot_89()`](#id89)                                               | Indel (89 indel-type classification)                                                          | Bar chart                 |
+| 166      | [`plot_ID166()`](https://steverozen.github.io/man/plot_ID166.Rd)   | Indel 83-type classification, genic/intergenic                                                | Paired bar chart          |
+| 476      | [`plot_476()`](#id476)                                             | Indel 476-type classification                                                                 | Bar chart + peak labels   |
+| 288      | [`plot_SBS288()`](#sbs288)                                         | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
 
 Every plot function except `plot_SBS288` has a corresponding `_pdf()`
 variant (e.g.,
-[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96_pdf.md))
+[`plot_SBS96_pdf()`](https://steverozen.github.io/reference/plot_SBS96_pdf.md))
 that writes multi-sample PDFs with 5 plots per page.
 
 ## Gallery
@@ -135,7 +135,7 @@ All plot functions share these parameters:
 
 Bar chart functions also accept `grid`, `upper`, `xlabels`, and
 `ylabels` toggles. See
-[`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96.md)
+[`?plot_SBS96`](https://steverozen.github.io/reference/plot_SBS96.md)
 for the full parameter list.
 
 ## Row name handling
@@ -144,7 +144,7 @@ If your catalog has row names matching the canonical mutation type
 labels, mSigPlot validates and reorders them automatically. If row names
 are absent (unnamed vector or sequential integer names), the data is
 assumed to be in canonical order. Use
-[`catalog_row_order()`](https://steverozen.github.io/mSigPlot/reference/catalog_row_order.md)
+[`catalog_row_order()`](https://steverozen.github.io/reference/catalog_row_order.md)
 to inspect the expected order for any catalog type:
 
 ``` r

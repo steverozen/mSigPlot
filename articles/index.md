@@ -3,4 +3,4 @@
 ### All vignettes
 
 - [Plotting mutational signatures with
-  mSigPlot](https://steverozen.github.io/mSigPlot/articles/mSigPlot.md):
+  mSigPlot](https://steverozen.github.io/articles/mSigPlot.md):
