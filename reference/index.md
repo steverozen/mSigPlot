@@ -2,7 +2,8 @@
 
 ## Auto-dispatch
 
-Auto-detect catalog type and plot
+Auto-detect catalog type by row count and dispatch to the appropriate
+plotting function. Start here if you are unsure which function to use.
 
 - [`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md)
   : Plot mutational signature catalog with automatic channel detection
@@ -10,6 +11,11 @@ Auto-detect catalog type and plot
   : Export mutational profiles to PDF with automatic type detection
 
 ## SBS (single base substitution)
+
+Plot single base substitution spectra and signatures at various
+resolutions: 12 (simplified), 96 (trinucleotide context), 192
+(strand-aware), 288 (3-panel strand-aware), and 1536 (pentanucleotide
+context).
 
 - [`plot_SBS96()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96.md)
   : Plot an SBS96 catalog using ggplot2
@@ -32,6 +38,9 @@ Auto-detect catalog type and plot
 
 ## DBS (doublet base substitution)
 
+Plot doublet base substitution spectra and signatures: 78-channel bar
+plots, 136-channel heatmaps, and 144-channel strand-aware bar plots.
+
 - [`plot_DBS78()`](https://steverozen.github.io/mSigPlot/reference/plot_DBS78.md)
   : Plot a DBS78 catalog using ggplot2
 - [`plot_DBS78_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_DBS78_pdf.md)
@@ -46,6 +55,10 @@ Auto-detect catalog type and plot
   : Export DBS144 strand bias profiles to PDF
 
 ## Indel
+
+Plot small insertion and deletion spectra and signatures: ID83 (COSMIC),
+ID89 (Koh classification), ID166 (genic/intergenic), and ID476 (flanking
+base context).
 
 - [`plot_83()`](https://steverozen.github.io/mSigPlot/reference/plot_83.md)
   : Plot 83-type indel catalog using ggplot2 and return the ggplot
@@ -68,6 +81,8 @@ Auto-detect catalog type and plot
   : Export ID166 genic/intergenic profiles to PDF
 
 ## Utilities
+
+Helper functions for working with catalog data.
 
 - [`catalog_row_order()`](https://steverozen.github.io/mSigPlot/reference/catalog_row_order.md)
   : Return catalog row orders for all supported catalog types
