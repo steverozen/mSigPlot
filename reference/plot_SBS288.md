@@ -27,7 +27,7 @@ plot_SBS288(catalog, plot_title = NULL, ...)
 - ...:
 
   Additional arguments passed to
-  [`plot_SBS96()`](https://steverozen.github.io/reference/plot_SBS96.md).
+  [`plot_SBS96()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96.md).
 
 ## Value
 
