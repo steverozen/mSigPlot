@@ -63,20 +63,20 @@ Every plot function except `plot_SBS288` has a corresponding `_pdf()` variant (e
 96-channel single base substitution profile with 6 color-coded mutation
 classes (C>A, C>G, C>T, T>A, T>C, T>G).
 
-<img src="man/figures/example_SBS96.png" width="100%" />
+<img src="man/figures/example_SBS96.png" alt="SBS96 mutational spectrum bar plot" width="100%" />
 
 ### SBS192
 
 Transcription strand-aware SBS profile. Bars are paired: transcribed (blue) and
 untranscribed (red) for each trinucleotide context. Intergenic regions not plotted.
 
-<img src="man/figures/example_SBS192.png" width="100%" />
+<img src="man/figures/example_SBS192.png" alt="SBS192 strand-aware mutational spectrum bar plot" width="100%" />
 
 ### SBS1536
 
 Pentanucleotide-context SBS shown as six 16x16 heatmaps.
 
-<img src="man/figures/example_SBS1536.png" width="80%" />
+<img src="man/figures/example_SBS1536.png" alt="SBS1536 pentanucleotide-context heatmap" width="80%" />
 
 ### SBS288
 
@@ -85,41 +85,41 @@ Pentanucleotide-context SBS shown as six 16x16 heatmaps.
 (intergenic). Displayed as three stacked SBS96 panels with a shared
 y-axis.
 
-<img src="man/figures/example_SBS288.png" width="100%" />
+<img src="man/figures/example_SBS288.png" alt="SBS288 strand-aware mutational spectrum bar plot" width="100%" />
 
 ### DBS78
 
 78-channel DBS (doublet base substitution) profile across 10 dinucleotide
 reference classes.
 
-<img src="man/figures/example_DBS78.png" width="100%" />
+<img src="man/figures/example_DBS78.png" alt="DBS78 doublet base substitution bar plot" width="100%" />
 
 ### DBS136
 
 DBS shown as 10 small 4x4 heatmaps, one per dinucleotide class, with
 a maxima-per-class summary.
 
-<img src="man/figures/example_DBS136.png" width="80%" />
+<img src="man/figures/example_DBS136.png" alt="DBS136 doublet base substitution heatmap" width="80%" />
 
 ### ID83
 
 COSMIC 83-type indel classification covering 1bp deletions/insertions,
 repeat-mediated indels, and microhomology-mediated deletions.
 
-<img src="man/figures/example_ID83.png" width="100%" />
+<img src="man/figures/example_ID83.png" alt="ID83 indel classification bar plot" width="100%" />
 
 ### ID89
 
 89-type indel classification system.
 
-<img src="man/figures/example_ID89.png" width="100%" />
+<img src="man/figures/example_ID89.png" alt="ID89 indel classification bar plot" width="100%" />
 
 ### ID476
 
 476-type indel classification system Top peaks are
 automatically labeled using ggrepel.
 
-<img src="man/figures/example_ID476.png" width="100%" />
+<img src="man/figures/example_ID476.png" alt="ID476 indel classification bar plot" width="100%" />
 
 ## Common parameters
 
