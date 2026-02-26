@@ -134,7 +134,7 @@ plot_SBS96(
 ## Auto-dispatch with plot_guess()
 
 If you don’t know (or don’t want to specify) the catalog type,
-[`plot_guess()`](https://steverozen.github.io/reference/plot_guess.md)
+[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md)
 detects it from the number of rows:
 
 ``` r
@@ -148,7 +148,7 @@ plot_guess(catalog_sbs96, plot_title = "Auto-detected SBS96")
 For batch plotting, every plot function has a `_pdf()` variant that
 writes a multi-page PDF with 5 plots per page. The auto-dispatch version
 is
-[`plot_guess_pdf()`](https://steverozen.github.io/reference/plot_guess_pdf.md):
+[`plot_guess_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_guess_pdf.md):
 
 ``` r
 # Build a multi-sample matrix (4 samples)
