@@ -61,7 +61,8 @@ that writes multi-sample PDFs with 5 plots per page.
 96-channel single base substitution profile with 6 color-coded mutation
 classes (C\>A, C\>G, C\>T, T\>A, T\>C, T\>G).
 
-![](reference/figures/example_SBS96.png)
+![SBS96 mutational spectrum bar
+plot](reference/figures/example_SBS96.png)
 
 ### SBS192
 
@@ -69,13 +70,15 @@ Transcription strand-aware SBS profile. Bars are paired: transcribed
 (blue) and untranscribed (red) for each trinucleotide context.
 Intergenic regions not plotted.
 
-![](reference/figures/example_SBS192.png)
+![SBS192 strand-aware mutational spectrum bar
+plot](reference/figures/example_SBS192.png)
 
 ### SBS1536
 
 Pentanucleotide-context SBS shown as six 16x16 heatmaps.
 
-![](reference/figures/example_SBS1536.png)
+![SBS1536 pentanucleotide-context
+heatmap](reference/figures/example_SBS1536.png)
 
 ### SBS288
 
@@ -84,41 +87,47 @@ Pentanucleotide-context SBS shown as six 16x16 heatmaps.
 (intergenic). Displayed as three stacked SBS96 panels with a shared
 y-axis.
 
-![](reference/figures/example_SBS288.png)
+![SBS288 strand-aware mutational spectrum bar
+plot](reference/figures/example_SBS288.png)
 
 ### DBS78
 
 78-channel DBS (doublet base substitution) profile across 10
 dinucleotide reference classes.
 
-![](reference/figures/example_DBS78.png)
+![DBS78 doublet base substitution bar
+plot](reference/figures/example_DBS78.png)
 
 ### DBS136
 
 DBS shown as 10 small 4x4 heatmaps, one per dinucleotide class, with a
 maxima-per-class summary.
 
-![](reference/figures/example_DBS136.png)
+![DBS136 doublet base substitution
+heatmap](reference/figures/example_DBS136.png)
 
 ### ID83
 
 COSMIC 83-type indel classification covering 1bp deletions/insertions,
 repeat-mediated indels, and microhomology-mediated deletions.
 
-![](reference/figures/example_ID83.png)
+![ID83 indel classification bar
+plot](reference/figures/example_ID83.png)
 
 ### ID89
 
 89-type indel classification system.
 
-![](reference/figures/example_ID89.png)
+![ID89 indel classification bar
+plot](reference/figures/example_ID89.png)
 
 ### ID476
 
 476-type indel classification system Top peaks are automatically labeled
 using ggrepel.
 
-![](reference/figures/example_ID476.png)
+![ID476 indel classification bar
+plot](reference/figures/example_ID476.png)
 
 ## Common parameters
 
