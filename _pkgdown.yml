@@ -2,15 +2,36 @@ url: https://steverozen.github.io/mSigPlot/
 
 template:
   bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [github, search]
+  components:
+    intro:
+      text: Get Started
+      href: articles/mSigPlot.html
+    articles:
+      text: Articles
+      href: articles/index.html
 
 reference:
   - title: Auto-dispatch
-    desc: Auto-detect catalog type and plot
+    desc: >
+      Auto-detect catalog type by row count and dispatch to the
+      appropriate plotting function. Start here if you are unsure
+      which function to use.
     contents:
       - plot_guess
       - plot_guess_pdf
 
   - title: SBS (single base substitution)
+    desc: >
+      Plot single base substitution spectra and signatures at various
+      resolutions: 12 (simplified), 96 (trinucleotide context),
+      192 (strand-aware), 288 (3-panel strand-aware), and 1536
+      (pentanucleotide context).
     contents:
       - plot_SBS96
       - plot_SBS96_pdf
@@ -23,6 +44,10 @@ reference:
       - plot_SBS1536_pdf
 
   - title: DBS (doublet base substitution)
+    desc: >
+      Plot doublet base substitution spectra and signatures:
+      78-channel bar plots, 136-channel heatmaps, and 144-channel
+      strand-aware bar plots.
     contents:
       - plot_DBS78
       - plot_DBS78_pdf
@@ -32,6 +57,10 @@ reference:
       - plot_DBS144_pdf
 
   - title: Indel
+    desc: >
+      Plot small insertion and deletion spectra and signatures:
+      ID83 (COSMIC), ID89 (Koh classification), ID166 (genic/intergenic),
+      and ID476 (flanking base context).
     contents:
       - plot_83
       - plot_83_pdf
@@ -44,5 +73,11 @@ reference:
       - plot_ID166_pdf
 
   - title: Utilities
+    desc: Helper functions for working with catalog data.
     contents:
       - catalog_row_order
+
+footer:
+  structure:
+    left:  developed_by
+    right: built_with
