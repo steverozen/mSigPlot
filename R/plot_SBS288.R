@@ -63,11 +63,13 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
 
   # different breaks when panels have different physical heights)
   shared_breaks <- pretty(c(0, global_max), n = 4)
+  is_counts <- sum(catalog[, 1], na.rm = TRUE) > 1.1
   shared_scale <- scale_y_continuous(
     breaks = shared_breaks,
     limits = c(0, global_max),
     expand = c(0, 0),
-    oob = scales::oob_keep
+    oob = scales::oob_keep,
+    labels = if (is_counts) scales::label_number(accuracy = 1) else ggplot2::waiver()
   )
   p1 <- p1 + shared_scale
   p2 <- p2 + shared_scale

@@ -10,3 +10,6 @@
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Visual regression test output (regenerated on demand)
+tests/visual/new/*.png

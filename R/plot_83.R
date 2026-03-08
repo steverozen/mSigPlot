@@ -254,6 +254,11 @@ plot_83 <- function(
         b <- scales::extended_breaks()(c(0, ymax))
         b[b >= 0]
       },
+      labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
+        scales::label_number(accuracy = 1)
+      } else {
+        ggplot2::waiver()
+      },
       expand = c(0, 0)
     ) +
     coord_cartesian(ylim = c(-ymax * 0.3, ymax * 1.35), clip = "off") +

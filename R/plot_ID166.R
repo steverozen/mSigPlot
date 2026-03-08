@@ -212,7 +212,13 @@ plot_ID166 <- function(
   p <- ggplot(df, aes(x = x, y = value)) +
     scale_x_continuous(limits = c(0, 167), expand = c(0, 0)) +
     scale_y_continuous(limits = c(0, ymax * 0.9), expand = c(0, 0),
-                       oob = scales::oob_keep) +
+                       oob = scales::oob_keep,
+                       labels = if (grepl("count", ylabel, ignore.case = TRUE) &&
+                                    !grepl("proportion", ylabel, ignore.case = TRUE)) {
+                         scales::label_number(accuracy = 1)
+                       } else {
+                         ggplot2::waiver()
+                       }) +
     coord_cartesian(
       ylim = c(
         if (xlabels) -ymax * 0.3 else 0,

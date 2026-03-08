@@ -573,9 +573,11 @@ plot_89 <- function(
           )
         }
       ),
-      labels = scales::number_format(
-        accuracy = if (ylabel == "Counts") 1 else 0.01
-      ),
+      labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
+        scales::label_number(accuracy = 1)
+      } else {
+        ggplot2::waiver()
+      },
       expand = c(0, 0)
     ) +
     ggplot2::theme_classic(base_size = base_size) +

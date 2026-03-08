@@ -158,7 +158,12 @@ plot_SBS192 <- function(
     scale_y_continuous(
       limits = c(0, ymax),
       expand = c(0, 0),
-      oob = scales::oob_keep
+      oob = scales::oob_keep,
+      labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
+        scales::label_number(accuracy = 1)
+      } else {
+        ggplot2::waiver()
+      }
     ) +
     coord_cartesian(
       ylim = c(
