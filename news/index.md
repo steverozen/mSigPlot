@@ -1,5 +1,10 @@
 # Changelog
 
+## mSigPlot 1.0.1
+
+- Adjusted ggrepel arrow heads in plot_476 etc.
+- More testing infrastructure
+
 ## mSigPlot 1.0.0
 
 - Initial release.
