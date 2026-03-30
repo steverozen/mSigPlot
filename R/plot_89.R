@@ -560,7 +560,7 @@ plot_89 <- function(
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
     ggplot2::scale_y_continuous(
       limits = c(
-        0,
+        min(0, min(muts_basis_melt$freq) * 1.05),
         if (show_top_bar && show_extra_top_bar) {
           ifelse(!is.null(setyaxis), setyaxis * 1.32, unique(blocks3$ymax))
         } else if (show_top_bar) {

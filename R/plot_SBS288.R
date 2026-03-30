@@ -43,8 +43,9 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   cat_u <- make_sub(u_idx)
   cat_n <- make_sub(n_idx)
 
-  # Shared y-axis max across all 3 panels
+  # Shared y-axis range across all 3 panels
   global_max <- max(cat_t[, 1], cat_u[, 1], cat_n[, 1]) * 1.1
+  global_min <- min(0, min(cat_t[, 1], cat_u[, 1], cat_n[, 1]))
 
   # Top panel: upper bars, no x-labels
   # Middle panel: no upper bars, no x-labels
@@ -62,11 +63,11 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   # Force identical y-axis breaks across all panels (ggplot2 auto-selects
 
   # different breaks when panels have different physical heights)
-  shared_breaks <- pretty(c(0, global_max), n = 4)
+  shared_breaks <- pretty(c(global_min, global_max), n = 4)
   is_counts <- sum(catalog[, 1], na.rm = TRUE) > 1.1
   shared_scale <- scale_y_continuous(
     breaks = shared_breaks,
-    limits = c(0, global_max),
+    limits = c(min(0, global_min * 1.05), global_max),
     expand = c(0, 0),
     oob = scales::oob_keep,
     labels = if (is_counts) scales::label_number(accuracy = 1) else ggplot2::waiver()

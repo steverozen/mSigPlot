@@ -106,6 +106,7 @@ plot_ID166 <- function(
   if (!is.null(ylim)) {
     ymax <- ylim[2]
   }
+  ymin <- min(0, min(df$value))
 
   # Class boundaries on the 166-bar scale
   class_ends_83 <- cumsum(class_sizes)
@@ -211,7 +212,7 @@ plot_ID166 <- function(
   # Build plot
   p <- ggplot(df, aes(x = x, y = value)) +
     scale_x_continuous(limits = c(0, 167), expand = c(0, 0)) +
-    scale_y_continuous(limits = c(0, ymax * 0.9), expand = c(0, 0),
+    scale_y_continuous(limits = c(min(0, ymin * 1.05), ymax * 0.9), expand = c(0, 0),
                        oob = scales::oob_keep,
                        labels = if (grepl("count", ylabel, ignore.case = TRUE) &&
                                     !grepl("proportion", ylabel, ignore.case = TRUE)) {
@@ -221,7 +222,7 @@ plot_ID166 <- function(
                        }) +
     coord_cartesian(
       ylim = c(
-        if (xlabels) -ymax * 0.3 else 0,
+        min(if (xlabels) -ymax * 0.3 else 0, ymin * 1.05),
         ymax * (if (upper) 1.35 else 1.05)
       ),
       clip = "off"

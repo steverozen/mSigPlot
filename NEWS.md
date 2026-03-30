@@ -1,3 +1,10 @@
+# mSigPlot 1.0.2
+
+* All bar-chart plot functions now support negative values (e.g. for
+  plotting signature differences). Affected functions: `plot_SBS96`,
+  `plot_SBS192`, `plot_SBS12`, `plot_SBS288`, `plot_DBS78`, `plot_DBS144`,
+  `plot_83`, `plot_89`, `plot_476`, `plot_ID166`.
+
 # mSigPlot 1.0.1
 
 * Adjusted ggrepel arrow heads in plot_476 etc.

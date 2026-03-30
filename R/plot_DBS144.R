@@ -81,6 +81,7 @@ plot_DBS144 <- function(
   if (!is.null(ylim)) {
     ymax <- ylim[2]
   }
+  ymin <- min(0, min(counts_strand))
 
   # Build data frame
   df <- data.frame(
@@ -101,7 +102,7 @@ plot_DBS144 <- function(
       expand = c(0, 0)
     ) +
     scale_y_continuous(
-      limits = c(0, ymax),
+      limits = c(min(0, ymin * 1.05), ymax),
       expand = c(0, 0),
       oob = scales::oob_keep,
       labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
@@ -111,7 +112,7 @@ plot_DBS144 <- function(
       }
     ) +
     coord_cartesian(
-      ylim = c(-ymax * 0.05, ymax * 1.1),
+      ylim = c(min(-ymax * 0.05, ymin * 1.05), ymax * 1.1),
       clip = "off"
     ) +
     theme_classic(base_size = base_size) +

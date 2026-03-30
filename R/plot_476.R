@@ -381,7 +381,7 @@ plot_476 <- function(
     ) +
     ggplot2::ggtitle(plot_title) +
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
-    ggplot2::coord_cartesian(ylim = c(0, max(blocks$ymax)), clip = "off") +
+    ggplot2::coord_cartesian(ylim = c(min(0, min(muts_basis_melt$freq) * 1.05), max(blocks$ymax)), clip = "off") +
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(

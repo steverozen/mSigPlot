@@ -114,6 +114,7 @@ plot_83 <- function(
   if (!is.null(ylim)) {
     ymax <- ylim[2]
   }
+  ymin <- min(0, min(df$value))
 
   # Class boundaries (cumulative)
   class_ends <- cumsum(class_sizes)
@@ -249,7 +250,7 @@ plot_83 <- function(
       expand = c(0, 0)
     ) +
     scale_y_continuous(
-      limits = c(-ymax * 0.3, ymax * 1.35),
+      limits = c(min(-ymax * 0.3, ymin * 1.05), ymax * 1.35),
       breaks = function(x) {
         b <- scales::extended_breaks()(c(0, ymax))
         b[b >= 0]
@@ -261,7 +262,7 @@ plot_83 <- function(
       },
       expand = c(0, 0)
     ) +
-    coord_cartesian(ylim = c(-ymax * 0.3, ymax * 1.35), clip = "off") +
+    coord_cartesian(ylim = c(min(-ymax * 0.3, ymin * 1.05), ymax * 1.35), clip = "off") +
     theme_classic(base_size = base_size) +
     theme(
       axis.line.x = element_blank(),

@@ -94,6 +94,7 @@ plot_DBS78 <- function(
   if (!is.null(ylim)) {
     ymax <- ylim[2]
   }
+  ymin <- min(0, min(df$value))
 
   # Class boundaries
   class_ends <- cumsum(class_sizes)
@@ -145,7 +146,7 @@ plot_DBS78 <- function(
       expand = c(0, 0)
     ) +
     scale_y_continuous(
-      limits = c(0, ymax),
+      limits = c(min(0, ymin * 1.05), ymax),
       expand = c(0, 0),
       oob = scales::oob_keep,
       labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
@@ -156,7 +157,7 @@ plot_DBS78 <- function(
     ) +
     coord_cartesian(
       ylim = c(
-        if (xlabels) -ymax * 0.15 else 0,
+        min(if (xlabels) -ymax * 0.15 else 0, ymin * 1.05),
         ymax * (if (upper) 1.2 else 1.05)
       ),
       clip = "off"

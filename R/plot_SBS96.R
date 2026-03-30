@@ -115,6 +115,7 @@ plot_SBS96 <- function(
   if (!is.null(ylim)) {
     ymax <- ylim[2]
   }
+  ymin <- min(0, min(df$value))
 
   # Class boundaries
   class_starts <- seq(1, 81, by = 16)
@@ -165,7 +166,7 @@ plot_SBS96 <- function(
       expand = c(0, 0)
     ) +
     scale_y_continuous(
-      limits = c(0, ymax),
+      limits = c(min(0, ymin * 1.05), ymax),
       expand = c(0, 0),
       oob = scales::oob_keep,
       labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
@@ -176,7 +177,7 @@ plot_SBS96 <- function(
     ) +
     coord_cartesian(
       ylim = c(
-        if (xlabels) -ymax * 0.35 else 0,
+        min(if (xlabels) -ymax * 0.35 else 0, ymin * 1.05),
         ymax * (if (upper) 1.2 else 1.05)
       ),
       clip = "off"
