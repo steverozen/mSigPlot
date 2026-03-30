@@ -357,7 +357,7 @@ plot_476_right <- function(
     ) +
     ggplot2::scale_y_continuous(
       expand = expansion(mult = c(0.03, 0)), # No padding at bottom, 5% at top
-      labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
+      labels = if (ylabel == "Count") {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()

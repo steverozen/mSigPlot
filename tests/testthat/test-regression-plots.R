@@ -92,6 +92,16 @@ test_that("plot_SBS96 regression", {
   check_regression(hash, "plot_SBS96")
 })
 
+test_that("plot_SBS96 works with a signature (proportions summing to ~1)", {
+  catalog <- load_icams_catalog("regress.cat.sbs.96.csv", "SBS96")
+  catalog[, 1] <- catalog[, 1] / sum(catalog[, 1])
+  p <- plot_SBS96(catalog, plot_title = "SBS96 signature")
+  expect_s3_class(p, "ggplot")
+  pb <- ggplot2::ggplot_build(p)
+  # Y-axis label should be proportion-related, not "counts"
+  expect_match(p$labels$y, "proportion", ignore.case = TRUE)
+})
+
 test_that("plot_SBS192 regression", {
   skip_if_no_pixi()
   catalog <- load_icams_catalog("regress.cat.sbs.192.csv", "SBS192")

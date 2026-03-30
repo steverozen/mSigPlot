@@ -214,8 +214,7 @@ plot_ID166 <- function(
     scale_x_continuous(limits = c(0, 167), expand = c(0, 0)) +
     scale_y_continuous(limits = c(min(0, ymin * 1.05), ymax * 0.9), expand = c(0, 0),
                        oob = scales::oob_keep,
-                       labels = if (grepl("count", ylabel, ignore.case = TRUE) &&
-                                    !grepl("proportion", ylabel, ignore.case = TRUE)) {
+                       labels = if (ylabel == "counts") {
                          scales::label_number(accuracy = 1)
                        } else {
                          ggplot2::waiver()

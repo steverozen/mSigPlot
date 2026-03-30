@@ -255,7 +255,7 @@ plot_83 <- function(
         b <- scales::extended_breaks()(c(0, ymax))
         b[b >= 0]
       },
-      labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
+      labels = if (ylabel == "counts") {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()

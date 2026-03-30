@@ -573,7 +573,7 @@ plot_89 <- function(
           )
         }
       ),
-      labels = if (grepl("count", ylabel, ignore.case = TRUE)) {
+      labels = if (identical(ylabel, "Counts")) {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()
