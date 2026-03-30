@@ -32,3 +32,24 @@ plot_SBS288(catalog, plot_title = NULL, ...)
 ## Value
 
 A `patchwork` object (printable and compatible with `ggsave()`).
+
+## Examples
+
+``` r
+set.seed(1)
+sbs96_names <- catalog_row_order()$SBS96
+rnames <- c(paste0("T:", sbs96_names),
+            paste0("U:", sbs96_names),
+            paste0("N:", sbs96_names))
+sig <- runif(288)
+sig <- sig / sum(sig)
+names(sig) <- rnames
+plot_SBS288(sig, plot_title = "Example SBS288")
+#> Scale for y is already present.
+#> Adding another scale for y, which will replace the existing scale.
+#> Scale for y is already present.
+#> Adding another scale for y, which will replace the existing scale.
+#> Scale for y is already present.
+#> Adding another scale for y, which will replace the existing scale.
+
+```

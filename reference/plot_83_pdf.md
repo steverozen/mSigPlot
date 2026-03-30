@@ -105,3 +105,13 @@ plot_83_pdf(
 ## Value
 
 Invisibly returns `NULL`. Called for side effect of creating PDF file.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(83 * 3), nrow = 83)
+rownames(sig) <- catalog_row_order()$ID
+plot_83_pdf(sig, filename = "id83.pdf")
+} # }
+```

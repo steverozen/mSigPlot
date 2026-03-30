@@ -45,3 +45,13 @@ plot_DBS136_pdf(
 ## Value
 
 Invisibly returns `NULL`.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(136 * 2), nrow = 136)
+rownames(sig) <- catalog_row_order()$DBS136
+plot_DBS136_pdf(sig, filename = "dbs136.pdf")
+} # }
+```

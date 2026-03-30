@@ -90,3 +90,13 @@ plot_SBS192_pdf(
 ## Value
 
 Invisibly returns `NULL`.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(192 * 3), nrow = 192)
+rownames(sig) <- catalog_row_order()$SBS192
+plot_SBS192_pdf(sig, filename = "sbs192.pdf")
+} # }
+```

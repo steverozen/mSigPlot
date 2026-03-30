@@ -100,3 +100,13 @@ plot_ID166_pdf(
 ## Value
 
 Invisibly returns `NULL`.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(166 * 3), nrow = 166)
+rownames(sig) <- catalog_row_order()$ID166
+plot_ID166_pdf(sig, filename = "id166.pdf")
+} # }
+```

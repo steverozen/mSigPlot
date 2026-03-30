@@ -94,3 +94,15 @@ plot_SBS96(
 ## Value
 
 A ggplot object.
+
+## Examples
+
+``` r
+# Plot a random SBS96 signature (proportions summing to 1)
+set.seed(1)
+sig <- runif(96)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS96
+plot_SBS96(sig, plot_title = "Example SBS96 signature")
+
+```

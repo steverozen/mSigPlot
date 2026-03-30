@@ -162,3 +162,14 @@ plot_476(
 ## Value
 
 A ggplot2 object containing the 476-channel indel profile plot.
+
+## Examples
+
+``` r
+set.seed(1)
+sig <- runif(476)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$ID476
+plot_476(sig, plot_title = "Example ID476 signature")
+
+```

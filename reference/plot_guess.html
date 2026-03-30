@@ -9,7 +9,7 @@ of rows in the catalog."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,13 +84,13 @@ function is used:</p><ul><li><p>1536 rows: calls <code><a href="plot_SBS1536.htm
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Automatically detect and plot a 476-channel catalog</span></span></span>
-<span class="r-in"><span><span class="fu">plot_guess</span><span class="op">(</span><span class="va">my_catalog_476</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Automatically detect and plot an 89-channel catalog</span></span></span>
-<span class="r-in"><span><span class="fu">plot_guess</span><span class="op">(</span><span class="va">my_catalog_89</span>, title <span class="op">=</span> <span class="st">"Sample Signature"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Auto-detect a 96-channel catalog and dispatch to plot_SBS96</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">96</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="va">sig</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS96</span></span></span>
+<span class="r-in"><span><span class="fu">plot_guess</span><span class="op">(</span><span class="va">sig</span>, plot_title <span class="op">=</span> <span class="st">"Auto-detected SBS96"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_guess-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

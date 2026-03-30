@@ -148,3 +148,13 @@ plot_476_pdf(
 ## Value
 
 NULL. Called for side effect of creating a PDF file.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(476 * 3), nrow = 476)
+rownames(sig) <- catalog_row_order()$ID476
+plot_476_pdf(sig, filename = "id476.pdf")
+} # }
+```

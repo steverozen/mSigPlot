@@ -72,3 +72,15 @@ plot_SBS12(
 A ggplot object. If a binomial test was performed, the object has an
 attribute `"strand.bias.statistics"` containing a data frame of
 transcribed/untranscribed counts and q-values.
+
+## Examples
+
+``` r
+# plot_SBS12 takes a 192-channel catalog and collapses to 12 bars
+set.seed(1)
+sig <- runif(192)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS192
+plot_SBS12(sig, plot_title = "Example SBS12 strand bias")
+
+```

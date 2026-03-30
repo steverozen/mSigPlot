@@ -92,3 +92,14 @@ plot_SBS192(
 ## Value
 
 A ggplot object.
+
+## Examples
+
+``` r
+set.seed(1)
+sig <- runif(192)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS192
+plot_SBS192(sig, plot_title = "Example SBS192 signature")
+
+```

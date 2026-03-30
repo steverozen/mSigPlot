@@ -11,7 +11,7 @@ Cairo for high-quality PDF rendering."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,6 +152,16 @@ mutation count labels. If <code>FALSE</code>, never display them. If <code>NULL<
     <p>Invisibly returns <code>NULL</code>. Called for side effect of creating PDF file.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">83</span> <span class="op">*</span> <span class="fl">3</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">83</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">ID</span></span></span>
+<span class="r-in"><span><span class="fu">plot_83_pdf</span><span class="op">(</span><span class="va">sig</span>, filename <span class="op">=</span> <span class="st">"id83.pdf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

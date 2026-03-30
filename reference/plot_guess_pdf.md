@@ -46,3 +46,14 @@ NULL. Called for side effect of creating a PDF file.
 [`plot_ID166_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_ID166_pdf.md),
 [`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_476_pdf.md),
 [`plot_89_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_89_pdf.md)
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(96 * 3), nrow = 96)
+rownames(sig) <- catalog_row_order()$SBS96
+colnames(sig) <- paste0("Sig", 1:3)
+plot_guess_pdf(sig, filename = "auto_detected.pdf")
+} # }
+```

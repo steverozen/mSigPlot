@@ -83,3 +83,12 @@ plot_89_pdf(
 ## Value
 
 NULL. Called for side effect of creating a PDF file.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(89 * 3), nrow = 89)
+plot_89_pdf(sig, filename = "id89.pdf")
+} # }
+```

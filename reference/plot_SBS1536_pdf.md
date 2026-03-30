@@ -45,3 +45,13 @@ plot_SBS1536_pdf(
 ## Value
 
 Invisibly returns `NULL`.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+sig <- matrix(runif(1536 * 2), nrow = 1536)
+rownames(sig) <- catalog_row_order()$SBS1536
+plot_SBS1536_pdf(sig, filename = "sbs1536.pdf")
+} # }
+```

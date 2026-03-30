@@ -105,4 +105,15 @@ plot_83(
 
 ## Value
 
-A ggplot object
+A ggplot object.
+
+## Examples
+
+``` r
+set.seed(1)
+sig <- runif(83)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$ID
+plot_83(sig, plot_title = "Example ID83 signature")
+
+```

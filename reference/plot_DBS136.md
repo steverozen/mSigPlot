@@ -48,3 +48,14 @@ plot_DBS136(
 ## Value
 
 A ggplot object (assembled via gridExtra).
+
+## Examples
+
+``` r
+set.seed(1)
+sig <- runif(136)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$DBS136
+plot_DBS136(sig, plot_title = "Example DBS136 heatmap")
+
+```

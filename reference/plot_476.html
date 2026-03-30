@@ -13,7 +13,7 @@ annotations. Includes smart peak labeling using ggrepel."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -210,6 +210,17 @@ fraction of <code>base_size</code>.</p></dd>
     <p>A ggplot2 object containing the 476-channel indel profile plot.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">476</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="va">sig</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">ID476</span></span></span>
+<span class="r-in"><span><span class="fu">plot_476</span><span class="op">(</span><span class="va">sig</span>, plot_title <span class="op">=</span> <span class="st">"Example ID476 signature"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_476-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
