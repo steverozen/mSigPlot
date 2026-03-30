@@ -234,7 +234,7 @@ plot_SBS192 <- function(
     pair_names <- reorder[seq(1, 191, by = 2)]
 
     # Extract 3' base (position 1), ref (position 2?), and labels
-    # In the ICAMS SBS192 encoding: position 1 = 5' base, 2 = ref, 3 = 3' base, 4 = alt
+    # In the SBS192 encoding: position 1 = 5' base, 2 = ref, 3 = 3' base, 4 = alt
     # But for SBS192, the first 96 entries are transcribed strand
     # The labels show: line 1 = 3' base, line 2 = ref, line 3 = 5' base
     label_3prime <- c("A", "C", "G", "T")

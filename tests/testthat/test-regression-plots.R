@@ -12,7 +12,7 @@
 
 # -- Helpers ------------------------------------------------------------------
 
-load_icams_catalog <- function(filename, type) {
+load_fixture_catalog <- function(filename, type) {
   df <- read.csv(test_path("fixtures", filename))
   orders <- catalog_row_order()
 
@@ -86,14 +86,14 @@ check_regression <- function(hash, name) {
 
 test_that("plot_SBS96 regression", {
   skip_if_no_pixi()
-  catalog <- load_icams_catalog("regress.cat.sbs.96.csv", "SBS96")
+  catalog <- load_fixture_catalog("regress.cat.sbs.96.csv", "SBS96")
   p <- plot_SBS96(catalog)
   hash <- render_and_hash(p, "plot_SBS96")
   check_regression(hash, "plot_SBS96")
 })
 
 test_that("plot_SBS96 works with a signature (proportions summing to ~1)", {
-  catalog <- load_icams_catalog("regress.cat.sbs.96.csv", "SBS96")
+  catalog <- load_fixture_catalog("regress.cat.sbs.96.csv", "SBS96")
   catalog[, 1] <- catalog[, 1] / sum(catalog[, 1])
   p <- plot_SBS96(catalog, plot_title = "SBS96 signature")
   expect_s3_class(p, "ggplot")
@@ -104,7 +104,7 @@ test_that("plot_SBS96 works with a signature (proportions summing to ~1)", {
 
 test_that("plot_SBS192 regression", {
   skip_if_no_pixi()
-  catalog <- load_icams_catalog("regress.cat.sbs.192.csv", "SBS192")
+  catalog <- load_fixture_catalog("regress.cat.sbs.192.csv", "SBS192")
   p <- plot_SBS192(catalog)
   hash <- render_and_hash(p, "plot_SBS192")
   check_regression(hash, "plot_SBS192")
@@ -112,7 +112,7 @@ test_that("plot_SBS192 regression", {
 
 test_that("plot_SBS12 regression", {
   skip_if_no_pixi()
-  catalog <- load_icams_catalog("regress.cat.sbs.192.csv", "SBS192")
+  catalog <- load_fixture_catalog("regress.cat.sbs.192.csv", "SBS192")
   p <- plot_SBS12(catalog)
   hash <- render_and_hash(p, "plot_SBS12")
   check_regression(hash, "plot_SBS12")
@@ -120,7 +120,7 @@ test_that("plot_SBS12 regression", {
 
 test_that("plot_DBS78 regression", {
   skip_if_no_pixi()
-  catalog <- load_icams_catalog("regress.cat.dbs.78.csv", "DBS78")
+  catalog <- load_fixture_catalog("regress.cat.dbs.78.csv", "DBS78")
   p <- plot_DBS78(catalog)
   hash <- render_and_hash(p, "plot_DBS78")
   check_regression(hash, "plot_DBS78")
@@ -128,7 +128,7 @@ test_that("plot_DBS78 regression", {
 
 test_that("plot_DBS144 regression", {
   skip_if_no_pixi()
-  catalog <- load_icams_catalog("regress.cat.dbs.144.csv", "DBS144")
+  catalog <- load_fixture_catalog("regress.cat.dbs.144.csv", "DBS144")
   p <- plot_DBS144(catalog)
   hash <- render_and_hash(p, "plot_DBS144")
   check_regression(hash, "plot_DBS144")

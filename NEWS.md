@@ -1,3 +1,7 @@
+# mSigPlot 1.0.4
+
+* Removed all references to ICAMS package from source and tests.
+
 # mSigPlot 1.0.3
 
 * Fixed y-axis tick labels showing integers instead of decimals for

@@ -163,7 +163,7 @@ plot_DBS136 <- function(
   # Row 1: panels 7,8,9,10 (TA, TC, TG, TT)
   # Row 2: panels 4,5,6,maxima (CC, CG, CT, maxima)
   # Row 3: panels 1,2,3,maxima (AC, AT, GC, maxima)
-  # Following ICAMS layout
+  # Following standard DBS136 heatmap layout
   all_panels <- c(panel_list, list(maxima_panel))
 
   title_grob <- grid::textGrob(
