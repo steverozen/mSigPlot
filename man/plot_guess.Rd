@@ -33,13 +33,12 @@ Automatically selects the appropriate plotting function based on the number
 of rows in the catalog.
 }
 \examples{
-\dontrun{
-# Automatically detect and plot a 476-channel catalog
-plot_guess(my_catalog_476)
-
-# Automatically detect and plot an 89-channel catalog
-plot_guess(my_catalog_89, title = "Sample Signature")
-}
+# Auto-detect a 96-channel catalog and dispatch to plot_SBS96
+set.seed(1)
+sig <- runif(96)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS96
+plot_guess(sig, plot_title = "Auto-detected SBS96")
 
 }
 \seealso{

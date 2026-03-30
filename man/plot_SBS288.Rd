@@ -25,3 +25,15 @@ Row name format: \verb{T:A[C>A]T}, \verb{U:A[C>A]T}, \verb{N:A[C>A]T} where \ver
 template (transcribed), \verb{U:} is non-template (untranscribed), and \verb{N:} is
 not-transcribed (intergenic).
 }
+\examples{
+set.seed(1)
+sbs96_names <- catalog_row_order()$SBS96
+rnames <- c(paste0("T:", sbs96_names),
+            paste0("U:", sbs96_names),
+            paste0("N:", sbs96_names))
+sig <- runif(288)
+sig <- sig / sum(sig)
+names(sig) <- rnames
+plot_SBS288(sig, plot_title = "Example SBS288")
+
+}

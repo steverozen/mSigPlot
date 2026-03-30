@@ -66,3 +66,11 @@ Invisibly returns \code{NULL}.
 Creates a multi-page PDF file containing ID166 paired barplots for
 multiple samples. Plots are arranged with 5 samples per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(166 * 3), nrow = 166)
+rownames(sig) <- catalog_row_order()$ID166
+plot_ID166_pdf(sig, filename = "id166.pdf")
+}
+
+}

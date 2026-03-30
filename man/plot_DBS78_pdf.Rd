@@ -60,3 +60,11 @@ Invisibly returns \code{NULL}.
 Creates a multi-page PDF file containing DBS78 profile plots for multiple
 samples. Plots are arranged with 5 samples per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(78 * 3), nrow = 78)
+rownames(sig) <- catalog_row_order()$DBS78
+plot_DBS78_pdf(sig, filename = "dbs78.pdf")
+}
+
+}

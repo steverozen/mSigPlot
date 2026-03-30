@@ -12,6 +12,13 @@
 #'
 #' @return Invisibly returns `NULL`.
 #'
+#' @examples
+#' \dontrun{
+#' sig <- matrix(runif(136 * 2), nrow = 136)
+#' rownames(sig) <- catalog_row_order()$DBS136
+#' plot_DBS136_pdf(sig, filename = "dbs136.pdf")
+#' }
+#'
 #' @export
 #'
 #' @importFrom Cairo CairoPDF

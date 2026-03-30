@@ -42,3 +42,11 @@ Invisibly returns \code{NULL}.
 Creates a multi-page PDF file containing DBS144 strand bias plots for
 multiple samples. Plots are arranged with 5 samples per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(144 * 3), nrow = 144)
+rownames(sig) <- catalog_row_order()$DBS144
+plot_DBS144_pdf(sig, filename = "dbs144.pdf")
+}
+
+}

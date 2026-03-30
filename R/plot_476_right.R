@@ -50,6 +50,13 @@
 #' @return A ggplot2 object containing the right portion of the 476-channel
 #'   indel profile plot.
 #'
+#' @examples
+#' set.seed(1)
+#' sig <- runif(476)
+#' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$ID476
+#' plot_476_right(sig, plot_title = "Example ID476 right panel")
+#'
 #' @export
 #'
 #' @import ggplot2 reshape2 dplyr ggrepel

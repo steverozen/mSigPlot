@@ -62,3 +62,11 @@ Creates a 192-bar chart showing single base substitutions on transcribed
 and untranscribed strands. Bars are paired (transcribed/untranscribed)
 side-by-side, with 6 colored class backgrounds.
 }
+\examples{
+set.seed(1)
+sig <- runif(192)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS192
+plot_SBS192(sig, plot_title = "Example SBS192 signature")
+
+}

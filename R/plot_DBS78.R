@@ -23,6 +23,13 @@
 #'
 #' @return A ggplot object.
 #'
+#' @examples
+#' set.seed(1)
+#' sig <- runif(78)
+#' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$DBS78
+#' plot_DBS78(sig, plot_title = "Example DBS78 signature")
+#'
 #' @export
 #'
 #' @import ggplot2 dplyr

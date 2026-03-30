@@ -60,3 +60,13 @@ Invisibly returns \code{NULL}. Called for side effect of creating PDF file.
 Creates a multi-page PDF file containing SBS96 profile plots for multiple
 samples. Plots are arranged with 5 samples per page.
 }
+\examples{
+\dontrun{
+# Create a multi-column catalog and export to PDF
+sig <- matrix(runif(96 * 3), nrow = 96)
+rownames(sig) <- catalog_row_order()$SBS96
+colnames(sig) <- paste0("Sample", 1:3)
+plot_SBS96_pdf(sig, filename = "sbs96_signatures.pdf")
+}
+
+}

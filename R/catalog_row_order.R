@@ -7,6 +7,11 @@
 #' @return A named list with elements: SBS96, SBS192, SBS1536, DBS78,
 #'   DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
 #'
+#' @examples
+#' cro <- catalog_row_order()
+#' head(cro$SBS96)
+#' length(cro$DBS78)
+#'
 #' @export
 catalog_row_order <- function() {
   list(

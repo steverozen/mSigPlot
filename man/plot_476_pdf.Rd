@@ -102,3 +102,11 @@ Creates a multi-page PDF file containing 476-channel indel profile plots
 for multiple samples. Plots are arranged with 5 samples per page. Uses
 Cairo for high-quality PDF rendering.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(476 * 3), nrow = 476)
+rownames(sig) <- catalog_row_order()$ID476
+plot_476_pdf(sig, filename = "id476.pdf")
+}
+
+}

@@ -70,8 +70,16 @@ mutation count labels. If \code{FALSE}, never display them. If \code{NULL}
 (sum > 1.1).}
 }
 \value{
-A ggplot object
+A ggplot object.
 }
 \description{
 Plot 83-type indel catalog using ggplot2 and return the ggplot object
+}
+\examples{
+set.seed(1)
+sig <- runif(83)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$ID
+plot_83(sig, plot_title = "Example ID83 signature")
+
 }

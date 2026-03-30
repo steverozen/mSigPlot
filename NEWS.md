@@ -1,6 +1,9 @@
-# mSigPlot 1.0.4
+# mSigPlot 1.0.5
 
+* Added runnable `@examples` to all exported functions for CRAN compliance.
+* Added `.claude-trace` and `tests/visual` to `.Rbuildignore`.
 * Removed all references to ICAMS package from source and tests.
+* `R CMD check` passes with 0 errors, 0 warnings, 0 notes.
 
 # mSigPlot 1.0.3
 

@@ -74,3 +74,11 @@ Creates a multi-page PDF file containing 83-channel indel profile plots
 for multiple samples. Plots are arranged with 5 samples per page. Uses
 Cairo for high-quality PDF rendering.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(83 * 3), nrow = 83)
+rownames(sig) <- catalog_row_order()$ID
+plot_83_pdf(sig, filename = "id83.pdf")
+}
+
+}

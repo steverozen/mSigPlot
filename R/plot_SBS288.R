@@ -14,6 +14,17 @@
 #'
 #' @return A `patchwork` object (printable and compatible with `ggsave()`).
 #'
+#' @examples
+#' set.seed(1)
+#' sbs96_names <- catalog_row_order()$SBS96
+#' rnames <- c(paste0("T:", sbs96_names),
+#'             paste0("U:", sbs96_names),
+#'             paste0("N:", sbs96_names))
+#' sig <- runif(288)
+#' sig <- sig / sum(sig)
+#' names(sig) <- rnames
+#' plot_SBS288(sig, plot_title = "Example SBS288")
+#'
 #' @export
 #'
 #' @import patchwork

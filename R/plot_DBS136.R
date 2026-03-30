@@ -14,6 +14,13 @@
 #'
 #' @return A ggplot object (assembled via gridExtra).
 #'
+#' @examples
+#' set.seed(1)
+#' sig <- runif(136)
+#' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$DBS136
+#' plot_DBS136(sig, plot_title = "Example DBS136 heatmap")
+#'
 #' @export
 #'
 #' @import ggplot2 dplyr

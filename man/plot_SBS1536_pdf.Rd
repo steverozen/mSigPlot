@@ -33,3 +33,11 @@ Invisibly returns \code{NULL}.
 Creates a multi-page PDF file containing SBS1536 heatmap plots, one
 sample per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(1536 * 2), nrow = 1536)
+rownames(sig) <- catalog_row_order()$SBS1536
+plot_SBS1536_pdf(sig, filename = "sbs1536.pdf")
+}
+
+}

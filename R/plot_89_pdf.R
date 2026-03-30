@@ -25,6 +25,12 @@
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
+#' @examples
+#' \dontrun{
+#' sig <- matrix(runif(89 * 3), nrow = 89)
+#' plot_89_pdf(sig, filename = "id89.pdf")
+#' }
+#'
 #' @export
 #'
 #' @import Cairo dplyr

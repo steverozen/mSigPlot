@@ -33,3 +33,11 @@ Invisibly returns \code{NULL}.
 Creates a multi-page PDF file containing DBS136 10-panel heatmap plots,
 one sample per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(136 * 2), nrow = 136)
+rownames(sig) <- catalog_row_order()$DBS136
+plot_DBS136_pdf(sig, filename = "dbs136.pdf")
+}
+
+}

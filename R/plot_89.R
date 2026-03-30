@@ -44,6 +44,12 @@
 #'
 #' @return A ggplot2 object containing the 89-channel indel profile plot.
 #'
+#' @examples
+#' set.seed(1)
+#' sig <- runif(89)
+#' sig <- sig / sum(sig)
+#' plot_89(sig, plot_title = "Example ID89 signature")
+#'
 #' @export
 #'
 #' @import ggplot2 reshape2 dplyr ggrepel

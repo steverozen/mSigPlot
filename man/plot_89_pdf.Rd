@@ -60,3 +60,10 @@ NULL. Called for side effect of creating a PDF file.
 Creates a multi-page PDF file containing 89-channel indel profile plots
 for multiple samples. Plots are arranged with 5 samples per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(89 * 3), nrow = 89)
+plot_89_pdf(sig, filename = "id89.pdf")
+}
+
+}

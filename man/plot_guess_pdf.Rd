@@ -27,6 +27,15 @@ number of rows. Plots are arranged with 5 samples per page (except for
 heatmap types which use 1 per page). Uses Cairo for high-quality PDF
 rendering.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(96 * 3), nrow = 96)
+rownames(sig) <- catalog_row_order()$SBS96
+colnames(sig) <- paste0("Sig", 1:3)
+plot_guess_pdf(sig, filename = "auto_detected.pdf")
+}
+
+}
 \seealso{
 \code{\link[=plot_guess]{plot_guess()}}, \code{\link[=plot_SBS96_pdf]{plot_SBS96_pdf()}}, \code{\link[=plot_SBS192_pdf]{plot_SBS192_pdf()}},
 \code{\link[=plot_SBS1536_pdf]{plot_SBS1536_pdf()}}, \code{\link[=plot_DBS78_pdf]{plot_DBS78_pdf()}}, \code{\link[=plot_DBS136_pdf]{plot_DBS136_pdf()}},

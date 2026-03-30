@@ -17,6 +17,13 @@
 #'
 #' @return A ggplot object.
 #'
+#' @examples
+#' set.seed(1)
+#' sig <- runif(144)
+#' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$DBS144
+#' plot_DBS144(sig, plot_title = "Example DBS144 signature")
+#'
 #' @export
 #'
 #' @import ggplot2 dplyr

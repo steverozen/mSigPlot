@@ -105,3 +105,10 @@ Creates a bar plot visualization of an 89-channel indel mutational signature
 for a single sample. The plot shows mutation counts or proportions across
 all 89 indel categories with color-coded category blocks.
 }
+\examples{
+set.seed(1)
+sig <- runif(89)
+sig <- sig / sum(sig)
+plot_89(sig, plot_title = "Example ID89 signature")
+
+}

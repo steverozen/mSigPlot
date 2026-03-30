@@ -16,6 +16,14 @@
 #'
 #' @return NULL. Called for side effect of creating a PDF file.
 #'
+#' @examples
+#' \dontrun{
+#' sig <- matrix(runif(96 * 3), nrow = 96)
+#' rownames(sig) <- catalog_row_order()$SBS96
+#' colnames(sig) <- paste0("Sig", 1:3)
+#' plot_guess_pdf(sig, filename = "auto_detected.pdf")
+#' }
+#'
 #' @seealso [plot_guess()], [plot_SBS96_pdf()], [plot_SBS192_pdf()],
 #'   [plot_SBS1536_pdf()], [plot_DBS78_pdf()], [plot_DBS136_pdf()],
 #'   [plot_DBS144_pdf()], [plot_ID166_pdf()], [plot_476_pdf()], [plot_89_pdf()]

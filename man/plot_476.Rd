@@ -110,3 +110,11 @@ for a single sample. The plot shows mutation counts or proportions across
 all 476 indel categories with color-coded category blocks and flanking base
 annotations. Includes smart peak labeling using ggrepel.
 }
+\examples{
+set.seed(1)
+sig <- runif(476)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$ID476
+plot_476(sig, plot_title = "Example ID476 signature")
+
+}

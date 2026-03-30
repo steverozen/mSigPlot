@@ -115,3 +115,11 @@ Creates a bar plot visualization of the right 134 channels of a 476-channel
 indel mutational signature. This covers the last 4 category blocks:
 Del(2,):R(1,9), Ins(2,):R(0,9), Del(2,):M(1,), and Complex.
 }
+\examples{
+set.seed(1)
+sig <- runif(476)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$ID476
+plot_476_right(sig, plot_title = "Example ID476 right panel")
+
+}

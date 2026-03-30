@@ -15,3 +15,9 @@ Returns a named list containing the canonical row ordering for each
 catalog type. These are used for validation and ordering of mutation
 catalogs.
 }
+\examples{
+cro <- catalog_row_order()
+head(cro$SBS96)
+length(cro$DBS78)
+
+}

@@ -52,3 +52,12 @@ trinucleotide contexts into 6 mutation classes, each split by
 transcribed/untranscribed strand. Optionally performs a binomial strand
 bias test and annotates significant results with asterisks.
 }
+\examples{
+# plot_SBS12 takes a 192-channel catalog and collapses to 12 bars
+set.seed(1)
+sig <- runif(192)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS192
+plot_SBS12(sig, plot_title = "Example SBS12 strand bias")
+
+}

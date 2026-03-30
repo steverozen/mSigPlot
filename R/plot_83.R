@@ -26,7 +26,15 @@
 #'   mutation count labels. If `FALSE`, never display them. If `NULL`
 #'   (the default), display them only when the catalog contains counts
 #'   (sum > 1.1).
-#' @return A ggplot object
+#' @return A ggplot object.
+#'
+#' @examples
+#' set.seed(1)
+#' sig <- runif(83)
+#' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$ID
+#' plot_83(sig, plot_title = "Example ID83 signature")
+#'
 #' @export
 #'
 #' @import ggplot2 dplyr

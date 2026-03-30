@@ -44,3 +44,11 @@ Creates a 20-bar chart (10 pairs) from a 144-row DBS catalog, collapsing
 by dinucleotide class and splitting by transcribed/untranscribed strand.
 Uses 132 of 144 entries (12 self-complementary types are omitted).
 }
+\examples{
+set.seed(1)
+sig <- runif(144)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$DBS144
+plot_DBS144(sig, plot_title = "Example DBS144 signature")
+
+}

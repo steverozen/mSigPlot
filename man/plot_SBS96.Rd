@@ -64,3 +64,12 @@ Creates a 96-bar chart showing single base substitution counts or
 proportions, organized into 6 mutation classes (C>A, C>G, C>T, T>A, T>C,
 T>G) of 16 bars each.
 }
+\examples{
+# Plot a random SBS96 signature (proportions summing to 1)
+set.seed(1)
+sig <- runif(96)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$SBS96
+plot_SBS96(sig, plot_title = "Example SBS96 signature")
+
+}

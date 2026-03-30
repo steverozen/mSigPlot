@@ -23,6 +23,14 @@
 #'   an attribute `"strand.bias.statistics"` containing a data frame of
 #'   transcribed/untranscribed counts and q-values.
 #'
+#' @examples
+#' # plot_SBS12 takes a 192-channel catalog and collapses to 12 bars
+#' set.seed(1)
+#' sig <- runif(192)
+#' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$SBS192
+#' plot_SBS12(sig, plot_title = "Example SBS12 strand bias")
+#'
 #' @export
 #'
 #' @import ggplot2 dplyr

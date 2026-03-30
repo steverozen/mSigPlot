@@ -35,3 +35,11 @@ Creates 10 small 4x4 heatmaps (one per dinucleotide reference class:
 AC, AT, GC, CC, CG, CT, TA, TC, TG, TT) using \code{geom_tile()} with a
 white-to-forestgreen color gradient. Includes a maxima-per-class summary.
 }
+\examples{
+set.seed(1)
+sig <- runif(136)
+sig <- sig / sum(sig)
+names(sig) <- catalog_row_order()$DBS136
+plot_DBS136(sig, plot_title = "Example DBS136 heatmap")
+
+}

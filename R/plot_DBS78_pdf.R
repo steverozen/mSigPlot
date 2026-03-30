@@ -21,6 +21,13 @@
 #'
 #' @return Invisibly returns `NULL`.
 #'
+#' @examples
+#' \dontrun{
+#' sig <- matrix(runif(78 * 3), nrow = 78)
+#' rownames(sig) <- catalog_row_order()$DBS78
+#' plot_DBS78_pdf(sig, filename = "dbs78.pdf")
+#' }
+#'
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange

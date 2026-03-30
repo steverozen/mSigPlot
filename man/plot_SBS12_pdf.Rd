@@ -46,3 +46,11 @@ Invisibly returns \code{NULL}.
 Creates a multi-page PDF file containing condensed SBS12 strand bias plots
 for multiple samples. Plots are arranged with 5 samples per page.
 }
+\examples{
+\dontrun{
+sig <- matrix(runif(192 * 3), nrow = 192)
+rownames(sig) <- catalog_row_order()$SBS192
+plot_SBS12_pdf(sig, filename = "sbs12.pdf")
+}
+
+}
