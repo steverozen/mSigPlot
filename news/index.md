@@ -1,5 +1,14 @@
 # Changelog
 
+## mSigPlot 1.0.4
+
+- Removed all references to ICAMS package from source and tests.
+
+## mSigPlot 1.0.3
+
+- Fixed y-axis tick labels showing integers instead of decimals for
+  proportion/signature catalogs. Affected all bar-chart plot functions.
+
 ## mSigPlot 1.0.2
 
 - All bar-chart plot functions now support negative values (e.g. for
