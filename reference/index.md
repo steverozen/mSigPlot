@@ -5,8 +5,8 @@
 Auto-detect catalog type by row count and dispatch to the appropriate
 plotting function. Start here if you are unsure which function to use.
 
-- [`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/guess_plots.md)
-  [`plot_guess_pdf()`](https://steverozen.github.io/mSigPlot/reference/guess_plots.md)
+- [`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md)
+  [`plot_guess_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md)
   : plot_guess, plot_guess_pdf
 
 ## SBS (single base substitution)

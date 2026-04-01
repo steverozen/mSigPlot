@@ -265,9 +265,9 @@ classes x 2 strands) to visualize transcription strand bias.</p>
 <h2 id="auto-dispatch-with-plot_guess">Auto-dispatch with plot_guess()<a class="anchor" aria-label="anchor" href="#auto-dispatch-with-plot_guess"></a>
 </h2>
 <p>If you don’t know (or don’t want to specify) the catalog type,
-<code><a href="../reference/guess_plots.html">plot_guess()</a></code> detects it from the number of rows:</p>
+<code><a href="../reference/plot_guess.html">plot_guess()</a></code> detects it from the number of rows:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/guess_plots.html">plot_guess</a></span><span class="op">(</span><span class="va">catalog_sbs96</span>, plot_title <span class="op">=</span> <span class="st">"Auto-detected SBS96"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_guess.html">plot_guess</a></span><span class="op">(</span><span class="va">catalog_sbs96</span>, plot_title <span class="op">=</span> <span class="st">"Auto-detected SBS96"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mSigPlot_files/figure-html/plot-guess-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
 <div class="section level2">
@@ -275,13 +275,13 @@ classes x 2 strands) to visualize transcription strand bias.</p>
 </h2>
 <p>Every plot function has a <code>_pdf()</code> variant that writes a
 multi-page PDF with 5 plots per page. The auto-dispatch version is
-<code><a href="../reference/guess_plots.html">plot_guess_pdf()</a></code>:</p>
+<code><a href="../reference/plot_guess.html">plot_guess_pdf()</a></code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sbs96_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">sbs96_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sbs96_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS96</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sbs96_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/guess_plots.html">plot_guess_pdf</a></span><span class="op">(</span><span class="va">sbs96_mat</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sbs96_samples.pdf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot_guess.html">plot_guess_pdf</a></span><span class="op">(</span><span class="va">sbs96_mat</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sbs96_samples.pdf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

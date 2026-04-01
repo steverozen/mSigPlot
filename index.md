@@ -16,7 +16,7 @@ remotes::install_github("steverozen/mSigPlot")
 
 Every plot function accepts a numeric vector, single-column data.frame,
 matrix, tibble, or data.table. The easiest entry point is
-[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/guess_plots.md),
+[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md),
 which auto-detects the catalog type by row count:
 
 ``` r
