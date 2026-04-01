@@ -1,34 +1,4 @@
-#' Export SBS192 profiles to PDF
-#'
-#' Creates a multi-page PDF file containing full SBS192 profile plots for
-#' multiple samples. Plots are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 192 rows and one column per sample.
-#' @param filename Character. Path to the output PDF file.
-#' @param grid Logical. Draw grid lines.
-#' @param upper Logical. Draw class labels above bars.
-#' @param xlabels Logical. Draw x-axis labels.
-#' @param ylabels Logical. Draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
-#' @param class_label_cex Numeric. Multiplier for class labels.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size. Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. Auto-detect if NULL.
-#'
-#' @return Invisibly returns `NULL`.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(192 * 3), nrow = 192)
-#' rownames(sig) <- catalog_row_order()$SBS192
-#' plot_SBS192_pdf(sig, filename = "sbs192.pdf")
-#' }
-#'
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange
@@ -52,7 +22,9 @@ plot_SBS192_pdf <- function(
   axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
-  stopifnot(nrow(catalog) == 192)
+  if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 192,
+                                catalog_row_order()$SBS192, "SBS192")))
+    stop("Invalid SBS192 catalog")
 
   n_samples <- ncol(catalog)
   plots_per_page <- 5

@@ -1,24 +1,4 @@
-#' Export SBS1536 heatmaps to PDF
-#'
-#' Creates a multi-page PDF file containing SBS1536 heatmap plots, one
-#' sample per page.
-#'
-#' @param catalog A matrix or data frame with 1536 rows and one column per sample.
-#' @param filename Character. Path to the output PDF file.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_text_cex Numeric. Multiplier for axis label size.
-#' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
-#'
-#' @return Invisibly returns `NULL`.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(1536 * 2), nrow = 1536)
-#' rownames(sig) <- catalog_row_order()$SBS1536
-#' plot_SBS1536_pdf(sig, filename = "sbs1536.pdf")
-#' }
-#'
+#' @rdname heatmap_plots
 #' @export
 #'
 #' @importFrom Cairo CairoPDF
@@ -31,7 +11,9 @@ plot_SBS1536_pdf <- function(
   axis_text_cex = 0.8,
   strip_text_cex = 1.0
 ) {
-  stopifnot(nrow(catalog) == 1536)
+  if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 1536,
+                                catalog_row_order()$SBS1536, "SBS1536")))
+    stop("Invalid SBS1536 catalog")
 
   n_samples <- ncol(catalog)
 

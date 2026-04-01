@@ -1,23 +1,4 @@
-#' Plot a DBS144 strand-bias catalog using ggplot2
-#'
-#' Creates a 20-bar chart (10 pairs) from a 144-row DBS catalog, collapsing
-#' by dinucleotide class and splitting by transcribed/untranscribed strand.
-#' Uses 132 of 144 entries (12 self-complementary types are omitted).
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param ylabels Logical, draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size.
-#'   Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#'
-#' @return A ggplot object.
+#' @rdname bar_chart_plots
 #'
 #' @examples
 #' set.seed(1)

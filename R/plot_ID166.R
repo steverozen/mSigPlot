@@ -1,30 +1,4 @@
-#' Plot an ID166 genic/intergenic indel catalog using ggplot2
-#'
-#' Creates a paired barplot showing 83 indel categories split into
-#' genic (black) and intergenic (grey) regions. Rows 1-83 are genic,
-#' rows 84-166 are intergenic.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param grid Logical, draw background color wash and grid lines.
-#' @param upper Logical, draw category labels above bars.
-#' @param xlabels Logical, draw x-axis labels.
-#' @param ylabels Logical, draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
-#' @param block_label_cex Numeric. Multiplier for upper category block labels.
-#' @param class_label_cex Numeric. Multiplier for major class labels.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param bottom_label_cex Numeric. Multiplier for bottom category labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size. Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. Auto-detect if NULL.
-#'
-#' @return A ggplot object.
+#' @rdname bar_chart_plots
 #'
 #' @examples
 #' set.seed(1)

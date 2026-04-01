@@ -1,31 +1,4 @@
-#' Export SBS12 strand bias profiles to PDF
-#'
-#' Creates a multi-page PDF file containing condensed SBS12 strand bias plots
-#' for multiple samples. Plots are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 192 rows and one column per sample.
-#' @param filename Character. Path to the output PDF file.
-#' @param abundance Optional named numeric vector of 64 3-mer counts for
-#'   binomial strand bias testing.
-#' @param ylabels Logical. Draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size.
-#'   Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#'
-#' @return Invisibly returns `NULL`.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(192 * 3), nrow = 192)
-#' rownames(sig) <- catalog_row_order()$SBS192
-#' plot_SBS12_pdf(sig, filename = "sbs12.pdf")
-#' }
-#'
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange
@@ -44,7 +17,9 @@ plot_SBS12_pdf <- function(
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8
 ) {
-  stopifnot(nrow(catalog) == 192)
+  if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 192,
+                                catalog_row_order()$SBS192, "SBS192")))
+    stop("Invalid SBS192 catalog")
 
   n_samples <- ncol(catalog)
   plots_per_page <- 5

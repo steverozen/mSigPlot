@@ -1,36 +1,4 @@
-#' Export 89-channel indel profiles to PDF
-#'
-#' Creates a multi-page PDF file containing 89-channel indel profile plots
-#' for multiple samples. Plots are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 89 rows (indel types) and
-#'   one column per sample. Column names are used as plot titles.
-#' @param text_cex Numeric. Size of text labels in the plot.
-#' @param top_bar_text_cex Numeric. Size of the labels in the colored top bar.
-#' @param title_text_cex Numeric. Size of the plot title text, relative to `base_size`.
-#' @param filename Character. Path to the output PDF file.
-#' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
-#' @param show_top_bar Logical. If `TRUE`, display the category bar above the
-#'   plot.
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   mutation count labels. If `FALSE`, never display them. If `NULL`
-#'   (the default), display them only when the catalog contains counts
-#'   (sum > 1.1).
-#' @param count_label_cex Numeric. Size of per-class count labels, as a
-#'   fraction of `base_size`.
-#' @param text_size Deprecated. Use `text_cex` instead.
-#' @param top_bar_text_size Deprecated. Use `top_bar_text_cex` instead.
-#' @param title_text_size Deprecated. Use `title_text_cex` instead.
-#' @param count_label_size Deprecated. Use `count_label_cex` instead.
-#'
-#' @return NULL. Called for side effect of creating a PDF file.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(89 * 3), nrow = 89)
-#' plot_89_pdf(sig, filename = "id89.pdf")
-#' }
-#'
+#' @rdname legacy_plots
 #' @export
 #'
 #' @import Cairo dplyr

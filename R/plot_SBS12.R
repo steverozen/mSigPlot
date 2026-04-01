@@ -1,32 +1,6 @@
-#' Plot a condensed SBS12 strand bias chart using ggplot2
-#'
-#' Creates a 12-bar chart from a 192-row SBS catalog, collapsing the 96
-#' trinucleotide contexts into 6 mutation classes, each split by
-#' transcribed/untranscribed strand. Optionally performs a binomial strand
-#' bias test and annotates significant results with asterisks.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param abundance Optional named numeric vector of 64 3-mer counts. If
-#'   provided and the catalog is counts, a two-sided binomial test is
-#'   performed for strand bias.
-#' @param ylabels Logical, draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size.
-#'   Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#'
-#' @return A ggplot object. If a binomial test was performed, the object has
-#'   an attribute `"strand.bias.statistics"` containing a data frame of
-#'   transcribed/untranscribed counts and q-values.
+#' @rdname bar_chart_plots
 #'
 #' @examples
-#' # plot_SBS12 takes a 192-channel catalog and collapses to 12 bars
 #' set.seed(1)
 #' sig <- runif(192)
 #' sig <- sig / sum(sig)

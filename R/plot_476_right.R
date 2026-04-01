@@ -1,54 +1,4 @@
-#' Plot right portion of 476-channel indel profile (positions 343-476)
-#'
-#' Creates a bar plot visualization of the right 134 channels of a 476-channel
-#' indel mutational signature. This covers the last 4 category blocks:
-#' Del(2,):R(1,9), Ins(2,):R(0,9), Del(2,):M(1,), and Complex.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table. Only positions 343-476 are plotted.
-#' @param block_text_cex Numeric. Size of category block labels (e.g. "Del >=2bp"),
-#'   as a fraction of `base_size`.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param num_labels Integer. Number of top peaks to label per category block.
-#'   Set to 0 or NULL to disable labels.
-#' @param ggrepel_cex Numeric. Size of ggrepel peak labels, as a fraction of
-#'   `base_size`.
-#' @param label_threshold_denominator Numeric. Peaks with values less than
-#'   max/label_threshold_denominator are not labeled.
-#' @param vline_labels Character vector. IndelType labels at which to draw
-#'   vertical reference lines. Positions are adjusted to the 1-134 coordinate
-#'   space.
-#' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
-#'   the indel type prefix.
-#' @param base_size Base font size for ggplot2's theme. All text sizes scale
-#'   relative to this value.
-#' @param title_text_cex Numeric. Size of the plot title text, relative to `base_size`.
-#' @param x_axis_tick_label_cex Numeric. Size of x-axis tick labels, relative to `base_size`.
-#' @param y_axis_tick_label_cex Numeric. Size of y-axis tick labels, relative to `base_size`.
-#' @param x_title_cex Numeric. Size of x-axis title, relative to `base_size`.
-#' @param y_title_cex Numeric. Size of y-axis title, relative to `base_size`.
-#' @param plot_complex Logical. If TRUE, include the 5 Complex indel channels.
-#' @param show_x_labels Logical. If `TRUE`, display the Figlabel for each
-#'   channel as a rotated x-axis tick label.
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   mutation count labels. If `FALSE`, never display them. If `NULL`
-#'   (the default), display them only when the catalog contains counts
-#'   (sum > 1.1).
-#' @param count_label_cex Numeric. Size of per-class count labels, as a
-#'   fraction of `base_size`.
-#' @param block_text_size Deprecated. Use `block_text_cex` instead.
-#' @param ggrepel_size Deprecated. Use `ggrepel_cex` instead.
-#' @param title_text_size Deprecated. Use `title_text_cex` instead.
-#' @param x_axis_tick_label_size Deprecated. Use `x_axis_tick_label_cex` instead.
-#' @param y_axis_tick_label_size Deprecated. Use `y_axis_tick_label_cex` instead.
-#' @param x_title_size Deprecated. Use `x_title_cex` instead.
-#' @param y_title_size Deprecated. Use `y_title_cex` instead.
-#' @param count_label_size Deprecated. Use `count_label_cex` instead.
-#' @param text_size Deprecated. Use `block_text_cex` instead.
-#' @param label_size Deprecated. Use `ggrepel_cex` instead.
-#'
-#' @return A ggplot2 object containing the right portion of the 476-channel
-#'   indel profile plot.
+#' @rdname legacy_plots
 #'
 #' @examples
 #' set.seed(1)
@@ -60,7 +10,6 @@
 #' @export
 #'
 #' @import ggplot2 reshape2 dplyr ggrepel
-#'
 plot_476_right <- function(
   catalog,
   block_text_cex = 1.0,

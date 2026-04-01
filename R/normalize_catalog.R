@@ -14,8 +14,12 @@
 #'   order.
 #'
 #' @keywords internal
-normalize_catalog <- function(catalog, expected_nrow,
-                              canonical_order = NULL, type_label = "") {
+normalize_catalog <- function(
+  catalog,
+  expected_nrow,
+  canonical_order = NULL,
+  type_label = ""
+) {
   original_attrs <- attributes(catalog)
   catalog_type_attr <- original_attrs$catalog.type
 
@@ -31,7 +35,9 @@ normalize_catalog <- function(catalog, expected_nrow,
   } else if (is.data.frame(catalog)) {
     catalog <- catalog[, 1, drop = FALSE]
   } else {
-    stop("catalog must be a numeric vector, matrix, data.frame, tibble, or data.table")
+    stop(
+      "catalog must be a numeric vector, matrix, data.frame, tibble, or data.table"
+    )
   }
 
   # Preserve catalog.type attribute from original input
@@ -39,7 +45,16 @@ normalize_catalog <- function(catalog, expected_nrow,
     attr(catalog, "catalog.type") <- catalog_type_attr
   }
 
-  stopifnot(nrow(catalog) == expected_nrow)
+  if (nrow(catalog) != expected_nrow) {
+    warning(
+      "Expected ",
+      expected_nrow,
+      " rows but got ",
+      nrow(catalog),
+      " rows; returning NULL"
+    )
+    return(NULL)
+  }
 
   # Validate and reorder row names if canonical_order is provided
   if (!is.null(canonical_order)) {
@@ -51,7 +66,8 @@ normalize_catalog <- function(catalog, expected_nrow,
       if (!setequal(rn, canonical_order)) {
         warning(
           "Row names of catalog do not match canonical ",
-          type_label, " row names; returning NULL"
+          type_label,
+          " row names; returning NULL"
         )
         return(NULL)
       }

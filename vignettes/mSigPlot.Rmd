@@ -32,6 +32,7 @@ library(mSigPlot)
 
 The 96-channel catalog has one row per trinucleotide mutation context,
 organized into 6 mutation classes (C>A, C>G, C>T, T>A, T>C, T>G).
+If row names are present they will be checked agains `catalog_row_order`.
 
 ```{r sbs96}
 sbs96_file <- system.file("extdata", "sbs96_example.csv", package = "mSigPlot")
@@ -42,6 +43,18 @@ catalog_sbs96 <- data.frame(
 )
 plot_SBS96(catalog_sbs96, plot_title = "HepG2 sample -- SBS96")
 ```
+
+Row names (or for a numeric vector, names) are not required.
+
+If there are no names or row names be sure the rows are in
+the order expected for plotting.
+
+```{r sbs96-example3}
+plot_SBS96(sample(sbs96_df[ ,3, drop = TRUE], replace = FALSE), 
+  plot_title = "HepG2 sample, mixed up row order -- SBS96")
+```
+
+The plot above will be unrecognizable.
 
 ## ID83 -- COSMIC indel classification
 

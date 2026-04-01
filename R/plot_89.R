@@ -1,59 +1,15 @@
-#' Plot 89-channel indel profile
-#'
-#' Creates a bar plot visualization of an 89-channel indel mutational signature
-#' for a single sample. The plot shows mutation counts or proportions across
-#' all 89 indel categories with color-coded category blocks.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table.
-#' @param text_cex Numeric. Size of text labels in the plot. Used as default
-#'   for `top_bar_text_cex`.
-#' @param top_bar_text_cex Numeric. Size of labels in the colored top bars
-#'   (both the category bar and the extra summary bar).
-#' @param title_text_cex Numeric. Size of the plot title text, relative to `base_size`.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param setyaxis Numeric or NULL. If provided, sets a fixed y-axis maximum.
-#'   If NULL, y-axis scales automatically to the data.
-#' @param ylabel Character. Label for the y-axis.
-#' @param base_size Base font size for ggplot2's `theme_classic()`.
-#' @param x_axis_tick_label_cex Numeric. Size of x-axis tick labels, relative to `base_size`.
-#' @param y_axis_tick_label_cex Numeric. Size of y-axis tick labels, relative to `base_size`.
-#' @param x_title_cex Numeric. Size of x-axis title, relative to `base_size`.
-#' @param y_title_cex Numeric. Size of y-axis title, relative to `base_size`.
-#' @param show_x_axis_text Logical. If `TRUE`, display x-axis tick labels.
-#' @param show_top_bar Logical. If `TRUE`, display the category bar above the
-#'   plot (e.g., "Del 1bp C", "Ins 1bp T").
-#' @param show_extra_top_bar Logical. If `TRUE`, display the extra summary bar
-#'   above the category bar (e.g., "Del", "Ins"). Only shown if `show_top_bar`
-#'   is also `TRUE`. This is really for backward compatibility.
-#' @param plot_complex Logical. If `TRUE`, include the Complex indel channel.
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   mutation count labels. If `FALSE`, never display them. If `NULL`
-#'   (the default), display them only when the catalog contains counts
-#'   (sum > 1.1).
-#' @param count_label_cex Numeric. Size of per-class count labels, as a
-#'   fraction of `base_size`.
-#' @param text_size Deprecated. Use `text_cex` instead.
-#' @param top_bar_text_size Deprecated. Use `top_bar_text_cex` instead.
-#' @param title_text_size Deprecated. Use `title_text_cex` instead.
-#' @param x_axis_tick_label_size Deprecated. Use `x_axis_tick_label_cex` instead.
-#' @param y_axis_tick_label_size Deprecated. Use `y_axis_tick_label_cex` instead.
-#' @param x_title_size Deprecated. Use `x_title_cex` instead.
-#' @param y_title_size Deprecated. Use `y_title_cex` instead.
-#' @param count_label_size Deprecated. Use `count_label_cex` instead.
-#'
-#' @return A ggplot2 object containing the 89-channel indel profile plot.
+#' @rdname legacy_plots
 #'
 #' @examples
 #' set.seed(1)
 #' sig <- runif(89)
 #' sig <- sig / sum(sig)
+#' names(sig) <- catalog_row_order()$ID89
 #' plot_89(sig, plot_title = "Example ID89 signature")
 #'
 #' @export
 #'
 #' @import ggplot2 reshape2 dplyr ggrepel
-#'
 plot_89 <- function(
   catalog,
   text_cex = 3,

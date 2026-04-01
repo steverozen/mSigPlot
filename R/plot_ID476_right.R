@@ -1,44 +1,4 @@
-#' Plot right portion of 476-channel indel profile (ggplot2-consistent interface)
-#'
-#' Wrapper around [plot_476_right()] using parameter names consistent with
-#' ggplot2 theme element naming conventions.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table with 476 rows. Only positions 343-476 are plotted.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param base_size Base font size for ggplot2's theme.
-#' @param plot_title_cex Numeric. Size of the plot title text, relative to
-#'   `base_size`. Maps to `title_text_cex` in [plot_476_right()].
-#' @param count_label_cex Numeric. Size of per-class count labels, as a
-#'   fraction of `base_size`.
-#' @param class_label_cex Numeric. Size of category block labels. Maps to
-#'   `block_text_cex` in [plot_476_right()].
-#' @param axis_text_x_cex Numeric. Size of x-axis tick labels. Maps to
-#'   `x_axis_tick_label_cex` in [plot_476_right()].
-#' @param axis_title_x_cex Numeric. Size of x-axis title, relative to
-#'   `base_size`. Maps to `x_title_cex` in [plot_476_right()].
-#' @param axis_title_y_cex Numeric. Size of y-axis title, relative to
-#'   `base_size`. Maps to `y_title_cex` in [plot_476_right()].
-#' @param axis_text_y_cex Numeric. Size of y-axis tick labels, relative to
-#'   `base_size`. Maps to `y_axis_tick_label_cex` in [plot_476_right()].
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   mutation count labels. If `FALSE`, never display them. If `NULL`
-#'   (the default), display them only when the catalog contains counts
-#'   (sum > 1.1).
-#' @param num_labels Integer. Number of top peaks to label per category block.
-#' @param ggrepel_cex Numeric. Size of ggrepel peak labels, as a fraction
-#'   of `base_size`.
-#' @param label_threshold_denominator Numeric. Peaks with values less than
-#'   max/label_threshold_denominator are not labeled.
-#' @param vline_labels Character vector. IndelType labels at which to draw
-#'   vertical reference lines.
-#' @param simplify_labels Logical. If TRUE, simplifies peak labels by removing
-#'   the indel type prefix.
-#' @param plot_complex Logical. If `TRUE`, include the 5 Complex indel channels.
-#' @param show_x_labels Logical. If `TRUE`, display the Figlabel for each
-#'   channel as a rotated x-axis tick label.
-#'
-#' @return A ggplot2 object.
+#' @rdname bar_chart_plots
 #'
 #' @examples
 #' set.seed(1)
@@ -47,7 +7,6 @@
 #' names(sig) <- catalog_row_order()$ID476
 #' plot_ID476_right(sig, plot_title = "Example ID476 right panel")
 #'
-#' @seealso [plot_476_right()]
 #' @export
 plot_ID476_right <- function(
   catalog,
@@ -91,28 +50,7 @@ plot_ID476_right <- function(
   )
 }
 
-#' Export right portion of 476-channel indel profiles to PDF (ggplot2-consistent interface)
-#'
-#' Wrapper around [plot_ID476_right()] for multi-sample PDF export. Uses
-#' parameter names consistent with ggplot2 theme element naming conventions.
-#' Plots are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 476 rows (indel types) and
-#'   one column per sample. Column names are used as plot titles.
-#' @param filename Character. Path to the output PDF file.
-#' @inheritParams plot_ID476_right
-#'
-#' @return NULL. Called for side effect of creating a PDF file.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(476 * 3), nrow = 476)
-#' rownames(sig) <- catalog_row_order()$ID476
-#' colnames(sig) <- paste0("Sig", 1:3)
-#' plot_ID476_right_pdf(sig, filename = "id476_right.pdf")
-#' }
-#'
-#' @seealso [plot_476_right_pdf()], [plot_ID476_right()]
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @import Cairo

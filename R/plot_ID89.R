@@ -1,44 +1,4 @@
-#' Plot 89-channel indel profile (ggplot2-consistent interface)
-#'
-#' Wrapper around [plot_89()] using parameter names consistent with
-#' ggplot2 theme element naming conventions.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table with 89 rows.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param upper Logical. If `TRUE`, display the category bar above the plot.
-#'   Maps to `show_top_bar` in [plot_89()].
-#' @param xlabels Logical. If `TRUE`, display x-axis tick labels.
-#'   Maps to `show_x_axis_text` in [plot_89()].
-#' @param ylim Numeric or NULL. If provided, sets a fixed y-axis maximum.
-#'   Maps to `setyaxis` in [plot_89()].
-#' @param base_size Base font size for ggplot2's theme.
-#' @param plot_title_cex Numeric. Size of the plot title text, relative to
-#'   `base_size`. Maps to `title_text_cex` in [plot_89()].
-#' @param count_label_cex Numeric. Size of per-class count labels, as a
-#'   fraction of `base_size`.
-#' @param block_label_cex Numeric. Size of the lower category block labels
-#'   (e.g. "Del 1 C", "Ins 1 T"). Maps to `text_cex` in [plot_89()].
-#' @param class_label_cex Numeric. Size of the upper summary class labels
-#'   (e.g. "Del", "Ins"). Maps to `top_bar_text_cex` in [plot_89()].
-#' @param axis_text_x_cex Numeric. Size of x-axis tick labels. Maps to
-#'   `x_axis_tick_label_cex` in [plot_89()].
-#' @param axis_title_x_cex Numeric. Size of x-axis title, relative to
-#'   `base_size`. Maps to `x_title_cex` in [plot_89()].
-#' @param axis_title_y_cex Numeric. Size of y-axis title, relative to
-#'   `base_size`. Maps to `y_title_cex` in [plot_89()].
-#' @param axis_text_y_cex Numeric. Size of y-axis tick labels, relative to
-#'   `base_size`. Maps to `y_axis_tick_label_cex` in [plot_89()].
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   mutation count labels. If `FALSE`, never display them. If `NULL`
-#'   (the default), display them only when the catalog contains counts
-#'   (sum > 1.1).
-#' @param ylabel Character or NULL. Custom y-axis label.
-#' @param show_extra_top_bar Logical. If `TRUE`, display the extra summary
-#'   bar above the category bar.
-#' @param plot_complex Logical. If `TRUE`, include the Complex indel channel.
-#'
-#' @return A ggplot2 object.
+#' @rdname bar_chart_plots
 #'
 #' @examples
 #' set.seed(1)
@@ -47,7 +7,6 @@
 #' names(sig) <- catalog_row_order()$ID89
 #' plot_ID89(sig, plot_title = "Example ID89")
 #'
-#' @seealso [plot_89()]
 #' @export
 plot_ID89 <- function(
   catalog,
@@ -91,28 +50,7 @@ plot_ID89 <- function(
   )
 }
 
-#' Export 89-channel indel profiles to PDF (ggplot2-consistent interface)
-#'
-#' Wrapper around [plot_ID89()] for multi-sample PDF export. Uses parameter
-#' names consistent with ggplot2 theme element naming conventions. Plots
-#' are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 89 rows (indel types) and
-#'   one column per sample. Column names are used as plot titles.
-#' @param filename Character. Path to the output PDF file.
-#' @inheritParams plot_ID89
-#'
-#' @return NULL. Called for side effect of creating a PDF file.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(89 * 3), nrow = 89)
-#' rownames(sig) <- catalog_row_order()$ID89
-#' colnames(sig) <- paste0("Sig", 1:3)
-#' plot_ID89_pdf(sig, filename = "id89.pdf")
-#' }
-#'
-#' @seealso [plot_89_pdf()], [plot_ID89()]
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @import Cairo

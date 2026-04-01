@@ -1,25 +1,11 @@
-#' Plot a DBS136 catalog as a 10-panel heatmap using ggplot2
-#'
-#' Creates 10 small 4x4 heatmaps (one per dinucleotide reference class:
-#' AC, AT, GC, CC, CG, CT, TA, TC, TG, TT) using `geom_tile()` with a
-#' white-to-forestgreen color gradient. Includes a maxima-per-class summary.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table.
-#' @param plot_title Character. Title displayed at the top.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_text_cex Numeric. Multiplier for axis label size.
-#' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
-#'
-#' @return A ggplot object (assembled via gridExtra).
+#' @rdname heatmap_plots
 #'
 #' @examples
 #' set.seed(1)
 #' sig <- runif(136)
 #' sig <- sig / sum(sig)
 #' names(sig) <- catalog_row_order()$DBS136
-#' plot_DBS136(sig, plot_title = "Example DBS136 heatmap")
+#' plot_DBS136(sig, plot_title = "Example DBS136")
 #'
 #' @export
 #'

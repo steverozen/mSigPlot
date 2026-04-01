@@ -1,36 +1,4 @@
-#' Export SBS96 profiles to PDF
-#'
-#' Creates a multi-page PDF file containing SBS96 profile plots for multiple
-#' samples. Plots are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 96 rows and one column per sample.
-#' @param filename Character. Path to the output PDF file.
-#' @param grid Logical. Draw grid lines.
-#' @param upper Logical. Draw class labels above bars.
-#' @param xlabels Logical. Draw x-axis labels.
-#' @param ylabels Logical. Draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for the per-class count labels.
-#' @param class_label_cex Numeric. Multiplier for the major class labels.
-#' @param axis_text_x_cex Numeric. Multiplier for the x-axis base labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size. Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. Auto-detect if NULL.
-#'
-#' @return Invisibly returns `NULL`. Called for side effect of creating PDF file.
-#'
-#' @examples
-#' \dontrun{
-#' # Create a multi-column catalog and export to PDF
-#' sig <- matrix(runif(96 * 3), nrow = 96)
-#' rownames(sig) <- catalog_row_order()$SBS96
-#' colnames(sig) <- paste0("Sample", 1:3)
-#' plot_SBS96_pdf(sig, filename = "sbs96_signatures.pdf")
-#' }
-#'
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange
@@ -54,7 +22,9 @@ plot_SBS96_pdf <- function(
   axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
-  stopifnot(nrow(catalog) == 96)
+  if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 96,
+                                catalog_row_order()$SBS96, "SBS96")))
+    stop("Invalid SBS96 catalog")
 
   n_samples <- ncol(catalog)
   plots_per_page <- 5

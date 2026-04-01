@@ -1,26 +1,37 @@
-#' Plot an SBS1536 catalog as a 2x3 heatmap grid using ggplot2
+#' Heatmap plots for mutational signatures
 #'
-#' Creates a 2x3 grid of 16x16 heatmaps (one per mutation type: C>A, C>G,
-#' C>T, T>A, T>C, T>G) using `geom_tile()` with a white-to-forestgreen
-#' color gradient. Axis labels show colored bases (A, C, G, T).
+#' Plot functions for SBS and DBS mutational signature catalogs
+#' as heatmaps. All functions return ggplot2 objects.
+#'
+#' Functions in this family:
+#' - `plot_SBS1536`: SBS pentanucleotide context (1536 channels)
+#' - `plot_DBS136`: DBS heatmap (136 channels, 10 4x4 panels)
+#'
+#' Each has a corresponding `_pdf()` variant for multi-sample PDF export.
 #'
 #' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table.
-#' @param plot_title Character. Title displayed at the top center.
+#'   or data.table. If there are row names (or for a vector, names), they
+#'   will be checked against [catalog_row_order()].
+#' @param plot_title Character. Title displayed above the plot.
+#' @param filename Character. Path to the output PDF file (\_pdf functions only).
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param axis_text_cex Numeric. Multiplier for axis label size.
 #' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
 #'
-#' @return A ggplot object (assembled via patchwork or gridExtra).
+#' @return Plot functions return a ggplot2 object, or NULL with a warning
+#'   if the catalog is invalid (wrong size or row names). PDF functions
+#'   return NULL invisibly (called for side effect of creating a PDF file),
+#'   or stop with an error if the catalog is invalid.
 #'
 #' @examples
 #' set.seed(1)
 #' sig <- runif(1536)
 #' sig <- sig / sum(sig)
 #' names(sig) <- catalog_row_order()$SBS1536
-#' plot_SBS1536(sig, plot_title = "Example SBS1536 heatmap")
+#' plot_SBS1536(sig, plot_title = "Example SBS1536")
 #'
+#' @rdname heatmap_plots
 #' @export
 #'
 #' @import ggplot2 dplyr

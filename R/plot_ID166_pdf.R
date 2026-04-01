@@ -1,36 +1,4 @@
-#' Export ID166 genic/intergenic profiles to PDF
-#'
-#' Creates a multi-page PDF file containing ID166 paired barplots for
-#' multiple samples. Plots are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 166 rows and one column per sample.
-#' @param filename Character. Path to the output PDF file.
-#' @param grid Logical. Draw background color wash and grid lines.
-#' @param upper Logical. Draw category labels above bars.
-#' @param xlabels Logical. Draw x-axis labels.
-#' @param ylabels Logical. Draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
-#' @param block_label_cex Numeric. Multiplier for category block labels.
-#' @param class_label_cex Numeric. Multiplier for major class labels.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param bottom_label_cex Numeric. Multiplier for bottom labels.
-#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size. Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. Auto-detect if NULL.
-#'
-#' @return Invisibly returns `NULL`.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(166 * 3), nrow = 166)
-#' rownames(sig) <- catalog_row_order()$ID166
-#' plot_ID166_pdf(sig, filename = "id166.pdf")
-#' }
-#'
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange
@@ -56,7 +24,9 @@ plot_ID166_pdf <- function(
   axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
-  stopifnot(nrow(catalog) == 166)
+  if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 166,
+                                catalog_row_order()$ID166, "ID166")))
+    stop("Invalid ID166 catalog")
 
   n_samples <- ncol(catalog)
   plots_per_page <- 5

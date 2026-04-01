@@ -1,24 +1,4 @@
-#' Export DBS136 heatmaps to PDF
-#'
-#' Creates a multi-page PDF file containing DBS136 10-panel heatmap plots,
-#' one sample per page.
-#'
-#' @param catalog A matrix or data frame with 136 rows and one column per sample.
-#' @param filename Character. Path to the output PDF file.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_text_cex Numeric. Multiplier for axis label size.
-#' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
-#'
-#' @return Invisibly returns `NULL`.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(136 * 2), nrow = 136)
-#' rownames(sig) <- catalog_row_order()$DBS136
-#' plot_DBS136_pdf(sig, filename = "dbs136.pdf")
-#' }
-#'
+#' @rdname heatmap_plots
 #' @export
 #'
 #' @importFrom Cairo CairoPDF
@@ -31,7 +11,9 @@ plot_DBS136_pdf <- function(
   axis_text_cex = 0.8,
   strip_text_cex = 1.0
 ) {
-  stopifnot(nrow(catalog) == 136)
+  if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 136,
+                                catalog_row_order()$DBS136, "DBS136")))
+    stop("Invalid DBS136 catalog")
 
   n_samples <- ncol(catalog)
 

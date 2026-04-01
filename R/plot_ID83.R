@@ -1,35 +1,4 @@
-#' Plot 83-channel indel profile (ggplot2-consistent interface)
-#'
-#' Wrapper around [plot_83()] using parameter names consistent with
-#' ggplot2 theme element naming conventions.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table with 83 rows.
-#' @param plot_title Character. Title displayed above the plot.
-#' @param grid Logical, draw grid lines.
-#' @param upper Logical, draw colored class rectangles and labels above bars.
-#' @param xlabels Logical, draw x-axis labels.
-#' @param ylabels Logical, draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
-#' @param block_label_cex Numeric. Multiplier for the upper colored category
-#'   block labels.
-#' @param class_label_cex Numeric. Multiplier for the major class labels.
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis channel labels.
-#' @param bottom_label_cex Numeric. Multiplier for bottom category description
-#'   labels.
-#' @param axis_title_x_cex Numeric. Multiplier for x-axis title size.
-#'   Currently has no effect in this function.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   mutation count labels. If `FALSE`, never display them. If `NULL`
-#'   (the default), display them only when the catalog contains counts
-#'   (sum > 1.1).
-#'
-#' @return A ggplot object.
+#' @rdname bar_chart_plots
 #'
 #' @examples
 #' set.seed(1)
@@ -38,7 +7,6 @@
 #' names(sig) <- catalog_row_order()$ID
 #' plot_ID83(sig, plot_title = "Example ID83")
 #'
-#' @seealso [plot_83()]
 #' @export
 plot_ID83 <- function(
   catalog,
@@ -81,28 +49,7 @@ plot_ID83 <- function(
   )
 }
 
-#' Export 83-channel indel profiles to PDF (ggplot2-consistent interface)
-#'
-#' Wrapper around [plot_ID83()] for multi-sample PDF export. Uses parameter
-#' names consistent with ggplot2 theme element naming conventions. Plots
-#' are arranged with 5 samples per page.
-#'
-#' @param catalog A matrix or data frame with 83 rows (indel types) and
-#'   one column per sample. Column names are used as plot titles.
-#' @param filename Character. Path to the output PDF file.
-#' @inheritParams plot_ID83
-#'
-#' @return NULL. Called for side effect of creating a PDF file.
-#'
-#' @examples
-#' \dontrun{
-#' sig <- matrix(runif(83 * 3), nrow = 83)
-#' rownames(sig) <- catalog_row_order()$ID
-#' colnames(sig) <- paste0("Sig", 1:3)
-#' plot_ID83_pdf(sig, filename = "id83.pdf")
-#' }
-#'
-#' @seealso [plot_83_pdf()], [plot_ID83()]
+#' @rdname bar_chart_plots
 #' @export
 #'
 #' @import Cairo
