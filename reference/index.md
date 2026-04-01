@@ -91,16 +91,6 @@ Plot small insertion and deletion spectra and signatures: ID83 (COSMIC),
 ID89 (Koh classification), ID166 (genic/intergenic), and ID476 (flanking
 base context).
 
-- [`plot_476()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_right()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_right_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_83()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_83_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_89()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_89_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  : plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83,
-  plot_83_pdf, plot_89, plot_89_pdf
 - [`plot_DBS144()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_DBS144_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_DBS78()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
@@ -127,6 +117,22 @@ base context).
   plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf,
   plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192,
   plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf
+
+## Indel (legacy)
+
+Original indel plot functions, kept for backward compatibility. For new
+code, prefer `plot_ID83`, `plot_ID89`, `plot_ID476`, `plot_ID476_right`.
+
+- [`plot_476()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_476_right()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_476_right_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_83()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_83_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_89()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  [`plot_89_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  : plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83,
+  plot_83_pdf, plot_89, plot_89_pdf
 
 ## Utilities
 
