@@ -1,74 +1,4 @@
-#' Bar chart plots for mutational signatures
-#'
-#' Plot functions for SBS, DBS, and indel mutational signature catalogs
-#' as bar charts. All functions return ggplot2 objects.
-#'
-#' Functions in this family:
-#' - `plot_SBS96`, `plot_SBS192`: SBS trinucleotide context
-#' - `plot_DBS78`: DBS dinucleotide substitutions
-#' - `plot_DBS144`: DBS with transcription strand
-#' - `plot_SBS12`: SBS strand bias summary (collapses 192 to 12 bars)
-#' - `plot_SBS288`: SBS with three-strand context
-#' - `plot_ID166`: Indel genic/intergenic (166 channels)
-#' - `plot_ID83`: Indel COSMIC classification (83 channels)
-#' - `plot_ID89`: Indel Koh classification (89 channels)
-#' - `plot_ID476`, `plot_ID476_right`: Indel with flanking context (476 channels)
-#'
-#' Each has a corresponding `_pdf()` variant for multi-sample PDF export.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table. If there are row names (or for a vector, names), they
-#'   will be checked against [catalog_row_order()].
-#' @param plot_title Character. Title displayed above the plot.
-#' @param filename Character. Path to the output PDF file (\_pdf functions only).
-#' @param grid Logical, draw grid lines.
-#' @param upper Logical, draw colored class rectangles and labels above bars.
-#' @param xlabels Logical, draw x-axis labels.
-#' @param ylabels Logical, draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
-#' @param class_label_cex Numeric. Multiplier for major class labels.
-#' @param block_label_cex Numeric. Multiplier for colored category block labels
-#'   (indel plots only).
-#' @param bottom_label_cex Numeric. Multiplier for bottom category description
-#'   labels (indel plots only).
-#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_x_cex Numeric. Multiplier for x-axis title size.
-#'   Currently has no effect in some functions.
-#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   count labels. If `FALSE`, never display them. If `NULL` (the default),
-#'   display them only when the catalog contains counts (sum > 1.1).
-#' @param abundance Numeric vector of per-class abundances for strand bias
-#'   testing (`plot_SBS12` only).
-#' @param ylabel Character or NULL. Custom y-axis label (`plot_ID89` only).
-#' @param show_extra_top_bar Logical. Display an extra summary bar above the
-#'   category bar (`plot_ID89` only).
-#' @param plot_complex Logical. Include Complex indel channels
-#'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
-#' @param num_labels Integer. Number of top peaks to label per category block
-#'   (`plot_ID476`, `plot_ID476_right` only).
-#' @param ggrepel_cex Numeric. Size of ggrepel peak labels
-#'   (`plot_ID476`, `plot_ID476_right` only).
-#' @param label_threshold_denominator Numeric. Peaks below
-#'   max/label_threshold_denominator are not labeled
-#'   (`plot_ID476`, `plot_ID476_right` only).
-#' @param vline_labels Character vector. IndelType labels at which to draw
-#'   vertical reference lines (`plot_ID476`, `plot_ID476_right` only).
-#' @param simplify_labels Logical. Simplify peak labels by removing
-#'   the indel type prefix (`plot_ID476`, `plot_ID476_right` only).
-#' @param show_x_labels Logical. Display channel labels as rotated x-axis
-#'   tick labels (`plot_ID476_right` only).
-#' @param ... Additional arguments passed to `plot_SBS96()` (`plot_SBS288` only).
-#'
-#' @return Plot functions return a ggplot2 object, or NULL with a warning
-#'   if the catalog is invalid (wrong size or row names). PDF functions
-#'   return NULL invisibly (called for side effect of creating a PDF file),
-#'   or stop with an error if the catalog is invalid.
-#'
+#' @rdname bar_plots
 #' @examples
 #' # Plot a random SBS96 signature (proportions summing to 1)
 #' set.seed(1)
@@ -77,7 +7,6 @@
 #' names(sig) <- catalog_row_order()$SBS96
 #' plot_SBS96(sig, plot_title = "Example SBS96 signature")
 #'
-#' @rdname bar_chart_plots
 #' @export
 #'
 #' @import ggplot2 dplyr

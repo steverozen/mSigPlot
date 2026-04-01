@@ -1,91 +1,4 @@
-#' Legacy plot functions for mutational signatures
-#'
-#' Original plot functions for indel mutational signature catalogs.
-#' These are kept for backward compatibility. For new code, prefer
-#' the ggplot2-consistent wrappers: [plot_ID83()], [plot_ID89()],
-#' [plot_ID476()], [plot_ID476_right()].
-#'
-#' Functions in this family:
-#' - `plot_83`: Indel COSMIC classification (83 channels)
-#' - `plot_89`: Indel Koh classification (89 channels)
-#' - `plot_476`: Indel with flanking context (476 channels)
-#' - `plot_476_right`: Right portion of 476-channel profile (positions 343-476)
-#'
-#' Each has a corresponding `_pdf()` variant for multi-sample PDF export.
-#'
-#' @param catalog Numeric vector, single-column data.frame, matrix, tibble,
-#'   or data.table. If there are row names (or for a vector, names), they
-#'   will be checked against [catalog_row_order()].
-#' @param plot_title Character. Title displayed above the plot.
-#' @param filename Character. Path to the output PDF file (\_pdf functions only).
-#' @param grid Logical, draw grid lines.
-#' @param upper Logical, draw colored class rectangles and labels above bars.
-#' @param xlabels Logical, draw x-axis labels.
-#' @param ylabels Logical, draw y-axis labels.
-#' @param ylim Optional y-axis limits.
-#' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
-#' @param block_label_cex Numeric. Multiplier for colored category block labels.
-#' @param class_label_cex Numeric. Multiplier for major class labels.
-#' @param x_label_cex Numeric. Multiplier for x-axis labels.
-#' @param bottom_label_cex Numeric. Multiplier for bottom category description labels.
-#' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
-#' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   count labels. If `FALSE`, never display them. If `NULL` (the default),
-#'   display them only when the catalog contains counts (sum > 1.1).
-#' @param text_cex Numeric. Size of text labels in the plot (`plot_89` only).
-#' @param top_bar_text_cex Numeric. Size of labels in the colored top bars (`plot_89` only).
-#' @param title_text_cex Numeric. Size of the plot title text (`plot_89`, `plot_476`,
-#'   `plot_476_right` only).
-#' @param setyaxis Numeric or NULL. Fixed y-axis maximum (`plot_89` only).
-#' @param ylabel Character or NULL. Custom y-axis label (`plot_89` only).
-#' @param x_axis_tick_label_cex Numeric. Size of x-axis tick labels
-#'   (`plot_89`, `plot_476`, `plot_476_right` only).
-#' @param y_axis_tick_label_cex Numeric. Size of y-axis tick labels
-#'   (`plot_89`, `plot_476`, `plot_476_right` only).
-#' @param x_title_cex Numeric. Size of x-axis title
-#'   (`plot_89`, `plot_476`, `plot_476_right` only).
-#' @param y_title_cex Numeric. Size of y-axis title
-#'   (`plot_89`, `plot_476`, `plot_476_right` only).
-#' @param show_x_axis_text Logical. Display x-axis tick labels (`plot_89` only).
-#' @param show_top_bar Logical. Display the category bar above the plot (`plot_89` only).
-#' @param show_extra_top_bar Logical. Display the extra summary bar (`plot_89` only).
-#' @param plot_complex Logical. Include Complex indel channels
-#'   (`plot_89`, `plot_476`, `plot_476_right` only).
-#' @param block_text_cex Numeric. Size of category block labels
-#'   (`plot_476`, `plot_476_right` only).
-#' @param num_labels Integer. Number of top peaks to label
-#'   (`plot_476`, `plot_476_right` only).
-#' @param ggrepel_cex Numeric. Size of ggrepel peak labels
-#'   (`plot_476`, `plot_476_right` only).
-#' @param label_threshold_denominator Numeric. Peaks below
-#'   max/label_threshold_denominator are not labeled
-#'   (`plot_476`, `plot_476_right` only).
-#' @param vline_labels Character vector. IndelType labels for vertical
-#'   reference lines (`plot_476`, `plot_476_right` only).
-#' @param simplify_labels Logical. Simplify peak labels
-#'   (`plot_476`, `plot_476_right` only).
-#' @param show_x_labels Logical. Display channel labels as rotated x-axis
-#'   tick labels (`plot_476_right` only).
-#' @param text_size Deprecated. Use `text_cex` instead.
-#' @param top_bar_text_size Deprecated. Use `top_bar_text_cex` instead.
-#' @param title_text_size Deprecated. Use `title_text_cex` instead.
-#' @param count_label_size Deprecated. Use `count_label_cex` instead.
-#' @param x_axis_tick_label_size Deprecated. Use `x_axis_tick_label_cex` instead.
-#' @param y_axis_tick_label_size Deprecated. Use `y_axis_tick_label_cex` instead.
-#' @param x_title_size Deprecated. Use `x_title_cex` instead.
-#' @param y_title_size Deprecated. Use `y_title_cex` instead.
-#' @param block_text_size Deprecated. Use `block_text_cex` instead.
-#' @param ggrepel_size Deprecated. Use `ggrepel_cex` instead.
-#' @param label_size Deprecated. Use `ggrepel_cex` instead.
-#'
-#' @return Plot functions return a ggplot2 object, or NULL with a warning
-#'   if the catalog is invalid (wrong size or row names). PDF functions
-#'   return NULL invisibly (called for side effect of creating a PDF file),
-#'   or stop with an error if the catalog is invalid.
-#'
+#' @rdname legacy_bar_plots
 #' @examples
 #' set.seed(1)
 #' sig <- runif(83)
@@ -93,7 +6,6 @@
 #' names(sig) <- catalog_row_order()$ID
 #' plot_83(sig, plot_title = "Example ID83 signature")
 #'
-#' @rdname legacy_plots
 #' @export
 #'
 #' @import ggplot2 dplyr

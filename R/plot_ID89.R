@@ -1,4 +1,4 @@
-#' @rdname bar_chart_plots
+#' @rdname bar_plots
 #'
 #' @examples
 #' set.seed(1)
@@ -50,7 +50,7 @@ plot_ID89 <- function(
   )
 }
 
-#' @rdname bar_chart_plots
+#' @rdname bar_plots
 #' @export
 #'
 #' @import Cairo

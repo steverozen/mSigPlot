@@ -2,7 +2,8 @@
 % Please edit documentation in R/plot_476.R, R/plot_476_pdf.R,
 %   R/plot_476_right.R, R/plot_476_right_pdf.R, R/plot_83.R, R/plot_83_pdf.R,
 %   R/plot_89.R, R/plot_89_pdf.R
-\name{plot_476}
+\name{legacy_bar_plots}
+\alias{legacy_bar_plots}
 \alias{plot_476}
 \alias{plot_476_pdf}
 \alias{plot_476_right}
@@ -11,7 +12,7 @@
 \alias{plot_83_pdf}
 \alias{plot_89}
 \alias{plot_89_pdf}
-\title{Legacy plot functions for mutational signatures}
+\title{plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83, plot_83_pdf, plot_89, plot_89_pdf}
 \usage{
 plot_476(
   catalog,
@@ -210,7 +211,8 @@ plot_89_pdf(
 }
 \arguments{
 \item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
-or data.table.}
+or data.table. If there are row names (or for a vector, names), they
+will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{block_text_cex}{Numeric. Size of category block labels
 (\code{plot_476}, \code{plot_476_right} only).}
@@ -325,8 +327,10 @@ tick labels (\code{plot_476_right} only).}
 \item{top_bar_text_size}{Deprecated. Use \code{top_bar_text_cex} instead.}
 }
 \value{
-A ggplot2 object (plot functions) or NULL (\_pdf functions, called
-for side effect of creating a PDF file).
+Plot functions return a ggplot2 object, or NULL with a warning
+if the catalog is invalid (wrong size or row names). PDF functions
+return NULL invisibly (called for side effect of creating a PDF file),
+or stop with an error if the catalog is invalid.
 }
 \description{
 Original plot functions for indel mutational signature catalogs.

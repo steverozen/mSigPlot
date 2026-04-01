@@ -1,4 +1,4 @@
-#' @rdname legacy_plots
+#' @rdname legacy_bar_plots
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange

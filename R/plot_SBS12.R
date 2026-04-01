@@ -1,4 +1,4 @@
-#' @rdname bar_chart_plots
+#' @rdname bar_plots
 #'
 #' @examples
 #' set.seed(1)

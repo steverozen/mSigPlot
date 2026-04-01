@@ -4,7 +4,8 @@
 %   R/plot_ID476.R, R/plot_ID476_right.R, R/plot_ID83.R, R/plot_ID89.R,
 %   R/plot_SBS12.R, R/plot_SBS12_pdf.R, R/plot_SBS192.R, R/plot_SBS192_pdf.R,
 %   R/plot_SBS288.R, R/plot_SBS96.R, R/plot_SBS96_pdf.R
-\name{plot_DBS144}
+\name{bar_plots}
+\alias{bar_plots}
 \alias{plot_DBS144}
 \alias{plot_DBS144_pdf}
 \alias{plot_DBS78}
@@ -26,7 +27,7 @@
 \alias{plot_SBS288}
 \alias{plot_SBS96}
 \alias{plot_SBS96_pdf}
-\title{Bar chart plots for mutational signatures}
+\title{plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf, plot_ID166, plot_ID166_pdf, plot_ID476, plot_ID476_pdf, plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf, plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192, plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf}
 \usage{
 plot_DBS144(
   catalog,
@@ -408,7 +409,8 @@ plot_SBS96_pdf(
 }
 \arguments{
 \item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
-or data.table.}
+or data.table. If there are row names (or for a vector, names), they
+will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
@@ -484,8 +486,10 @@ testing (\code{plot_SBS12} only).}
 \item{...}{Additional arguments passed to \code{plot_SBS96()} (\code{plot_SBS288} only).}
 }
 \value{
-A ggplot2 object (plot functions) or NULL (\_pdf functions, called
-for side effect of creating a PDF file).
+Plot functions return a ggplot2 object, or NULL with a warning
+if the catalog is invalid (wrong size or row names). PDF functions
+return NULL invisibly (called for side effect of creating a PDF file),
+or stop with an error if the catalog is invalid.
 }
 \description{
 Plot functions for SBS, DBS, and indel mutational signature catalogs
