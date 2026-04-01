@@ -16,7 +16,7 @@ remotes::install_github("steverozen/mSigPlot")
 
 Every plot function accepts a numeric vector, single-column data.frame,
 matrix, tibble, or data.table. The easiest entry point is
-[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md),
+[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/guess_plots.md),
 which auto-detects the catalog type by row count:
 
 ``` r
@@ -51,7 +51,7 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 
 Every plot function except `plot_SBS288` has a corresponding `_pdf()`
 variant (e.g.,
-[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md))
+[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md))
 that writes multi-sample PDFs with 5 plots per page.
 
 ## Gallery
@@ -144,7 +144,7 @@ All plot functions share these parameters:
 
 Bar chart functions also accept `grid`, `upper`, `xlabels`, and
 `ylabels` toggles. See
-[`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md)
+[`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 for the full parameter list.
 
 ## Row name handling

@@ -1,4 +1,4 @@
-# Heatmap plots for mutational signatures
+# plot_DBS136, plot_DBS136_pdf, plot_SBS1536, plot_SBS1536_pdf
 
 Plot functions for SBS and DBS mutational signature catalogs as
 heatmaps. All functions return ggplot2 objects.
@@ -48,7 +48,9 @@ plot_SBS1536_pdf(
 - catalog:
 
   Numeric vector, single-column data.frame, matrix, tibble, or
-  data.table.
+  data.table. If there are row names (or for a vector, names), they will
+  be checked against
+  [`catalog_row_order()`](https://steverozen.github.io/mSigPlot/reference/catalog_row_order.md).
 
 - plot_title:
 
@@ -76,8 +78,10 @@ plot_SBS1536_pdf(
 
 ## Value
 
-A ggplot2 object (plot functions) or NULL (\\pdf functions, called for
-side effect of creating a PDF file).
+Plot functions return a ggplot2 object, or NULL with a warning if the
+catalog is invalid (wrong size or row names). PDF functions return NULL
+invisibly (called for side effect of creating a PDF file), or stop with
+an error if the catalog is invalid.
 
 ## Details
 

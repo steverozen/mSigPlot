@@ -236,7 +236,7 @@ plot_SBS12(catalog_sbs192, plot_title = "HepG2 -- SBS12 strand bias")
 ## Auto-dispatch with plot_guess()
 
 If you don’t know (or don’t want to specify) the catalog type,
-[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md)
+[`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/guess_plots.md)
 detects it from the number of rows:
 
 ``` r
@@ -249,7 +249,7 @@ plot_guess(catalog_sbs96, plot_title = "Auto-detected SBS96")
 
 Every plot function has a `_pdf()` variant that writes a multi-page PDF
 with 5 plots per page. The auto-dispatch version is
-[`plot_guess_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_guess_pdf.md):
+[`plot_guess_pdf()`](https://steverozen.github.io/mSigPlot/reference/guess_plots.md):
 
 ``` r
 sbs96_mat <- as.matrix(sbs96_df[, 3:6])
