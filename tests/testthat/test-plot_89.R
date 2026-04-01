@@ -57,6 +57,21 @@ test_that("plot_89_pdf creates PDF file", {
   unlink(temp_pdf)
 })
 
+test_that("plot_89 adjusts setyaxis when too small for highest bar", {
+  test_catalog <- rep(0.01, 89)
+  # Set setyaxis well below the max bar value so it must be adjusted
+  p <- plot_89(
+    catalog = test_catalog,
+    plot_title = "ymax adjustment test",
+    setyaxis = 0.001
+  )
+  expect_s3_class(p, "ggplot")
+  # The y-axis upper limit should be >= 1.1 * max bar value
+  pb <- ggplot2::ggplot_build(p)
+  y_range <- pb$layout$panel_params[[1]]$y.range
+  expect_gte(y_range[2], 1.1 * max(test_catalog))
+})
+
 test_that("plot_89 count labels render with count catalog", {
   fixture_path <- testthat::test_path("fixtures", "type89_liu_et_al_sigs.tsv")
   sig_data <- read.table(

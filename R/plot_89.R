@@ -412,6 +412,10 @@ plot_89 <- function(
   )
   muts_basis_melt$Sample <- as.character(muts_basis_melt$Sample)
 
+  if (!is.null(setyaxis) && setyaxis < 1.1 * max(muts_basis_melt$freq)) {
+    setyaxis <- 1.1 * max(muts_basis_melt$freq)
+  }
+
   # === 3. Define Palettes and Block Positions ===
   indel_mypalette_block_fill <- c(
     "#fdbe6f",  # Del(C)

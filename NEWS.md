@@ -1,3 +1,9 @@
+# mSigPlot 1.0.6
+
+* `plot_89`: automatically adjust `setyaxis` upward when it is less than
+  1.1 times the highest bar, preventing bars from being clipped by the
+  y-axis limit.
+
 # mSigPlot 1.0.5
 
 * Added runnable `@examples` to all exported functions for CRAN compliance.
