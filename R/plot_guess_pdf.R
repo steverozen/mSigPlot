@@ -1,4 +1,4 @@
-#' @rdname guess_plots
+#' @rdname plot_guess
 #'
 #' @examples
 #' \dontrun{

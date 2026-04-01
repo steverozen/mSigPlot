@@ -22,8 +22,7 @@
 #'   - 83 rows: calls `plot_ID83()`
 #'   - 78 rows: calls `plot_DBS78()`
 #'
-#'   For `plot_guess_pdf()`, a matrix or data frame with one column per sample.
-#'   Column names are used as plot titles.
+#'   The column names of `catalog` are used as plot titles.
 #' @param filename Character. Path to the output PDF file (`plot_guess_pdf` only).
 #' @param ... Additional arguments passed to the underlying plotting function.
 #'
@@ -42,10 +41,10 @@
 #'   [plot_DBS136()], [plot_DBS144()], [plot_ID166()], [plot_ID476()], [plot_ID89()],
 #'   [plot_ID83()]
 #'
-#' @name guess_plots
+#' @name plot_guess
 NULL
 
-#' @rdname guess_plots
+#' @rdname plot_guess
 #' @export
 plot_guess = function(catalog, ...) {
   if (is.numeric(catalog) && !is.matrix(catalog)) {
