@@ -13,12 +13,14 @@
 #' @param ylabels Logical, draw y-axis labels.
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
+#' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param count_label_cex Numeric. Multiplier for per-class count labels.
 #' @param class_label_cex Numeric. Multiplier for major class labels (C>A, etc.).
-#' @param x_label_cex Numeric. Multiplier for x-axis base labels.
-#' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
+#' @param axis_text_x_cex Numeric. Multiplier for x-axis base labels.
+#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size.
+#'   Currently has no effect in this function.
+#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
+#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
 #'   count labels. If `FALSE`, never display them. If `NULL` (the default),
 #'   display them only when the catalog contains counts (sum > 1.1).
@@ -45,12 +47,13 @@ plot_SBS96 <- function(
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
-  title_cex = 0.8,
+  plot_title_cex = 0.8,
   count_label_cex = 0.9,
   class_label_cex = 1.1,
-  x_label_cex = 0.7,
-  axis_title_cex = 1.0,
-  axis_text_cex = 0.8,
+  axis_text_x_cex = 0.7,
+  axis_title_x_cex = 1.0,
+  axis_title_y_cex = 1.0,
+  axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
   # If row names are in stapled format like A[C>A]T, convert to ACTA
@@ -196,8 +199,8 @@ plot_SBS96 <- function(
       axis.ticks.x = element_blank(),
       axis.text.x = element_blank(),
       axis.title.x = element_blank(),
-      axis.title.y = element_text(size = axis_title_cex * base_size),
-      axis.text.y = element_text(size = axis_text_cex * base_size),
+      axis.title.y = element_text(size = axis_title_y_cex * base_size),
+      axis.text.y = element_text(size = axis_text_y_cex * base_size),
       plot.margin = margin(
         t = if (upper) 30 * base_size / 11 else 10,
         r = 10,
@@ -264,7 +267,7 @@ plot_SBS96 <- function(
         data = data.frame(x = idx1, y = -ymax * 0.05,
                           label = rep(label1, 6)),
         aes(x = x + 1.5, y = y, label = label),
-        size = x_label_cex * base_mm,
+        size = axis_text_x_cex * base_mm,
         inherit.aes = FALSE
       )
 
@@ -278,7 +281,7 @@ plot_SBS96 <- function(
           data = data.frame(x = tier_x, y = tier_y[k],
                             label = rep(tier_labels[k], 24)),
           aes(x = x, y = y, label = label),
-          size = x_label_cex * base_mm,
+          size = axis_text_x_cex * base_mm,
           inherit.aes = FALSE
         )
     }
@@ -287,10 +290,10 @@ plot_SBS96 <- function(
     p <- p +
       annotate("text", x = 0, y = -ymax * 0.05,
                label = "preceded by 5'", hjust = 1,
-               size = x_label_cex * base_mm) +
+               size = axis_text_x_cex * base_mm) +
       annotate("text", x = 0, y = -ymax * 0.12,
                label = "followed by 3'", hjust = 1,
-               size = x_label_cex * base_mm)
+               size = axis_text_x_cex * base_mm)
   }
 
   # Sample name title
@@ -302,7 +305,7 @@ plot_SBS96 <- function(
       label = plot_title,
       hjust = 0,
       fontface = "bold",
-      size = title_cex * base_mm
+      size = plot_title_cex * base_mm
     )
 
   return(p)

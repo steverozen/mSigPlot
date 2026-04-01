@@ -8,9 +8,9 @@
 #'   or data.table.
 #' @param plot_title Character. Title displayed at the top.
 #' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_label_cex Numeric. Multiplier for axis base labels.
-#' @param panel_label_cex Numeric. Multiplier for panel mutation type labels.
+#' @param plot_title_cex Numeric. Multiplier for the plot title size.
+#' @param axis_text_cex Numeric. Multiplier for axis label size.
+#' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
 #'
 #' @return A ggplot object (assembled via gridExtra).
 #'
@@ -29,9 +29,9 @@ plot_DBS136 <- function(
   catalog,
   plot_title = NULL,
   base_size = 11,
-  title_cex = 1.2,
-  axis_label_cex = 0.8,
-  panel_label_cex = 1.0
+  plot_title_cex = 1.2,
+  axis_text_cex = 0.8,
+  strip_text_cex = 1.0
 ) {
   catalog <- normalize_catalog(catalog, 136, catalog_row_order()$DBS136, "DBS136")
   if (is.null(catalog)) return(NULL)
@@ -118,7 +118,7 @@ plot_DBS136 <- function(
       theme_void(base_size = base_size) +
       theme(
         plot.title = element_text(hjust = 0.5, face = "bold",
-                                  size = panel_label_cex * base_size * 0.9),
+                                  size = strip_text_cex * base_size * 0.9),
         plot.margin = margin(t = 3, r = 3, b = 3, l = 3)
       )
 
@@ -126,10 +126,10 @@ plot_DBS136 <- function(
     p <- p +
       annotate("text", x = 1:4, y = 5, label = bases,
                color = base_cols, fontface = "bold",
-               size = axis_label_cex * base_mm) +
+               size = axis_text_cex * base_mm) +
       annotate("text", x = 0, y = 4:1, label = bases,
                color = base_cols, fontface = "bold",
-               size = axis_label_cex * base_mm)
+               size = axis_text_cex * base_mm)
 
     panel_list[[idx]] <- p
   }
@@ -175,7 +175,7 @@ plot_DBS136 <- function(
 
   title_grob <- grid::textGrob(
     plot_title,
-    gp = grid::gpar(fontsize = title_cex * base_size, fontface = "bold")
+    gp = grid::gpar(fontsize = plot_title_cex * base_size, fontface = "bold")
   )
 
   layout_matrix <- rbind(

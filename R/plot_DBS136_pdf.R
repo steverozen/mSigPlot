@@ -6,9 +6,9 @@
 #' @param catalog A matrix or data frame with 136 rows and one column per sample.
 #' @param filename Character. Path to the output PDF file.
 #' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
-#' @param axis_label_cex Numeric. Multiplier for axis base labels.
-#' @param panel_label_cex Numeric. Multiplier for panel mutation type labels.
+#' @param plot_title_cex Numeric. Multiplier for the plot title size.
+#' @param axis_text_cex Numeric. Multiplier for axis label size.
+#' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
 #'
 #' @return Invisibly returns `NULL`.
 #'
@@ -27,9 +27,9 @@ plot_DBS136_pdf <- function(
   catalog,
   filename,
   base_size = 11,
-  title_cex = 1.2,
-  axis_label_cex = 0.8,
-  panel_label_cex = 1.0
+  plot_title_cex = 1.2,
+  axis_text_cex = 0.8,
+  strip_text_cex = 1.0
 ) {
   stopifnot(nrow(catalog) == 136)
 
@@ -43,9 +43,9 @@ plot_DBS136_pdf <- function(
       catalog = sample_catalog,
       plot_title = colnames(catalog)[i],
       base_size = base_size,
-      title_cex = title_cex,
-      axis_label_cex = axis_label_cex,
-      panel_label_cex = panel_label_cex
+      plot_title_cex = plot_title_cex,
+      axis_text_cex = axis_text_cex,
+      strip_text_cex = strip_text_cex
     )
   }
 

@@ -1,5 +1,11 @@
 # mSigPlot 1.0.6
 
+* First cut at rationalizing function names and arguments. Functions 
+  like plot_83, plot_89 now superseded by plot_ID83, plot_ID89, etc.
+  Old functions with old args lists kept for backward compatibility.
+
+# mSigPlot 1.0.6
+
 * `plot_89`: automatically adjust `setyaxis` upward when it is less than
   1.1 times the highest bar, preventing bars from being clipped by the
   y-axis limit.

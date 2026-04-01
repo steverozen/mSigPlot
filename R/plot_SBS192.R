@@ -13,12 +13,14 @@
 #' @param ylabels Logical, draw y-axis labels.
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
+#' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param count_label_cex Numeric. Multiplier for per-class count labels.
 #' @param class_label_cex Numeric. Multiplier for major class labels.
-#' @param x_label_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
+#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
+#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size.
+#'   Currently has no effect in this function.
+#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
+#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
 #' @param show_counts Logical or NULL. Auto-detect if NULL.
 #'
 #' @return A ggplot object.
@@ -42,12 +44,13 @@ plot_SBS192 <- function(
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
-  title_cex = 0.8,
+  plot_title_cex = 0.8,
   count_label_cex = 0.9,
   class_label_cex = 0.9,
-  x_label_cex = 0.5,
-  axis_title_cex = 1.0,
-  axis_text_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 1.0,
+  axis_title_y_cex = 1.0,
+  axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
   catalog <- normalize_catalog(catalog, 192, catalog_row_order()$SBS192, "SBS192")
@@ -186,8 +189,8 @@ plot_SBS192 <- function(
       axis.ticks.x = element_blank(),
       axis.text.x = element_blank(),
       axis.title.x = element_blank(),
-      axis.title.y = element_text(size = axis_title_cex * base_size),
-      axis.text.y = element_text(size = axis_text_cex * base_size),
+      axis.title.y = element_text(size = axis_title_y_cex * base_size),
+      axis.text.y = element_text(size = axis_text_y_cex * base_size),
       plot.margin = margin(
         t = if (upper) 25 * base_size / 11 else 10,
         r = 10,
@@ -254,7 +257,7 @@ plot_SBS192 <- function(
         data = data.frame(x = pair_x, y = -ymax * 0.01,
                           label = rep(label_3prime, 24)),
         aes(x = x, y = y, label = label),
-        size = x_label_cex * base_mm, angle = 90, hjust = 1,
+        size = axis_text_x_cex * base_mm, angle = 90, hjust = 1,
         inherit.aes = FALSE
       )
 
@@ -264,7 +267,7 @@ plot_SBS192 <- function(
         data = data.frame(x = pair_x, y = -ymax * 0.06,
                           label = label_ref),
         aes(x = x, y = y, label = label),
-        size = x_label_cex * base_mm, angle = 90, hjust = 1,
+        size = axis_text_x_cex * base_mm, angle = 90, hjust = 1,
         inherit.aes = FALSE
       )
 
@@ -274,7 +277,7 @@ plot_SBS192 <- function(
         data = data.frame(x = pair_x, y = -ymax * 0.11,
                           label = rep(rep(label_5prime, 6), each = 1)),
         aes(x = x, y = y, label = label),
-        size = x_label_cex * base_mm, angle = 90, hjust = 1,
+        size = axis_text_x_cex * base_mm, angle = 90, hjust = 1,
         inherit.aes = FALSE
       )
   }
@@ -300,7 +303,7 @@ plot_SBS192 <- function(
       label = plot_title,
       hjust = 0,
       fontface = "bold",
-      size = title_cex * base_mm
+      size = plot_title_cex * base_mm
     )
 
   # Legend for strand colors
@@ -320,10 +323,10 @@ plot_SBS192 <- function(
              fill = strand_col[2]) +
     annotate("text", x = 159, y = ymax * 1.05,
              label = "Transcribed strand", hjust = 0,
-             size = title_cex * base_mm * 0.8) +
+             size = plot_title_cex * base_mm * 0.8) +
     annotate("text", x = 159, y = ymax * 0.98,
              label = "Untranscribed strand", hjust = 0,
-             size = title_cex * base_mm * 0.8)
+             size = plot_title_cex * base_mm * 0.8)
 
   return(p)
 }

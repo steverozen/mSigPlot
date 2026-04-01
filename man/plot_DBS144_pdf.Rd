@@ -10,10 +10,11 @@ plot_DBS144_pdf(
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
-  title_cex = 0.8,
-  x_label_cex = 1,
-  axis_title_cex = 1,
-  axis_text_cex = 0.8
+  plot_title_cex = 0.8,
+  axis_text_x_cex = 1,
+  axis_title_x_cex = 1,
+  axis_title_y_cex = 1,
+  axis_text_y_cex = 0.8
 )
 }
 \arguments{
@@ -27,13 +28,16 @@ plot_DBS144_pdf(
 
 \item{base_size}{Numeric. Base font size in points.}
 
-\item{title_cex}{Numeric. Multiplier for the plot title size.}
+\item{plot_title_cex}{Numeric. Multiplier for the plot title size.}
 
-\item{x_label_cex}{Numeric. Multiplier for x-axis labels.}
+\item{axis_text_x_cex}{Numeric. Multiplier for x-axis labels.}
 
-\item{axis_title_cex}{Numeric. Multiplier for the y-axis title size.}
+\item{axis_title_x_cex}{Numeric. Multiplier for the x-axis title size.
+Currently has no effect in this function.}
 
-\item{axis_text_cex}{Numeric. Multiplier for the y-axis tick label size.}
+\item{axis_title_y_cex}{Numeric. Multiplier for the y-axis title size.}
+
+\item{axis_text_y_cex}{Numeric. Multiplier for the y-axis tick label size.}
 }
 \value{
 Invisibly returns \code{NULL}.

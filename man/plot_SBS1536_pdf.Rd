@@ -8,9 +8,9 @@ plot_SBS1536_pdf(
   catalog,
   filename,
   base_size = 11,
-  title_cex = 1.2,
-  axis_label_cex = 0.8,
-  panel_label_cex = 1
+  plot_title_cex = 1.2,
+  axis_text_cex = 0.8,
+  strip_text_cex = 1
 )
 }
 \arguments{
@@ -20,11 +20,11 @@ plot_SBS1536_pdf(
 
 \item{base_size}{Numeric. Base font size in points.}
 
-\item{title_cex}{Numeric. Multiplier for the plot title size.}
+\item{plot_title_cex}{Numeric. Multiplier for the plot title size.}
 
-\item{axis_label_cex}{Numeric. Multiplier for axis base labels.}
+\item{axis_text_cex}{Numeric. Multiplier for axis label size.}
 
-\item{panel_label_cex}{Numeric. Multiplier for panel mutation type labels.}
+\item{strip_text_cex}{Numeric. Multiplier for panel/facet label size.}
 }
 \value{
 Invisibly returns \code{NULL}.

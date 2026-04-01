@@ -13,14 +13,15 @@
 #' @param ylabels Logical, draw y-axis labels.
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
+#' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param count_label_cex Numeric. Multiplier for per-class count labels.
 #' @param block_label_cex Numeric. Multiplier for upper category block labels.
 #' @param class_label_cex Numeric. Multiplier for major class labels.
-#' @param x_label_cex Numeric. Multiplier for x-axis labels.
+#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
 #' @param bottom_label_cex Numeric. Multiplier for bottom category labels.
-#' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
+#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size. Currently has no effect in this function.
+#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
+#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
 #' @param show_counts Logical or NULL. Auto-detect if NULL.
 #'
 #' @return A ggplot object.
@@ -44,14 +45,15 @@ plot_ID166 <- function(
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
-  title_cex = 0.8,
+  plot_title_cex = 0.8,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
-  x_label_cex = 0.5,
+  axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_cex = 1.0,
-  axis_text_cex = 0.8,
+  axis_title_x_cex = 1.0,
+  axis_title_y_cex = 1.0,
+  axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
   catalog <- normalize_catalog(catalog, 166, catalog_row_order()$ID166, "ID166")
@@ -239,8 +241,8 @@ plot_ID166 <- function(
       axis.ticks.x = element_blank(),
       axis.text.x = element_blank(),
       axis.title.x = element_blank(),
-      axis.title.y = element_text(size = axis_title_cex * base_size),
-      axis.text.y = element_text(size = axis_text_cex * base_size),
+      axis.title.y = element_text(size = axis_title_y_cex * base_size),
+      axis.text.y = element_text(size = axis_text_y_cex * base_size),
       plot.margin = margin(
         t = if (upper) 40 * base_size / 11 else 10,
         r = 10,
@@ -321,7 +323,7 @@ plot_ID166 <- function(
         data = data.frame(x = pair_centers, y = -ymax * 0.15,
                           label = mut_type),
         aes(x = x, y = y, label = label),
-        size = x_label_cex * base_mm,
+        size = axis_text_x_cex * base_mm,
         inherit.aes = FALSE
       ) +
       geom_text(
@@ -354,7 +356,7 @@ plot_ID166 <- function(
       label = plot_title,
       hjust = 0,
       fontface = "bold",
-      size = title_cex * base_mm
+      size = plot_title_cex * base_mm
     )
 
   # Legend
@@ -367,10 +369,10 @@ plot_ID166 <- function(
              fill = region_col[2]) +
     annotate("text", x = 140, y = ymax * 1.06,
              label = "Genic region", hjust = 0,
-             size = title_cex * base_mm * 0.8) +
+             size = plot_title_cex * base_mm * 0.8) +
     annotate("text", x = 140, y = ymax * 0.98,
              label = "Intergenic region", hjust = 0,
-             size = title_cex * base_mm * 0.8)
+             size = plot_title_cex * base_mm * 0.8)
 
   return(p)
 }

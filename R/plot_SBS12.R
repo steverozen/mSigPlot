@@ -14,10 +14,12 @@
 #' @param ylabels Logical, draw y-axis labels.
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
-#' @param title_cex Numeric. Multiplier for the plot title size.
-#' @param x_label_cex Numeric. Multiplier for x-axis labels.
-#' @param axis_title_cex Numeric. Multiplier for the y-axis title size.
-#' @param axis_text_cex Numeric. Multiplier for the y-axis tick label size.
+#' @param plot_title_cex Numeric. Multiplier for the plot title size.
+#' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
+#' @param axis_title_x_cex Numeric. Multiplier for the x-axis title size.
+#'   Currently has no effect in this function.
+#' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
+#' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
 #'
 #' @return A ggplot object. If a binomial test was performed, the object has
 #'   an attribute `"strand.bias.statistics"` containing a data frame of
@@ -42,10 +44,11 @@ plot_SBS12 <- function(
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
-  title_cex = 0.8,
-  x_label_cex = 1.0,
-  axis_title_cex = 1.0,
-  axis_text_cex = 0.8
+  plot_title_cex = 0.8,
+  axis_text_x_cex = 1.0,
+  axis_title_x_cex = 1.0,
+  axis_title_y_cex = 1.0,
+  axis_text_y_cex = 0.8
 ) {
   catalog <- normalize_catalog(catalog, 192, catalog_row_order()$SBS192, "SBS192")
   if (is.null(catalog)) return(NULL)
@@ -184,9 +187,9 @@ plot_SBS12 <- function(
     ) +
     theme_classic(base_size = base_size) +
     theme(
-      axis.title.y = element_text(size = axis_title_cex * base_size),
-      axis.text.y = element_text(size = axis_text_cex * base_size),
-      axis.text.x = element_text(size = x_label_cex * base_size),
+      axis.title.y = element_text(size = axis_title_y_cex * base_size),
+      axis.text.y = element_text(size = axis_text_y_cex * base_size),
+      axis.text.x = element_text(size = axis_text_x_cex * base_size),
       plot.margin = margin(t = 20, r = 10, b = 10, l = 10)
     )
 
@@ -224,7 +227,7 @@ plot_SBS12 <- function(
       label = plot_title,
       hjust = 0,
       fontface = "bold",
-      size = title_cex * base_mm
+      size = plot_title_cex * base_mm
     )
 
   # Legend
@@ -237,10 +240,10 @@ plot_SBS12 <- function(
              fill = strand_col[2]) +
     annotate("text", x = 7.7, y = ymax * 0.945,
              label = "Transcribed strand", hjust = 0,
-             size = title_cex * base_mm * 0.8) +
+             size = plot_title_cex * base_mm * 0.8) +
     annotate("text", x = 7.7, y = ymax * 0.865,
              label = "Untranscribed strand", hjust = 0,
-             size = title_cex * base_mm * 0.8)
+             size = plot_title_cex * base_mm * 0.8)
 
   # Attach strand bias statistics as attribute if computed
   if (!is.null(strand_bias)) {

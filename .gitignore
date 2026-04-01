@@ -13,3 +13,5 @@
 
 # Visual regression test output (regenerated on demand)
 tests/visual/new/*.png
+/doc/
+/Meta/
