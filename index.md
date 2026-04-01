@@ -51,7 +51,7 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 
 Every plot function except `plot_SBS288` has a corresponding `_pdf()`
 variant (e.g.,
-[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96_pdf.md))
+[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md))
 that writes multi-sample PDFs with 5 plots per page.
 
 ## Gallery
@@ -144,7 +144,7 @@ All plot functions share these parameters:
 
 Bar chart functions also accept `grid`, `upper`, `xlabels`, and
 `ylabels` toggles. See
-[`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96.md)
+[`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md)
 for the full parameter list.
 
 ## Row name handling

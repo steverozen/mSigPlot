@@ -1,5 +1,16 @@
 # Changelog
 
+## mSigPlot 1.0.8
+
+- Updated error handling and clarified documentation regarding error
+  handling.
+
+## mSigPlot 1.0.7
+
+- First cut at rationalizing function names and arguments. Functions
+  like plot_83, plot_89 now superseded by plot_ID83, plot_ID89, etc. Old
+  functions with old args lists kept for backward compatibility.
+
 ## mSigPlot 1.0.6
 
 - `plot_89`: automatically adjust `setyaxis` upward when it is less than

@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,166 +65,223 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>mSigPlot creates publication-quality plots for mutational signatures
-and mutational spectra. It supports SBS (single base substitution), DBS
-(doublet base substitution), and indel catalogs across 10 classification
-systems.</p>
+and mutational spectra. It supports single base substitutions (SBS),
+doublet base substitutions (DBS), and small insertions and deletions
+(indels) across 10 classification systems.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://steverozen.github.io/" class="external-link">mSigPlot</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="loading-catalog-data">Loading catalog data<a class="anchor" aria-label="anchor" href="#loading-catalog-data"></a>
+<h2 id="sbs96-single-base-substitutions-in-trinucleotide-context">SBS96 – single base substitutions in trinucleotide context<a class="anchor" aria-label="anchor" href="#sbs96-single-base-substitutions-in-trinucleotide-context"></a>
 </h2>
-<p>mSigPlot works with numeric vectors, data frames, matrices, tibbles,
-and data.tables. Here we load three example catalogs bundled with the
-package.</p>
-<div class="section level3">
-<h3 id="sbs96-catalog">SBS96 catalog<a class="anchor" aria-label="anchor" href="#sbs96-catalog"></a>
-</h3>
-<p>The 96-channel SBS catalog has one row per trinucleotide mutation
-context. The bundled example contains mutation counts from four HepG2
-samples.</p>
+<p>The 96-channel catalog has one row per trinucleotide mutation
+context, organized into 6 mutation classes (C&gt;A, C&gt;G, C&gt;T,
+T&gt;A, T&gt;C, T&gt;G). If row names are present they will be checked
+agains <code>catalog_row_order</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sbs96_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sbs96_example.csv"</span>, package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
 <span><span class="va">sbs96_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">sbs96_file</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Build a named catalog: row names are the 96 canonical trinucleotide types</span></span>
-<span><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">catalog_sbs96</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  sample1 <span class="op">=</span> <span class="va">sbs96_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span>,</span>
-<span>  row.names <span class="op">=</span> <span class="va">orders</span><span class="op">$</span><span class="va">SBS96</span></span>
+<span>  row.names <span class="op">=</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS96</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">catalog_sbs96</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      sample1</span></span>
-<span><span class="co">#&gt; ACAA     123</span></span>
-<span><span class="co">#&gt; ACCA     390</span></span>
-<span><span class="co">#&gt; ACGA      15</span></span>
-<span><span class="co">#&gt; ACTA     194</span></span>
-<span><span class="co">#&gt; CCAA     212</span></span>
-<span><span class="co">#&gt; CCCA     113</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="dbs78-catalog">DBS78 catalog<a class="anchor" aria-label="anchor" href="#dbs78-catalog"></a>
-</h3>
-<p>The 78-channel DBS catalog covers all doublet base substitution
-classes.</p>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_SBS96</a></span><span class="op">(</span><span class="va">catalog_sbs96</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 sample -- SBS96"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/sbs96-1.png" class="r-plt" alt="" width="100%"></p>
+<p>Row names (or for a numeric vector, names) are not required.</p>
+<p>If there are no names or row names be sure the rows are in the order
+expected for plotting.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_SBS96</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">sbs96_df</span><span class="op">[</span> ,<span class="fl">3</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, </span>
+<span>  plot_title <span class="op">=</span> <span class="st">"HepG2 sample, mixed up row order -- SBS96"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/sbs96-example3-1.png" class="r-plt" alt="" width="100%"></p>
+<p>The plot above will be unrecognizable.</p>
+</div>
+<div class="section level2">
+<h2 id="id83-cosmic-indel-classification">ID83 – COSMIC indel classification<a class="anchor" aria-label="anchor" href="#id83-cosmic-indel-classification"></a>
+</h2>
+<p>The 83-channel indel catalog uses the COSMIC classification with
+single-base and multi-base deletions, insertions, and microhomology
+deletions.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">id83_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"id83_cosmic_v3.5.tsv"</span>, package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">id83_sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">id83_file</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>                        row.names <span class="op">=</span> <span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_ID83</a></span><span class="op">(</span><span class="va">id83_sigs</span><span class="op">[</span>, <span class="st">"ID1"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, plot_title <span class="op">=</span> <span class="st">"COSMIC ID1 signature"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/id83-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="id89-89-channel-indel-classification">ID89 – 89-channel indel classification<a class="anchor" aria-label="anchor" href="#id89-89-channel-indel-classification"></a>
+</h2>
+<p>The 89-channel system (Koh et al.) provides a finer decomposition of
+indel types, including optional complex indels.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">id89_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"type89_liu_et_al_sigs.tsv"</span>,</span>
+<span>                         package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">id89_sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">id89_file</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>                        row.names <span class="op">=</span> <span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_ID89</a></span><span class="op">(</span><span class="va">id89_sigs</span><span class="op">[</span>, <span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, plot_title <span class="op">=</span> <span class="st">"ID89 signature"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/id89-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="id476-476-channel-indel-classification">ID476 – 476-channel indel classification<a class="anchor" aria-label="anchor" href="#id476-476-channel-indel-classification"></a>
+</h2>
+<p>The 476-channel system adds flanking base context to the indel
+classification, producing a detailed profile.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">id476_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"type476_liu_et_al_sigs.tsv"</span>,</span>
+<span>                          package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">id476_sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">id476_file</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>                         row.names <span class="op">=</span> <span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_ID476</a></span><span class="op">(</span><span class="va">id476_sigs</span><span class="op">[</span>, <span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, plot_title <span class="op">=</span> <span class="st">"ID476 signature"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/id476-1.png" class="r-plt" alt="" width="100%"></p>
+<div class="section level3">
+<h3 id="id476-right-panel">ID476 right panel<a class="anchor" aria-label="anchor" href="#id476-right-panel"></a>
+</h3>
+<p>The right portion of the 476-channel profile (positions 343–476) can
+be plotted separately for a closer look at multi-base indels.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_ID476_right</a></span><span class="op">(</span><span class="va">id476_sigs</span><span class="op">[</span>, <span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>,</span>
+<span>                 plot_title <span class="op">=</span> <span class="st">"ID476 right panel"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/id476-right-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="dbs78-doublet-base-substitutions">DBS78 – doublet base substitutions<a class="anchor" aria-label="anchor" href="#dbs78-doublet-base-substitutions"></a>
+</h2>
+<p>The 78-channel DBS catalog covers all dinucleotide substitution
+classes, organized into 10 reference dinucleotide groups.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dbs78_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"dbs78_example.csv"</span>, package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
 <span><span class="va">dbs78_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">dbs78_file</span><span class="op">)</span></span>
-<span></span>
 <span><span class="va">catalog_dbs78</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  sample1 <span class="op">=</span> <span class="va">dbs78_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span>,</span>
 <span>  row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">dbs78_df</span><span class="op">$</span><span class="va">Ref</span>, <span class="va">dbs78_df</span><span class="op">$</span><span class="va">Var</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">catalog_dbs78</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      sample1</span></span>
-<span><span class="co">#&gt; ACCA       0</span></span>
-<span><span class="co">#&gt; ACCG       0</span></span>
-<span><span class="co">#&gt; ACCT       0</span></span>
-<span><span class="co">#&gt; ACGA       0</span></span>
-<span><span class="co">#&gt; ACGG       0</span></span>
-<span><span class="co">#&gt; ACGT       0</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="id83-catalog-cosmic-signatures">ID83 catalog (COSMIC signatures)<a class="anchor" aria-label="anchor" href="#id83-catalog-cosmic-signatures"></a>
-</h3>
-<p>The 83-channel indel catalog uses the COSMIC classification. This
-file contains COSMIC v3.5 reference signatures; each column is a
-signature.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">id83_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"id83_cosmic_v3.5.tsv"</span>, package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
-<span><span class="va">id83_sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">id83_file</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
-<span>                         row.names <span class="op">=</span> <span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Pick one signature to plot</span></span>
-<span><span class="va">catalog_id83</span> <span class="op">&lt;-</span> <span class="va">id83_sigs</span><span class="op">[</span>, <span class="st">"ID1"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">catalog_id83</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                     ID1</span></span>
-<span><span class="co">#&gt; DEL:C:1:0  1.598890e-04</span></span>
-<span><span class="co">#&gt; DEL:C:1:1  7.735230e-04</span></span>
-<span><span class="co">#&gt; DEL:C:1:2  3.310000e-18</span></span>
-<span><span class="co">#&gt; DEL:C:1:3  1.907613e-03</span></span>
-<span><span class="co">#&gt; DEL:C:1:4  7.059900e-04</span></span>
-<span><span class="co">#&gt; DEL:C:1:5+ 3.370115e-03</span></span></code></pre></div>
-</div>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_DBS78</a></span><span class="op">(</span><span class="va">catalog_dbs78</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 sample -- DBS78"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/dbs78-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
 <div class="section level2">
-<h2 id="plotting-individual-catalogs">Plotting individual catalogs<a class="anchor" aria-label="anchor" href="#plotting-individual-catalogs"></a>
+<h2 id="sbs192-sbs-with-transcription-strand">SBS192 – SBS with transcription strand<a class="anchor" aria-label="anchor" href="#sbs192-sbs-with-transcription-strand"></a>
 </h2>
-<div class="section level3">
-<h3 id="sbs96">SBS96<a class="anchor" aria-label="anchor" href="#sbs96"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_SBS96.html">plot_SBS96</a></span><span class="op">(</span><span class="va">catalog_sbs96</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 sample — SBS96"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mSigPlot_files/figure-html/plot-sbs96-1.png" class="r-plt" alt="" width="100%"></p>
-</div>
-<div class="section level3">
-<h3 id="dbs78">DBS78<a class="anchor" aria-label="anchor" href="#dbs78"></a>
-</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_DBS78.html">plot_DBS78</a></span><span class="op">(</span><span class="va">catalog_dbs78</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 sample — DBS78"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mSigPlot_files/figure-html/plot-dbs78-1.png" class="r-plt" alt="" width="100%"></p>
-</div>
-<div class="section level3">
-<h3 id="id83">ID83<a class="anchor" aria-label="anchor" href="#id83"></a>
-</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_83.html">plot_83</a></span><span class="op">(</span><span class="va">catalog_id83</span>, plot_title <span class="op">=</span> <span class="st">"COSMIC ID1 signature"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mSigPlot_files/figure-html/plot-id83-1.png" class="r-plt" alt="" width="100%"></p>
-</div>
+<p>The 192-channel catalog pairs each of the 96 trinucleotide contexts
+with transcribed and untranscribed strand information.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sbs192_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"regress.cat.sbs.192.csv"</span>,</span>
+<span>                           package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">sbs192_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">sbs192_file</span><span class="op">)</span></span>
+<span><span class="va">catalog_sbs192</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  sample1 <span class="op">=</span> <span class="va">sbs192_df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span>,</span>
+<span>  row.names <span class="op">=</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS192</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_SBS192</a></span><span class="op">(</span><span class="va">catalog_sbs192</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 -- SBS192"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/sbs192-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
 <div class="section level2">
-<h2 id="customizing-plots">Customizing plots<a class="anchor" aria-label="anchor" href="#customizing-plots"></a>
+<h2 id="dbs144-dbs-with-transcription-strand">DBS144 – DBS with transcription strand<a class="anchor" aria-label="anchor" href="#dbs144-dbs-with-transcription-strand"></a>
 </h2>
-<p>All plot functions accept parameters to control appearance:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_SBS96.html">plot_SBS96</a></span><span class="op">(</span></span>
-<span>  <span class="va">catalog_sbs96</span>,</span>
-<span>  plot_title <span class="op">=</span> <span class="st">"Custom styling example"</span>,</span>
-<span>  base_size   <span class="op">=</span> <span class="fl">14</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  grid        <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p><img src="mSigPlot_files/figure-html/customize-1.png" class="r-plt" alt="" width="100%"></p>
+<p>The 144-channel DBS catalog adds transcription strand context to the
+78 dinucleotide substitution types.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dbs144_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"regress.cat.dbs.144.csv"</span>,</span>
+<span>                           package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">dbs144_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">dbs144_file</span><span class="op">)</span></span>
+<span><span class="va">catalog_dbs144</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  sample1 <span class="op">=</span> <span class="va">dbs144_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span>,</span>
+<span>  row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">dbs144_df</span><span class="op">$</span><span class="va">Ref</span>, <span class="va">dbs144_df</span><span class="op">$</span><span class="va">Var</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_DBS144</a></span><span class="op">(</span><span class="va">catalog_dbs144</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 -- DBS144"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/dbs144-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="dbs136-dbs-heatmap">DBS136 – DBS heatmap<a class="anchor" aria-label="anchor" href="#dbs136-dbs-heatmap"></a>
+</h2>
+<p>The 136-channel DBS catalog is displayed as a heatmap of 10 panels
+(4x4 grids) rather than a bar chart.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dbs136_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"regress.cat.dbs.136.csv"</span>,</span>
+<span>                           package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">dbs136_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">dbs136_file</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/heatmap_plots.html">plot_DBS136</a></span><span class="op">(</span><span class="va">dbs136_df</span><span class="op">[</span>, <span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 -- DBS136"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/dbs136-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="sbs1536-sbs-pentanucleotide-context">SBS1536 – SBS pentanucleotide context<a class="anchor" aria-label="anchor" href="#sbs1536-sbs-pentanucleotide-context"></a>
+</h2>
+<p>The 1536-channel catalog extends trinucleotide context to
+pentanucleotide context, displayed as a faceted heatmap.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sbs1536_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"regress.cat.sbs.1536.csv"</span>,</span>
+<span>                            package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">sbs1536_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">sbs1536_file</span><span class="op">)</span></span>
+<span><span class="va">catalog_sbs1536</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  sample1 <span class="op">=</span> <span class="va">sbs1536_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span>,</span>
+<span>  row.names <span class="op">=</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS1536</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/heatmap_plots.html">plot_SBS1536</a></span><span class="op">(</span><span class="va">catalog_sbs1536</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 -- SBS1536"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/sbs1536-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="sbs288-sbs-with-three-strand-context">SBS288 – SBS with three-strand context<a class="anchor" aria-label="anchor" href="#sbs288-sbs-with-three-strand-context"></a>
+</h2>
+<p>The 288-channel catalog adds three strand categories (transcribed,
+untranscribed, non-transcribed/intergenic) to the 96 SBS channels.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sbs288_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"SBS288_De-Novo_Signatures.txt"</span>,</span>
+<span>                           package <span class="op">=</span> <span class="st">"mSigPlot"</span><span class="op">)</span></span>
+<span><span class="va">sbs288_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">sbs288_file</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>                        row.names <span class="op">=</span> <span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_SBS288</a></span><span class="op">(</span><span class="va">sbs288_df</span><span class="op">[</span>, <span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, plot_title <span class="op">=</span> <span class="st">"SBS288A"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">y</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">y</span>, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">y</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">y</span>, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">y</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">y</span>, which will replace the existing scale.</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/sbs288-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="id166-indel-genicintergenic">ID166 – indel genic/intergenic<a class="anchor" aria-label="anchor" href="#id166-indel-genicintergenic"></a>
+</h2>
+<p>The 166-channel indel catalog adds genic/intergenic context to the
+83-channel COSMIC classification.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">sig_id166</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">166</span><span class="op">)</span></span>
+<span><span class="va">sig_id166</span> <span class="op">&lt;-</span> <span class="va">sig_id166</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sig_id166</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">sig_id166</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">ID166</span></span>
+<span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_ID166</a></span><span class="op">(</span><span class="va">sig_id166</span>, plot_title <span class="op">=</span> <span class="st">"Simulated ID166 signature"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/id166-1.png" class="r-plt" alt="" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="sbs12-strand-bias-summary">SBS12 – strand bias summary<a class="anchor" aria-label="anchor" href="#sbs12-strand-bias-summary"></a>
+</h2>
+<p>The SBS12 plot collapses a 192-channel catalog to 12 bars (6 mutation
+classes x 2 strands) to visualize transcription strand bias.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/bar_chart_plots.html">plot_SBS12</a></span><span class="op">(</span><span class="va">catalog_sbs192</span>, plot_title <span class="op">=</span> <span class="st">"HepG2 -- SBS12 strand bias"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mSigPlot_files/figure-html/sbs12-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="auto-dispatch-with-plot_guess">Auto-dispatch with plot_guess()<a class="anchor" aria-label="anchor" href="#auto-dispatch-with-plot_guess"></a>
 </h2>
 <p>If you don’t know (or don’t want to specify) the catalog type,
 <code><a href="../reference/plot_guess.html">plot_guess()</a></code> detects it from the number of rows:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_guess.html">plot_guess</a></span><span class="op">(</span><span class="va">catalog_sbs96</span>, plot_title <span class="op">=</span> <span class="st">"Auto-detected SBS96"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mSigPlot_files/figure-html/plot-guess-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="multi-sample-pdf-export">Multi-sample PDF export<a class="anchor" aria-label="anchor" href="#multi-sample-pdf-export"></a>
 </h2>
-<p>For batch plotting, every plot function has a <code>_pdf()</code>
-variant that writes a multi-page PDF with 5 plots per page. The
-auto-dispatch version is <code><a href="../reference/plot_guess_pdf.html">plot_guess_pdf()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Build a multi-sample matrix (4 samples)</span></span>
-<span><span class="va">sbs96_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">sbs96_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sbs96_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">orders</span><span class="op">$</span><span class="va">SBS96</span></span>
+<p>Every plot function has a <code>_pdf()</code> variant that writes a
+multi-page PDF with 5 plots per page. The auto-dispatch version is
+<code><a href="../reference/plot_guess_pdf.html">plot_guess_pdf()</a></code>:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sbs96_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">sbs96_df</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sbs96_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS96</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sbs96_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Write to PDF — 5 plots per page</span></span>
 <span><span class="fu"><a href="../reference/plot_guess_pdf.html">plot_guess_pdf</a></span><span class="op">(</span><span class="va">sbs96_mat</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sbs96_samples.pdf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="combining-plots">Combining plots<a class="anchor" aria-label="anchor" href="#combining-plots"></a>
-</h2>
-<p>Since plot functions return ggplot objects, you can combine them
-using packages like <code>patchwork</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"patchwork"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
-<span>  <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_SBS96.html">plot_SBS96</a></span><span class="op">(</span><span class="va">catalog_sbs96</span>, plot_title <span class="op">=</span> <span class="st">"SBS96"</span><span class="op">)</span></span>
-<span>  <span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_DBS78.html">plot_DBS78</a></span><span class="op">(</span><span class="va">catalog_dbs78</span>, plot_title <span class="op">=</span> <span class="st">"DBS78"</span><span class="op">)</span></span>
-<span>  <span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="mSigPlot_files/figure-html/patchwork-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

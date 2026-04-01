@@ -37,15 +37,15 @@ NULL. Called for side effect of creating a PDF file.
 ## See also
 
 [`plot_guess()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md),
-[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS96_pdf.md),
-[`plot_SBS192_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS192_pdf.md),
-[`plot_SBS1536_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_SBS1536_pdf.md),
-[`plot_DBS78_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_DBS78_pdf.md),
-[`plot_DBS136_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_DBS136_pdf.md),
-[`plot_DBS144_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_DBS144_pdf.md),
-[`plot_ID166_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_ID166_pdf.md),
-[`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_476_pdf.md),
-[`plot_89_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_89_pdf.md)
+[`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md),
+[`plot_SBS192_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md),
+[`plot_SBS1536_pdf()`](https://steverozen.github.io/mSigPlot/reference/heatmap_plots.md),
+[`plot_DBS78_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md),
+[`plot_DBS136_pdf()`](https://steverozen.github.io/mSigPlot/reference/heatmap_plots.md),
+[`plot_DBS144_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md),
+[`plot_ID166_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_chart_plots.md),
+[`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_plots.md),
+[`plot_89_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_plots.md)
 
 ## Examples
 
