@@ -1,0 +1,158 @@
+---
+title: "Plot gallery"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plot gallery}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 10,
+  fig.height = 4,
+  out.width = "100%"
+)
+```
+
+A visual reference for every plot type in mSigPlot.
+
+```{r setup}
+library(mSigPlot)
+orders <- catalog_row_order()
+```
+
+```{r load-data, include = FALSE}
+# SBS data
+sbs96_df <- read.csv(
+  system.file("extdata", "sbs96_example.csv", package = "mSigPlot"))
+catalog_sbs96 <- data.frame(
+  sample1 = sbs96_df[, 3], row.names = orders$SBS96)
+
+sbs192_df <- read.csv(
+  system.file("extdata", "regress.cat.sbs.192.csv", package = "mSigPlot"))
+catalog_sbs192 <- data.frame(
+  sample1 = sbs192_df[, 4], row.names = orders$SBS192)
+
+sbs1536_df <- read.csv(
+  system.file("extdata", "regress.cat.sbs.1536.csv", package = "mSigPlot"))
+catalog_sbs1536 <- data.frame(
+  sample1 = sbs1536_df[, 3], row.names = orders$SBS1536)
+
+sbs288_df <- read.table(
+  system.file("extdata", "SBS288_De-Novo_Signatures.txt", package = "mSigPlot"),
+  header = TRUE, sep = "\t", row.names = 1, check.names = FALSE)
+
+# DBS data
+dbs78_df <- read.csv(
+  system.file("extdata", "dbs78_example.csv", package = "mSigPlot"))
+catalog_dbs78 <- data.frame(
+  sample1 = dbs78_df[, 3], row.names = paste0(dbs78_df$Ref, dbs78_df$Var))
+
+dbs144_df <- read.csv(
+  system.file("extdata", "regress.cat.dbs.144.csv", package = "mSigPlot"))
+catalog_dbs144 <- data.frame(
+  sample1 = dbs144_df[, 3], row.names = paste0(dbs144_df$Ref, dbs144_df$Var))
+
+dbs136_df <- read.csv(
+  system.file("extdata", "regress.cat.dbs.136.csv", package = "mSigPlot"),
+  row.names = 1)
+
+# Indel data
+id83_sigs <- read.table(
+  system.file("extdata", "id83_cosmic_v3.5.tsv", package = "mSigPlot"),
+  header = TRUE, sep = "\t", row.names = 1, check.names = FALSE)
+
+id89_sigs <- read.table(
+  system.file("extdata", "type89_liu_et_al_sigs.tsv", package = "mSigPlot"),
+  header = TRUE, sep = "\t", row.names = 1, check.names = FALSE)
+
+id476_sigs <- read.table(
+  system.file("extdata", "type476_liu_et_al_sigs.tsv", package = "mSigPlot"),
+  header = TRUE, sep = "\t", row.names = 1, check.names = FALSE)
+
+set.seed(42)
+sig_id166 <- runif(166)
+sig_id166 <- sig_id166 / sum(sig_id166)
+names(sig_id166) <- orders$ID166
+```
+
+## SBS96
+
+```{r sbs96}
+plot_SBS96(catalog_sbs96, plot_title = "SBS96")
+```
+
+## SBS192
+
+```{r sbs192}
+plot_SBS192(catalog_sbs192, plot_title = "SBS192")
+```
+
+## SBS288
+
+```{r sbs288, fig.height = 8}
+plot_SBS288(sbs288_df[, 1, drop = FALSE], plot_title = "SBS288A")
+```
+
+## SBS12
+
+```{r sbs12}
+plot_SBS12(catalog_sbs192, plot_title = "SBS12 strand bias")
+```
+
+## SBS1536
+
+```{r sbs1536, fig.height = 6}
+plot_SBS1536(catalog_sbs1536, plot_title = "SBS1536")
+```
+
+## DBS78
+
+```{r dbs78}
+plot_DBS78(catalog_dbs78, plot_title = "DBS78")
+```
+
+## DBS144
+
+```{r dbs144}
+plot_DBS144(catalog_dbs144, plot_title = "DBS144")
+```
+
+## DBS136
+
+```{r dbs136, fig.height = 6}
+plot_DBS136(dbs136_df[, 1, drop = FALSE], plot_title = "DBS136")
+```
+
+## ID83
+
+```{r id83}
+plot_ID83(id83_sigs[, "ID1", drop = FALSE], plot_title = "ID83 (COSMIC ID1)")
+```
+
+## ID89
+
+```{r id89}
+plot_ID89(id89_sigs[, 1, drop = FALSE], plot_title = "ID89")
+```
+
+## ID166
+
+```{r id166}
+plot_ID166(sig_id166, plot_title = "ID166 (simulated)")
+```
+
+## ID476
+
+```{r id476, fig.height = 5}
+plot_ID476(id476_sigs[, 1, drop = FALSE], plot_title = "ID476")
+```
+
+## ID476 right panel
+
+```{r id476-right, fig.height = 5}
+plot_ID476_right(id476_sigs[, 1, drop = FALSE], plot_title = "ID476 right panel")
+```

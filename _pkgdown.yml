@@ -16,6 +16,12 @@ navbar:
       text: Articles
       href: articles/index.html
 
+articles:
+  - title: Articles
+    contents:
+      - mSigPlot
+      - gallery
+
 reference:
   - title: Auto-dispatch
     desc: >
@@ -24,6 +30,7 @@ reference:
       which function to use.
     contents:
       - plot_guess
+      - plot_guess_pdf
 
   - title: SBS (single base substitution)
     desc: >
@@ -62,10 +69,15 @@ reference:
       and ID476 (flanking base context).
     contents:
       - plot_ID83
+      - plot_ID83_pdf
       - plot_ID89
+      - plot_ID89_pdf
       - plot_ID166
+      - plot_ID166_pdf
       - plot_ID476
+      - plot_ID476_pdf
       - plot_ID476_right
+      - plot_ID476_right_pdf
 
   - title: Indel (legacy)
     desc: >
@@ -74,9 +86,13 @@ reference:
       `plot_ID476_right`.
     contents:
       - plot_83
+      - plot_83_pdf
       - plot_89
+      - plot_89_pdf
       - plot_476
+      - plot_476_pdf
       - plot_476_right
+      - plot_476_right_pdf
 
   - title: Utilities
     desc: Helper functions for working with catalog data.

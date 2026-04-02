@@ -1,3 +1,8 @@
+# mSigPlot 1.0.9
+
+* refactor the "legacy" plots (e.g. plot_89)
+* More updates to documentation
+
 # mSigPlot 1.0.8
 
 * Updated error handling and clarified documentation regarding error handling.

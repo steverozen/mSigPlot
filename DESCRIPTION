@@ -1,6 +1,6 @@
 Package: mSigPlot
 Title: Mutational signature plotting functions
-Version: 1.0.8
+Version: 1.0.9
 Authors@R: 
     person("Steven", "Rozen", , "steverozen@pm.me", role = c("aut", "cre"))
 Description: mSigPlot stands for Mutational Signature Plotting. Provides
