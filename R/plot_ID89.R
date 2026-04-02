@@ -13,7 +13,7 @@
 plot_ID89 <- function(
   catalog,
   plot_title = NULL,
-  upper = TRUE,
+  upper = FALSE,
   xlabels = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -31,13 +31,19 @@ plot_ID89 <- function(
   plot_complex = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
-  if (is.null(catalog)) return(NULL)
-  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  if (is.null(catalog)) {
+    return(NULL)
+  }
+  if (is.null(plot_title)) {
+    plot_title <- colnames(catalog)[1] %||% ""
+  }
   catalog <- catalog[, 1]
 
   if (is.null(ylabel)) {
-    if ((!is.null(ylim) && ylim > 1.5) ||
-        !(sum(catalog) < 1.1 && max(catalog) != 1)) {
+    if (
+      (!is.null(ylim) && ylim > 1.5) ||
+        !(sum(catalog) < 1.1 && max(catalog) != 1)
+    ) {
       ylabel = "Counts"
     } else {
       ylabel = "Proportion"
@@ -268,15 +274,21 @@ plot_ID89 <- function(
   indel_type_4_figurelabel$SubIndel[del_t] <- ifelse(
     grepl("R\\(1,4\\)", indel_type_4_figurelabel$IndelType[del_t]),
     "Del(T):R(1,4)",
-    ifelse(grepl("R\\(5,7\\)", indel_type_4_figurelabel$IndelType[del_t]),
-      "Del(T):R(5,7)", "Del(T):R(8,)")
+    ifelse(
+      grepl("R\\(5,7\\)", indel_type_4_figurelabel$IndelType[del_t]),
+      "Del(T):R(5,7)",
+      "Del(T):R(8,)"
+    )
   )
   ins_t <- indel_type_4_figurelabel$Indel == "Ins(T)"
   indel_type_4_figurelabel$SubIndel[ins_t] <- ifelse(
     grepl("R\\(0,4\\)", indel_type_4_figurelabel$IndelType[ins_t]),
     "Ins(T):R(0,4)",
-    ifelse(grepl("R\\(5,7\\)", indel_type_4_figurelabel$IndelType[ins_t]),
-      "Ins(T):R(5,7)", "Ins(T):R(8,)")
+    ifelse(
+      grepl("R\\(5,7\\)", indel_type_4_figurelabel$IndelType[ins_t]),
+      "Ins(T):R(5,7)",
+      "Ins(T):R(8,)"
+    )
   )
 
   # === 2. Prepare Data for Plotting ===
@@ -307,18 +319,18 @@ plot_ID89 <- function(
 
   # === 3. Define Palettes and Block Positions ===
   indel_mypalette_block_fill <- c(
-    "#fdbe6f",  # Del(C)
-    "#ffb34d",  # Del(T):R(1,4)
-    "#ff8001",  # Del(T):R(5,7)
-    "#cc6600",  # Del(T):R(8,)
-    "#b0dd8b",  # Ins(C)
-    "#6dcf65",  # Ins(T):R(0,4)
-    "#36a12e",  # Ins(T):R(5,7)
-    "#1a7a14",  # Ins(T):R(8,)
-    "#f14432",  # Del(2,):R(0,9)
-    "#4a98c9",  # Ins(2,)
-    "#61409b",  # Del(2,):M(1,)
-    "#000000"   # Complex
+    "#fdbe6f", # Del(C)
+    "#ffb34d", # Del(T):R(1,4)
+    "#ff8001", # Del(T):R(5,7)
+    "#cc6600", # Del(T):R(8,)
+    "#b0dd8b", # Ins(C)
+    "#6dcf65", # Ins(T):R(0,4)
+    "#36a12e", # Ins(T):R(5,7)
+    "#1a7a14", # Ins(T):R(8,)
+    "#f14432", # Del(2,):R(0,9)
+    "#4a98c9", # Ins(2,)
+    "#61409b", # Del(2,):M(1,)
+    "#000000" # Complex
   )
 
   indel_positions <- indel_type_4_figurelabel$IndelType
@@ -327,9 +339,13 @@ plot_ID89 <- function(
   entry <- table(indel_type_4_figurelabel$SubIndel)
   order_entry <- c(
     "Del(C)",
-    "Del(T):R(1,4)", "Del(T):R(5,7)", "Del(T):R(8,)",
+    "Del(T):R(1,4)",
+    "Del(T):R(5,7)",
+    "Del(T):R(8,)",
     "Ins(C)",
-    "Ins(T):R(0,4)", "Ins(T):R(5,7)", "Ins(T):R(8,)",
+    "Ins(T):R(0,4)",
+    "Ins(T):R(5,7)",
+    "Ins(T):R(8,)",
     "Del(2,):R(0,9)",
     "Ins(2,)",
     "Del(2,):M(1,)",
@@ -347,17 +363,23 @@ plot_ID89 <- function(
     !is.null(ylim),
     ylim,
     max(muts_basis_melt$freq)
-  ) * 1.08
+  ) *
+    1.08
   blocks$ymax <- ifelse(
     !is.null(ylim),
     ylim,
     max(muts_basis_melt$freq)
-  ) * 1.2
+  ) *
+    1.2
   blocks$labels <- c(
     "Del 1 C",
-    "Del 1 T (2-4)", "Del 1 T (5-7)", "Del 1 T (8+)",
+    "Del 1 T (2-4)",
+    "Del 1 T (5-7)",
+    "Del 1 T (8+)",
     "Ins 1 C",
-    "Ins 1 T (0-4)", "Ins 1 T (5-7)", "Ins 1 T (8+)",
+    "Ins 1 T (0-4)",
+    "Ins 1 T (5-7)",
+    "Ins 1 T (8+)",
     "Del \u22652",
     "Ins \u22652",
     "Del Mh",
@@ -365,9 +387,13 @@ plot_ID89 <- function(
   )
   blocks$cl <- c(
     "black",
-    "black", "black", "white",
     "black",
-    "black", "black", "white",
+    "black",
+    "white",
+    "black",
+    "black",
+    "black",
+    "white",
     "white",
     "white",
     "white",
@@ -381,12 +407,16 @@ plot_ID89 <- function(
   blocks3 <- blocks %>%
     dplyr::mutate(
       Type = ifelse(
-        Type == "Del(C)" | grepl("^Del\\(T\\)", Type), "Del1", Type
+        Type == "Del(C)" | grepl("^Del\\(T\\)", Type),
+        "Del1",
+        Type
       )
     ) %>%
     dplyr::mutate(
       Type = ifelse(
-        Type == "Ins(C)" | grepl("^Ins\\(T\\)", Type), "Ins1", Type
+        Type == "Ins(C)" | grepl("^Ins\\(T\\)", Type),
+        "Ins1",
+        Type
       )
     ) %>%
     dplyr::group_by(Type) %>%
@@ -398,12 +428,14 @@ plot_ID89 <- function(
     !is.null(ylim),
     ylim,
     max(muts_basis_melt$freq)
-  ) * 1.2
+  ) *
+    1.2
   blocks3$ymax <- ifelse(
     !is.null(ylim),
     ylim,
     max(muts_basis_melt$freq)
-  ) * 1.32
+  ) *
+    1.32
   blocks3$cl <- "white"
   blocks3$Type <- c("Del1", "Ins1", "Del2", "Ins2", "DelMH", "X")
   blocks3$cl[1:2] <- "black"
@@ -583,8 +615,11 @@ plot_ID89 <- function(
       FUN = sum
     )
     names(counts_by_block) <- c("Type", "count")
-    counts_by_block$count <- ifelse(counts_by_block$count > 0 & counts_by_block$count < 1,
-      signif(counts_by_block$count, 2), round(counts_by_block$count))
+    counts_by_block$count <- ifelse(
+      counts_by_block$count > 0 & counts_by_block$count < 1,
+      signif(counts_by_block$count, 2),
+      round(counts_by_block$count)
+    )
     count_label_df <- merge(blocks, counts_by_block, by = "Type")
     count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
     max_freq <- ifelse(!is.null(ylim), ylim, max(muts_basis_melt$freq))

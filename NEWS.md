@@ -1,3 +1,8 @@
+# mSigPlot 1.0.10
+
+* Added `plot_ID83_pdf()` and `plot_ID89_pdf()` calling the new-style plot functions
+* Removed legacy `plot_83_pdf()` and `plot_89_pdf()`
+
 # mSigPlot 1.0.9
 
 * refactor the "legacy" plots (e.g. plot_89)

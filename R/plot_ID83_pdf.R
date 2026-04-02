@@ -1,10 +1,10 @@
-#' @rdname legacy_bar_plots
+#' @rdname bar_plots
 #' @export
 #'
 #' @importFrom gridExtra grid.arrange
 #' @importFrom Cairo CairoPDF
 #' @importFrom grDevices dev.off
-plot_83_pdf <- function(
+plot_ID83_pdf <- function(
   catalog,
   filename,
   grid = TRUE,
@@ -13,14 +13,15 @@ plot_83_pdf <- function(
   ylabels = TRUE,
   ylim = NULL,
   base_size = 11,
-  title_cex = 0.8,
-  count_label_cex = 0.6,
+  plot_title_cex = 0.8,
+  count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
-  x_label_cex = 0.5,
+  axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_cex = 1.0,
-  axis_text_cex = 0.8,
+  axis_title_x_cex = 1.0,
+  axis_title_y_cex = 1.0,
+  axis_text_y_cex = 0.8,
   show_counts = NULL
 ) {
   if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 83,
@@ -38,7 +39,7 @@ plot_83_pdf <- function(
 
     for (j in i:end_idx) {
       sample_catalog <- catalog[, j, drop = FALSE]
-      p <- plot_83(
+      p <- plot_ID83(
         catalog = sample_catalog,
         plot_title = colnames(catalog)[j],
         grid = grid,
@@ -47,20 +48,20 @@ plot_83_pdf <- function(
         ylabels = ylabels,
         ylim = ylim,
         base_size = base_size,
-        title_cex = title_cex,
+        plot_title_cex = plot_title_cex,
         count_label_cex = count_label_cex,
         block_label_cex = block_label_cex,
         class_label_cex = class_label_cex,
-        x_label_cex = x_label_cex,
+        axis_text_x_cex = axis_text_x_cex,
         bottom_label_cex = bottom_label_cex,
-        axis_title_cex = axis_title_cex,
-        axis_text_cex = axis_text_cex,
+        axis_title_x_cex = axis_title_x_cex,
+        axis_title_y_cex = axis_title_y_cex,
+        axis_text_y_cex = axis_text_y_cex,
         show_counts = show_counts
       )
       page_plots[[length(page_plots) + 1]] <- p
     }
 
-    # Pad with empty plots if needed
     while (length(page_plots) < plots_per_page) {
       page_plots[[length(page_plots) + 1]] <- ggplot2::ggplot() +
         ggplot2::theme_void()
@@ -74,6 +75,5 @@ plot_83_pdf <- function(
   }
 
   grDevices::dev.off()
-
   invisible(NULL)
 }

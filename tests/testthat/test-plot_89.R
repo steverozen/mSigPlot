@@ -17,7 +17,7 @@ test_that("plot_89 returns a ggplot object", {
     setyaxis = .03
   )
 })
-test_that("plot_89_pdf creates PDF file", {
+test_that("plot_ID89_pdf creates PDF file", {
   fixture_path <- testthat::test_path("fixtures", "type89_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -31,10 +31,9 @@ test_that("plot_89_pdf creates PDF file", {
   catalog_subset <- sig_data[, 1:3, drop = FALSE]
 
   # Create temp file for output
-
   temp_pdf <- tempfile(fileext = ".pdf")
 
-  plot_89_pdf(
+  plot_ID89_pdf(
     catalog_subset,
     filename = temp_pdf
   )
@@ -42,12 +41,11 @@ test_that("plot_89_pdf creates PDF file", {
   expect_true(file.exists(temp_pdf))
   expect_gt(file.size(temp_pdf), 0)
 
-  plot_89_pdf(
+  plot_ID89_pdf(
     catalog_subset,
     filename = temp_pdf,
-    top_bar_text_cex = 2.5,
-    text_cex = 3.5,
-    title_text_cex = 0.9
+    block_label_cex = 2.5,
+    plot_title_cex = 0.9
   )
 
   expect_true(file.exists(temp_pdf))

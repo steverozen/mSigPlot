@@ -1,4 +1,4 @@
-#' plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83, plot_83_pdf, plot_89, plot_89_pdf
+#' plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83, plot_89
 #'
 #' Original plot functions for indel mutational signature catalogs.
 #' These are kept for backward compatibility. For new code, prefer
