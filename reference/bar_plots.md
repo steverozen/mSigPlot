@@ -225,7 +225,28 @@ plot_ID83_pdf(
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
-  count_label_cex = 0.6,
+  count_label_cex = 0.9,
+  block_label_cex = 0.65,
+  class_label_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  bottom_label_cex = 0.65,
+  axis_title_x_cex = 1,
+  axis_title_y_cex = 1,
+  axis_text_y_cex = 0.8,
+  show_counts = NULL
+)
+
+plot_ID83_pdf(
+  catalog,
+  filename,
+  grid = TRUE,
+  upper = TRUE,
+  xlabels = TRUE,
+  ylabels = TRUE,
+  ylim = NULL,
+  base_size = 11,
+  plot_title_cex = 0.8,
+  count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -253,14 +274,14 @@ plot_ID89(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
+  show_extra_top_bar = FALSE,
   plot_complex = FALSE
 )
 
 plot_ID89_pdf(
   catalog,
   filename,
-  upper = TRUE,
+  upper = FALSE,
   xlabels = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -274,7 +295,26 @@ plot_ID89_pdf(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
+  plot_complex = FALSE
+)
+
+plot_ID89_pdf(
+  catalog,
+  filename,
+  upper = FALSE,
+  xlabels = TRUE,
+  ylim = NULL,
+  base_size = 11,
+  plot_title_cex = 1,
+  count_label_cex = 1.03,
+  block_label_cex = 3,
+  class_label_cex = block_label_cex,
+  axis_text_x_cex = 0.7,
+  axis_title_x_cex = 0.9,
+  axis_title_y_cex = 0.9,
+  axis_text_y_cex = 0.7,
+  show_counts = NULL,
+  ylabel = NULL,
   plot_complex = FALSE
 )
 

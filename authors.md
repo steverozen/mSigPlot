@@ -10,12 +10,12 @@ Source:
 [`DESCRIPTION`](https://github.com/steverozen/mSigPlot/blob/main/DESCRIPTION)
 
 Rozen S (2026). *mSigPlot: Mutational signature plotting functions*. R
-package version 1.0.9, <https://steverozen.github.io/>.
+package version 1.0.11, <https://steverozen.github.io/>.
 
     @Manual{,
       title = {mSigPlot: Mutational signature plotting functions},
       author = {Steven Rozen},
       year = {2026},
-      note = {R package version 1.0.9},
+      note = {R package version 1.0.11},
       url = {https://steverozen.github.io/},
     }

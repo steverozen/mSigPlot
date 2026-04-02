@@ -1,4 +1,4 @@
-# plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83, plot_83_pdf, plot_89, plot_89_pdf
+# plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83, plot_89
 
 Original plot functions for indel mutational signature catalogs. These
 are kept for backward compatibility. For new code, prefer the
@@ -141,26 +141,6 @@ plot_83(
   show_counts = NULL
 )
 
-plot_83_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  title_cex = 0.8,
-  count_label_cex = 0.6,
-  block_label_cex = 0.65,
-  class_label_cex = 0.8,
-  x_label_cex = 0.5,
-  bottom_label_cex = 0.65,
-  axis_title_cex = 1,
-  axis_text_cex = 0.8,
-  show_counts = NULL
-)
-
 plot_89(
   catalog,
   text_cex = 3,
@@ -187,22 +167,6 @@ plot_89(
   y_axis_tick_label_size = NULL,
   x_title_size = NULL,
   y_title_size = NULL,
-  count_label_size = NULL
-)
-
-plot_89_pdf(
-  catalog,
-  text_cex = 3,
-  top_bar_text_cex = text_cex,
-  title_text_cex = 1,
-  filename,
-  show_x_axis_text = TRUE,
-  show_top_bar = TRUE,
-  show_counts = NULL,
-  count_label_cex = 1.03,
-  text_size = NULL,
-  top_bar_text_size = NULL,
-  title_text_size = NULL,
   count_label_size = NULL
 )
 ```

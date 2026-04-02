@@ -1,5 +1,25 @@
 # Changelog
 
+## mSigPlot 1.0.11
+
+- Removed `show_extra_top_bar` parameter from
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  and
+  [`plot_ID89_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+- Removed associated blocks3 (extra “Del”/“Ins” tier) code from
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+- [`plot_89()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
+  retains `show_extra_top_bar` for backward compatibility but ignores it
+
+## mSigPlot 1.0.10
+
+- Added
+  [`plot_ID83_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  and
+  [`plot_ID89_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  calling the new-style plot functions
+- Removed legacy `plot_83_pdf()` and `plot_89_pdf()`
+
 ## mSigPlot 1.0.9
 
 - refactor the “legacy” plots (e.g. plot_89)
