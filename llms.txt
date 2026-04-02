@@ -43,10 +43,10 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 | 78       | [`plot_DBS78()`](#dbs78)                                                    | DBS (doublet base substitution)                                                               | Bar chart                 |
 | 136      | [`plot_DBS136()`](#dbs136)                                                  | DBS dinucleotide classes                                                                      | 10-panel heatmap          |
 | 144      | [`plot_DBS144()`](https://steverozen.github.io/mSigPlot/man/plot_DBS144.Rd) | DBS with transcription strand                                                                 | Paired bar chart          |
-| 83       | [`plot_83()`](#id83)                                                        | Indel (COSMIC 83 indel-type classification)                                                   | Bar chart                 |
-| 89       | [`plot_89()`](#id89)                                                        | Indel (89 indel-type classification)                                                          | Bar chart                 |
+| 83       | [`plot_ID83()`](#id83)                                                      | Indel (COSMIC 83 indel-type classification)                                                   | Bar chart                 |
+| 89       | [`plot_ID89()`](#id89)                                                      | Indel (89 indel-type classification)                                                          | Bar chart                 |
 | 166      | [`plot_ID166()`](https://steverozen.github.io/mSigPlot/man/plot_ID166.Rd)   | Indel 83-type classification, genic/intergenic                                                | Paired bar chart          |
-| 476      | [`plot_476()`](#id476)                                                      | Indel 476-type classification                                                                 | Bar chart + peak labels   |
+| 476      | [`plot_ID476()`](#id476)                                                    | Indel 476-type classification                                                                 | Bar chart + peak labels   |
 | 288      | [`plot_SBS288()`](#sbs288)                                                  | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
 
 Every plot function except `plot_SBS288` has a corresponding `_pdf()`
@@ -324,5 +324,3 @@ Helper functions for working with catalog data.
 
 - [Plotting mutational signatures with
   mSigPlot](https://steverozen.github.io/mSigPlot/articles/mSigPlot.md):
-- [Plot
-  gallery](https://steverozen.github.io/mSigPlot/articles/gallery.md):
