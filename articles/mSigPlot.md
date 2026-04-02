@@ -197,12 +197,6 @@ sbs288_file <- system.file("extdata", "SBS288_De-Novo_Signatures.txt",
 sbs288_df <- read.table(sbs288_file, header = TRUE, sep = "\t",
                         row.names = 1, check.names = FALSE)
 plot_SBS288(sbs288_df[, 1, drop = FALSE], plot_title = "SBS288A")
-#> Scale for y is already present.
-#> Adding another scale for y, which will replace the existing scale.
-#> Scale for y is already present.
-#> Adding another scale for y, which will replace the existing scale.
-#> Scale for y is already present.
-#> Adding another scale for y, which will replace the existing scale.
 ```
 
 ![](mSigPlot_files/figure-html/sbs288-1.png)

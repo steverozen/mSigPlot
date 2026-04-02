@@ -27,12 +27,6 @@ plot_SBS192(catalog_sbs192, plot_title = "SBS192")
 
 ``` r
 plot_SBS288(sbs288_df[, 1, drop = FALSE], plot_title = "SBS288A")
-#> Scale for y is already present.
-#> Adding another scale for y, which will replace the existing scale.
-#> Scale for y is already present.
-#> Adding another scale for y, which will replace the existing scale.
-#> Scale for y is already present.
-#> Adding another scale for y, which will replace the existing scale.
 ```
 
 ![](gallery_files/figure-html/sbs288-1.png)
