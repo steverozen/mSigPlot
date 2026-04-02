@@ -284,7 +284,7 @@ plot_ID83_pdf(
 plot_ID89(
   catalog,
   plot_title = NULL,
-  upper = FALSE,
+  upper = TRUE,
   xlabels = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -298,7 +298,7 @@ plot_ID89(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
+  show_extra_top_bar = FALSE,
   plot_complex = FALSE
 )
 
@@ -319,7 +319,6 @@ plot_ID89_pdf(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
   plot_complex = FALSE
 )
 
@@ -340,7 +339,6 @@ plot_ID89_pdf(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
   plot_complex = FALSE
 )
 

@@ -21,7 +21,6 @@ plot_ID89_pdf <- function(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
   plot_complex = FALSE
 ) {
   if (is.null(normalize_catalog(catalog[, 1, drop = FALSE], 89,
@@ -56,7 +55,6 @@ plot_ID89_pdf <- function(
         axis_text_y_cex = axis_text_y_cex,
         show_counts = show_counts,
         ylabel = ylabel,
-        show_extra_top_bar = show_extra_top_bar,
         plot_complex = plot_complex
       )
       page_plots[[length(page_plots) + 1]] <- p

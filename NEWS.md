@@ -1,3 +1,9 @@
+# mSigPlot 1.0.11
+
+* Removed `show_extra_top_bar` parameter from `plot_ID89()` and `plot_ID89_pdf()`
+* Removed associated blocks3 (extra "Del"/"Ins" tier) code from `plot_ID89()`
+* `plot_89()` retains `show_extra_top_bar` for backward compatibility but ignores it
+
 # mSigPlot 1.0.10
 
 * Added `plot_ID83_pdf()` and `plot_ID89_pdf()` calling the new-style plot functions

@@ -13,7 +13,7 @@
 plot_ID89 <- function(
   catalog,
   plot_title = NULL,
-  upper = FALSE,
+  upper = TRUE,
   xlabels = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -27,7 +27,7 @@ plot_ID89 <- function(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
+  show_extra_top_bar = FALSE,
   plot_complex = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
@@ -400,53 +400,7 @@ plot_ID89 <- function(
     "white"
   )
 
-  # Grey blocks for insertion/deletion/complex
-  indel_mypalette_fill3 <- c("#000000", "#888888", "#DDDDDD")
-
-  # === 4. Prepare Block3 for Overhead Labels ===
-  blocks3 <- blocks %>%
-    dplyr::mutate(
-      Type = ifelse(
-        Type == "Del(C)" | grepl("^Del\\(T\\)", Type),
-        "Del1",
-        Type
-      )
-    ) %>%
-    dplyr::mutate(
-      Type = ifelse(
-        Type == "Ins(C)" | grepl("^Ins\\(T\\)", Type),
-        "Ins1",
-        Type
-      )
-    ) %>%
-    dplyr::group_by(Type) %>%
-    dplyr::summarise(xmin = min(xmin), xmax = max(xmax)) %>%
-    dplyr::mutate(labels = substr(Type, 1, 3)) %>%
-    dplyr::mutate(labels = ifelse(labels == "Com", "X", labels)) %>%
-    dplyr::arrange(xmin)
-  blocks3$ymin <- ifelse(
-    !is.null(ylim),
-    ylim,
-    max(muts_basis_melt$freq)
-  ) *
-    1.2
-  blocks3$ymax <- ifelse(
-    !is.null(ylim),
-    ylim,
-    max(muts_basis_melt$freq)
-  ) *
-    1.32
-  blocks3$cl <- "white"
-  blocks3$Type <- c("Del1", "Ins1", "Del2", "Ins2", "DelMH", "X")
-  blocks3$cl[1:2] <- "black"
-
   indel_mypalette_fill_all <- c(
-    "Del1" = "#fe9f38",
-    "Ins1" = "#73bf5d",
-    "Del2" = "#f14432",
-    "Ins2" = "#4a98c9",
-    "DelMH" = "#61409b",
-    "X" = "black",
     "Del(2,):M(1,)" = "#61409b",
     "Del(2,):R(0,9)" = "#f14432",
     "Del(C)" = "#fdbe6f",
@@ -469,9 +423,8 @@ plot_ID89 <- function(
     indel_positions <- indel_positions[-complex_idx]
     indel_positions_labels <- indel_positions_labels[-complex_idx]
     blocks <- blocks[blocks$Type != "Complex", ]
-    blocks3 <- blocks3[blocks3$Type != "X", ]
     indel_mypalette_fill_all <- indel_mypalette_fill_all[
-      !names(indel_mypalette_fill_all) %in% c("Complex", "X")
+      !names(indel_mypalette_fill_all) %in% "Complex"
     ]
   }
 
@@ -492,9 +445,7 @@ plot_ID89 <- function(
     ggplot2::scale_y_continuous(
       limits = c(
         min(0, min(muts_basis_melt$freq) * 1.05),
-        if (upper && show_extra_top_bar) {
-          ifelse(!is.null(ylim), ylim * 1.32, unique(blocks3$ymax))
-        } else if (upper) {
+        if (upper) {
           ifelse(!is.null(ylim), ylim * 1.2, unique(blocks$ymax))
         } else {
           ifelse(
@@ -572,34 +523,6 @@ plot_ID89 <- function(
         inherit.aes = FALSE
       )
 
-    # Add extra top bar only if requested (e.g., "Del", "Ins")
-    if (show_extra_top_bar) {
-      p <- p +
-        ggplot2::geom_rect(
-          data = blocks3,
-          ggplot2::aes(
-            xmin = xmin,
-            ymin = ymin,
-            xmax = xmax,
-            ymax = ymax,
-            fill = Type,
-            colour = "white"
-          ),
-          inherit.aes = FALSE
-        ) +
-        ggplot2::geom_text(
-          data = blocks3,
-          ggplot2::aes(
-            x = (xmax + xmin) / 2,
-            y = (ymax + ymin) / 2,
-            label = labels,
-            colour = cl
-          ),
-          size = class_label_cex * base_size / 11,
-          fontface = "bold",
-          inherit.aes = FALSE
-        )
-    }
   }
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
@@ -659,7 +582,6 @@ plot_ID89_pdf <- function(
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   ylabel = NULL,
-  show_extra_top_bar = upper,
   plot_complex = FALSE
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {

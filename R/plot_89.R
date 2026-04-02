@@ -112,7 +112,6 @@ plot_89 <- function(
     axis_text_y_cex = y_axis_tick_label_cex,
     show_counts = show_counts,
     ylabel = ylabel,
-    show_extra_top_bar = show_extra_top_bar,
     plot_complex = plot_complex
   )
 }
