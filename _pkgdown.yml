@@ -20,7 +20,6 @@ articles:
   - title: Articles
     contents:
       - mSigPlot
-      - gallery
 
 reference:
   - title: Auto-dispatch
