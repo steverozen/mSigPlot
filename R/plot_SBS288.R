@@ -64,9 +64,9 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
     oob = scales::oob_keep,
     labels = if (is_counts) scales::label_number(accuracy = 1) else ggplot2::waiver()
   )
-  p1 <- p1 + shared_scale
-  p2 <- p2 + shared_scale
-  p3 <- p3 + shared_scale
+  p1 <- suppressMessages(p1 + shared_scale)
+  p2 <- suppressMessages(p2 + shared_scale)
+  p3 <- suppressMessages(p3 + shared_scale)
 
   # Height ratios: top panel gets space for upper bars,
   # bottom panel gets space for x-labels
