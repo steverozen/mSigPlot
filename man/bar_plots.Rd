@@ -150,7 +150,6 @@ plot_ID476_right(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  show_x_labels = FALSE,
   stop_at_9 = TRUE
 )
 
@@ -362,9 +361,6 @@ the indel type prefix (\code{plot_ID476}, \code{plot_ID476_right} only).}
 
 \item{plot_complex}{Logical. Include Complex indel channels
 (\code{plot_ID89}, \code{plot_ID476}, \code{plot_ID476_right} only).}
-
-\item{show_x_labels}{Logical. Display channel labels as rotated x-axis
-tick labels (\code{plot_ID476_right} only).}
 
 \item{ylab}{Y-axis label control (\code{plot_ID89} only). \code{TRUE} (default)
 auto-detects from data. A character string overrides the label.

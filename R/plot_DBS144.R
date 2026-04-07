@@ -65,8 +65,6 @@
 #'   vertical reference lines (`plot_ID476`, `plot_ID476_right` only).
 #' @param simplify_labels Logical. Simplify peak labels by removing
 #'   the indel type prefix (`plot_ID476`, `plot_ID476_right` only).
-#' @param show_x_labels Logical. Display channel labels as rotated x-axis
-#'   tick labels (`plot_ID476_right` only).
 #' @param ... Additional arguments passed to `plot_SBS96()` (`plot_SBS288` only).
 #'
 #' @return Plot functions return a ggplot2 object, or NULL with a warning

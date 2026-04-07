@@ -87,7 +87,6 @@ plot_476_right(
   x_title_cex = 0.9,
   y_title_cex = 0.9,
   plot_complex = FALSE,
-  show_x_labels = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
   stop_at_9 = TRUE,
@@ -119,7 +118,6 @@ plot_476_right_pdf(
   x_title_cex = 0.9,
   y_title_cex = 0.9,
   plot_complex = FALSE,
-  show_x_labels = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
   stop_at_9 = TRUE
@@ -252,9 +250,6 @@ display them only when the catalog contains counts (sum > 1.1).}
 \item{label_size}{Deprecated. Use \code{peak_label_cex} instead.}
 
 \item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
-
-\item{show_x_labels}{Logical. Display channel labels as rotated x-axis
-tick labels (\code{plot_476_right} only).}
 
 \item{grid}{Logical, draw grid lines.}
 

@@ -32,7 +32,6 @@ plot_ID476_right <- function(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  show_x_labels = FALSE,
   stop_at_9 = TRUE
 ) {
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
@@ -218,16 +217,8 @@ plot_ID476_right <- function(
     ggplot2::xlab("Indel Type") +
     ggplot2::ylab(ylabel) +
     ggplot2::scale_x_continuous(
-      breaks = if (show_x_labels) {
-        seq_len(n_channels)
-      } else {
-        flanking_blocks$xmin
-      },
-      labels = if (show_x_labels) {
-        muts_basis_melt$Figlabel[order(muts_basis_melt$x_pos)]
-      } else {
-        flanking_blocks$label
-      },
+      breaks = flanking_blocks$xmin,
+      labels = flanking_blocks$label,
       limits = c(0.5, n_channels + 0.5)
     ) +
     ggplot2::scale_y_continuous(
@@ -245,8 +236,8 @@ plot_ID476_right <- function(
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
         size = rel(axis_text_x_cex),
-        angle = if (show_x_labels) 90 else 0,
-        hjust = if (show_x_labels) 1 else 0,
+        angle = 0,
+        hjust = 0,
         vjust = 0.5,
       ),
       axis.ticks.x = ggplot2::element_line(),

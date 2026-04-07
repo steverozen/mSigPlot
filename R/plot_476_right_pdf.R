@@ -19,7 +19,6 @@ plot_476_right_pdf <- function(
   x_title_cex = 0.9,
   y_title_cex = 0.9,
   plot_complex = FALSE,
-  show_x_labels = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
   stop_at_9 = TRUE
@@ -41,7 +40,6 @@ plot_476_right_pdf <- function(
       x_title_cex = x_title_cex,
       y_title_cex = y_title_cex,
       plot_complex = plot_complex,
-      show_x_labels = show_x_labels,
       show_counts = show_counts,
       count_label_cex = count_label_cex,
       stop_at_9 = stop_at_9

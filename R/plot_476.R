@@ -67,8 +67,6 @@
 #'   reference lines (`plot_476`, `plot_476_right` only).
 #' @param simplify_labels Logical. Simplify peak labels
 #'   (`plot_476`, `plot_476_right` only).
-#' @param show_x_labels Logical. Display channel labels as rotated x-axis
-#'   tick labels (`plot_476_right` only).
 #' @param text_size Deprecated. Use `text_cex` instead.
 #' @param top_bar_text_size Deprecated. Use `top_bar_text_cex` instead.
 #' @param title_text_size Deprecated. Use `title_text_cex` instead.

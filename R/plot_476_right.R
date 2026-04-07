@@ -24,7 +24,6 @@ plot_476_right <- function(
   x_title_cex = 0.9,
   y_title_cex = 0.9,
   plot_complex = FALSE,
-  show_x_labels = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
   stop_at_9 = TRUE,
@@ -130,7 +129,6 @@ plot_476_right <- function(
     vline_labels = vline_labels,
     simplify_labels = simplify_labels,
     plot_complex = plot_complex,
-    show_x_labels = show_x_labels,
     stop_at_9 = stop_at_9
   )
 }
