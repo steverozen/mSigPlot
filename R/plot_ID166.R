@@ -19,8 +19,6 @@ plot_ID166 <- function(
   show_axis_text_y = TRUE,
   show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
-  xlabels = NULL,
-  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -39,15 +37,6 @@ plot_ID166 <- function(
   catalog <- normalize_catalog(catalog, 166, catalog_row_order()$ID166, "ID166")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
-
-  axis_vis <- resolve_axis_params(
-    show_axis_text_x, show_axis_text_y,
-    show_axis_title_x, show_axis_title_y,
-    xlabels, ylabels
-  )
-  show_axis_text_x <- axis_vis$show_axis_text_x
-  show_axis_text_y <- axis_vis$show_axis_text_y
-  show_axis_title_y <- axis_vis$show_axis_title_y
 
   base_mm <- base_mm(base_size)
 

@@ -109,28 +109,28 @@ message("[8/13] plot_DBS144")
 cat144 <- load_csv_catalog("regress.cat.dbs.144.csv", "DBS144")
 save_ggplot(plot_DBS144(cat144), "plot_DBS144")
 
-# 9. plot_83
-message("[9/13] plot_83")
+# 9. plot_ID83
+message("[9/13] plot_ID83")
 sig83 <- load_tsv_catalog("COSMIC_v3.5_ID_GRCh37_signatures.tsv")
-save_ggplot(plot_83(sig83[, 1, drop = FALSE]), "plot_83")
+save_ggplot(plot_ID83(sig83[, 1, drop = FALSE]), "plot_ID83")
 
-# 10. plot_89
-message("[10/13] plot_89")
+# 10. plot_ID89
+message("[10/13] plot_ID89")
 sig89 <- load_tsv_catalog("type89_liu_et_al_sigs.tsv")
-save_ggplot(plot_89(as.numeric(sig89[, 1]), plot_title = "ID89"), "plot_89")
+save_ggplot(plot_ID89(as.numeric(sig89[, 1]), plot_title = "ID89"), "plot_ID89")
 
-# 11. plot_476
-message("[11/13] plot_476")
+# 11. plot_ID476
+message("[11/13] plot_ID476")
 sig476 <- load_tsv_catalog("type476_liu_et_al_sigs.tsv")
-p476 <- plot_476(as.numeric(sig476[, 1]), plot_title = "ID476")
+p476 <- plot_ID476(as.numeric(sig476[, 1]), plot_title = "ID476")
 set.seed(1)
-save_ggplot(p476, "plot_476")
+save_ggplot(p476, "plot_ID476")
 
-# 12. plot_476_right
-message("[12/13] plot_476_right")
-p476r <- plot_476_right(as.numeric(sig476[, 1]), plot_title = "ID476R")
+# 12. plot_ID476_right
+message("[12/13] plot_ID476_right")
+p476r <- plot_ID476_right(as.numeric(sig476[, 1]), plot_title = "ID476R")
 set.seed(1)
-save_ggplot(p476r, "plot_476_right")
+save_ggplot(p476r, "plot_ID476_right")
 
 # 13. plot_ID166
 message("[13/13] plot_ID166")

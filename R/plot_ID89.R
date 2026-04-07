@@ -18,7 +18,6 @@ plot_ID89 <- function(
   show_axis_text_y = TRUE,
   show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
-  xlabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1.0,
@@ -45,16 +44,6 @@ plot_ID89 <- function(
     plot_title <- colnames(catalog)[1] %||% ""
   }
   catalog <- catalog[, 1]
-
-  axis_vis <- resolve_axis_params(
-    show_axis_text_x, show_axis_text_y,
-    show_axis_title_x, show_axis_title_y,
-    xlabels = xlabels
-  )
-  show_axis_text_x <- axis_vis$show_axis_text_x
-  show_axis_text_y <- axis_vis$show_axis_text_y
-  show_axis_title_x <- axis_vis$show_axis_title_x
-  show_axis_title_y <- axis_vis$show_axis_title_y
 
   # Resolve ylab parameter
   if (isTRUE(ylab)) {

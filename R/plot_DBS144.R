@@ -41,9 +41,6 @@
 #' @param show_axis_text_y Logical. If FALSE, hide y-axis tick labels.
 #' @param show_axis_title_x Logical. If FALSE, hide the x-axis title.
 #' @param show_axis_title_y Logical. If FALSE, hide the y-axis title.
-#' @param xlabels Deprecated; use `show_axis_text_x` instead.
-#' @param ylabels Deprecated; use `show_axis_text_y` and `show_axis_title_y`
-#'   instead.
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
 #'   count labels. If `FALSE`, never display them. If `NULL` (the default),
 #'   display them only when the catalog contains counts (sum > 1.1).
@@ -65,6 +62,8 @@
 #'   vertical reference lines (`plot_ID476`, `plot_ID476_right` only).
 #' @param simplify_labels Logical. Simplify peak labels by removing
 #'   the indel type prefix (`plot_ID476`, `plot_ID476_right` only).
+#' @param stop_at_9 Logical. If TRUE, cap repeat length labels at 9
+#'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
 #' @param ... Additional arguments passed to `plot_SBS96()` (`plot_SBS288` only).
 #'
 #' @return Plot functions return a ggplot2 object, or NULL with a warning
@@ -94,7 +93,6 @@ plot_DBS144 <- function(
   show_axis_text_y = TRUE,
   show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
-  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -106,15 +104,6 @@ plot_DBS144 <- function(
   catalog <- normalize_catalog(catalog, 144, catalog_row_order()$DBS144, "DBS144")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
-
-  axis_vis <- resolve_axis_params(
-    show_axis_text_x, show_axis_text_y,
-    show_axis_title_x, show_axis_title_y,
-    ylabels = ylabels
-  )
-  show_axis_text_x <- axis_vis$show_axis_text_x
-  show_axis_text_y <- axis_vis$show_axis_text_y
-  show_axis_title_y <- axis_vis$show_axis_title_y
 
   base_mm <- base_mm(base_size)
 

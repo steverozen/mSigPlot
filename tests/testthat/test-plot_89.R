@@ -1,20 +1,20 @@
-test_that("plot_89 returns a ggplot object", {
+test_that("plot_ID89 returns a ggplot object", {
   # Create a simple test catalog with 89 values
   test_catalog <- rep(0.01, 89)
 
-  p <- plot_89(
+  p <- plot_ID89(
     catalog = test_catalog,
-    text_cex = 3,
+    block_label_cex = 3,
     plot_title = "Test 89 type plot"
   )
 
   expect_s3_class(p, "ggplot")
 
-  p <- plot_89(
+  p <- plot_ID89(
     catalog = test_catalog,
-    text_cex = 3,
+    block_label_cex = 3,
     plot_title = "Test 89 type plot",
-    setyaxis = .03
+    ylim = .03
   )
 })
 test_that("plot_ID89_pdf creates PDF file", {
@@ -55,13 +55,13 @@ test_that("plot_ID89_pdf creates PDF file", {
   unlink(temp_pdf)
 })
 
-test_that("plot_89 adjusts setyaxis when too small for highest bar", {
+test_that("plot_ID89 adjusts ylim when too small for highest bar", {
   test_catalog <- rep(0.01, 89)
-  # Set setyaxis well below the max bar value so it must be adjusted
-  p <- plot_89(
+  # Set ylim well below the max bar value so it must be adjusted
+  p <- plot_ID89(
     catalog = test_catalog,
     plot_title = "ymax adjustment test",
-    setyaxis = 0.001
+    ylim = 0.001
   )
   expect_s3_class(p, "ggplot")
   # The y-axis upper limit should be >= 1.1 * max bar value
@@ -70,7 +70,7 @@ test_that("plot_89 adjusts setyaxis when too small for highest bar", {
   expect_gte(y_range[2], 1.1 * max(test_catalog))
 })
 
-test_that("plot_89 count labels render with count catalog", {
+test_that("plot_ID89 count labels render with count catalog", {
   fixture_path <- testthat::test_path("fixtures", "type89_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -83,7 +83,7 @@ test_that("plot_89 count labels render with count catalog", {
   # Multiply by 100 to create a count-type catalog (sum >> 1.1)
   catalog_count <- sig_data[, 1] * 100
 
-  p <- plot_89(
+  p <- plot_ID89(
     catalog = catalog_count,
     plot_title = "Counts test"
   )
@@ -98,7 +98,7 @@ test_that("plot_89 count labels render with count catalog", {
   expect_true(has_count_layer)
 })
 
-test_that("plot_89 show_counts = FALSE suppresses count labels", {
+test_that("plot_ID89 show_counts = FALSE suppresses count labels", {
   fixture_path <- testthat::test_path("fixtures", "type89_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -110,7 +110,7 @@ test_that("plot_89 show_counts = FALSE suppresses count labels", {
 
   catalog_count <- sig_data[, 1] * 100
 
-  p <- plot_89(
+  p <- plot_ID89(
     catalog = catalog_count,
     plot_title = "No counts",
     show_counts = FALSE

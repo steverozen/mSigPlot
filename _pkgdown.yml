@@ -78,19 +78,6 @@ reference:
       - plot_ID476_right
       - plot_ID476_right_pdf
 
-  - title: Indel (legacy)
-    desc: >
-      Original indel plot functions, kept for backward compatibility.
-      For new code, prefer `plot_ID83`, `plot_ID89`, `plot_ID476`,
-      `plot_ID476_right`.
-    contents:
-      - plot_83
-      - plot_89
-      - plot_476
-      - plot_476_pdf
-      - plot_476_right
-      - plot_476_right_pdf
-
   - title: Utilities
     desc: Helper functions for working with catalog data.
     contents:

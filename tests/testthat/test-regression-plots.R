@@ -134,54 +134,54 @@ test_that("plot_DBS144 regression", {
   check_regression(hash, "plot_DBS144")
 })
 
-test_that("plot_83 regression", {
+test_that("plot_ID83 regression", {
   skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "COSMIC_v3.5_ID_GRCh37_signatures.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
   )
   catalog <- sig_data[, 1, drop = FALSE]
-  p <- plot_83(catalog)
-  hash <- render_and_hash(p, "plot_83")
-  check_regression(hash, "plot_83")
+  p <- plot_ID83(catalog)
+  hash <- render_and_hash(p, "plot_ID83")
+  check_regression(hash, "plot_ID83")
 })
 
-test_that("plot_89 regression", {
+test_that("plot_ID89 regression", {
   skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "type89_liu_et_al_sigs.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
   )
   catalog <- as.numeric(sig_data[, 1])
-  p <- plot_89(catalog, plot_title = "SBS89_regress")
-  hash <- render_and_hash(p, "plot_89")
-  check_regression(hash, "plot_89")
+  p <- plot_ID89(catalog, plot_title = "SBS89_regress")
+  hash <- render_and_hash(p, "plot_ID89")
+  check_regression(hash, "plot_ID89")
 })
 
-test_that("plot_476 regression", {
+test_that("plot_ID476 regression", {
   skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "type476_liu_et_al_sigs.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
   )
   catalog <- as.numeric(sig_data[, 1])
-  p <- plot_476(catalog, plot_title = "ID476_regress")
+  p <- plot_ID476(catalog, plot_title = "ID476_regress")
   set.seed(1) # ggrepel uses randomness at render time
-  hash <- render_and_hash(p, "plot_476")
-  check_regression(hash, "plot_476")
+  hash <- render_and_hash(p, "plot_ID476")
+  check_regression(hash, "plot_ID476")
 })
 
-test_that("plot_476_right regression", {
+test_that("plot_ID476_right regression", {
   skip_if_no_pixi()
   sig_data <- read.table(
     test_path("fixtures", "type476_liu_et_al_sigs.tsv"),
     header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
   )
   catalog <- as.numeric(sig_data[, 1])
-  p <- plot_476_right(catalog, plot_title = "ID476R_regress")
+  p <- plot_ID476_right(catalog, plot_title = "ID476R_regress")
   set.seed(1) # ggrepel uses randomness at render time
-  hash <- render_and_hash(p, "plot_476_right")
-  check_regression(hash, "plot_476_right")
+  hash <- render_and_hash(p, "plot_ID476_right")
+  check_regression(hash, "plot_ID476_right")
 })
 
 test_that("plot_ID166 regression", {

@@ -1,16 +1,16 @@
-test_that("plot_guess dispatches to plot_476 for 476-row catalog", {
+test_that("plot_guess dispatches to plot_ID476 for 476-row catalog", {
   catalog <- data.frame(sample1 = runif(476))
   p <- plot_guess(catalog)
   expect_s3_class(p, "ggplot")
 })
 
-test_that("plot_guess dispatches to plot_89 for 89-row catalog", {
+test_that("plot_guess dispatches to plot_ID89 for 89-row catalog", {
   catalog <- data.frame(sample1 = runif(89))
   p <- plot_guess(catalog)
   expect_s3_class(p, "ggplot")
 })
 
-test_that("plot_guess dispatches to plot_83 for 83-row catalog", {
+test_that("plot_guess dispatches to plot_ID83 for 83-row catalog", {
   catalog <- data.frame(sample1 = runif(83))
   p <- plot_guess(catalog)
   expect_s3_class(p, "ggplot")

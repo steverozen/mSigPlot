@@ -42,11 +42,11 @@ ggplot_functions <- list(
   list(fn = "plot_SBS12",  n = 192, named = TRUE),
   list(fn = "plot_DBS78",  n = 78,  named = TRUE),
   list(fn = "plot_DBS144", n = 144, named = TRUE),
-  list(fn = "plot_83",     n = 83,  named = TRUE),
+  list(fn = "plot_ID83",     n = 83,  named = TRUE),
   list(fn = "plot_ID166",  n = 166, named = TRUE),
-  list(fn = "plot_89",     n = 89,  named = TRUE),
-  list(fn = "plot_476",    n = 476, named = FALSE),
-  list(fn = "plot_476_right", n = 476, named = FALSE)
+  list(fn = "plot_ID89",     n = 89,  named = TRUE),
+  list(fn = "plot_ID476",    n = 476, named = FALSE),
+  list(fn = "plot_ID476_right", n = 476, named = FALSE)
 )
 
 for (spec in ggplot_functions) {

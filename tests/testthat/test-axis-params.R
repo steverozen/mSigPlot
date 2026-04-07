@@ -1,57 +1,9 @@
-test_that("resolve_axis_params returns defaults when no deprecated params", {
-  result <- resolve_axis_params()
-  expect_true(result$show_axis_text_x)
-  expect_true(result$show_axis_text_y)
-  expect_true(result$show_axis_title_x)
-  expect_true(result$show_axis_title_y)
-})
-
-test_that("resolve_axis_params maps xlabels to show_axis_text_x", {
-  expect_warning(result <- resolve_axis_params(xlabels = FALSE),
-                 "xlabels.*deprecated")
-  expect_false(result$show_axis_text_x)
-  expect_true(result$show_axis_text_y)
-})
-
-test_that("resolve_axis_params maps ylabels to text_y and title_y", {
-  expect_warning(result <- resolve_axis_params(ylabels = FALSE),
-                 "ylabels.*deprecated")
-  expect_false(result$show_axis_text_y)
-  expect_false(result$show_axis_title_y)
-  expect_true(result$show_axis_text_x)
-  expect_true(result$show_axis_title_x)
-})
-
-test_that("resolve_axis_params errors on xlabels + show_axis_text_x conflict", {
-  expect_error(
-    resolve_axis_params(show_axis_text_x = FALSE, xlabels = FALSE),
-    "Cannot specify both"
-  )
-})
-
-test_that("resolve_axis_params errors on ylabels + show_axis_text_y conflict", {
-  expect_error(
-    resolve_axis_params(show_axis_text_y = FALSE, ylabels = FALSE),
-    "Cannot specify both"
-  )
-})
-
 test_that("plot_SBS96 accepts show_axis_text_x = FALSE", {
   set.seed(1)
   sig <- runif(96)
   names(sig) <- catalog_row_order()$SBS96
   p <- plot_SBS96(sig, show_axis_text_x = FALSE)
   expect_s3_class(p, "ggplot")
-})
-
-test_that("plot_SBS96 warns on deprecated xlabels", {
-  set.seed(1)
-  sig <- runif(96)
-  names(sig) <- catalog_row_order()$SBS96
-  expect_warning(
-    plot_SBS96(sig, xlabels = FALSE),
-    "xlabels.*deprecated"
-  )
 })
 
 test_that("plot_DBS78 accepts show_axis_text_y = FALSE", {

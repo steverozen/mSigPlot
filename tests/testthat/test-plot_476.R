@@ -1,4 +1,4 @@
-test_that("plot_476 returns a ggplot object", {
+test_that("plot_ID476 returns a ggplot object", {
   # Load fixture data
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
@@ -12,16 +12,16 @@ test_that("plot_476 returns a ggplot object", {
   # Test with first signature column
   catalog <- as.numeric(sig_data[, 1])
 
-  p <- plot_476(
+  p <- plot_ID476(
     catalog = catalog,
-    block_text_cex = 3,
+    class_label_cex = 3,
     plot_title = colnames(sig_data)[1]
   )
 
   expect_s3_class(p, "ggplot")
 })
 
-test_that("plot_476 handles different label options", {
+test_that("plot_ID476 handles different label options", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -34,7 +34,7 @@ test_that("plot_476 handles different label options", {
   catalog <- as.numeric(sig_data[, 1])
 
   # Test with no labels
-  p_no_labels <- plot_476(
+  p_no_labels <- plot_ID476(
     catalog = catalog,
     plot_title = "No labels",
     num_peak_labels = 0
@@ -42,7 +42,7 @@ test_that("plot_476 handles different label options", {
   expect_s3_class(p_no_labels, "ggplot")
 
   # Test with simplified labels
-  p_simplified <- plot_476(
+  p_simplified <- plot_ID476(
     catalog = catalog,
     plot_title = "Simplified labels",
     num_peak_labels = 5,
@@ -51,7 +51,7 @@ test_that("plot_476 handles different label options", {
   expect_s3_class(p_simplified, "ggplot")
 
   # Test with full labels
-  p_full <- plot_476(
+  p_full <- plot_ID476(
     catalog = catalog,
     plot_title = "Full labels",
     num_peak_labels = 3,
@@ -60,7 +60,7 @@ test_that("plot_476 handles different label options", {
   expect_s3_class(p_full, "ggplot")
 })
 
-test_that("plot_476 handles vertical line annotations", {
+test_that("plot_ID476 handles vertical line annotations", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -72,7 +72,7 @@ test_that("plot_476 handles vertical line annotations", {
 
   catalog <- as.numeric(sig_data[, 1])
 
-  p <- plot_476(
+  p <- plot_ID476(
     catalog = catalog,
     plot_title = "With vlines",
     vline_labels = c("A[Del(C):R1]A", "G[Del(C):R1]A")
@@ -81,7 +81,7 @@ test_that("plot_476 handles vertical line annotations", {
   expect_s3_class(p, "ggplot")
 })
 
-test_that("plot_476 handles base_size", {
+test_that("plot_ID476 handles base_size", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -93,7 +93,7 @@ test_that("plot_476 handles base_size", {
 
   catalog <- as.numeric(sig_data[, 1])
 
-  p <- plot_476(
+  p <- plot_ID476(
     catalog = catalog,
     plot_title = "With base_size",
     base_size = 30
@@ -103,7 +103,7 @@ test_that("plot_476 handles base_size", {
 })
 
 
-test_that("plot_476_pdf creates PDF file", {
+test_that("plot_ID476_pdf creates PDF file", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -120,7 +120,7 @@ test_that("plot_476_pdf creates PDF file", {
 
   temp_pdf <- tempfile(fileext = ".pdf")
 
-  plot_476_pdf(
+  plot_ID476_pdf(
     catalog = catalog_subset,
     filename = temp_pdf,
     num_peak_labels = 2
@@ -129,11 +129,11 @@ test_that("plot_476_pdf creates PDF file", {
   expect_true(file.exists(temp_pdf))
   expect_gt(file.size(temp_pdf), 0)
 
-  plot_476_pdf(
+  plot_ID476_pdf(
     catalog = catalog_subset,
     filename = temp_pdf,
     num_peak_labels = 2,
-    title_text_cex = 0.8
+    plot_title_cex = 0.8
   )
 
   expect_true(file.exists(temp_pdf))
@@ -143,7 +143,7 @@ test_that("plot_476_pdf creates PDF file", {
   unlink(temp_pdf)
 })
 
-test_that("plot_476 count labels render with count catalog", {
+test_that("plot_ID476 count labels render with count catalog", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -156,7 +156,7 @@ test_that("plot_476 count labels render with count catalog", {
   # Multiply by 100 to create a count-type catalog (sum >> 1.1)
   catalog_count <- as.numeric(sig_data[, 1]) * 100
 
-  p <- plot_476(
+  p <- plot_ID476(
     catalog = catalog_count,
     plot_title = "Counts test"
   )
@@ -171,7 +171,7 @@ test_that("plot_476 count labels render with count catalog", {
   expect_true(has_count_layer)
 })
 
-test_that("plot_476 show_counts = FALSE suppresses count labels", {
+test_that("plot_ID476 show_counts = FALSE suppresses count labels", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -183,7 +183,7 @@ test_that("plot_476 show_counts = FALSE suppresses count labels", {
 
   catalog_count <- as.numeric(sig_data[, 1]) * 100
 
-  p <- plot_476(
+  p <- plot_ID476(
     catalog = catalog_count,
     plot_title = "No counts",
     show_counts = FALSE
@@ -199,7 +199,7 @@ test_that("plot_476 show_counts = FALSE suppresses count labels", {
   expect_false(has_count_layer)
 })
 
-test_that("plot_476_right count labels render with count catalog", {
+test_that("plot_ID476_right count labels render with count catalog", {
   fixture_path <- testthat::test_path("fixtures", "type476_liu_et_al_sigs.tsv")
   sig_data <- read.table(
     fixture_path,
@@ -211,7 +211,7 @@ test_that("plot_476_right count labels render with count catalog", {
 
   catalog_count <- as.numeric(sig_data[, 1]) * 100
 
-  p <- plot_476_right(
+  p <- plot_ID476_right(
     catalog = catalog_count,
     plot_title = "Right counts test"
   )

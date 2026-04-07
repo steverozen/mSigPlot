@@ -63,30 +63,30 @@ test_that("plot_SBS12 renders negative bars", {
   expect_negative_bars(p, "plot_SBS12")
 })
 
-test_that("plot_83 renders negative bars", {
+test_that("plot_ID83 renders negative bars", {
   set.seed(6)
   catalog <- runif(83, min = -0.03, max = 0.05)
   names(catalog) <- catalog_row_order()$ID
-  p <- plot_83(catalog, plot_title = "ID83 neg")
+  p <- plot_ID83(catalog, plot_title = "ID83 neg")
   expect_s3_class(p, "ggplot")
-  expect_negative_bars(p, "plot_83")
+  expect_negative_bars(p, "plot_ID83")
 })
 
-test_that("plot_89 renders negative bars", {
+test_that("plot_ID89 renders negative bars", {
   set.seed(7)
   catalog <- runif(89, min = -0.03, max = 0.05)
-  p <- plot_89(catalog, plot_title = "ID89 neg", show_top_bar = FALSE)
+  p <- plot_ID89(catalog, plot_title = "ID89 neg", upper = FALSE)
   expect_s3_class(p, "ggplot")
-  expect_negative_bars(p, "plot_89")
+  expect_negative_bars(p, "plot_ID89")
 })
 
-test_that("plot_476 renders negative bars", {
+test_that("plot_ID476 renders negative bars", {
   set.seed(8)
   catalog <- runif(476, min = -0.01, max = 0.03)
   names(catalog) <- catalog_row_order()$ID476
-  p <- plot_476(catalog, plot_title = "ID476 neg")
+  p <- plot_ID476(catalog, plot_title = "ID476 neg")
   expect_s3_class(p, "ggplot")
-  expect_negative_bars(p, "plot_476")
+  expect_negative_bars(p, "plot_ID476")
 })
 
 test_that("plot_ID166 renders negative bars", {
