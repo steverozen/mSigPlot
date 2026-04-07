@@ -1,3 +1,7 @@
+# mSigPlot 2.0.0
+
+* Remove all deprecated functionality
+
 # mSigPlot 1.0.12
 
 * More cleanup for consistency
