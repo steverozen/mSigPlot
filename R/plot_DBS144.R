@@ -56,10 +56,8 @@
 #'   category bar (`plot_ID89` only).
 #' @param plot_complex Logical. Include Complex indel channels
 #'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
-#' @param num_labels Integer. Number of top peaks to label per category block
-#'   (`plot_ID476`, `plot_ID476_right` only).
-#' @param ggrepel_cex Numeric. Size of ggrepel peak labels
-#'   (`plot_ID476`, `plot_ID476_right` only).
+#' @param num_peak_labels Integer. Number of top peaks to label (0 = none).
+#' @param peak_label_cex Numeric. Size multiplier for peak labels.
 #' @param label_threshold_denominator Numeric. Peaks below
 #'   max/label_threshold_denominator are not labeled
 #'   (`plot_ID476`, `plot_ID476_right` only).

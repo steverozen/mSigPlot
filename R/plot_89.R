@@ -27,6 +27,9 @@ plot_89 <- function(
   plot_complex = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7,
+  stop_at_9 = TRUE,
   text_size = NULL,
   top_bar_text_size = NULL,
   title_text_size = NULL,
@@ -112,6 +115,9 @@ plot_89 <- function(
     axis_text_y_cex = y_axis_tick_label_cex,
     show_counts = show_counts,
     ylab = if (is.null(ylabel)) TRUE else ylabel,
-    plot_complex = plot_complex
+    plot_complex = plot_complex,
+    num_peak_labels = num_peak_labels,
+    peak_label_cex = peak_label_cex,
+    stop_at_9 = stop_at_9
   )
 }

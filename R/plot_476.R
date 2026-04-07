@@ -56,9 +56,9 @@
 #'   (`plot_89`, `plot_476`, `plot_476_right` only).
 #' @param block_text_cex Numeric. Size of category block labels
 #'   (`plot_476`, `plot_476_right` only).
-#' @param num_labels Integer. Number of top peaks to label
+#' @param num_peak_labels Integer. Number of top peaks to label
 #'   (`plot_476`, `plot_476_right` only).
-#' @param ggrepel_cex Numeric. Size of ggrepel peak labels
+#' @param peak_label_cex Numeric. Size of ggrepel peak labels
 #'   (`plot_476`, `plot_476_right` only).
 #' @param label_threshold_denominator Numeric. Peaks below
 #'   max/label_threshold_denominator are not labeled
@@ -78,8 +78,8 @@
 #' @param x_title_size Deprecated. Use `x_title_cex` instead.
 #' @param y_title_size Deprecated. Use `y_title_cex` instead.
 #' @param block_text_size Deprecated. Use `block_text_cex` instead.
-#' @param ggrepel_size Deprecated. Use `ggrepel_cex` instead.
-#' @param label_size Deprecated. Use `ggrepel_cex` instead.
+#' @param ggrepel_size Deprecated. Use `peak_label_cex` instead.
+#' @param label_size Deprecated. Use `peak_label_cex` instead.
 #'
 #' @return Plot functions return a ggplot2 object, or NULL with a warning
 #'   if the catalog is invalid (wrong size or row names). PDF functions
@@ -103,8 +103,8 @@ plot_476 <- function(
   catalog,
   block_text_cex = 0.78,
   plot_title = NULL,
-  num_labels = 3,
-  ggrepel_cex = 0.52,
+  num_peak_labels = 3,
+  peak_label_cex = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -117,6 +117,7 @@ plot_476 <- function(
   plot_complex = FALSE,
   show_counts = NULL,
   count_label_cex = 0.52,
+  stop_at_9 = TRUE,
   block_text_size = NULL,
   ggrepel_size = NULL,
   title_text_size = NULL,
@@ -137,11 +138,11 @@ plot_476 <- function(
     block_text_cex <- text_size
   }
   if (!is.null(label_size)) {
-    if (!missing(ggrepel_cex)) {
-      stop("Cannot specify both 'label_size' and 'ggrepel_cex'.")
+    if (!missing(peak_label_cex)) {
+      stop("Cannot specify both 'label_size' and 'peak_label_cex'.")
     }
-    warning("'label_size' is deprecated. Use 'ggrepel_cex' instead.")
-    ggrepel_cex <- label_size
+    warning("'label_size' is deprecated. Use 'peak_label_cex' instead.")
+    peak_label_cex <- label_size
   }
   if (!is.null(block_text_size)) {
     if (!missing(block_text_cex)) {
@@ -151,11 +152,11 @@ plot_476 <- function(
     block_text_cex <- block_text_size
   }
   if (!is.null(ggrepel_size)) {
-    if (!missing(ggrepel_cex)) {
-      stop("Cannot specify both 'ggrepel_size' and 'ggrepel_cex'.")
+    if (!missing(peak_label_cex)) {
+      stop("Cannot specify both 'ggrepel_size' and 'peak_label_cex'.")
     }
-    warning("'ggrepel_size' is deprecated. Use 'ggrepel_cex' instead.")
-    ggrepel_cex <- ggrepel_size
+    warning("'ggrepel_size' is deprecated. Use 'peak_label_cex' instead.")
+    peak_label_cex <- ggrepel_size
   }
   if (!is.null(title_text_size)) {
     if (!missing(title_text_cex)) {
@@ -213,11 +214,12 @@ plot_476 <- function(
     axis_title_y_cex = y_title_cex,
     axis_text_y_cex = y_axis_tick_label_cex,
     show_counts = show_counts,
-    num_labels = num_labels,
-    ggrepel_cex = ggrepel_cex,
+    num_peak_labels = num_peak_labels,
+    peak_label_cex = peak_label_cex,
     label_threshold_denominator = label_threshold_denominator,
     vline_labels = vline_labels,
     simplify_labels = simplify_labels,
-    plot_complex = plot_complex
+    plot_complex = plot_complex,
+    stop_at_9 = stop_at_9
   )
 }

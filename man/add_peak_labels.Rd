@@ -10,8 +10,8 @@ add_peak_labels(
   x_col,
   y_col,
   label_col,
-  num_labels = 0,
-  ggrepel_cex = 0.7,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7,
   base_size = 11,
   arrow_length = 0.01,
   label_threshold_denominator = 7
@@ -28,9 +28,9 @@ add_peak_labels(
 
 \item{label_col}{Character name of the label column in \code{df}.}
 
-\item{num_labels}{Integer number of top bars to label (0 = none).}
+\item{num_peak_labels}{Integer number of top bars to label (0 = none).}
 
-\item{ggrepel_cex}{Numeric multiplier for label text size.}
+\item{peak_label_cex}{Numeric multiplier for label text size.}
 
 \item{base_size}{Numeric base font size.}
 
@@ -40,7 +40,7 @@ add_peak_labels(
 max / denominator are candidates for labeling.}
 }
 \value{
-The ggplot object with labels added (or unchanged if num_labels == 0).
+The ggplot object with labels added (or unchanged if num_peak_labels == 0).
 }
 \description{
 Adds \code{ggrepel::geom_text_repel()} labels with closed arrowhead segments

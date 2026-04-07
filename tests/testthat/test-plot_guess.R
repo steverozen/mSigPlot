@@ -59,7 +59,7 @@ test_that("plot_guess_pdf passes additional arguments", {
   tmp_file <- tempfile(fileext = ".pdf")
   on.exit(unlink(tmp_file), add = TRUE)
 
-  plot_guess_pdf(catalog, tmp_file, num_labels = 2)
+  plot_guess_pdf(catalog, tmp_file, num_peak_labels = 2)
 
   expect_true(file.exists(tmp_file))
 })

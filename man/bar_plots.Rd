@@ -68,8 +68,8 @@ plot_DBS78(
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
   show_counts = NULL,
-  num_labels = 0,
-  ggrepel_cex = 0.7
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 )
 
 plot_DBS78_pdf(catalog, filename, ...)
@@ -96,7 +96,9 @@ plot_ID166(
   axis_title_x_cex = 1,
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 )
 
 plot_ID166_pdf(catalog, filename, ...)
@@ -117,12 +119,13 @@ plot_ID476(
   show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
   show_counts = NULL,
-  num_labels = 4,
-  ggrepel_cex = 0.52,
+  num_peak_labels = 4,
+  peak_label_cex = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = FALSE,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  stop_at_9 = TRUE
 )
 
 plot_ID476_right(
@@ -141,13 +144,14 @@ plot_ID476_right(
   show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
   show_counts = NULL,
-  num_labels = 3,
-  ggrepel_cex = 0.7,
+  num_peak_labels = 3,
+  peak_label_cex = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  show_x_labels = FALSE
+  show_x_labels = FALSE,
+  stop_at_9 = TRUE
 )
 
 plot_ID83(
@@ -173,8 +177,8 @@ plot_ID83(
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
   show_counts = NULL,
-  num_labels = 0,
-  ggrepel_cex = 0.7
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 )
 
 plot_ID83_pdf(catalog, filename, ...)
@@ -201,7 +205,10 @@ plot_ID89(
   show_counts = NULL,
   ylab = TRUE,
   show_extra_top_bar = FALSE,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7,
+  stop_at_9 = TRUE
 )
 
 plot_ID89_pdf(catalog, filename, ...)
@@ -246,7 +253,9 @@ plot_SBS192(
   axis_title_x_cex = 1,
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 )
 
 plot_SBS192_pdf(catalog, filename, ...)
@@ -274,8 +283,8 @@ plot_SBS96(
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
   show_counts = NULL,
-  num_labels = 0,
-  ggrepel_cex = 0.7
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 )
 
 plot_SBS96_pdf(catalog, filename, ...)
@@ -331,11 +340,9 @@ Currently has no effect in some functions.}
 count labels. If \code{FALSE}, never display them. If \code{NULL} (the default),
 display them only when the catalog contains counts (sum > 1.1).}
 
-\item{num_labels}{Integer. Number of top peaks to label per category block
-(\code{plot_ID476}, \code{plot_ID476_right} only).}
+\item{num_peak_labels}{Integer. Number of top peaks to label (0 = none).}
 
-\item{ggrepel_cex}{Numeric. Size of ggrepel peak labels
-(\code{plot_ID476}, \code{plot_ID476_right} only).}
+\item{peak_label_cex}{Numeric. Size multiplier for peak labels.}
 
 \item{block_label_cex}{Numeric. Multiplier for colored category block labels
 (indel plots only).}

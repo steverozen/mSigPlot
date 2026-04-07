@@ -7,8 +7,8 @@ plot_476_right_pdf <- function(
   catalog,
   filename,
   block_text_cex = 1.0,
-  num_labels = 3,
-  ggrepel_cex = 0.7,
+  num_peak_labels = 3,
+  peak_label_cex = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -21,15 +21,16 @@ plot_476_right_pdf <- function(
   plot_complex = FALSE,
   show_x_labels = FALSE,
   show_counts = NULL,
-  count_label_cex = 1.03
+  count_label_cex = 1.03,
+  stop_at_9 = TRUE
 ) {
   plot_list <- lapply(1:ncol(catalog), function(i) {
     plot_476_right(
       catalog = catalog[, i],
       block_text_cex = block_text_cex,
       plot_title = colnames(catalog)[i],
-      num_labels = num_labels,
-      ggrepel_cex = ggrepel_cex,
+      num_peak_labels = num_peak_labels,
+      peak_label_cex = peak_label_cex,
       label_threshold_denominator = label_threshold_denominator,
       vline_labels = vline_labels,
       simplify_labels = simplify_labels,
@@ -42,7 +43,8 @@ plot_476_right_pdf <- function(
       plot_complex = plot_complex,
       show_x_labels = show_x_labels,
       show_counts = show_counts,
-      count_label_cex = count_label_cex
+      count_label_cex = count_label_cex,
+      stop_at_9 = stop_at_9
     )
   })
   plots_per_page <- 5

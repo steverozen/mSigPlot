@@ -32,7 +32,9 @@ plot_ID166 <- function(
   axis_title_x_cex = 1.0,
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 ) {
   catalog <- normalize_catalog(catalog, 166, catalog_row_order()$ID166, "ID166")
   if (is.null(catalog)) return(NULL)
@@ -80,6 +82,7 @@ plot_ID166 <- function(
     x = 1:166,
     value = c(rbind(genic, intergenic)),
     region = rep(c("Genic", "Intergenic"), 83),
+    label = rownames(catalog)[c(rbind(1:83, 84:166))],
     stringsAsFactors = FALSE
   )
   bar_colors <- rep(region_col, 83)
@@ -353,6 +356,11 @@ plot_ID166 <- function(
     annotate("text", x = 140, y = ymax * 0.98,
              label = "Intergenic region", hjust = 0,
              size = plot_title_cex * base_mm * 0.8)
+
+  p <- add_peak_labels(p, df, "x", "value", "label",
+                       num_peak_labels = num_peak_labels,
+                       peak_label_cex = peak_label_cex,
+                       base_size = base_size)
 
   return(p)
 }

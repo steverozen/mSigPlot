@@ -30,7 +30,9 @@ plot_SBS192 <- function(
   axis_title_x_cex = 1.0,
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 ) {
   catalog <- normalize_catalog(catalog, 192, catalog_row_order()$SBS192, "SBS192")
   if (is.null(catalog)) return(NULL)
@@ -85,6 +87,7 @@ plot_SBS192 <- function(
     x = 1:192,
     value = values,
     strand = rep(c("Transcribed", "Untranscribed"), 96),
+    label = reorder,
     stringsAsFactors = FALSE
   )
   bar_colors <- rep(strand_col, 96)
@@ -308,6 +311,11 @@ plot_SBS192 <- function(
     annotate("text", x = 159, y = ymax * 0.98,
              label = "Untranscribed strand", hjust = 0,
              size = plot_title_cex * base_mm * 0.8)
+
+  p <- add_peak_labels(p, df, "x", "value", "label",
+                       num_peak_labels = num_peak_labels,
+                       peak_label_cex = peak_label_cex,
+                       base_size = base_size)
 
   return(p)
 }

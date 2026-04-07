@@ -24,7 +24,9 @@ plot_83 <- function(
   bottom_label_cex = 0.65,
   axis_title_cex = 1.0,
   axis_text_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 ) {
   plot_ID83(
     catalog = catalog,
@@ -44,6 +46,8 @@ plot_83 <- function(
     bottom_label_cex = bottom_label_cex,
     axis_title_y_cex = axis_title_cex,
     axis_text_y_cex = axis_text_cex,
-    show_counts = show_counts
+    show_counts = show_counts,
+    num_peak_labels = num_peak_labels,
+    peak_label_cex = peak_label_cex
   )
 }

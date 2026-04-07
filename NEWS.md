@@ -1,3 +1,8 @@
+# mSigPlot 1.0.12
+
+* More cleanup for consistency
+* Added peak labels to all bar-plot like plots
+
 # mSigPlot 1.0.11
 
 * Removed `show_extra_top_bar` parameter from `plot_ID89()` and `plot_ID89_pdf()`

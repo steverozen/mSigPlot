@@ -6,13 +6,13 @@
 plot_476_pdf <- function(
   catalog,
   filename,
-  num_labels = 4,
+  num_peak_labels = 4,
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
   vline_labels = c(),
   base_size = 11,
   block_text_cex = 0.78,
-  ggrepel_cex = 0.52,
+  peak_label_cex = 0.52,
   title_text_cex = 1.0,
   x_axis_tick_label_cex = 0.8,
   y_axis_tick_label_cex = 0.7,
@@ -21,6 +21,7 @@ plot_476_pdf <- function(
   plot_complex = FALSE,
   show_counts = NULL,
   count_label_cex = 0.52,
+  stop_at_9 = TRUE,
   block_text_size = NULL,
   ggrepel_size = NULL,
   title_text_size = NULL,
@@ -39,11 +40,11 @@ plot_476_pdf <- function(
     block_text_cex <- block_text_size
   }
   if (!is.null(ggrepel_size)) {
-    if (!missing(ggrepel_cex)) {
-      stop("Cannot specify both 'ggrepel_size' and 'ggrepel_cex'.")
+    if (!missing(peak_label_cex)) {
+      stop("Cannot specify both 'ggrepel_size' and 'peak_label_cex'.")
     }
-    warning("'ggrepel_size' is deprecated. Use 'ggrepel_cex' instead.")
-    ggrepel_cex <- ggrepel_size
+    warning("'ggrepel_size' is deprecated. Use 'peak_label_cex' instead.")
+    peak_label_cex <- ggrepel_size
   }
   if (!is.null(title_text_size)) {
     if (!missing(title_text_cex)) {
@@ -94,8 +95,8 @@ plot_476_pdf <- function(
       catalog = catalog[, i],
       block_text_cex = block_text_cex,
       plot_title = colnames(catalog)[i],
-      num_labels = num_labels,
-      ggrepel_cex = ggrepel_cex,
+      num_peak_labels = num_peak_labels,
+      peak_label_cex = peak_label_cex,
       simplify_labels = simplify_labels,
       label_threshold_denominator = label_threshold_denominator,
       vline_labels = vline_labels,
@@ -107,7 +108,8 @@ plot_476_pdf <- function(
       y_title_cex = y_title_cex,
       plot_complex = plot_complex,
       show_counts = show_counts,
-      count_label_cex = count_label_cex
+      count_label_cex = count_label_cex,
+      stop_at_9 = stop_at_9
     )
   })
   plots_per_page <- 5

@@ -37,7 +37,7 @@ test_that("plot_476 handles different label options", {
   p_no_labels <- plot_476(
     catalog = catalog,
     plot_title = "No labels",
-    num_labels = 0
+    num_peak_labels = 0
   )
   expect_s3_class(p_no_labels, "ggplot")
 
@@ -45,7 +45,7 @@ test_that("plot_476 handles different label options", {
   p_simplified <- plot_476(
     catalog = catalog,
     plot_title = "Simplified labels",
-    num_labels = 5,
+    num_peak_labels = 5,
     simplify_labels = TRUE
   )
   expect_s3_class(p_simplified, "ggplot")
@@ -54,7 +54,7 @@ test_that("plot_476 handles different label options", {
   p_full <- plot_476(
     catalog = catalog,
     plot_title = "Full labels",
-    num_labels = 3,
+    num_peak_labels = 3,
     simplify_labels = FALSE
   )
   expect_s3_class(p_full, "ggplot")
@@ -123,7 +123,7 @@ test_that("plot_476_pdf creates PDF file", {
   plot_476_pdf(
     catalog = catalog_subset,
     filename = temp_pdf,
-    num_labels = 2
+    num_peak_labels = 2
   )
 
   expect_true(file.exists(temp_pdf))
@@ -132,7 +132,7 @@ test_that("plot_476_pdf creates PDF file", {
   plot_476_pdf(
     catalog = catalog_subset,
     filename = temp_pdf,
-    num_labels = 2,
+    num_peak_labels = 2,
     title_text_cex = 0.8
   )
 

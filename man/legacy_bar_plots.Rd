@@ -15,8 +15,8 @@ plot_476(
   catalog,
   block_text_cex = 0.78,
   plot_title = NULL,
-  num_labels = 3,
-  ggrepel_cex = 0.52,
+  num_peak_labels = 3,
+  peak_label_cex = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -29,6 +29,7 @@ plot_476(
   plot_complex = FALSE,
   show_counts = NULL,
   count_label_cex = 0.52,
+  stop_at_9 = TRUE,
   block_text_size = NULL,
   ggrepel_size = NULL,
   title_text_size = NULL,
@@ -44,13 +45,13 @@ plot_476(
 plot_476_pdf(
   catalog,
   filename,
-  num_labels = 4,
+  num_peak_labels = 4,
   simplify_labels = FALSE,
   label_threshold_denominator = 7,
   vline_labels = c(),
   base_size = 11,
   block_text_cex = 0.78,
-  ggrepel_cex = 0.52,
+  peak_label_cex = 0.52,
   title_text_cex = 1,
   x_axis_tick_label_cex = 0.8,
   y_axis_tick_label_cex = 0.7,
@@ -59,6 +60,7 @@ plot_476_pdf(
   plot_complex = FALSE,
   show_counts = NULL,
   count_label_cex = 0.52,
+  stop_at_9 = TRUE,
   block_text_size = NULL,
   ggrepel_size = NULL,
   title_text_size = NULL,
@@ -73,8 +75,8 @@ plot_476_right(
   catalog,
   block_text_cex = 1,
   plot_title = NULL,
-  num_labels = 3,
-  ggrepel_cex = 0.7,
+  num_peak_labels = 3,
+  peak_label_cex = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -88,6 +90,7 @@ plot_476_right(
   show_x_labels = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
+  stop_at_9 = TRUE,
   block_text_size = NULL,
   ggrepel_size = NULL,
   title_text_size = NULL,
@@ -104,8 +107,8 @@ plot_476_right_pdf(
   catalog,
   filename,
   block_text_cex = 1,
-  num_labels = 3,
-  ggrepel_cex = 0.7,
+  num_peak_labels = 3,
+  peak_label_cex = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = TRUE,
@@ -118,7 +121,8 @@ plot_476_right_pdf(
   plot_complex = FALSE,
   show_x_labels = FALSE,
   show_counts = NULL,
-  count_label_cex = 1.03
+  count_label_cex = 1.03,
+  stop_at_9 = TRUE
 )
 
 plot_83(
@@ -138,7 +142,9 @@ plot_83(
   bottom_label_cex = 0.65,
   axis_title_cex = 1,
   axis_text_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 )
 
 plot_89(
@@ -160,6 +166,9 @@ plot_89(
   plot_complex = FALSE,
   show_counts = NULL,
   count_label_cex = 1.03,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7,
+  stop_at_9 = TRUE,
   text_size = NULL,
   top_bar_text_size = NULL,
   title_text_size = NULL,
@@ -180,10 +189,10 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
-\item{num_labels}{Integer. Number of top peaks to label
+\item{num_peak_labels}{Integer. Number of top peaks to label
 (\code{plot_476}, \code{plot_476_right} only).}
 
-\item{ggrepel_cex}{Numeric. Size of ggrepel peak labels
+\item{peak_label_cex}{Numeric. Size of ggrepel peak labels
 (\code{plot_476}, \code{plot_476_right} only).}
 
 \item{label_threshold_denominator}{Numeric. Peaks below
@@ -224,7 +233,7 @@ display them only when the catalog contains counts (sum > 1.1).}
 
 \item{block_text_size}{Deprecated. Use \code{block_text_cex} instead.}
 
-\item{ggrepel_size}{Deprecated. Use \code{ggrepel_cex} instead.}
+\item{ggrepel_size}{Deprecated. Use \code{peak_label_cex} instead.}
 
 \item{title_text_size}{Deprecated. Use \code{title_text_cex} instead.}
 
@@ -240,7 +249,7 @@ display them only when the catalog contains counts (sum > 1.1).}
 
 \item{text_size}{Deprecated. Use \code{text_cex} instead.}
 
-\item{label_size}{Deprecated. Use \code{ggrepel_cex} instead.}
+\item{label_size}{Deprecated. Use \code{peak_label_cex} instead.}
 
 \item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
 

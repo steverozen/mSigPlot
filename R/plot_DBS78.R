@@ -31,8 +31,8 @@ plot_DBS78 <- function(
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8,
   show_counts = NULL,
-  num_labels = 0,
-  ggrepel_cex = 0.7
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 ) {
   catalog <- normalize_catalog(catalog, 78, catalog_row_order()$DBS78, "DBS78")
   if (is.null(catalog)) return(NULL)
@@ -249,7 +249,7 @@ plot_DBS78 <- function(
     )
 
   p <- add_peak_labels(p, df, "x", "value", "label",
-                       num_labels = num_labels, ggrepel_cex = ggrepel_cex,
+                       num_peak_labels = num_peak_labels, peak_label_cex = peak_label_cex,
                        base_size = base_size)
 
   return(p)

@@ -27,12 +27,13 @@ plot_ID476 <- function(
   show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
   show_counts = NULL,
-  num_labels = 4,
-  ggrepel_cex = 0.52,
+  num_peak_labels = 4,
+  peak_label_cex = 0.52,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = FALSE,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  stop_at_9 = TRUE
 ) {
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
   if (is.null(catalog)) return(NULL)
@@ -108,10 +109,10 @@ plot_ID476 <- function(
   blocks$ymin <- max(muts_basis_melt$freq) * 1.35
   blocks$ymax <- max(muts_basis_melt$freq) * 1.47
   blocks$labels <- c(
-    "Del 1bp C",
-    "Del 1bp T",
-    "Ins 1bp C",
-    "Ins 1bp T",
+    "Del 1 C",
+    "Del 1 T",
+    "Ins 1 C",
+    "Ins 1 T",
     "Del \u22652bp", # \u.... is >= character
     "Ins \u22652bp",
     "Mh",
@@ -146,15 +147,15 @@ plot_ID476 <- function(
 
   n_channels <- max(muts_basis_melt$x_pos)
 
-  # Create label data: top num_labels per block, excluding peaks < 1/10 max
+  # Create label data: top num_peak_labels per block, excluding peaks < 1/10 max
   max_freq <- max(muts_basis_melt$freq)
   min_threshold <- max_freq / label_threshold_denominator
 
-  if (!is.null(num_labels) && num_labels > 0) {
+  if (!is.null(num_peak_labels) && num_peak_labels > 0) {
     label_data <- muts_basis_melt |>
       dplyr::filter(freq >= min_threshold) |>
       dplyr::group_by(Indel) |>
-      dplyr::slice_max(order_by = freq, n = num_labels, with_ties = FALSE) |>
+      dplyr::slice_max(order_by = freq, n = num_peak_labels, with_ties = FALSE) |>
       dplyr::ungroup()
   } else {
     label_data <- muts_basis_melt[0, ] # Empty data frame, no labels
@@ -310,7 +311,7 @@ plot_ID476 <- function(
     ggrepel::geom_text_repel(
       data = label_data,
       ggplot2::aes(x = x_pos, y = freq, label = Figlabel),
-      size = ggrepel_cex * base_size / ggplot2::.pt,
+      size = peak_label_cex * base_size / ggplot2::.pt,
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
       segment.color = "gray50",

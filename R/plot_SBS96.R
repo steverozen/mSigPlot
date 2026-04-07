@@ -31,8 +31,8 @@ plot_SBS96 <- function(
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8,
   show_counts = NULL,
-  num_labels = 0,
-  ggrepel_cex = 0.7
+  num_peak_labels = 0,
+  peak_label_cex = 0.7
 ) {
   # If row names are in stapled format like A[C>A]T, convert to ACTA
   rn <- if (is.data.frame(catalog) || is.matrix(catalog)) {
@@ -290,7 +290,7 @@ plot_SBS96 <- function(
     )
 
   p <- add_peak_labels(p, df, "x", "value", "label",
-                       num_labels = num_labels, ggrepel_cex = ggrepel_cex,
+                       num_peak_labels = num_peak_labels, peak_label_cex = peak_label_cex,
                        base_size = base_size)
 
   return(p)

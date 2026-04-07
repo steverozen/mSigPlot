@@ -32,7 +32,10 @@ plot_ID89 <- function(
   show_counts = NULL,
   ylab = TRUE,
   show_extra_top_bar = FALSE,
-  plot_complex = FALSE
+  plot_complex = FALSE,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7,
+  stop_at_9 = TRUE
 ) {
   catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
   if (is.null(catalog)) {
@@ -383,27 +386,30 @@ plot_ID89 <- function(
     xmax = cumsum(entry) + 0.5
   )
 
+  top_bar_mult <- if (num_peak_labels > 0) c(1.25, 1.37) else c(1.08, 1.2)
   blocks$ymin <- ifelse(
     !is.null(ylim),
     ylim,
     max(muts_basis_melt$freq)
   ) *
-    1.08
+    top_bar_mult[1]
   blocks$ymax <- ifelse(
     !is.null(ylim),
     ylim,
     max(muts_basis_melt$freq)
   ) *
-    1.2
+    top_bar_mult[2]
+  del_t_8_label <- if (stop_at_9) "Del 1 T (8-9)" else "Del 1 T (8+)"
+  ins_t_8_label <- if (stop_at_9) "Ins 1 T (8-9)" else "Ins 1 T (8+)"
   blocks$labels <- c(
     "Del 1 C",
     "Del 1 T (2-4)",
     "Del 1 T (5-7)",
-    "Del 1 T (8+)",
+    del_t_8_label,
     "Ins 1 C",
     "Ins 1 T (0-4)",
     "Ins 1 T (5-7)",
-    "Ins 1 T (8+)",
+    ins_t_8_label,
     "Del \u22652",
     "Ins \u22652",
     "Del Mh",
@@ -470,7 +476,7 @@ plot_ID89 <- function(
       limits = c(
         min(0, min(muts_basis_melt$freq) * 1.05),
         if (upper) {
-          ifelse(!is.null(ylim), ylim * 1.2, unique(blocks$ymax))
+          ifelse(!is.null(ylim), ylim * top_bar_mult[2], unique(blocks$ymax))
         } else {
           ifelse(
             !is.null(ylim),
@@ -588,6 +594,11 @@ plot_ID89 <- function(
         inherit.aes = FALSE
       )
   }
+
+  p <- add_peak_labels(p, muts_basis_melt, "IndelType", "freq", "Figlabel",
+                       num_peak_labels = num_peak_labels,
+                       peak_label_cex = peak_label_cex,
+                       base_size = base_size)
 
   return(p)
 }

@@ -63,31 +63,31 @@ resolve_show_counts <- function(show_counts, catalog_type) {
 #' @param x_col Character name of the x-position column in `df`.
 #' @param y_col Character name of the y-value column in `df`.
 #' @param label_col Character name of the label column in `df`.
-#' @param num_labels Integer number of top bars to label (0 = none).
-#' @param ggrepel_cex Numeric multiplier for label text size.
+#' @param num_peak_labels Integer number of top bars to label (0 = none).
+#' @param peak_label_cex Numeric multiplier for label text size.
 #' @param base_size Numeric base font size.
 #' @param arrow_length Numeric arrow length in npc units.
 #' @param label_threshold_denominator Numeric; only bars with value >
 #'   max / denominator are candidates for labeling.
 #'
-#' @return The ggplot object with labels added (or unchanged if num_labels == 0).
+#' @return The ggplot object with labels added (or unchanged if num_peak_labels == 0).
 #' @keywords internal
 #'
 #' @importFrom ggrepel geom_text_repel
 add_peak_labels <- function(
     plot, df, x_col, y_col, label_col,
-    num_labels = 0,
-    ggrepel_cex = 0.7,
+    num_peak_labels = 0,
+    peak_label_cex = 0.7,
     base_size = 11,
     arrow_length = 0.01,
     label_threshold_denominator = 7
 ) {
-  if (num_labels == 0) return(plot)
+  if (num_peak_labels == 0) return(plot)
 
   threshold <- max(abs(df[[y_col]]), na.rm = TRUE) / label_threshold_denominator
   candidates <- df[abs(df[[y_col]]) > threshold, ]
   candidates <- candidates[order(-abs(candidates[[y_col]])), ]
-  label_data <- utils::head(candidates, num_labels)
+  label_data <- utils::head(candidates, num_peak_labels)
 
   if (nrow(label_data) == 0) return(plot)
 
@@ -98,7 +98,7 @@ add_peak_labels <- function(
       y = .data[[y_col]],
       label = .data[[label_col]]
     ),
-    size = ggrepel_cex * base_size / ggplot2::.pt,
+    size = peak_label_cex * base_size / ggplot2::.pt,
     nudge_y = max(abs(df[[y_col]]), na.rm = TRUE) * 0.1,
     direction = "both",
     segment.color = "gray50",
