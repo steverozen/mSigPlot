@@ -23,8 +23,6 @@
 #' @param filename Character. Path to the output PDF file (\_pdf functions only).
 #' @param grid Logical, draw grid lines.
 #' @param upper Logical, draw colored class rectangles and labels above bars.
-#' @param xlabels Logical, draw x-axis labels.
-#' @param ylabels Logical, draw y-axis labels.
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
@@ -39,12 +37,21 @@
 #'   Currently has no effect in some functions.
 #' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
 #' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
+#' @param show_axis_text_x Logical. If FALSE, hide x-axis tick labels.
+#' @param show_axis_text_y Logical. If FALSE, hide y-axis tick labels.
+#' @param show_axis_title_x Logical. If FALSE, hide the x-axis title.
+#' @param show_axis_title_y Logical. If FALSE, hide the y-axis title.
+#' @param xlabels Deprecated; use `show_axis_text_x` instead.
+#' @param ylabels Deprecated; use `show_axis_text_y` and `show_axis_title_y`
+#'   instead.
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
 #'   count labels. If `FALSE`, never display them. If `NULL` (the default),
 #'   display them only when the catalog contains counts (sum > 1.1).
 #' @param abundance Numeric vector of per-class abundances for strand bias
 #'   testing (`plot_SBS12` only).
-#' @param ylabel Character or NULL. Custom y-axis label (`plot_ID89` only).
+#' @param ylab Y-axis label control (`plot_ID89` only). `TRUE` (default)
+#'   auto-detects from data. A character string overrides the label.
+#'   `NULL` or `FALSE` suppresses the y-axis title.
 #' @param show_extra_top_bar Logical. Display an extra summary bar above the
 #'   category bar (`plot_ID89` only).
 #' @param plot_complex Logical. Include Complex indel channels
@@ -87,7 +94,11 @@ NULL
 plot_DBS144 <- function(
   catalog,
   plot_title = NULL,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -100,7 +111,16 @@ plot_DBS144 <- function(
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    ylabels = ylabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
+  base_mm <- base_mm(base_size)
 
   strand_col <- c("#394398", "#e83020")
   xlabel <- c("AC", "AT", "CC", "CG", "CT", "GC", "TA", "TC", "TG", "TT")
@@ -110,14 +130,7 @@ plot_DBS144 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(abs(catalog[, 1])) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
 
   # Collapse 132 entries into 20 bars (10 classes x 2 strands)
   # Class boundaries within the 132-entry reordered vector:
@@ -188,10 +201,13 @@ plot_DBS144 <- function(
       plot.margin = margin(t = 20, r = 10, b = 10, l = 10)
     )
 
-  if (ylabels) {
+  if (show_axis_title_y) {
     p <- p + ylab(ylabel)
   } else {
     p <- p + ylab(NULL)
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
   p <- p + xlab(NULL)
 
@@ -220,6 +236,10 @@ plot_DBS144 <- function(
     annotate("text", x = 8.7, y = ymax * 0.865,
              label = "Untranscribed strand", hjust = 0,
              size = plot_title_cex * base_mm * 0.8)
+
+  if (!show_axis_text_x) {
+    p <- p + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+  }
 
   return(p)
 }

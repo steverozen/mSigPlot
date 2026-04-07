@@ -21,6 +21,10 @@ plot_ID476_right <- function(
   axis_title_x_cex = 0.9,
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
   show_counts = NULL,
   num_labels = 3,
   ggrepel_cex = 0.7,
@@ -30,17 +34,14 @@ plot_ID476_right <- function(
   plot_complex = FALSE,
   show_x_labels = FALSE
 ) {
-  catalog <- normalize_catalog(catalog, 476, NULL, "ID476")
+  catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
   catalog <- catalog[, 1]
 
   # Determine y-axis label based on sum
-  ylabel <- if (sum(catalog, na.rm = TRUE) < 1.1) {
-    "Proportion"
-  } else {
-    "Count"
-  }
+  catalog_type <- detect_catalog_type(catalog)
+  ylabel <- if (catalog_type == "counts") "Count" else "Proportion"
   Koh476_indeltype = type_476_indel_type()
   my_vector <- Koh476_indeltype$IndelType
   muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
@@ -311,9 +312,7 @@ plot_ID476_right <- function(
     )
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  if (is.null(show_counts)) {
-    show_counts <- (ylabel == "Count")
-  }
+  show_counts <- resolve_show_counts(show_counts, catalog_type)
 
   # Add count labels
   if (show_counts) {
@@ -341,64 +340,18 @@ plot_ID476_right <- function(
       )
   }
 
-  return(p)
-}
-
-#' @rdname bar_plots
-#' @export
-#'
-#' @import Cairo
-#' @importFrom grDevices dev.off cairo_pdf
-plot_ID476_right_pdf <- function(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1.0,
-  count_label_cex = 1.03,
-  class_label_cex = 1.0,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
-  axis_text_y_cex = 0.7,
-  show_counts = NULL,
-  num_labels = 3,
-  ggrepel_cex = 0.7,
-  label_threshold_denominator = 7,
-  vline_labels = c(),
-  simplify_labels = TRUE,
-  plot_complex = FALSE,
-  show_x_labels = FALSE
-) {
-  plot_list <- lapply(1:ncol(catalog), function(i) {
-    plot_ID476_right(
-      catalog = catalog[, i],
-      plot_title = colnames(catalog)[i],
-      base_size = base_size,
-      plot_title_cex = plot_title_cex,
-      count_label_cex = count_label_cex,
-      class_label_cex = class_label_cex,
-      axis_text_x_cex = axis_text_x_cex,
-      axis_title_x_cex = axis_title_x_cex,
-      axis_title_y_cex = axis_title_y_cex,
-      axis_text_y_cex = axis_text_y_cex,
-      show_counts = show_counts,
-      num_labels = num_labels,
-      ggrepel_cex = ggrepel_cex,
-      label_threshold_denominator = label_threshold_denominator,
-      vline_labels = vline_labels,
-      simplify_labels = simplify_labels,
-      plot_complex = plot_complex,
-      show_x_labels = show_x_labels
-    )
-  })
-  plots_per_page <- 5
-  total_pages <- ceiling(length(plot_list) / plots_per_page)
-  cairo_pdf(filename, width = 8.2677, height = 14.61613)
-  for (page in 1:total_pages) {
-    start_index <- (page - 1) * plots_per_page + 1
-    end_index <- min(page * plots_per_page, length(plot_list))
-    plots_on_page <- plot_list[start_index:end_index]
-    do.call(gridExtra::grid.arrange, c(plots_on_page, nrow = 5, ncol = 1))
+  if (!show_axis_text_x) {
+    p <- p + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
   }
-  dev.off()
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  }
+  if (!show_axis_title_x) {
+    p <- p + theme(axis.title.x = element_blank())
+  }
+  if (!show_axis_title_y) {
+    p <- p + theme(axis.title.y = element_blank())
+  }
+
+  return(p)
 }

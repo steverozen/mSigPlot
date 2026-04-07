@@ -17,27 +17,24 @@ plot_SBS1536 <- function(
   base_size = 11,
   plot_title_cex = 1.2,
   axis_text_cex = 0.8,
-  strip_text_cex = 1.0
+  strip_text_cex = 1.0,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE
 ) {
   catalog <- normalize_catalog(catalog, 1536, catalog_row_order()$SBS1536, "SBS1536")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  base_mm <- base_mm(base_size)
 
   # Base colors for axis labels
   bases <- c("A", "C", "G", "T")
   base_cols <- c("forestgreen", "dodgerblue2", "black", "red")
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(abs(catalog[, 1])) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
 
   # Sort catalog in plotting order
   rates <- data.frame(value = catalog[, 1], stringsAsFactors = FALSE)
@@ -105,35 +102,38 @@ plot_SBS1536 <- function(
       )
 
     # Add base labels on x-axis (top): two rows
-    # Row 1 (1bp 3'): each group of 4 gets A, C, G, T
-    x_label_1 <- rep(bases, each = 4)
-    x_label_2 <- rep(bases, times = 4)
-    p <- p +
-      annotate("text", x = 1:16, y = 17.3,
-               label = x_label_1,
-               color = rep(base_cols, each = 4),
-               fontface = "bold",
-               size = axis_text_cex * base_mm) +
-      annotate("text", x = 1:16, y = 18.3,
-               label = x_label_2,
-               color = rep(base_cols, times = 4),
-               fontface = "bold",
-               size = axis_text_cex * base_mm)
+    if (show_axis_text_x) {
+      x_label_1 <- rep(bases, each = 4)
+      x_label_2 <- rep(bases, times = 4)
+      p <- p +
+        annotate("text", x = 1:16, y = 17.3,
+                 label = x_label_1,
+                 color = rep(base_cols, each = 4),
+                 fontface = "bold",
+                 size = axis_text_cex * base_mm) +
+        annotate("text", x = 1:16, y = 18.3,
+                 label = x_label_2,
+                 color = rep(base_cols, times = 4),
+                 fontface = "bold",
+                 size = axis_text_cex * base_mm)
+    }
 
     # Add base labels on y-axis (left): two columns
-    y_label_1 <- rep(bases, each = 4)
-    y_label_2 <- rep(bases, times = 4)
-    p <- p +
-      annotate("text", x = -0.3, y = 16:1,
-               label = y_label_1,
-               color = rep(base_cols, each = 4),
-               fontface = "bold",
-               size = axis_text_cex * base_mm) +
-      annotate("text", x = -1.3, y = 16:1,
-               label = y_label_2,
-               color = rep(base_cols, times = 4),
-               fontface = "bold",
-               size = axis_text_cex * base_mm)
+    if (show_axis_text_y) {
+      y_label_1 <- rep(bases, each = 4)
+      y_label_2 <- rep(bases, times = 4)
+      p <- p +
+        annotate("text", x = -0.3, y = 16:1,
+                 label = y_label_1,
+                 color = rep(base_cols, each = 4),
+                 fontface = "bold",
+                 size = axis_text_cex * base_mm) +
+        annotate("text", x = -1.3, y = 16:1,
+                 label = y_label_2,
+                 color = rep(base_cols, times = 4),
+                 fontface = "bold",
+                 size = axis_text_cex * base_mm)
+    }
 
     panel_list[[idx]] <- p
   }

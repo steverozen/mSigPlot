@@ -15,8 +15,12 @@ plot_SBS192 <- function(
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -32,7 +36,16 @@ plot_SBS192 <- function(
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    xlabels, ylabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
+  base_mm <- base_mm(base_size)
 
   # Class colors and background colors
   class_col <- c("#03bcee", "#010101", "#e32926", "#999999", "#a1ce63", "#ebc6c4")
@@ -46,14 +59,7 @@ plot_SBS192 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(abs(catalog[, 1])) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
 
   values <- cat_reordered
   if (catalog_type == "density") {
@@ -108,9 +114,7 @@ plot_SBS192 <- function(
   )
 
   # Resolve show_counts
-  if (is.null(show_counts)) {
-    show_counts <- (catalog_type == "counts")
-  }
+  show_counts <- resolve_show_counts(show_counts, catalog_type)
 
   # Count labels per class
   if (show_counts) {
@@ -153,7 +157,7 @@ plot_SBS192 <- function(
     ) +
     coord_cartesian(
       ylim = c(
-        min(if (xlabels) -ymax * 0.15 else 0, ymin * 1.05),
+        min(if (show_axis_text_x) -ymax * 0.15 else 0, ymin * 1.05),
         ymax * (if (upper) 1.15 else 1.05)
       ),
       clip = "off"
@@ -169,16 +173,18 @@ plot_SBS192 <- function(
       plot.margin = margin(
         t = if (upper) 25 * base_size / 11 else 10,
         r = 10,
-        b = if (xlabels) 25 * base_size / 11 else 10,
+        b = if (show_axis_text_x) 25 * base_size / 11 else 10,
         l = 10
       )
     )
 
-  if (ylabels) {
+  if (show_axis_title_y) {
     p <- p + ylab(ylabel)
   } else {
-    p <- p + ylab(NULL) +
-      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    p <- p + ylab(NULL)
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
 
   # Grid lines
@@ -210,7 +216,7 @@ plot_SBS192 <- function(
   }
 
   # X-axis context labels (3 rows: 3' base, ref base, 5' base)
-  if (xlabels) {
+  if (show_axis_text_x) {
     # Each pair of bars = one trinucleotide context
     pair_x <- (seq(1, 191, by = 2) + seq(2, 192, by = 2)) / 2
 

@@ -99,7 +99,7 @@ plot_89 <- function(
     catalog = catalog,
     plot_title = plot_title,
     upper = show_top_bar,
-    xlabels = show_x_axis_text,
+    show_axis_text_x = show_x_axis_text,
     ylim = setyaxis,
     base_size = base_size,
     plot_title_cex = title_text_cex,
@@ -111,7 +111,7 @@ plot_89 <- function(
     axis_title_y_cex = y_title_cex,
     axis_text_y_cex = y_axis_tick_label_cex,
     show_counts = show_counts,
-    ylabel = ylabel,
+    ylab = if (is.null(ylabel)) TRUE else ylabel,
     plot_complex = plot_complex
   )
 }

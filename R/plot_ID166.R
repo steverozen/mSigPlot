@@ -15,8 +15,12 @@ plot_ID166 <- function(
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -34,7 +38,16 @@ plot_ID166 <- function(
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    xlabels, ylabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
+  base_mm <- base_mm(base_size)
 
   # 16 indel class colors (same as ID83)
   indel_class_col <- c(
@@ -55,14 +68,7 @@ plot_ID166 <- function(
   class_sizes <- c(6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 2, 3, 5)
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(abs(catalog[, 1])) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
 
   # Genic = rows 1-83, Intergenic = rows 84-166
   genic <- catalog[1:83, 1]
@@ -139,9 +145,7 @@ plot_ID166 <- function(
   )
 
   # Resolve show_counts
-  if (is.null(show_counts)) {
-    show_counts <- (catalog_type == "counts")
-  }
+  show_counts <- resolve_show_counts(show_counts, catalog_type)
 
   # Count labels per class
   if (show_counts) {
@@ -204,7 +208,7 @@ plot_ID166 <- function(
                        }) +
     coord_cartesian(
       ylim = c(
-        min(if (xlabels) -ymax * 0.3 else 0, ymin * 1.05),
+        min(if (show_axis_text_x) -ymax * 0.3 else 0, ymin * 1.05),
         ymax * (if (upper) 1.35 else 1.05)
       ),
       clip = "off"
@@ -220,7 +224,7 @@ plot_ID166 <- function(
       plot.margin = margin(
         t = if (upper) 40 * base_size / 11 else 10,
         r = 10,
-        b = if (xlabels) 50 * base_size / 11 else 10,
+        b = if (show_axis_text_x) 50 * base_size / 11 else 10,
         l = 10
       )
     )
@@ -244,11 +248,13 @@ plot_ID166 <- function(
   p <- p +
     geom_bar(stat = "identity", fill = bar_colors, width = 0.8)
 
-  if (ylabels) {
+  if (show_axis_title_y) {
     p <- p + ylab(ylabel)
   } else {
-    p <- p + ylab(NULL) +
-      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    p <- p + ylab(NULL)
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
 
   # Upper blocks and labels
@@ -280,7 +286,7 @@ plot_ID166 <- function(
   }
 
   # X-axis labels
-  if (xlabels) {
+  if (show_axis_text_x) {
     # Bottom color strip
     p <- p +
       geom_rect(

@@ -14,9 +14,7 @@
 \alias{plot_ID166}
 \alias{plot_ID166_pdf}
 \alias{plot_ID476}
-\alias{plot_ID476_pdf}
 \alias{plot_ID476_right}
-\alias{plot_ID476_right_pdf}
 \alias{plot_ID83}
 \alias{plot_ID83_pdf}
 \alias{plot_ID89}
@@ -33,7 +31,11 @@
 plot_DBS144(
   catalog,
   plot_title = NULL,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -43,26 +45,19 @@ plot_DBS144(
   axis_text_y_cex = 0.8
 )
 
-plot_DBS144_pdf(
-  catalog,
-  filename,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8
-)
+plot_DBS144_pdf(catalog, filename, ...)
 
 plot_DBS78(
   catalog,
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -72,35 +67,24 @@ plot_DBS78(
   axis_title_x_cex = 1,
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_labels = 0,
+  ggrepel_cex = 0.7
 )
 
-plot_DBS78_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.6,
-  class_label_cex = 0.7,
-  axis_text_x_cex = 0.5,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-)
+plot_DBS78_pdf(catalog, filename, ...)
 
 plot_ID166(
   catalog,
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -115,26 +99,7 @@ plot_ID166(
   show_counts = NULL
 )
 
-plot_ID166_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.6,
-  block_label_cex = 0.65,
-  class_label_cex = 0.8,
-  axis_text_x_cex = 0.5,
-  bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-)
+plot_ID166_pdf(catalog, filename, ...)
 
 plot_ID476(
   catalog,
@@ -147,26 +112,10 @@ plot_ID476(
   axis_title_x_cex = 0.7,
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
-  show_counts = NULL,
-  num_labels = 4,
-  ggrepel_cex = 0.52,
-  label_threshold_denominator = 7,
-  vline_labels = c(),
-  simplify_labels = FALSE,
-  plot_complex = FALSE
-)
-
-plot_ID476_pdf(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1,
-  count_label_cex = 0.52,
-  class_label_cex = 0.78,
-  axis_text_x_cex = 0.8,
-  axis_title_x_cex = 0.7,
-  axis_title_y_cex = 0.9,
-  axis_text_y_cex = 0.7,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
   show_counts = NULL,
   num_labels = 4,
   ggrepel_cex = 0.52,
@@ -187,27 +136,10 @@ plot_ID476_right(
   axis_title_x_cex = 0.9,
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
-  show_counts = NULL,
-  num_labels = 3,
-  ggrepel_cex = 0.7,
-  label_threshold_denominator = 7,
-  vline_labels = c(),
-  simplify_labels = TRUE,
-  plot_complex = FALSE,
-  show_x_labels = FALSE
-)
-
-plot_ID476_right_pdf(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1,
-  count_label_cex = 1.03,
-  class_label_cex = 1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
-  axis_text_y_cex = 0.7,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
   show_counts = NULL,
   num_labels = 3,
   ggrepel_cex = 0.7,
@@ -223,8 +155,12 @@ plot_ID83(
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -236,56 +172,22 @@ plot_ID83(
   axis_title_x_cex = 1,
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_labels = 0,
+  ggrepel_cex = 0.7
 )
 
-plot_ID83_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.9,
-  block_label_cex = 0.65,
-  class_label_cex = 0.8,
-  axis_text_x_cex = 0.5,
-  bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-)
-
-plot_ID83_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.9,
-  block_label_cex = 0.65,
-  class_label_cex = 0.8,
-  axis_text_x_cex = 0.5,
-  bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-)
+plot_ID83_pdf(catalog, filename, ...)
 
 plot_ID89(
   catalog,
   plot_title = NULL,
   upper = TRUE,
-  xlabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1,
@@ -297,56 +199,22 @@ plot_ID89(
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  ylabel = NULL,
+  ylab = TRUE,
   show_extra_top_bar = FALSE,
   plot_complex = FALSE
 )
 
-plot_ID89_pdf(
-  catalog,
-  filename,
-  upper = FALSE,
-  xlabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 1,
-  count_label_cex = 1.03,
-  block_label_cex = 3,
-  class_label_cex = block_label_cex,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
-  axis_text_y_cex = 0.7,
-  show_counts = NULL,
-  ylabel = NULL,
-  plot_complex = FALSE
-)
-
-plot_ID89_pdf(
-  catalog,
-  filename,
-  upper = FALSE,
-  xlabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 1,
-  count_label_cex = 1.03,
-  block_label_cex = 3,
-  class_label_cex = block_label_cex,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
-  axis_text_y_cex = 0.7,
-  show_counts = NULL,
-  ylabel = NULL,
-  plot_complex = FALSE
-)
+plot_ID89_pdf(catalog, filename, ...)
 
 plot_SBS12(
   catalog,
   plot_title = NULL,
   abundance = NULL,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -356,27 +224,19 @@ plot_SBS12(
   axis_text_y_cex = 0.8
 )
 
-plot_SBS12_pdf(
-  catalog,
-  filename,
-  abundance = NULL,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8
-)
+plot_SBS12_pdf(catalog, filename, ...)
 
 plot_SBS192(
   catalog,
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -389,24 +249,7 @@ plot_SBS192(
   show_counts = NULL
 )
 
-plot_SBS192_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.6,
-  class_label_cex = 0.9,
-  axis_text_x_cex = 0.5,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-)
+plot_SBS192_pdf(catalog, filename, ...)
 
 plot_SBS288(catalog, plot_title = NULL, ...)
 
@@ -415,8 +258,12 @@ plot_SBS96(
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -426,27 +273,12 @@ plot_SBS96(
   axis_title_x_cex = 1,
   axis_title_y_cex = 1,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_labels = 0,
+  ggrepel_cex = 0.7
 )
 
-plot_SBS96_pdf(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.6,
-  class_label_cex = 1.1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-)
+plot_SBS96_pdf(catalog, filename, ...)
 }
 \arguments{
 \item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
@@ -455,7 +287,16 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{plot_title}{Character. Title displayed above the plot.}
 
-\item{ylabels}{Logical, draw y-axis labels.}
+\item{show_axis_text_x}{Logical. If FALSE, hide x-axis tick labels.}
+
+\item{show_axis_text_y}{Logical. If FALSE, hide y-axis tick labels.}
+
+\item{show_axis_title_x}{Logical. If FALSE, hide the x-axis title.}
+
+\item{show_axis_title_y}{Logical. If FALSE, hide the y-axis title.}
+
+\item{ylabels}{Deprecated; use \code{show_axis_text_y} and \code{show_axis_title_y}
+instead.}
 
 \item{ylim}{Optional y-axis limits.}
 
@@ -474,11 +315,13 @@ Currently has no effect in some functions.}
 
 \item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
 
+\item{...}{Additional arguments passed to \code{plot_SBS96()} (\code{plot_SBS288} only).}
+
 \item{grid}{Logical, draw grid lines.}
 
 \item{upper}{Logical, draw colored class rectangles and labels above bars.}
 
-\item{xlabels}{Logical, draw x-axis labels.}
+\item{xlabels}{Deprecated; use \code{show_axis_text_x} instead.}
 
 \item{count_label_cex}{Numeric. Multiplier for per-class count labels.}
 
@@ -488,17 +331,17 @@ Currently has no effect in some functions.}
 count labels. If \code{FALSE}, never display them. If \code{NULL} (the default),
 display them only when the catalog contains counts (sum > 1.1).}
 
-\item{block_label_cex}{Numeric. Multiplier for colored category block labels
-(indel plots only).}
-
-\item{bottom_label_cex}{Numeric. Multiplier for bottom category description
-labels (indel plots only).}
-
 \item{num_labels}{Integer. Number of top peaks to label per category block
 (\code{plot_ID476}, \code{plot_ID476_right} only).}
 
 \item{ggrepel_cex}{Numeric. Size of ggrepel peak labels
 (\code{plot_ID476}, \code{plot_ID476_right} only).}
+
+\item{block_label_cex}{Numeric. Multiplier for colored category block labels
+(indel plots only).}
+
+\item{bottom_label_cex}{Numeric. Multiplier for bottom category description
+labels (indel plots only).}
 
 \item{label_threshold_denominator}{Numeric. Peaks below
 max/label_threshold_denominator are not labeled
@@ -516,15 +359,15 @@ the indel type prefix (\code{plot_ID476}, \code{plot_ID476_right} only).}
 \item{show_x_labels}{Logical. Display channel labels as rotated x-axis
 tick labels (\code{plot_ID476_right} only).}
 
-\item{ylabel}{Character or NULL. Custom y-axis label (\code{plot_ID89} only).}
+\item{ylab}{Y-axis label control (\code{plot_ID89} only). \code{TRUE} (default)
+auto-detects from data. A character string overrides the label.
+\code{NULL} or \code{FALSE} suppresses the y-axis title.}
 
 \item{show_extra_top_bar}{Logical. Display an extra summary bar above the
 category bar (\code{plot_ID89} only).}
 
 \item{abundance}{Numeric vector of per-class abundances for strand bias
 testing (\code{plot_SBS12} only).}
-
-\item{...}{Additional arguments passed to \code{plot_SBS96()} (\code{plot_SBS288} only).}
 }
 \value{
 Plot functions return a ggplot2 object, or NULL with a warning

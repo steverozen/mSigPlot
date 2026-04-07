@@ -15,8 +15,12 @@ plot_ID83 <- function(
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -28,15 +32,26 @@ plot_ID83 <- function(
   axis_title_x_cex = 1.0,
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_labels = 0,
+  ggrepel_cex = 0.7
 ) {
   catalog <- normalize_catalog(catalog, 83, catalog_row_order()$ID, "ID83")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    xlabels, ylabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
   # Base text size in mm for use in geom_text
   # (geom_text uses mm; base_size is in points; 1 pt = 25.4/72.27 mm)
-  base_mm <- base_size / (72.27 / 25.4)
+  base_mm <- base_mm(base_size)
 
   # Define colors for 16 indel classes
   indel_class_col <- c(
@@ -71,17 +86,10 @@ plot_ID83 <- function(
     color = cols,
     stringsAsFactors = FALSE
   )
+  df$label <- rownames(catalog)
 
   # Determine catalog type and y-axis label
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if ((!is.null(ylim) && max(ylim) > 1.5) ||
-        !(sum(df$value) < 1.1)) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(df$value, attributes(catalog)$catalog.type, ylim)
 
   if (catalog_type == "counts") {
     ymax <- 4 * ceiling(max(max(df$value) * 1.3, 10) / 4)
@@ -198,9 +206,7 @@ plot_ID83 <- function(
   )
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  if (is.null(show_counts)) {
-    show_counts <- (catalog_type == "counts")
-  }
+  show_counts <- resolve_show_counts(show_counts, catalog_type)
 
   # Calculate counts per class for annotation
   if (show_counts) {
@@ -259,10 +265,13 @@ plot_ID83 <- function(
     )
 
   # Add y-axis label
-  if (ylabels) {
+  if (show_axis_title_y) {
     p <- p + ylab(ylabel)
   } else {
     p <- p + ylab(NULL)
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
 
   # Add x-axis label
@@ -317,7 +326,7 @@ plot_ID83 <- function(
   }
 
   # Add x-axis labels
-  if (xlabels) {
+  if (show_axis_text_x) {
     p <- p +
       geom_rect(
         data = bottom_blocks,
@@ -366,64 +375,9 @@ plot_ID83 <- function(
       size = plot_title_cex * base_mm
     )
 
-  return(p)
-}
+  p <- add_peak_labels(p, df, "x", "value", "label",
+                       num_labels = num_labels, ggrepel_cex = ggrepel_cex,
+                       base_size = base_size)
 
-#' @rdname bar_plots
-#' @export
-#'
-#' @import Cairo
-#' @importFrom grDevices dev.off cairo_pdf
-plot_ID83_pdf <- function(
-  catalog,
-  filename,
-  grid = TRUE,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 0.8,
-  count_label_cex = 0.6,
-  block_label_cex = 0.65,
-  class_label_cex = 0.8,
-  axis_text_x_cex = 0.5,
-  bottom_label_cex = 0.65,
-  axis_title_x_cex = 1.0,
-  axis_title_y_cex = 1.0,
-  axis_text_y_cex = 0.8,
-  show_counts = NULL
-) {
-  plot_list <- lapply(1:ncol(catalog), function(i) {
-    plot_ID83(
-      catalog = catalog[, i, drop = FALSE],
-      plot_title = colnames(catalog)[i],
-      grid = grid,
-      upper = upper,
-      xlabels = xlabels,
-      ylabels = ylabels,
-      ylim = ylim,
-      base_size = base_size,
-      plot_title_cex = plot_title_cex,
-      count_label_cex = count_label_cex,
-      block_label_cex = block_label_cex,
-      class_label_cex = class_label_cex,
-      axis_text_x_cex = axis_text_x_cex,
-      bottom_label_cex = bottom_label_cex,
-      axis_title_x_cex = axis_title_x_cex,
-      axis_title_y_cex = axis_title_y_cex,
-      axis_text_y_cex = axis_text_y_cex,
-      show_counts = show_counts
-    )
-  })
-  plots_per_page <- 5
-  total_pages <- ceiling(length(plot_list) / plots_per_page)
-  Cairo::CairoPDF(file = filename, width = 12, height = 14)
-  for (page in 1:total_pages) {
-    start_index <- (page - 1) * plots_per_page + 1
-    end_index <- min(page * plots_per_page, length(plot_list))
-    plots_on_page <- plot_list[start_index:end_index]
-    do.call(gridExtra::grid.arrange, c(plots_on_page, nrow = 5, ncol = 1))
-  }
-  dev.off()
+  return(p)
 }

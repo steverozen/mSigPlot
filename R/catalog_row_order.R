@@ -2,9 +2,9 @@
 #'
 #' Returns a named list containing the canonical row ordering for each
 #' catalog type. These are used for validation and ordering of mutation
-#' catalogs.
+#' catalogs. The result is cached after the first call.
 #'
-#' @return A named list with elements: SBS96, SBS192, SBS1536, DBS78,
+#' @return A named list with elements: SBS96, SBS192, SBS288, SBS1536, DBS78,
 #'   DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
 #'
 #' @examples
@@ -14,8 +14,14 @@
 #'
 #' @export
 catalog_row_order <- function() {
-  list(
-    SBS96 = c(
+  if (!is.null(.pkg_cache$row_orders)) return(.pkg_cache$row_orders)
+  result <- .build_row_orders()
+  .pkg_cache$row_orders <- result
+  result
+}
+
+.build_row_orders <- function() {
+  sbs96 <- c(
       "ACAA", "ACCA", "ACGA", "ACTA", "CCAA", "CCCA", "CCGA", "CCTA",
       "GCAA", "GCCA", "GCGA", "GCTA", "TCAA", "TCCA", "TCGA", "TCTA",
       "ACAG", "ACCG", "ACGG", "ACTG", "CCAG", "CCCG", "CCGG", "CCTG",
@@ -28,7 +34,12 @@ catalog_row_order <- function() {
       "GTAC", "GTCC", "GTGC", "GTTC", "TTAC", "TTCC", "TTGC", "TTTC",
       "ATAG", "ATCG", "ATGG", "ATTG", "CTAG", "CTCG", "CTGG", "CTTG",
       "GTAG", "GTCG", "GTGG", "GTTG", "TTAG", "TTCG", "TTGG", "TTTG"
-    ),
+  )
+
+  list(
+    SBS96 = sbs96,
+
+    SBS288 = c(paste0("T:", sbs96), paste0("U:", sbs96), paste0("N:", sbs96)),
 
     SBS192 = c(
       "AAAC", "AACC", "AAGC", "AATC", "CAAC", "CACC", "CAGC", "CATC",
@@ -357,7 +368,9 @@ catalog_row_order <- function() {
       "Del(2,):U(1,2):R(5,)", "Del(3,):U(3,):R2", "Del(3,):U(3,):R(3,)", "Ins(2,4):R0", "Ins(5,):R0", "Ins(2,4):R1", "Ins(5,):R1", "Ins(2,):R(2,4)",
       "Ins(2,):R(5,)", "Del(2,5):M1", "Del(3,5):M2", "Del(4,5):M(3,4)", "Del(6,):M1", "Del(6,):M2", "Del(6,):M3", "Del(6,):M(4,)",
       "Complex"
-    )
+    ),
+
+    ID476 = type_476_indel_type()$IndelType
   )
 }
 

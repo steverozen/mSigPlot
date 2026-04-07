@@ -44,35 +44,30 @@
 #' @name plot_guess
 NULL
 
+# Dispatch table mapping row count to plot function
+.plot_dispatch <- list(
+  "1536" = "plot_SBS1536",
+  "476"  = "plot_ID476",
+  "288"  = "plot_SBS288",
+  "192"  = "plot_SBS192",
+  "166"  = "plot_ID166",
+  "144"  = "plot_DBS144",
+  "136"  = "plot_DBS136",
+  "96"   = "plot_SBS96",
+  "89"   = "plot_ID89",
+  "83"   = "plot_ID83",
+  "78"   = "plot_DBS78"
+)
+
 #' @rdname plot_guess
 #' @export
-plot_guess = function(catalog, ...) {
-  if (is.numeric(catalog) && !is.matrix(catalog)) {
-    n_rows = length(catalog)
+plot_guess <- function(catalog, ...) {
+  n_rows <- if (is.numeric(catalog) && !is.matrix(catalog)) {
+    length(catalog)
   } else {
-    n_rows = nrow(catalog)
+    nrow(catalog)
   }
-  if (n_rows == 1536) {
-    plot_SBS1536(catalog, ...)
-  } else if (n_rows == 476) {
-    plot_ID476(catalog, ...)
-  } else if (n_rows == 192) {
-    plot_SBS192(catalog, ...)
-  } else if (n_rows == 166) {
-    plot_ID166(catalog, ...)
-  } else if (n_rows == 144) {
-    plot_DBS144(catalog, ...)
-  } else if (n_rows == 136) {
-    plot_DBS136(catalog, ...)
-  } else if (n_rows == 96) {
-    plot_SBS96(catalog, ...)
-  } else if (n_rows == 89) {
-    plot_ID89(catalog, ...)
-  } else if (n_rows == 83) {
-    plot_ID83(catalog, ...)
-  } else if (n_rows == 78) {
-    plot_DBS78(catalog, ...)
-  } else {
-    stop("Unexpected number of rows: ", n_rows)
-  }
+  fn_name <- .plot_dispatch[[as.character(n_rows)]]
+  if (is.null(fn_name)) stop("Unexpected number of rows: ", n_rows)
+  match.fun(fn_name)(catalog, ...)
 }

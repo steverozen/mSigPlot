@@ -15,8 +15,12 @@ plot_DBS78 <- function(
   plot_title = NULL,
   grid = TRUE,
   upper = TRUE,
-  xlabels = TRUE,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -26,13 +30,24 @@ plot_DBS78 <- function(
   axis_title_x_cex = 1.0,
   axis_title_y_cex = 1.0,
   axis_text_y_cex = 0.8,
-  show_counts = NULL
+  show_counts = NULL,
+  num_labels = 0,
+  ggrepel_cex = 0.7
 ) {
   catalog <- normalize_catalog(catalog, 78, catalog_row_order()$DBS78, "DBS78")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    xlabels, ylabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
+  base_mm <- base_mm(base_size)
 
   # 10 DBS class colors (RColorBrewer "Paired")
   dinuc_class_col <- c(
@@ -52,16 +67,10 @@ plot_DBS78 <- function(
     value = catalog[, 1],
     stringsAsFactors = FALSE
   )
+  df$label <- rownames(catalog)
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(df$value) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(df$value, attributes(catalog)$catalog.type)
 
   if (catalog_type == "density") {
     ylabel <- "mut/million"
@@ -97,9 +106,7 @@ plot_DBS78 <- function(
   )
 
   # Resolve show_counts
-  if (is.null(show_counts)) {
-    show_counts <- (catalog_type == "counts")
-  }
+  show_counts <- resolve_show_counts(show_counts, catalog_type)
 
   # Count labels per class
   if (show_counts) {
@@ -142,7 +149,7 @@ plot_DBS78 <- function(
     ) +
     coord_cartesian(
       ylim = c(
-        min(if (xlabels) -ymax * 0.15 else 0, ymin * 1.05),
+        min(if (show_axis_text_x) -ymax * 0.15 else 0, ymin * 1.05),
         ymax * (if (upper) 1.2 else 1.05)
       ),
       clip = "off"
@@ -158,16 +165,18 @@ plot_DBS78 <- function(
       plot.margin = margin(
         t = if (upper) 25 * base_size / 11 else 10,
         r = 10,
-        b = if (xlabels) 20 * base_size / 11 else 10,
+        b = if (show_axis_text_x) 20 * base_size / 11 else 10,
         l = 10
       )
     )
 
-  if (ylabels) {
+  if (show_axis_title_y) {
     p <- p + ylab(ylabel)
   } else {
-    p <- p + ylab(NULL) +
-      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    p <- p + ylab(NULL)
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
 
   # Grid
@@ -197,7 +206,7 @@ plot_DBS78 <- function(
   }
 
   # X-axis labels (two rows: alt base 1 and alt base 2)
-  if (xlabels) {
+  if (show_axis_text_x) {
     alt1 <- substr(x_labels, 1, 1)
     alt2 <- substr(x_labels, 2, 2)
     p <- p +
@@ -238,6 +247,10 @@ plot_DBS78 <- function(
       fontface = "bold",
       size = plot_title_cex * base_mm
     )
+
+  p <- add_peak_labels(p, df, "x", "value", "label",
+                       num_labels = num_labels, ggrepel_cex = ggrepel_cex,
+                       base_size = base_size)
 
   return(p)
 }

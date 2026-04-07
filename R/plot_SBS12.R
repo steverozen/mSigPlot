@@ -15,7 +15,11 @@ plot_SBS12 <- function(
   catalog,
   plot_title = NULL,
   abundance = NULL,
-  ylabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  ylabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 0.8,
@@ -28,7 +32,16 @@ plot_SBS12 <- function(
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    ylabels = ylabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
+  base_mm <- base_mm(base_size)
 
   strand_col <- c("#394398", "#e83020")
   maj_class_names <- c("C>A", "C>G", "C>T", "T>A", "T>C", "T>G")
@@ -38,14 +51,7 @@ plot_SBS12 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(abs(catalog[, 1])) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
 
   # Collapse 192 bars into 12 (6 classes x 2 strands)
   # In the reordered data: odd = transcribed, even = untranscribed
@@ -167,10 +173,13 @@ plot_SBS12 <- function(
       plot.margin = margin(t = 20, r = 10, b = 10, l = 10)
     )
 
-  if (ylabels) {
+  if (show_axis_title_y) {
     p <- p + ylab(ylabel)
   } else {
     p <- p + ylab(NULL)
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
   p <- p + xlab(NULL)
 
@@ -222,6 +231,10 @@ plot_SBS12 <- function(
   # Attach strand bias statistics as attribute if computed
   if (!is.null(strand_bias)) {
     attr(p, "strand.bias.statistics") <- strand_bias
+  }
+
+  if (!show_axis_text_x) {
+    p <- p + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
   }
 
   return(p)

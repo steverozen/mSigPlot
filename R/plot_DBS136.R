@@ -18,6 +18,12 @@
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param axis_text_cex Numeric. Multiplier for axis label size.
 #' @param strip_text_cex Numeric. Multiplier for panel/facet label size.
+#' @param show_axis_text_x Logical. If FALSE, hide x-axis base labels.
+#' @param show_axis_text_y Logical. If FALSE, hide y-axis base labels.
+#' @param show_axis_title_x Logical. If FALSE, hide the x-axis description.
+#' @param show_axis_title_y Logical. If FALSE, hide the y-axis description.
+#' @param ... Additional arguments passed to the underlying plot function
+#'   (\_pdf variants only).
 #'
 #' @return Plot functions return a ggplot2 object, or NULL with a warning
 #'   if the catalog is invalid (wrong size or row names). PDF functions
@@ -46,13 +52,17 @@ plot_DBS136 <- function(
   base_size = 11,
   plot_title_cex = 1.2,
   axis_text_cex = 0.8,
-  strip_text_cex = 1.0
+  strip_text_cex = 1.0,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE
 ) {
   catalog <- normalize_catalog(catalog, 136, catalog_row_order()$DBS136, "DBS136")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
 
-  base_mm <- base_size / (72.27 / 25.4)
+  base_mm <- base_mm(base_size)
 
   bases <- c("A", "C", "G", "T")
   base_cols <- c("forestgreen", "dodgerblue2", "black", "red")
@@ -61,14 +71,7 @@ plot_DBS136 <- function(
   mut_type_labels <- paste0(ref_order, ">NN")
 
   # Detect catalog type
-  catalog_type <- attributes(catalog)$catalog.type
-  if (is.null(catalog_type)) {
-    if (sum(abs(catalog[, 1])) >= 1.1) {
-      catalog_type <- "counts"
-    } else {
-      catalog_type <- "counts.signature"
-    }
-  }
+  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
 
   # Map catalog to 160-position layout using order_DBS136_for_plotting
   plotting_order <- order_DBS136_for_plotting()
@@ -138,13 +141,18 @@ plot_DBS136 <- function(
       )
 
     # Axis labels
-    p <- p +
-      annotate("text", x = 1:4, y = 5, label = bases,
-               color = base_cols, fontface = "bold",
-               size = axis_text_cex * base_mm) +
-      annotate("text", x = 0, y = 4:1, label = bases,
-               color = base_cols, fontface = "bold",
-               size = axis_text_cex * base_mm)
+    if (show_axis_text_x) {
+      p <- p +
+        annotate("text", x = 1:4, y = 5, label = bases,
+                 color = base_cols, fontface = "bold",
+                 size = axis_text_cex * base_mm)
+    }
+    if (show_axis_text_y) {
+      p <- p +
+        annotate("text", x = 0, y = 4:1, label = bases,
+                 color = base_cols, fontface = "bold",
+                 size = axis_text_cex * base_mm)
+    }
 
     panel_list[[idx]] <- p
   }

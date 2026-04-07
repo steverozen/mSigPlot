@@ -15,17 +15,14 @@ plot_DBS136(
   base_size = 11,
   plot_title_cex = 1.2,
   axis_text_cex = 0.8,
-  strip_text_cex = 1
+  strip_text_cex = 1,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE
 )
 
-plot_DBS136_pdf(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1.2,
-  axis_text_cex = 0.8,
-  strip_text_cex = 1
-)
+plot_DBS136_pdf(catalog, filename, ...)
 
 plot_SBS1536(
   catalog,
@@ -33,17 +30,14 @@ plot_SBS1536(
   base_size = 11,
   plot_title_cex = 1.2,
   axis_text_cex = 0.8,
-  strip_text_cex = 1
+  strip_text_cex = 1,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE
 )
 
-plot_SBS1536_pdf(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1.2,
-  axis_text_cex = 0.8,
-  strip_text_cex = 1
-)
+plot_SBS1536_pdf(catalog, filename, ...)
 }
 \arguments{
 \item{catalog}{Numeric vector, single-column data.frame, matrix, tibble,
@@ -60,7 +54,18 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{strip_text_cex}{Numeric. Multiplier for panel/facet label size.}
 
+\item{show_axis_text_x}{Logical. If FALSE, hide x-axis base labels.}
+
+\item{show_axis_text_y}{Logical. If FALSE, hide y-axis base labels.}
+
+\item{show_axis_title_x}{Logical. If FALSE, hide the x-axis description.}
+
+\item{show_axis_title_y}{Logical. If FALSE, hide the y-axis description.}
+
 \item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
+
+\item{...}{Additional arguments passed to the underlying plot function
+(\_pdf variants only).}
 }
 \value{
 Plot functions return a ggplot2 object, or NULL with a warning

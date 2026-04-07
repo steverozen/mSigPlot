@@ -7,13 +7,13 @@
 catalog_row_order()
 }
 \value{
-A named list with elements: SBS96, SBS192, SBS1536, DBS78,
+A named list with elements: SBS96, SBS192, SBS288, SBS1536, DBS78,
 DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
 }
 \description{
 Returns a named list containing the canonical row ordering for each
 catalog type. These are used for validation and ordering of mutation
-catalogs.
+catalogs. The result is cached after the first call.
 }
 \examples{
 cro <- catalog_row_order()

@@ -10,7 +10,28 @@
 #'
 #' @export
 plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
-  catalog <- normalize_catalog(catalog, 288, canonical_order = NULL)
+  # Convert stapled SBS288 row names like T:A[C>A]T to T:ACTA
+  rn <- if (is.data.frame(catalog) || is.matrix(catalog)) {
+    rownames(catalog)
+  } else if (is.numeric(catalog)) {
+    names(catalog)
+  } else {
+    NULL
+  }
+  if (!is.null(rn) &&
+      all(grepl("^[TUN]:[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
+    # Strip prefix, unstaple, re-prefix
+    prefix <- substr(rn, 1, 2)
+    stapled <- substring(rn, 3)
+    converted <- paste0(prefix, unstaple_SBS96_rownames(stapled))
+    if (is.data.frame(catalog) || is.matrix(catalog)) {
+      rownames(catalog) <- converted
+    } else {
+      names(catalog) <- converted
+    }
+  }
+
+  catalog <- normalize_catalog(catalog, 288, catalog_row_order()$SBS288, "SBS288")
   if (is.null(catalog)) return(NULL)
 
   rn <- rownames(catalog)
@@ -44,13 +65,13 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   # Bottom panel: no upper bars, x-labels
   p1 <- plot_SBS96(cat_t, plot_title = "Template",
                    ylim = c(0, global_max),
-                   upper = TRUE, xlabels = FALSE, ...)
+                   upper = TRUE, show_axis_text_x = FALSE, ...)
   p2 <- plot_SBS96(cat_u, plot_title = "Non-template",
                    ylim = c(0, global_max),
-                   upper = FALSE, xlabels = FALSE, ...)
+                   upper = FALSE, show_axis_text_x = FALSE, ...)
   p3 <- plot_SBS96(cat_n, plot_title = "Not-transcribed",
                    ylim = c(0, global_max),
-                   upper = FALSE, xlabels = TRUE, ...)
+                   upper = FALSE, show_axis_text_x = TRUE, ...)
 
   # Force identical y-axis breaks across all panels (ggplot2 auto-selects
 

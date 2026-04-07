@@ -14,7 +14,11 @@ plot_ID89 <- function(
   catalog,
   plot_title = NULL,
   upper = TRUE,
-  xlabels = TRUE,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE,
+  xlabels = NULL,
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1.0,
@@ -26,7 +30,7 @@ plot_ID89 <- function(
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  ylabel = NULL,
+  ylab = TRUE,
   show_extra_top_bar = FALSE,
   plot_complex = FALSE
 ) {
@@ -39,15 +43,35 @@ plot_ID89 <- function(
   }
   catalog <- catalog[, 1]
 
-  if (is.null(ylabel)) {
-    if (
-      (!is.null(ylim) && ylim > 1.5) ||
-        !(sum(catalog) < 1.1 && max(catalog) != 1)
-    ) {
-      ylabel = "Counts"
-    } else {
-      ylabel = "Proportion"
+  axis_vis <- resolve_axis_params(
+    show_axis_text_x, show_axis_text_y,
+    show_axis_title_x, show_axis_title_y,
+    xlabels = xlabels
+  )
+  show_axis_text_x <- axis_vis$show_axis_text_x
+  show_axis_text_y <- axis_vis$show_axis_text_y
+  show_axis_title_x <- axis_vis$show_axis_title_x
+  show_axis_title_y <- axis_vis$show_axis_title_y
+
+  # Resolve ylab parameter
+  if (isTRUE(ylab)) {
+    catalog_type <- detect_catalog_type(catalog, ylim = ylim)
+    ylabel <- if (catalog_type == "counts") "Counts" else "Proportion"
+  } else if (is.character(ylab)) {
+    ylabel <- ylab
+    catalog_type <- detect_catalog_type(catalog, ylim = ylim)
+  } else {
+    # NULL or FALSE: suppress y-axis title
+    if (show_axis_title_y) {
+      warning(
+        "ylab = NULL/FALSE conflicts with show_axis_title_y = TRUE; ",
+        "suppressing y-axis title",
+        call. = FALSE
+      )
     }
+    show_axis_title_y <- FALSE
+    catalog_type <- detect_catalog_type(catalog, ylim = ylim)
+    ylabel <- if (catalog_type == "counts") "Counts" else "Proportion"
   }
   # === 1. Define Indel Type Labels and Categories ===
   indel_type_4_figurelabel <- structure(
@@ -464,7 +488,7 @@ plot_ID89 <- function(
     ) +
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
-      axis.text.x = if (xlabels) {
+      axis.text.x = if (show_axis_text_x) {
         ggplot2::element_text(
           angle = 90,
           vjust = 0.5,
@@ -475,7 +499,7 @@ plot_ID89 <- function(
       } else {
         ggplot2::element_blank()
       },
-      axis.ticks.x = if (xlabels) {
+      axis.ticks.x = if (show_axis_text_x) {
         ggplot2::element_line()
       } else {
         ggplot2::element_blank()
@@ -487,12 +511,22 @@ plot_ID89 <- function(
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
         size = rel(axis_title_x_cex),
-        margin = margin(t = ifelse(xlabels, -12, 1), b = 0)
+        margin = margin(t = ifelse(show_axis_text_x, -12, 1), b = 0)
       ),
       axis.title.y = ggplot2::element_text(size = rel(axis_title_y_cex)),
       plot.title = ggplot2::element_text(size = rel(plot_title_cex))
     ) +
     ggplot2::scale_colour_manual(values = c("black", "white"))
+
+  if (!show_axis_title_x) {
+    p <- p + theme(axis.title.x = element_blank())
+  }
+  if (!show_axis_title_y) {
+    p <- p + theme(axis.title.y = element_blank())
+  }
+  if (!show_axis_text_y) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  }
 
   # Add top bar conditionally
   if (upper) {
@@ -526,9 +560,7 @@ plot_ID89 <- function(
   }
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  if (is.null(show_counts)) {
-    show_counts <- (ylabel == "Counts")
-  }
+  show_counts <- resolve_show_counts(show_counts, if (ylabel == "Counts") "counts" else "counts.signature")
 
   # Add count labels
   if (show_counts) {
@@ -558,62 +590,4 @@ plot_ID89 <- function(
   }
 
   return(p)
-}
-
-#' @rdname bar_plots
-#' @export
-#'
-#' @import Cairo
-#' @importFrom grDevices dev.off cairo_pdf
-plot_ID89_pdf <- function(
-  catalog,
-  filename,
-  upper = TRUE,
-  xlabels = TRUE,
-  ylim = NULL,
-  base_size = 11,
-  plot_title_cex = 1.0,
-  count_label_cex = 1.03,
-  block_label_cex = 3,
-  class_label_cex = block_label_cex,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
-  axis_text_y_cex = 0.7,
-  show_counts = NULL,
-  ylabel = NULL,
-  plot_complex = FALSE
-) {
-  plot_list <- lapply(1:ncol(catalog), function(i) {
-    plot_ID89(
-      catalog = catalog[, i],
-      plot_title = colnames(catalog)[i],
-      upper = upper,
-      xlabels = xlabels,
-      ylim = ylim,
-      base_size = base_size,
-      plot_title_cex = plot_title_cex,
-      count_label_cex = count_label_cex,
-      block_label_cex = block_label_cex,
-      class_label_cex = class_label_cex,
-      axis_text_x_cex = axis_text_x_cex,
-      axis_title_x_cex = axis_title_x_cex,
-      axis_title_y_cex = axis_title_y_cex,
-      axis_text_y_cex = axis_text_y_cex,
-      show_counts = show_counts,
-      ylabel = ylabel,
-      show_extra_top_bar = show_extra_top_bar,
-      plot_complex = plot_complex
-    )
-  })
-  plots_per_page <- 5
-  total_pages <- ceiling(length(plot_list) / plots_per_page)
-  cairo_pdf(filename, width = 8.2677, height = 14.61613)
-  for (page in 1:total_pages) {
-    start_index <- (page - 1) * plots_per_page + 1
-    end_index <- min(page * plots_per_page, length(plot_list))
-    plots_on_page <- plot_list[start_index:end_index]
-    do.call(gridExtra::grid.arrange, c(plots_on_page, nrow = 5, ncol = 1))
-  }
-  dev.off()
 }
