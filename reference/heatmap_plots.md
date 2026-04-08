@@ -12,17 +12,14 @@ plot_DBS136(
   base_size = 11,
   plot_title_cex = 1.2,
   axis_text_cex = 0.8,
-  strip_text_cex = 1
+  strip_text_cex = 1,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE
 )
 
-plot_DBS136_pdf(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1.2,
-  axis_text_cex = 0.8,
-  strip_text_cex = 1
-)
+plot_DBS136_pdf(catalog, filename, ...)
 
 plot_SBS1536(
   catalog,
@@ -30,17 +27,14 @@ plot_SBS1536(
   base_size = 11,
   plot_title_cex = 1.2,
   axis_text_cex = 0.8,
-  strip_text_cex = 1
+  strip_text_cex = 1,
+  show_axis_text_x = TRUE,
+  show_axis_text_y = TRUE,
+  show_axis_title_x = TRUE,
+  show_axis_title_y = TRUE
 )
 
-plot_SBS1536_pdf(
-  catalog,
-  filename,
-  base_size = 11,
-  plot_title_cex = 1.2,
-  axis_text_cex = 0.8,
-  strip_text_cex = 1
-)
+plot_SBS1536_pdf(catalog, filename, ...)
 ```
 
 ## Arguments
@@ -72,9 +66,30 @@ plot_SBS1536_pdf(
 
   Numeric. Multiplier for panel/facet label size.
 
+- show_axis_text_x:
+
+  Logical. If FALSE, hide x-axis base labels.
+
+- show_axis_text_y:
+
+  Logical. If FALSE, hide y-axis base labels.
+
+- show_axis_title_x:
+
+  Logical. If FALSE, hide the x-axis description.
+
+- show_axis_title_y:
+
+  Logical. If FALSE, hide the y-axis description.
+
 - filename:
 
   Character. Path to the output PDF file (\\pdf functions only).
+
+- ...:
+
+  Additional arguments passed to the underlying plot function (\\pdf
+  variants only).
 
 ## Value
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## mSigPlot 2.0.0
+
+- Remove all deprecated functionality
+
+## mSigPlot 1.0.12
+
+- More cleanup for consistency
+- Added peak labels to all bar-plot like plots
+
 ## mSigPlot 1.0.11
 
 - Removed `show_extra_top_bar` parameter from
@@ -8,8 +17,8 @@
   [`plot_ID89_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 - Removed associated blocks3 (extra “Del”/“Ins” tier) code from
   [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
-- [`plot_89()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  retains `show_extra_top_bar` for backward compatibility but ignores it
+- `plot_89()` retains `show_extra_top_bar` for backward compatibility
+  but ignores it
 
 ## mSigPlot 1.0.10
 

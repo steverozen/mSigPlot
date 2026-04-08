@@ -133,17 +133,20 @@ plot](reference/figures/example_ID476.png)
 
 All plot functions share these parameters:
 
-| Parameter     | Description                                                      |
-|---------------|------------------------------------------------------------------|
-| `catalog`     | Numeric vector, data.frame, matrix, tibble, or data.table        |
-| `plot_title`  | Title above the plot (defaults to column name)                   |
-| `base_size`   | Base font size in points (default 11)                            |
-| `show_counts` | `TRUE`/`FALSE`/`NULL` (auto-detect) for per-class count labels   |
-| `ylim`        | Y-axis limits                                                    |
-| `*_cex`       | Multipliers for individual text elements relative to `base_size` |
+| Parameter           | Description                                                      |
+|---------------------|------------------------------------------------------------------|
+| `catalog`           | Numeric vector, data.frame, matrix, tibble, or data.table        |
+| `plot_title`        | Title above the plot (defaults to column name)                   |
+| `base_size`         | Base font size in points (default 11)                            |
+| `show_counts`       | `TRUE`/`FALSE`/`NULL` (auto-detect) for per-class count labels   |
+| `show_axis_text_x`  | Show or hide x-axis tick labels                                  |
+| `show_axis_text_y`  | Show or hide y-axis tick labels                                  |
+| `show_axis_title_x` | Show or hide the x-axis title                                    |
+| `show_axis_title_y` | Show or hide the y-axis title                                    |
+| `*_cex`             | Multipliers for individual text elements relative to `base_size` |
 
-Bar chart functions also accept `grid`, `upper`, `xlabels`, and
-`ylabels` toggles. See
+Most bar chart functions also accept `ylim` (y-axis limits), `grid`
+(grid lines), and `upper` (colored class labels above bars). See
 [`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 for the full parameter list.
 

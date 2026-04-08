@@ -118,20 +118,6 @@ base context).
   plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192,
   plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf
 
-## Indel (legacy)
-
-Original indel plot functions, kept for backward compatibility. For new
-code, prefer `plot_ID83`, `plot_ID89`, `plot_ID476`, `plot_ID476_right`.
-
-- [`plot_476()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_right()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_right_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_83()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_89()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  : plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83,
-  plot_89
-
 ## Utilities
 
 Helper functions for working with catalog data.

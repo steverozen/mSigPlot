@@ -9,7 +9,7 @@ as bar charts. All functions return ggplot2 objects."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@ as bar charts. All functions return ggplot2 objects."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf, plot_ID166, plot_ID166_pdf, plot_ID476, plot_ID476_pdf, plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf, plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192, plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf</h1>
-      <small class="dont-index">Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS144.R" class="external-link"><code>R/plot_DBS144.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS144_pdf.R" class="external-link"><code>R/plot_DBS144_pdf.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS78.R" class="external-link"><code>R/plot_DBS78.R</code></a>, and 16 more</small>
+      <small class="dont-index">Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS144.R" class="external-link"><code>R/plot_DBS144.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS144_pdf.R" class="external-link"><code>R/plot_DBS144_pdf.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS78.R" class="external-link"><code>R/plot_DBS78.R</code></a>, and 18 more</small>
       <div class="d-none name"><code>bar_plots.Rd</code></div>
     </div>
 
@@ -47,7 +47,10 @@ as bar charts. All functions return ggplot2 objects.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_DBS144</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -57,26 +60,17 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_DBS144_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_DBS144_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_DBS78</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -86,35 +80,22 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_DBS78_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_DBS78_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_ID166</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -126,29 +107,12 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_ID166_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
-<span>  block_label_cex <span class="op">=</span> <span class="fl">0.65</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  bottom_label_cex <span class="op">=</span> <span class="fl">0.65</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_ID166_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_ID476</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
@@ -161,34 +125,21 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  num_labels <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  ggrepel_cex <span class="op">=</span> <span class="fl">0.52</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.52</span>,</span>
 <span>  label_threshold_denominator <span class="op">=</span> <span class="fl">7</span>,</span>
 <span>  vline_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  simplify_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  stop_at_9 <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_ID476_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.52</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">0.78</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  num_labels <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  ggrepel_cex <span class="op">=</span> <span class="fl">0.52</span>,</span>
-<span>  label_threshold_denominator <span class="op">=</span> <span class="fl">7</span>,</span>
-<span>  vline_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  simplify_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_ID476_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_ID476_right</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
@@ -201,44 +152,31 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  num_labels <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  ggrepel_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  label_threshold_denominator <span class="op">=</span> <span class="fl">7</span>,</span>
 <span>  vline_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  simplify_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show_x_labels <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  stop_at_9 <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_ID476_right_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">1.03</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  num_labels <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  ggrepel_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  label_threshold_denominator <span class="op">=</span> <span class="fl">7</span>,</span>
-<span>  vline_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  simplify_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show_x_labels <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_ID476_right_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_ID83</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -250,56 +188,21 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_ID83_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  block_label_cex <span class="op">=</span> <span class="fl">0.65</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  bottom_label_cex <span class="op">=</span> <span class="fl">0.65</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">plot_ID83_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  block_label_cex <span class="op">=</span> <span class="fl">0.65</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  bottom_label_cex <span class="op">=</span> <span class="fl">0.65</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_ID83_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_ID89</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -311,56 +214,24 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ylabel <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_extra_top_bar <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  stop_at_9 <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_ID89_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">1.03</span>,</span>
-<span>  block_label_cex <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="va">block_label_cex</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ylabel <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">plot_ID89_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">1.03</span>,</span>
-<span>  block_label_cex <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="va">block_label_cex</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ylabel <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  plot_complex <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_ID89_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_SBS12</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  abundance <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -370,27 +241,17 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_SBS12_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  abundance <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_SBS12_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_SBS192</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -400,27 +261,12 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_SBS192_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_SBS192_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_SBS288</span><span class="op">(</span><span class="va">catalog</span>, plot_title <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
@@ -429,8 +275,10 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -440,27 +288,12 @@ as bar charts. All functions return ggplot2 objects.</p>
 <span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num_peak_labels <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  peak_label_cex <span class="op">=</span> <span class="fl">0.7</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_SBS96_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  upper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  count_label_cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
-<span>  class_label_cex <span class="op">=</span> <span class="fl">1.1</span>,</span>
-<span>  axis_text_x_cex <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span>  axis_title_x_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_title_y_cex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  axis_text_y_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  show_counts <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">plot_SBS96_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -477,8 +310,20 @@ will be checked against <code><a href="catalog_row_order.html">catalog_row_order
 <dd><p>Character. Title displayed above the plot.</p></dd>
 
 
-<dt id="arg-ylabels">ylabels<a class="anchor" aria-label="anchor" href="#arg-ylabels"></a></dt>
-<dd><p>Logical, draw y-axis labels.</p></dd>
+<dt id="arg-show-axis-text-x">show_axis_text_x<a class="anchor" aria-label="anchor" href="#arg-show-axis-text-x"></a></dt>
+<dd><p>Logical. If FALSE, hide x-axis tick labels.</p></dd>
+
+
+<dt id="arg-show-axis-text-y">show_axis_text_y<a class="anchor" aria-label="anchor" href="#arg-show-axis-text-y"></a></dt>
+<dd><p>Logical. If FALSE, hide y-axis tick labels.</p></dd>
+
+
+<dt id="arg-show-axis-title-x">show_axis_title_x<a class="anchor" aria-label="anchor" href="#arg-show-axis-title-x"></a></dt>
+<dd><p>Logical. If FALSE, hide the x-axis title.</p></dd>
+
+
+<dt id="arg-show-axis-title-y">show_axis_title_y<a class="anchor" aria-label="anchor" href="#arg-show-axis-title-y"></a></dt>
+<dd><p>Logical. If FALSE, hide the y-axis title.</p></dd>
 
 
 <dt id="arg-ylim">ylim<a class="anchor" aria-label="anchor" href="#arg-ylim"></a></dt>
@@ -514,16 +359,16 @@ Currently has no effect in some functions.</p></dd>
 <dd><p>Character. Path to the output PDF file (\_pdf functions only).</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to <code>plot_SBS96()</code> (<code>plot_SBS288</code> only).</p></dd>
+
+
 <dt id="arg-grid">grid<a class="anchor" aria-label="anchor" href="#arg-grid"></a></dt>
 <dd><p>Logical, draw grid lines.</p></dd>
 
 
 <dt id="arg-upper">upper<a class="anchor" aria-label="anchor" href="#arg-upper"></a></dt>
 <dd><p>Logical, draw colored class rectangles and labels above bars.</p></dd>
-
-
-<dt id="arg-xlabels">xlabels<a class="anchor" aria-label="anchor" href="#arg-xlabels"></a></dt>
-<dd><p>Logical, draw x-axis labels.</p></dd>
 
 
 <dt id="arg-count-label-cex">count_label_cex<a class="anchor" aria-label="anchor" href="#arg-count-label-cex"></a></dt>
@@ -540,6 +385,14 @@ count labels. If <code>FALSE</code>, never display them. If <code>NULL</code> (t
 display them only when the catalog contains counts (sum &gt; 1.1).</p></dd>
 
 
+<dt id="arg-num-peak-labels">num_peak_labels<a class="anchor" aria-label="anchor" href="#arg-num-peak-labels"></a></dt>
+<dd><p>Integer. Number of top peaks to label (0 = none).</p></dd>
+
+
+<dt id="arg-peak-label-cex">peak_label_cex<a class="anchor" aria-label="anchor" href="#arg-peak-label-cex"></a></dt>
+<dd><p>Numeric. Size multiplier for peak labels.</p></dd>
+
+
 <dt id="arg-block-label-cex">block_label_cex<a class="anchor" aria-label="anchor" href="#arg-block-label-cex"></a></dt>
 <dd><p>Numeric. Multiplier for colored category block labels
 (indel plots only).</p></dd>
@@ -548,16 +401,6 @@ display them only when the catalog contains counts (sum &gt; 1.1).</p></dd>
 <dt id="arg-bottom-label-cex">bottom_label_cex<a class="anchor" aria-label="anchor" href="#arg-bottom-label-cex"></a></dt>
 <dd><p>Numeric. Multiplier for bottom category description
 labels (indel plots only).</p></dd>
-
-
-<dt id="arg-num-labels">num_labels<a class="anchor" aria-label="anchor" href="#arg-num-labels"></a></dt>
-<dd><p>Integer. Number of top peaks to label per category block
-(<code>plot_ID476</code>, <code>plot_ID476_right</code> only).</p></dd>
-
-
-<dt id="arg-ggrepel-cex">ggrepel_cex<a class="anchor" aria-label="anchor" href="#arg-ggrepel-cex"></a></dt>
-<dd><p>Numeric. Size of ggrepel peak labels
-(<code>plot_ID476</code>, <code>plot_ID476_right</code> only).</p></dd>
 
 
 <dt id="arg-label-threshold-denominator">label_threshold_denominator<a class="anchor" aria-label="anchor" href="#arg-label-threshold-denominator"></a></dt>
@@ -581,13 +424,15 @@ the indel type prefix (<code>plot_ID476</code>, <code>plot_ID476_right</code> on
 (<code>plot_ID89</code>, <code>plot_ID476</code>, <code>plot_ID476_right</code> only).</p></dd>
 
 
-<dt id="arg-show-x-labels">show_x_labels<a class="anchor" aria-label="anchor" href="#arg-show-x-labels"></a></dt>
-<dd><p>Logical. Display channel labels as rotated x-axis
-tick labels (<code>plot_ID476_right</code> only).</p></dd>
+<dt id="arg-stop-at-">stop_at_9<a class="anchor" aria-label="anchor" href="#arg-stop-at-"></a></dt>
+<dd><p>Logical. If TRUE, cap repeat length labels at 9
+(<code>plot_ID89</code>, <code>plot_ID476</code>, <code>plot_ID476_right</code> only).</p></dd>
 
 
-<dt id="arg-ylabel">ylabel<a class="anchor" aria-label="anchor" href="#arg-ylabel"></a></dt>
-<dd><p>Character or NULL. Custom y-axis label (<code>plot_ID89</code> only).</p></dd>
+<dt id="arg-ylab">ylab<a class="anchor" aria-label="anchor" href="#arg-ylab"></a></dt>
+<dd><p>Y-axis label control (<code>plot_ID89</code> only). <code>TRUE</code> (default)
+auto-detects from data. A character string overrides the label.
+<code>NULL</code> or <code>FALSE</code> suppresses the y-axis title.</p></dd>
 
 
 <dt id="arg-show-extra-top-bar">show_extra_top_bar<a class="anchor" aria-label="anchor" href="#arg-show-extra-top-bar"></a></dt>
@@ -598,10 +443,6 @@ category bar (<code>plot_ID89</code> only).</p></dd>
 <dt id="arg-abundance">abundance<a class="anchor" aria-label="anchor" href="#arg-abundance"></a></dt>
 <dd><p>Numeric vector of per-class abundances for strand bias
 testing (<code>plot_SBS12</code> only).</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code>plot_SBS96()</code> (<code>plot_SBS288</code> only).</p></dd>
 
 </dl></div>
     <div class="section level2">

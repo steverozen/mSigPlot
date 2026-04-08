@@ -133,17 +133,20 @@ plot](reference/figures/example_ID476.png)
 
 All plot functions share these parameters:
 
-| Parameter     | Description                                                      |
-|---------------|------------------------------------------------------------------|
-| `catalog`     | Numeric vector, data.frame, matrix, tibble, or data.table        |
-| `plot_title`  | Title above the plot (defaults to column name)                   |
-| `base_size`   | Base font size in points (default 11)                            |
-| `show_counts` | `TRUE`/`FALSE`/`NULL` (auto-detect) for per-class count labels   |
-| `ylim`        | Y-axis limits                                                    |
-| `*_cex`       | Multipliers for individual text elements relative to `base_size` |
+| Parameter           | Description                                                      |
+|---------------------|------------------------------------------------------------------|
+| `catalog`           | Numeric vector, data.frame, matrix, tibble, or data.table        |
+| `plot_title`        | Title above the plot (defaults to column name)                   |
+| `base_size`         | Base font size in points (default 11)                            |
+| `show_counts`       | `TRUE`/`FALSE`/`NULL` (auto-detect) for per-class count labels   |
+| `show_axis_text_x`  | Show or hide x-axis tick labels                                  |
+| `show_axis_text_y`  | Show or hide y-axis tick labels                                  |
+| `show_axis_title_x` | Show or hide the x-axis title                                    |
+| `show_axis_title_y` | Show or hide the y-axis title                                    |
+| `*_cex`             | Multipliers for individual text elements relative to `base_size` |
 
-Bar chart functions also accept `grid`, `upper`, `xlabels`, and
-`ylabels` toggles. See
+Most bar chart functions also accept `ylim` (y-axis limits), `grid`
+(grid lines), and `upper` (colored class labels above bars). See
 [`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 for the full parameter list.
 
@@ -294,20 +297,6 @@ base context).
   plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf,
   plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192,
   plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf
-
-## Indel (legacy)
-
-Original indel plot functions, kept for backward compatibility. For new
-code, prefer `plot_ID83`, `plot_ID89`, `plot_ID476`, `plot_ID476_right`.
-
-- [`plot_476()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_right()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_476_right_pdf()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_83()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  [`plot_89()`](https://steverozen.github.io/mSigPlot/reference/legacy_bar_plots.md)
-  : plot_476, plot_476_pdf, plot_476_right, plot_476_right_pdf, plot_83,
-  plot_89
 
 ## Utilities
 

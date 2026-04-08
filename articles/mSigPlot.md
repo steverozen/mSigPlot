@@ -74,6 +74,15 @@ plot_ID89(id89_sigs[, 1, drop = FALSE], plot_title = "ID89 signature")
 
 ![](mSigPlot_files/figure-html/id89-1.png)
 
+One can add arrows to label the tallest peaks for bar-chart-like plots:
+
+``` r
+plot_ID89(id89_sigs[, 1, drop = FALSE], plot_title = "ID89 signature",
+          num_peak_labels = 5)
+```
+
+![](mSigPlot_files/figure-html/id89-peak-labels-1.png)
+
 ## ID476 – 476-channel indel classification
 
 The 476-channel system adds flanking base context to the indel

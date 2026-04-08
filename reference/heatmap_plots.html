@@ -9,7 +9,7 @@ as heatmaps. All functions return ggplot2 objects."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,17 +50,14 @@ as heatmaps. All functions return ggplot2 objects.</p>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">1.2</span>,</span>
 <span>  axis_text_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  strip_text_cex <span class="op">=</span> <span class="fl">1</span></span>
+<span>  strip_text_cex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_DBS136_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">1.2</span>,</span>
-<span>  axis_text_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  strip_text_cex <span class="op">=</span> <span class="fl">1</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_DBS136_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot_SBS1536</span><span class="op">(</span></span>
 <span>  <span class="va">catalog</span>,</span>
@@ -68,17 +65,14 @@ as heatmaps. All functions return ggplot2 objects.</p>
 <span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  plot_title_cex <span class="op">=</span> <span class="fl">1.2</span>,</span>
 <span>  axis_text_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  strip_text_cex <span class="op">=</span> <span class="fl">1</span></span>
+<span>  strip_text_cex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  show_axis_text_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_text_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_axis_title_y <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_SBS1536_pdf</span><span class="op">(</span></span>
-<span>  <span class="va">catalog</span>,</span>
-<span>  <span class="va">filename</span>,</span>
-<span>  base_size <span class="op">=</span> <span class="fl">11</span>,</span>
-<span>  plot_title_cex <span class="op">=</span> <span class="fl">1.2</span>,</span>
-<span>  axis_text_cex <span class="op">=</span> <span class="fl">0.8</span>,</span>
-<span>  strip_text_cex <span class="op">=</span> <span class="fl">1</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">plot_SBS1536_pdf</span><span class="op">(</span><span class="va">catalog</span>, <span class="va">filename</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -111,8 +105,29 @@ will be checked against <code><a href="catalog_row_order.html">catalog_row_order
 <dd><p>Numeric. Multiplier for panel/facet label size.</p></dd>
 
 
+<dt id="arg-show-axis-text-x">show_axis_text_x<a class="anchor" aria-label="anchor" href="#arg-show-axis-text-x"></a></dt>
+<dd><p>Logical. If FALSE, hide x-axis base labels.</p></dd>
+
+
+<dt id="arg-show-axis-text-y">show_axis_text_y<a class="anchor" aria-label="anchor" href="#arg-show-axis-text-y"></a></dt>
+<dd><p>Logical. If FALSE, hide y-axis base labels.</p></dd>
+
+
+<dt id="arg-show-axis-title-x">show_axis_title_x<a class="anchor" aria-label="anchor" href="#arg-show-axis-title-x"></a></dt>
+<dd><p>Logical. If FALSE, hide the x-axis description.</p></dd>
+
+
+<dt id="arg-show-axis-title-y">show_axis_title_y<a class="anchor" aria-label="anchor" href="#arg-show-axis-title-y"></a></dt>
+<dd><p>Logical. If FALSE, hide the y-axis description.</p></dd>
+
+
 <dt id="arg-filename">filename<a class="anchor" aria-label="anchor" href="#arg-filename"></a></dt>
 <dd><p>Character. Path to the output PDF file (\_pdf functions only).</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to the underlying plot function
+(\_pdf variants only).</p></dd>
 
 </dl></div>
     <div class="section level2">
