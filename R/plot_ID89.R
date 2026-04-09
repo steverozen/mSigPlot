@@ -29,7 +29,6 @@ plot_ID89 <- function(
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
@@ -300,31 +299,7 @@ plot_ID89 <- function(
   )
 
   # === 2. Prepare Data for Plotting ===
-  my_vector <- indel_type_4_figurelabel$IndelType
-  muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
-  muts_basis_melt <- data.frame(
-    IndelType = muts_basis$IndelType,
-    variable  = "Sample",
-    value     = muts_basis$Sample,
-    stringsAsFactors = FALSE
-  )
-  muts_basis_melt <- merge(
-    indel_type_4_figurelabel,
-    muts_basis_melt,
-    by = "IndelType",
-    all.x = TRUE
-  )
-  muts_basis_melt[is.na(muts_basis_melt)] <- 0
-  names(muts_basis_melt) <- c(
-    "IndelType",
-    "Indel",
-    "Indel3",
-    "Figlabel",
-    "SubIndel",
-    "Sample",
-    "freq"
-  )
-  muts_basis_melt$Sample <- as.character(muts_basis_melt$Sample)
+  muts_basis_melt <- prepare_indel_data(catalog, indel_type_4_figurelabel)
 
   if (!is.null(ylim)) {
     ymax <- ylim[2]

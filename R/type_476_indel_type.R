@@ -1,4 +1,18 @@
+#' Return the 476-channel indel type classification table
+#'
+#' Constructs a data frame mapping 476 indel channels to their type,
+#' class, and figure label. The result is cached after the first call.
+#'
+#' @return A 476-row data frame with columns: IndelType, Indel, Indel3, Figlabel.
+#' @keywords internal
 type_476_indel_type = function() {
+  if (!is.null(.pkg_cache$type_476)) return(.pkg_cache$type_476)
+  result <- .build_type_476()
+  .pkg_cache$type_476 <- result
+  result
+}
+
+.build_type_476 <- function() {
   structure(
     list(
       IndelType = c(

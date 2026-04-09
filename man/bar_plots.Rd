@@ -57,7 +57,7 @@ plot_DBS78(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -82,7 +82,7 @@ plot_ID166(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -163,7 +163,7 @@ plot_ID83(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -202,7 +202,6 @@ plot_ID89(
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
@@ -217,7 +216,7 @@ plot_SBS12(
   abundance = NULL,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -237,7 +236,7 @@ plot_SBS192(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -266,7 +265,7 @@ plot_SBS96(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -307,8 +306,7 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{axis_text_x_cex}{Numeric. Multiplier for x-axis labels.}
 
-\item{axis_title_x_cex}{Numeric. Multiplier for x-axis title size.
-Currently has no effect in some functions.}
+\item{axis_title_x_cex}{Numeric. Multiplier for x-axis title size.}
 
 \item{axis_title_y_cex}{Numeric. Multiplier for the y-axis title size.}
 
@@ -360,9 +358,6 @@ the indel type prefix (\code{plot_ID476}, \code{plot_ID476_right} only).}
 
 \item{stop_at_9}{Logical. If TRUE, cap repeat length labels at 9
 (\code{plot_ID89}, \code{plot_ID476}, \code{plot_ID476_right} only).}
-
-\item{show_extra_top_bar}{Logical. Display an extra summary bar above the
-category bar (\code{plot_ID89} only).}
 
 \item{abundance}{Numeric vector of per-class abundances for strand bias
 testing (\code{plot_SBS12} only).}

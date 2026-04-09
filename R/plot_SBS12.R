@@ -17,7 +17,7 @@ plot_SBS12 <- function(
   abundance = NULL,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -171,7 +171,11 @@ plot_SBS12 <- function(
   if (!show_axis_text_y) {
     p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
-  p <- p + xlab(NULL)
+  if (show_axis_title_x) {
+    p <- p + xlab("Mutation Type")
+  } else {
+    p <- p + xlab(NULL)
+  }
 
   # Add asterisks for significant strand bias
   for (k in 1:6) {

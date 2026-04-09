@@ -52,31 +52,8 @@ plot_ID476_right <- function(
     ylabel <- ifelse(catalog_type == "proportion",
                      "Proportion", "Density Proportion")
   }
-  Koh476_indeltype = type_476_indel_type()
-  my_vector <- Koh476_indeltype$IndelType
-  muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
-  muts_basis_melt <- data.frame(
-    IndelType = muts_basis$IndelType,
-    variable  = "Sample",
-    value     = muts_basis$Sample,
-    stringsAsFactors = FALSE
-  )
-  muts_basis_melt <- merge(
-    Koh476_indeltype,
-    muts_basis_melt,
-    by = "IndelType",
-    all.x = TRUE
-  )
-  muts_basis_melt[is.na(muts_basis_melt)] <- 0
-  names(muts_basis_melt) <- c(
-    "IndelType",
-    "Indel",
-    "Indel3",
-    "Figlabel",
-    "Sample",
-    "freq"
-  )
-  muts_basis_melt$Sample <- as.character(muts_basis_melt$Sample)
+  Koh476_indeltype <- type_476_indel_type()
+  muts_basis_melt <- prepare_indel_data(catalog, Koh476_indeltype)
 
   # Add x position for plotting
   muts_basis_melt$x_pos <- match(

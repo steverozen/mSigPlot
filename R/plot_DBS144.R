@@ -38,7 +38,6 @@
 #'   labels (indel plots only).
 #' @param axis_text_x_cex Numeric. Multiplier for x-axis labels.
 #' @param axis_title_x_cex Numeric. Multiplier for x-axis title size.
-#'   Currently has no effect in some functions.
 #' @param axis_title_y_cex Numeric. Multiplier for the y-axis title size.
 #' @param axis_text_y_cex Numeric. Multiplier for the y-axis tick label size.
 #' @param show_axis_text_x Logical. If FALSE, hide x-axis tick labels.
@@ -51,8 +50,6 @@
 #'   Not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
 #' @param abundance Numeric vector of per-class abundances for strand bias
 #'   testing (`plot_SBS12` only).
-#' @param show_extra_top_bar Logical. Display an extra summary bar above the
-#'   category bar (`plot_ID89` only).
 #' @param plot_complex Logical. Include Complex indel channels
 #'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
 #' @param num_peak_labels Integer. Number of top peaks to label (0 = none).

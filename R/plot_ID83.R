@@ -17,7 +17,7 @@ plot_ID83 <- function(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -268,7 +268,11 @@ plot_ID83 <- function(
   }
 
   # Add x-axis label
-  p <- p + xlab(NULL)
+  if (show_axis_title_x) {
+    p <- p + xlab("Indel Type")
+  } else {
+    p <- p + xlab(NULL)
+  }
 
   # Add grid lines that match the y-axis ticks
   if (grid) {

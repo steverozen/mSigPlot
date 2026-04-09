@@ -117,6 +117,34 @@ add_peak_labels <- function(
 }
 
 
+#' Prepare indel data for plotting
+#'
+#' Merges a catalog vector with an indel type table, producing a long-format
+#' data frame ready for ggplot. Used by `plot_ID476`, `plot_ID476_right`,
+#' and `plot_ID89`.
+#'
+#' @param catalog Named numeric vector of indel channel values.
+#' @param type_table Data frame with at least an `IndelType` column and
+#'   classification columns (e.g. `Indel`, `Indel3`, `Figlabel`).
+#' @return Data frame with columns from `type_table` plus `Sample` and `freq`.
+#' @keywords internal
+prepare_indel_data <- function(catalog, type_table) {
+  melt_df <- data.frame(
+    IndelType = type_table$IndelType,
+    variable  = "Sample",
+    value     = catalog,
+    stringsAsFactors = FALSE
+  )
+  merged <- merge(type_table, melt_df, by = "IndelType", all.x = TRUE)
+  merged[is.na(merged)] <- 0
+  # Rename last two columns to Sample and freq
+  nc <- ncol(merged)
+  names(merged)[(nc - 1):nc] <- c("Sample", "freq")
+  merged$Sample <- as.character(merged$Sample)
+  merged
+}
+
+
 #' Generic multi-sample PDF export for bar plots
 #'
 #' Creates a multi-page PDF with plots arranged in a grid. Each page

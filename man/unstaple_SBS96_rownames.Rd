@@ -2,15 +2,19 @@
 % Please edit documentation in R/unstaple_SBS96_rownames.R
 \name{unstaple_SBS96_rownames}
 \alias{unstaple_SBS96_rownames}
-\title{Convert SBS96-channel mutations-type identifiers like this \code{"A[C>A]T" -> "ACTA"}}
+\title{Convert stapled SBS96 row names to compact format}
 \usage{
-unstaple_SBS96_rownames(c1)
+unstaple_SBS96_rownames(stapled_names)
 }
 \arguments{
-\item{c1}{A vector of character strings with the mutation indicated by
-e.g. \code{[C>A]} in the middle.}
+\item{stapled_names}{Character vector of stapled mutation type identifiers
+(e.g. \code{"A[C>A]T"}).}
+}
+\value{
+Character vector of compact 4-letter identifiers.
 }
 \description{
-Convert SBS96-channel mutations-type identifiers like this \code{"A[C>A]T" -> "ACTA"}
+Converts names like \code{"A[C>A]T"} to \code{"ACTA"} (compact
+\verb{<5' base><ref><3' base><alt>} format).
 }
 \keyword{internal}

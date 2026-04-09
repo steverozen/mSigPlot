@@ -17,7 +17,7 @@ plot_ID166 <- function(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -215,7 +215,11 @@ plot_ID166 <- function(
       axis.line.x = element_blank(),
       axis.ticks.x = element_blank(),
       axis.text.x = element_blank(),
-      axis.title.x = element_blank(),
+      axis.title.x = if (show_axis_title_x) {
+        element_text(size = axis_title_x_cex * base_size)
+      } else {
+        element_blank()
+      },
       axis.title.y = element_text(size = axis_title_y_cex * base_size),
       axis.text.y = element_text(size = axis_text_y_cex * base_size),
       plot.margin = margin(
@@ -225,6 +229,13 @@ plot_ID166 <- function(
         l = 10
       )
     )
+
+  # X-axis label
+  if (show_axis_title_x) {
+    p <- p + xlab("Indel Type")
+  } else {
+    p <- p + xlab(NULL)
+  }
 
   # Background color wash
   if (grid) {
