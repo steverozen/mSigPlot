@@ -68,14 +68,18 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 (\_pdf variants only).}
 }
 \value{
-Plot functions return a ggplot2 object, or NULL with a warning
-if the catalog is invalid (wrong size or row names). PDF functions
-return NULL invisibly (called for side effect of creating a PDF file),
-or stop with an error if the catalog is invalid.
+Plot functions return a patchwork object (a composite of ggplot2
+panels), or NULL with a warning if the catalog is invalid (wrong size or
+row names). Note: adding ggplot2 layers with \code{+} (e.g. \code{+ ggtitle()})
+applies only to the last sub-plot, not the composite; use
+\code{\link[patchwork:plot_annotation]{patchwork::plot_annotation()}} for titles/captions on the whole
+composition. PDF functions return NULL invisibly (called for side effect
+of creating a PDF file), or stop with an error if the catalog is invalid.
 }
 \description{
 Plot functions for SBS and DBS mutational signature catalogs
-as heatmaps. All functions return ggplot2 objects.
+as heatmaps. Plot functions return patchwork objects (composites of
+ggplot2 panels).
 }
 \details{
 Functions in this family:

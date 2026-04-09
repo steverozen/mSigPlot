@@ -32,23 +32,6 @@ plot_SBS96 <- function(
   num_peak_labels = 0,
   peak_label_cex = 0.7
 ) {
-  # If row names are in stapled format like A[C>A]T, convert to ACTA
-  rn <- if (is.data.frame(catalog) || is.matrix(catalog)) {
-    rownames(catalog)
-  } else if (is.numeric(catalog)) {
-    names(catalog)
-  } else {
-    NULL
-  }
-  if (!is.null(rn) && all(grepl("^[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
-    converted <- unstaple_SBS96_rownames(rn)
-    if (is.data.frame(catalog) || is.matrix(catalog)) {
-      rownames(catalog) <- converted
-    } else {
-      names(catalog) <- converted
-    }
-  }
-
   catalog <- normalize_catalog(catalog, 96, catalog_row_order()$SBS96, "SBS96")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""

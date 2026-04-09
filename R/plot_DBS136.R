@@ -1,7 +1,8 @@
 #' plot_DBS136, plot_DBS136_pdf, plot_SBS1536, plot_SBS1536_pdf
 #'
 #' Plot functions for SBS and DBS mutational signature catalogs
-#' as heatmaps. All functions return ggplot2 objects.
+#' as heatmaps. Plot functions return patchwork objects (composites of
+#' ggplot2 panels).
 #'
 #' Functions in this family:
 #' - `plot_SBS1536`: SBS pentanucleotide context (1536 channels)
@@ -25,10 +26,13 @@
 #' @param ... Additional arguments passed to the underlying plot function
 #'   (\_pdf variants only).
 #'
-#' @return Plot functions return a ggplot2 object, or NULL with a warning
-#'   if the catalog is invalid (wrong size or row names). PDF functions
-#'   return NULL invisibly (called for side effect of creating a PDF file),
-#'   or stop with an error if the catalog is invalid.
+#' @return Plot functions return a patchwork object (a composite of ggplot2
+#'   panels), or NULL with a warning if the catalog is invalid (wrong size or
+#'   row names). Note: adding ggplot2 layers with `+` (e.g. `+ ggtitle()`)
+#'   applies only to the last sub-plot, not the composite; use
+#'   [patchwork::plot_annotation()] for titles/captions on the whole
+#'   composition. PDF functions return NULL invisibly (called for side effect
+#'   of creating a PDF file), or stop with an error if the catalog is invalid.
 #'
 #' @name heatmap_plots
 NULL
@@ -45,7 +49,7 @@ NULL
 #' @export
 #'
 #' @import ggplot2
-#' @importFrom gridExtra grid.arrange arrangeGrob
+#' @importFrom patchwork wrap_plots plot_annotation
 plot_DBS136 <- function(
   catalog,
   plot_title = NULL,
@@ -196,26 +200,21 @@ plot_DBS136 <- function(
   # Following standard DBS136 heatmap layout
   all_panels <- c(panel_list, list(maxima_panel))
 
-  title_grob <- grid::textGrob(
-    plot_title,
-    gp = grid::gpar(fontsize = plot_title_cex * base_size, fontface = "bold")
-  )
+  # Layout: 3 rows x 4 cols, maxima panel (K) spans 2 rows
+  # Row 1: panels 7,8,9,10 (TA, TC, TG, TT)  = G,H,I,J
+  # Row 2: panels 4,5,6     (CC, CG, CT)      = D,E,F + K
+  # Row 3: panels 1,2,3     (AC, AT, GC)      = A,B,C + K
+  design <- "GHIJ
+             DEFK
+             ABCK"
 
-  layout_matrix <- rbind(
-    c(7, 8, 9, 10),
-    c(4, 5, 6, 11),
-    c(1, 2, 3, 11)
-  )
-
-  result <- gridExtra::grid.arrange(
-    title_grob,
-    gridExtra::arrangeGrob(
-      grobs = all_panels,
-      layout_matrix = layout_matrix
-    ),
-    nrow = 2,
-    heights = c(0.06, 0.94)
-  )
-
-  invisible(result)
+  patchwork::wrap_plots(all_panels, design = design) +
+    patchwork::plot_annotation(
+      title = plot_title,
+      theme = ggplot2::theme(
+        plot.title = ggplot2::element_text(
+          size = plot_title_cex * base_size, face = "bold", hjust = 0.5
+        )
+      )
+    )
 }

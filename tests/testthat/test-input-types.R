@@ -76,37 +76,37 @@ for (spec in ggplot_functions) {
   })
 }
 
-# -- gtable-returning functions (heatmaps) ------------------------------------
+# -- patchwork-returning functions (heatmaps) ----------------------------------
 
-gtable_functions <- list(
+patchwork_functions <- list(
   list(fn = "plot_SBS1536", n = 1536, named = TRUE),
   list(fn = "plot_DBS136",  n = 136,  named = TRUE)
 )
 
-for (spec in gtable_functions) {
+for (spec in patchwork_functions) {
   fn <- get(spec$fn)
   n  <- spec$n
   nm <- spec$named
 
   test_that(paste(spec$fn, "accepts unnamed numeric vector"), {
     result <- fn(make_vector(n, named = FALSE))
-    expect_true(inherits(result, "gtable"))
+    expect_true(inherits(result, "patchwork"))
   })
 
   test_that(paste(spec$fn, "accepts named numeric vector"), {
     result <- fn(make_vector(n, named = nm))
-    expect_true(inherits(result, "gtable"))
+    expect_true(inherits(result, "patchwork"))
   })
 
   test_that(paste(spec$fn, "accepts 1-column matrix"), {
     result <- fn(make_matrix(n, named = nm))
-    expect_true(inherits(result, "gtable"))
+    expect_true(inherits(result, "patchwork"))
   })
 
   test_that(paste(spec$fn, "accepts tibble"), {
     skip_if_not_installed("tibble")
     result <- fn(make_tibble(n, named = FALSE))
-    expect_true(inherits(result, "gtable"))
+    expect_true(inherits(result, "patchwork"))
   })
 }
 

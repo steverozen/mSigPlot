@@ -15,6 +15,19 @@ Returns a named list containing the canonical row ordering for each
 catalog type. These are used for validation and ordering of mutation
 catalogs. The result is cached after the first call.
 }
+\details{
+Row names use a compact 4-letter format for SBS types: e.g. \code{ACAA}
+encodes the trinucleotide context as
+\verb{<5' base><ref><3' base><alt>}.
+SBS288 row names add a strand prefix:
+\code{T:ACAA} (transcribed), \code{U:ACAA} (untranscribed), \code{N:ACAA}
+(non-transcribed).
+
+Catalogs with "stapled" row names (e.g. \verb{A[C>A]A} for SBS96,
+\verb{T:A[C>A]A} for SBS288) are automatically converted to compact format
+by \code{\link[=normalize_catalog]{normalize_catalog()}} before validation, so both formats are
+accepted by all plotting functions.
+}
 \examples{
 cro <- catalog_row_order()
 head(cro$SBS96)

@@ -4,7 +4,8 @@
 %   R/plot_ID476.R, R/plot_ID476_pdf.R, R/plot_ID476_right.R,
 %   R/plot_ID476_right_pdf.R, R/plot_ID83.R, R/plot_ID83_pdf.R, R/plot_ID89.R,
 %   R/plot_ID89_pdf.R, R/plot_SBS12.R, R/plot_SBS12_pdf.R, R/plot_SBS192.R,
-%   R/plot_SBS192_pdf.R, R/plot_SBS288.R, R/plot_SBS96.R, R/plot_SBS96_pdf.R
+%   R/plot_SBS192_pdf.R, R/plot_SBS288.R, R/plot_SBS288_pdf.R, R/plot_SBS96.R,
+%   R/plot_SBS96_pdf.R
 \name{bar_plots}
 \alias{bar_plots}
 \alias{plot_DBS144}
@@ -26,6 +27,7 @@
 \alias{plot_SBS192}
 \alias{plot_SBS192_pdf}
 \alias{plot_SBS288}
+\alias{plot_SBS288_pdf}
 \alias{plot_SBS96}
 \alias{plot_SBS96_pdf}
 \title{plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf, plot_ID166, plot_ID166_pdf, plot_ID476, plot_ID476_pdf, plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf, plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192, plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf}
@@ -254,6 +256,8 @@ plot_SBS192(
 plot_SBS192_pdf(catalog, filename, ...)
 
 plot_SBS288(catalog, plot_title = NULL, ...)
+
+plot_SBS288_pdf(catalog, filename, ...)
 
 plot_SBS96(
   catalog,

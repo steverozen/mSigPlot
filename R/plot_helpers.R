@@ -149,13 +149,16 @@ plot_catalog_pdf <- function(
   on.exit(grDevices::dev.off())
 
   if (plots_per_page == 1) {
-    # Heatmap mode: one plot per page, function draws directly
+    # One-per-page mode: heatmaps draw directly, patchwork/ggplot need print()
     for (i in seq_len(n_samples)) {
-      plot_fn(
+      p <- plot_fn(
         catalog = catalog[, i, drop = FALSE],
         plot_title = colnames(catalog)[i],
         ...
       )
+      if (inherits(p, "patchwork") || inherits(p, "ggplot")) {
+        print(p)
+      }
     }
   } else {
     # Bar plot mode: collect ggplot objects, arrange per page
@@ -169,20 +172,28 @@ plot_catalog_pdf <- function(
           plot_title = colnames(catalog)[j],
           ...
         )
-        page_plots[[length(page_plots) + 1]] <- p
+        # Patchwork objects (e.g. SBS288) can't go into grid.arrange;
+        # print each on its own page
+        if (inherits(p, "patchwork")) {
+          print(p)
+        } else {
+          page_plots[[length(page_plots) + 1]] <- p
+        }
       }
 
-      # Pad with blank plots to fill the page
-      while (length(page_plots) < plots_per_page) {
-        page_plots[[length(page_plots) + 1]] <- ggplot2::ggplot() +
-          ggplot2::theme_void()
-      }
+      # Only arrange if we collected any ggplot objects
+      if (length(page_plots) > 0) {
+        while (length(page_plots) < plots_per_page) {
+          page_plots[[length(page_plots) + 1]] <- ggplot2::ggplot() +
+            ggplot2::theme_void()
+        }
 
-      gridExtra::grid.arrange(
-        grobs = page_plots,
-        ncol = 1,
-        nrow = plots_per_page
-      )
+        gridExtra::grid.arrange(
+          grobs = page_plots,
+          ncol = 1,
+          nrow = plots_per_page
+        )
+      }
     }
   }
 

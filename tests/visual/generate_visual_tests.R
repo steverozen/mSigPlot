@@ -48,13 +48,6 @@ save_ggplot <- function(p, name, width = 800, height = 600) {
   message("  -> ", path)
 }
 
-save_gtable <- function(expr, name, width = 1000, height = 800) {
-  path <- file.path(out_dir, paste0(name, ".png"))
-  grDevices::png(path, width = width, height = height, type = "cairo")
-  result <- force(expr)
-  grDevices::dev.off()
-  message("  -> ", path)
-}
 
 # -- Generate plots -----------------------------------------------------------
 
@@ -92,7 +85,7 @@ save_ggplot(plot_SBS288(cat288, plot_title = "SBS288"), "plot_SBS288")
 # 5. plot_SBS1536
 message("[5/13] plot_SBS1536")
 cat1536 <- load_csv_catalog("regress.cat.sbs.1536.csv", "SBS1536")
-save_gtable(plot_SBS1536(cat1536), "plot_SBS1536")
+save_ggplot(plot_SBS1536(cat1536), "plot_SBS1536", width = 1000, height = 800)
 
 # 6. plot_DBS78
 message("[6/13] plot_DBS78")
@@ -102,7 +95,7 @@ save_ggplot(plot_DBS78(cat78), "plot_DBS78")
 # 7. plot_DBS136
 message("[7/13] plot_DBS136")
 cat136 <- load_csv_catalog("regress.cat.dbs.136.csv", "DBS136")
-save_gtable(plot_DBS136(cat136), "plot_DBS136")
+save_ggplot(plot_DBS136(cat136), "plot_DBS136", width = 1000, height = 800)
 
 # 8. plot_DBS144
 message("[8/13] plot_DBS144")

@@ -28,6 +28,8 @@ order.
 \description{
 Internal helper that coerces a catalog from any supported input type
 (numeric vector, matrix, data.table, tibble, data.frame) to a 1-column
-data.frame with validated row names.
+data.frame with validated row names. Stapled SBS row names
+(e.g. \verb{A[C>A]A} for SBS96, \verb{T:A[C>A]A} for SBS288) are automatically
+converted to compact format before validation.
 }
 \keyword{internal}

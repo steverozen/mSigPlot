@@ -48,6 +48,52 @@ test_that("plot_SBS288 prints without error", {
   expect_no_error(print(p))
 })
 
+test_that("plot_SBS288_pdf creates PDF from multi-sample catalog", {
+  fixture_path <- testthat::test_path("fixtures", "SBS288_De-Novo_Signatures.txt")
+  sbs288 <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  catalog_subset <- sbs288[, 1:2, drop = FALSE]
+  temp_pdf <- tempfile(fileext = ".pdf")
+
+  expect_no_error(
+    plot_SBS288_pdf(catalog_subset, filename = temp_pdf)
+  )
+
+  expect_true(file.exists(temp_pdf))
+  expect_gt(file.size(temp_pdf), 0)
+
+  unlink(temp_pdf)
+})
+
+test_that("plot_guess_pdf works with 288-row catalog", {
+  fixture_path <- testthat::test_path("fixtures", "SBS288_De-Novo_Signatures.txt")
+  sbs288 <- read.table(
+    fixture_path,
+    header = TRUE,
+    sep = "\t",
+    row.names = 1,
+    check.names = FALSE
+  )
+
+  catalog_subset <- sbs288[, 1:2, drop = FALSE]
+  temp_pdf <- tempfile(fileext = ".pdf")
+
+  expect_no_error(
+    plot_guess_pdf(catalog_subset, filename = temp_pdf)
+  )
+
+  expect_true(file.exists(temp_pdf))
+  expect_gt(file.size(temp_pdf), 0)
+
+  unlink(temp_pdf)
+})
+
 test_that("plot_SBS288 works with real SBS288 signature file", {
   fixture_path <- testthat::test_path("fixtures", "SBS288_De-Novo_Signatures.txt")
   sbs288 <- read.table(

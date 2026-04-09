@@ -110,6 +110,6 @@ test_that("plot_SBS288 renders negative bars", {
   catalog <- runif(288, min = -0.02, max = 0.04)
   names(catalog) <- rnames
   p <- plot_SBS288(catalog, plot_title = "SBS288 neg")
-  # plot_SBS288 returns a gtable, not a ggplot
-  expect_true(inherits(p, "gtable") || inherits(p, "ggplot"))
+  # plot_SBS288 returns a patchwork object
+  expect_true(inherits(p, "patchwork"))
 })

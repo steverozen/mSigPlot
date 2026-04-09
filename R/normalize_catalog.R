@@ -2,7 +2,9 @@
 #'
 #' Internal helper that coerces a catalog from any supported input type
 #' (numeric vector, matrix, data.table, tibble, data.frame) to a 1-column
-#' data.frame with validated row names.
+#' data.frame with validated row names. Stapled SBS row names
+#' (e.g. `A[C>A]A` for SBS96, `T:A[C>A]A` for SBS288) are automatically
+#' converted to compact format before validation.
 #'
 #' @param catalog Input catalog in any supported format.
 #' @param expected_nrow Integer. Expected number of rows/elements.
@@ -54,6 +56,20 @@ normalize_catalog <- function(
       " rows; returning NULL"
     )
     return(NULL)
+  }
+
+  # Convert stapled SBS row names to canonical form
+  rn <- rownames(catalog)
+  if (!is.null(rn) && !is.null(canonical_order)) {
+    if (expected_nrow == 96 &&
+        all(grepl("^[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
+      rownames(catalog) <- unstaple_SBS96_rownames(rn)
+    } else if (expected_nrow == 288 &&
+               all(grepl("^[TUN]:[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
+      prefix <- substr(rn, 1, 2)
+      stapled <- substring(rn, 3)
+      rownames(catalog) <- paste0(prefix, unstaple_SBS96_rownames(stapled))
+    }
   }
 
   # Validate and reorder row names if canonical_order is provided

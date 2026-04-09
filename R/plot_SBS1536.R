@@ -11,7 +11,7 @@
 #'
 #' @import ggplot2
 #' @importFrom dplyr arrange desc %>%
-#' @importFrom gridExtra grid.arrange
+#' @importFrom patchwork wrap_plots plot_annotation
 plot_SBS1536 <- function(
   catalog,
   plot_title = NULL,
@@ -139,29 +139,18 @@ plot_SBS1536 <- function(
     panel_list[[idx]] <- p
   }
 
-  # Arrange 2x3 grid with title
-  title_grob <- grid::textGrob(
-    plot_title,
-    gp = grid::gpar(fontsize = plot_title_cex * base_size, fontface = "bold")
-  )
-
-  # Add axis description labels
-  subtitle_grob <- grid::textGrob(
-    "X: 3' context (1bp inner, 2bp outer)    Y: 5' context (1bp inner, 2bp outer)",
-    gp = grid::gpar(fontsize = base_size * 0.8)
-  )
-
-  result <- gridExtra::grid.arrange(
-    title_grob,
-    gridExtra::arrangeGrob(
-      grobs = panel_list,
-      nrow = 2,
-      ncol = 3
-    ),
-    subtitle_grob,
-    nrow = 3,
-    heights = c(0.08, 0.87, 0.05)
-  )
-
-  invisible(result)
+  # Arrange 2x3 grid with title and caption
+  patchwork::wrap_plots(panel_list, nrow = 2, ncol = 3) +
+    patchwork::plot_annotation(
+      title = plot_title,
+      caption = "X: 3' context (1bp inner, 2bp outer)    Y: 5' context (1bp inner, 2bp outer)",
+      theme = ggplot2::theme(
+        plot.title = ggplot2::element_text(
+          size = plot_title_cex * base_size, face = "bold", hjust = 0.5
+        ),
+        plot.caption = ggplot2::element_text(
+          size = base_size * 0.8, hjust = 0.5
+        )
+      )
+    )
 }

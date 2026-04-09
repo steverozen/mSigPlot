@@ -28,8 +28,10 @@
 #' @param ... Additional arguments passed to the underlying plotting function.
 #'
 #' @return `plot_guess()` returns a plot object. The exact class depends on
-#'   the dispatched function: most return a ggplot object, SBS288 returns a
-#'   patchwork object, and DBS136/SBS1536 return gtable objects (invisibly).
+#'   the dispatched function: most return a ggplot object; SBS288, DBS136,
+#'   and SBS1536 return patchwork objects. Note: adding ggplot2 layers with
+#'   `+` to a patchwork object (e.g. `+ ggtitle()`) applies only to the last
+#'   sub-plot, not the composite; use [patchwork::plot_annotation()] instead.
 #'   `plot_guess_pdf()` returns NULL invisibly (called for side effect of
 #'   creating a PDF file).
 #'

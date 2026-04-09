@@ -10,27 +10,6 @@
 #'
 #' @export
 plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
-  # Convert stapled SBS288 row names like T:A[C>A]T to T:ACTA
-  rn <- if (is.data.frame(catalog) || is.matrix(catalog)) {
-    rownames(catalog)
-  } else if (is.numeric(catalog)) {
-    names(catalog)
-  } else {
-    NULL
-  }
-  if (!is.null(rn) &&
-      all(grepl("^[TUN]:[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
-    # Strip prefix, unstaple, re-prefix
-    prefix <- substr(rn, 1, 2)
-    stapled <- substring(rn, 3)
-    converted <- paste0(prefix, unstaple_SBS96_rownames(stapled))
-    if (is.data.frame(catalog) || is.matrix(catalog)) {
-      rownames(catalog) <- converted
-    } else {
-      names(catalog) <- converted
-    }
-  }
-
   catalog <- normalize_catalog(catalog, 288, catalog_row_order()$SBS288, "SBS288")
   if (is.null(catalog)) return(NULL)
 
