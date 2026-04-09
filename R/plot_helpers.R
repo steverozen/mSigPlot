@@ -20,20 +20,19 @@ base_mm <- function(base_size) {
 
 #' Detect y-axis type from data and attributes
 #'
-#' Determines whether the catalog represents counts, counts.signature,
-#' density, or density.signature. Checks the `y_axis_type_attr` attribute
-#' first; if absent, infers from data values and optional ylim.
+#' Determines the y-axis type for a catalog. Checks the `y_axis_type_attr`
+#' attribute first; if absent, infers from data values and optional ylim.
 #'
 #' @param values Numeric vector of catalog values.
 #' @param y_axis_type_attr The `y_axis_type_attr` attribute from the catalog, or NULL.
 #' @param ylim Optional y-axis limits vector.
-#' @return Character string: one of "counts", "counts.signature", "density",
-#'   or "density.signature".
+#' @return Character string: one of `"counts"`, `"proportion"`,
+#'   `"muts_per_million"`, or `"density_proportion"`.
 #' @keywords internal
 detect_y_axis_type <- function(values, y_axis_type_attr = NULL, ylim = NULL) {
   if (!is.null(y_axis_type_attr)) return(y_axis_type_attr)
   if (!is.null(ylim) && max(ylim) > 1.5) return("counts")
-  if (sum(abs(values), na.rm = TRUE) >= 1.1) "counts" else "counts.signature"
+  if (sum(abs(values), na.rm = TRUE) >= 1.1) "counts" else "proportion"
 }
 
 

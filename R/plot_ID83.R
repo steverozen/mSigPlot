@@ -80,13 +80,17 @@ plot_ID83 <- function(
   # Determine catalog type and y-axis label
   catalog_type <- detect_y_axis_type(df$value, attributes(catalog)$y_axis_type_attr, ylim)
 
-  if (catalog_type == "counts") {
-    ymax <- 4 * ceiling(max(max(df$value) * 1.3, 10) / 4)
-    ylabel <- "counts"
-  } else {
-    # if (catalog_type == "counts.signature") {
+  if (catalog_type == "muts_per_million") {
+    ylabel <- "Muts/Million"
+    df$value <- df$value * 1e6
     ymax <- max(df$value) * 1.3
-    ylabel <- "proportion"
+  } else if (catalog_type == "counts") {
+    ymax <- 4 * ceiling(max(max(df$value) * 1.3, 10) / 4)
+    ylabel <- "Counts"
+  } else {
+    ymax <- max(df$value) * 1.3
+    ylabel <- ifelse(catalog_type == "proportion",
+                     "Proportion", "Density Proportion")
   }
 
   if (!is.null(ylim)) {
@@ -231,7 +235,7 @@ plot_ID83 <- function(
         b <- scales::extended_breaks()(c(0, ymax))
         b[b >= 0]
       },
-      labels = if (ylabel == "counts") {
+      labels = if (ylabel == "Counts") {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()

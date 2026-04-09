@@ -14,12 +14,11 @@ detect_y_axis_type(values, y_axis_type_attr = NULL, ylim = NULL)
 \item{ylim}{Optional y-axis limits vector.}
 }
 \value{
-Character string: one of "counts", "counts.signature", "density",
-or "density.signature".
+Character string: one of \code{"counts"}, \code{"proportion"},
+\code{"muts_per_million"}, or \code{"density_proportion"}.
 }
 \description{
-Determines whether the catalog represents counts, counts.signature,
-density, or density.signature. Checks the \code{y_axis_type_attr} attribute
-first; if absent, infers from data values and optional ylim.
+Determines the y-axis type for a catalog. Checks the \code{y_axis_type_attr}
+attribute first; if absent, infers from data values and optional ylim.
 }
 \keyword{internal}

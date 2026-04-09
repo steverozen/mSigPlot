@@ -76,12 +76,17 @@ plot_ID166 <- function(
   )
   bar_colors <- rep(region_col, 83)
 
-  if (catalog_type == "counts") {
+  if (catalog_type == "muts_per_million") {
+    ylabel <- "Muts/Million"
+    df$value <- df$value * 1e6
+    ymax <- max(max(df$value) * 1.45, 0.01)
+  } else if (catalog_type == "counts") {
     ymax <- 4 * ceiling(max(max(df$value) * 1.45, 10) / 4)
-    ylabel <- "counts"
+    ylabel <- "Counts"
   } else {
     ymax <- max(max(df$value) * 1.45, 0.01)
-    ylabel <- "counts proportion"
+    ylabel <- ifelse(catalog_type == "proportion",
+                     "Proportion", "Density Proportion")
   }
 
   if (!is.null(ylim)) {
@@ -193,7 +198,7 @@ plot_ID166 <- function(
     scale_x_continuous(limits = c(0, 167), expand = c(0, 0)) +
     scale_y_continuous(limits = c(min(0, ymin * 1.05), ymax * 0.9), expand = c(0, 0),
                        oob = scales::oob_keep,
-                       labels = if (ylabel == "counts") {
+                       labels = if (ylabel == "Counts") {
                          scales::label_number(accuracy = 1)
                        } else {
                          ggplot2::waiver()

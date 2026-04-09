@@ -318,19 +318,24 @@ Currently has no effect in some functions.}
 
 \item{...}{Additional arguments passed to \code{plot_SBS96()} (\code{plot_SBS288} only).}
 
-\item{grid}{Logical, draw grid lines.}
+\item{grid}{Logical, draw grid lines (not available in \code{plot_DBS144},
+\code{plot_SBS12}, \code{plot_ID89}, \code{plot_ID476}, \code{plot_ID476_right}, \code{plot_SBS288}).}
 
-\item{upper}{Logical, draw colored class rectangles and labels above bars.}
+\item{upper}{Logical, draw colored class rectangles and labels above bars
+(not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}).}
 
-\item{count_label_cex}{Numeric. Multiplier for per-class count labels.}
+\item{count_label_cex}{Numeric. Multiplier for per-class count labels
+(not available in \code{plot_DBS144}, \code{plot_SBS12}).}
 
 \item{class_label_cex}{Numeric. Multiplier for major class labels.}
 
 \item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
 count labels. If \code{FALSE}, never display them. If \code{NULL} (the default),
-display them only when the catalog contains counts (sum > 1.1).}
+display them only when the catalog contains counts (sum > 1.1).
+Not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}.}
 
-\item{num_peak_labels}{Integer. Number of top peaks to label (0 = none).}
+\item{num_peak_labels}{Integer. Number of top peaks to label (0 = none).
+Not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}.}
 
 \item{peak_label_cex}{Numeric. Size multiplier for peak labels.}
 
@@ -363,14 +368,16 @@ category bar (\code{plot_ID89} only).}
 testing (\code{plot_SBS12} only).}
 }
 \value{
-Plot functions return a ggplot2 object, or NULL with a warning
-if the catalog is invalid (wrong size or row names). PDF functions
-return NULL invisibly (called for side effect of creating a PDF file),
-or stop with an error if the catalog is invalid.
+Plot functions return a ggplot2 object (or a patchwork object for
+\code{plot_SBS288}), or NULL with a warning if the catalog is invalid (wrong
+size or row names). PDF functions return NULL invisibly (called for side
+effect of creating a PDF file), or stop with an error if the catalog is
+invalid.
 }
 \description{
 Plot functions for SBS, DBS, and indel mutational signature catalogs
-as bar charts. All functions return ggplot2 objects.
+as bar charts. Most functions return ggplot2 objects; \code{plot_SBS288}
+returns a patchwork object.
 }
 \details{
 Functions in this family:

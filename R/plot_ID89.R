@@ -48,14 +48,14 @@ plot_ID89 <- function(
 
   # Detect catalog type and set y-axis label
   catalog_type <- detect_y_axis_type(catalog, y_axis_type_attr = y_axis_type_attr, ylim = ylim)
-  if (catalog_type == "density") {
-    ylabel <- "mut/million"
+  if (catalog_type == "muts_per_million") {
+    ylabel <- "Muts/Million"
     catalog <- catalog * 1e6
   } else if (catalog_type == "counts") {
     ylabel <- "Counts"
   } else {
-    ylabel <- ifelse(catalog_type == "counts.signature",
-                     "Proportion", "density proportion")
+    ylabel <- ifelse(catalog_type == "proportion",
+                     "Proportion", "Density Proportion")
   }
   # === 1. Define Indel Type Labels and Categories ===
   indel_type_4_figurelabel <- structure(

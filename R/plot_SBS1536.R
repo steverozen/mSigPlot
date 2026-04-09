@@ -78,7 +78,7 @@ plot_SBS1536 <- function(
     # Panel title
     if (catalog_type == "counts") {
       panel_title <- paste0(mt, " (N=", round(type_totals[mt]), ")")
-    } else if (catalog_type %in% c("counts.signature", "density.signature")) {
+    } else if (catalog_type %in% c("proportion", "density_proportion")) {
       panel_title <- paste0(mt, " (", round(100 * type_totals[mt], 1), "%)")
     } else {
       panel_title <- mt

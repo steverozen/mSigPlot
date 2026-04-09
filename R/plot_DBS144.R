@@ -1,7 +1,8 @@
 #' plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf, plot_ID166, plot_ID166_pdf, plot_ID476, plot_ID476_pdf, plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf, plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192, plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf
 #'
 #' Plot functions for SBS, DBS, and indel mutational signature catalogs
-#' as bar charts. All functions return ggplot2 objects.
+#' as bar charts. Most functions return ggplot2 objects; `plot_SBS288`
+#' returns a patchwork object.
 #'
 #' Functions in this family:
 #' - `plot_SBS96`, `plot_SBS192`: SBS trinucleotide context
@@ -21,12 +22,15 @@
 #'   will be checked against [catalog_row_order()].
 #' @param plot_title Character. Title displayed above the plot.
 #' @param filename Character. Path to the output PDF file (\_pdf functions only).
-#' @param grid Logical, draw grid lines.
-#' @param upper Logical, draw colored class rectangles and labels above bars.
+#' @param grid Logical, draw grid lines (not available in `plot_DBS144`,
+#'   `plot_SBS12`, `plot_ID89`, `plot_ID476`, `plot_ID476_right`, `plot_SBS288`).
+#' @param upper Logical, draw colored class rectangles and labels above bars
+#'   (not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`).
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param count_label_cex Numeric. Multiplier for per-class count labels.
+#' @param count_label_cex Numeric. Multiplier for per-class count labels
+#'   (not available in `plot_DBS144`, `plot_SBS12`).
 #' @param class_label_cex Numeric. Multiplier for major class labels.
 #' @param block_label_cex Numeric. Multiplier for colored category block labels
 #'   (indel plots only).
@@ -44,6 +48,7 @@
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
 #'   count labels. If `FALSE`, never display them. If `NULL` (the default),
 #'   display them only when the catalog contains counts (sum > 1.1).
+#'   Not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
 #' @param abundance Numeric vector of per-class abundances for strand bias
 #'   testing (`plot_SBS12` only).
 #' @param show_extra_top_bar Logical. Display an extra summary bar above the
@@ -51,6 +56,7 @@
 #' @param plot_complex Logical. Include Complex indel channels
 #'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
 #' @param num_peak_labels Integer. Number of top peaks to label (0 = none).
+#'   Not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
 #' @param peak_label_cex Numeric. Size multiplier for peak labels.
 #' @param label_threshold_denominator Numeric. Peaks below
 #'   max/label_threshold_denominator are not labeled
@@ -63,10 +69,11 @@
 #'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
 #' @param ... Additional arguments passed to `plot_SBS96()` (`plot_SBS288` only).
 #'
-#' @return Plot functions return a ggplot2 object, or NULL with a warning
-#'   if the catalog is invalid (wrong size or row names). PDF functions
-#'   return NULL invisibly (called for side effect of creating a PDF file),
-#'   or stop with an error if the catalog is invalid.
+#' @return Plot functions return a ggplot2 object (or a patchwork object for
+#'   `plot_SBS288`), or NULL with a warning if the catalog is invalid (wrong
+#'   size or row names). PDF functions return NULL invisibly (called for side
+#'   effect of creating a PDF file), or stop with an error if the catalog is
+#'   invalid.
 #'
 #' @name bar_plots
 NULL
@@ -125,16 +132,16 @@ plot_DBS144 <- function(
       sum(cat_reordered[seq(idx[i] + 2, idx[i + 1], by = 2)])
   }
 
-  if (catalog_type == "density") {
+  if (catalog_type == "muts_per_million") {
     counts_strand <- counts_strand * 1e6
-    ylabel <- "mut/million"
+    ylabel <- "Muts/Million"
     ymax <- max(counts_strand) * 1.3
   } else if (catalog_type == "counts") {
     ymax <- 4 * ceiling(max(max(counts_strand) * 1.3, 10) / 4)
-    ylabel <- "counts"
+    ylabel <- "Counts"
   } else {
-    ylabel <- ifelse(catalog_type == "counts.signature",
-                     "counts proportion", "density proportion")
+    ylabel <- ifelse(catalog_type == "proportion",
+                     "Proportion", "Density Proportion")
     ymax <- min(max(counts_strand) * 1.3, 1)
   }
 
@@ -165,7 +172,7 @@ plot_DBS144 <- function(
       limits = c(min(0, ymin * 1.05), ymax),
       expand = c(0, 0),
       oob = scales::oob_keep,
-      labels = if (ylabel == "counts") {
+      labels = if (ylabel == "Counts") {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()

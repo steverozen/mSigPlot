@@ -43,7 +43,15 @@ plot_ID476_right <- function(
 
   # Determine y-axis label based on catalog type
   catalog_type <- detect_y_axis_type(catalog, y_axis_type_attr = y_axis_type_attr)
-  ylabel <- if (catalog_type == "counts") "Count" else "Proportion"
+  if (catalog_type == "muts_per_million") {
+    ylabel <- "Muts/Million"
+    catalog <- catalog * 1e6
+  } else if (catalog_type == "counts") {
+    ylabel <- "Counts"
+  } else {
+    ylabel <- ifelse(catalog_type == "proportion",
+                     "Proportion", "Density Proportion")
+  }
   Koh476_indeltype = type_476_indel_type()
   my_vector <- Koh476_indeltype$IndelType
   muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
@@ -230,7 +238,7 @@ plot_ID476_right <- function(
     ) +
     ggplot2::scale_y_continuous(
       expand = expansion(mult = c(0.03, 0)), # No padding at bottom, 5% at top
-      labels = if (ylabel == "Count") {
+      labels = if (ylabel == "Counts") {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()
@@ -242,7 +250,7 @@ plot_ID476_right <- function(
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
-        size = rel(axis_text_x_cex),
+        size = axis_text_x_cex * base_size,
         angle = 0,
         hjust = 0,
         vjust = 0.5,
@@ -250,18 +258,18 @@ plot_ID476_right <- function(
       axis.ticks.x = ggplot2::element_line(),
       axis.ticks.length.x = unit(0.3, "line"), # Downward ticks
       axis.text.y = ggplot2::element_text(
-        size = rel(axis_text_y_cex),
+        size = axis_text_y_cex * base_size,
         colour = "black"
       ),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
-        size = rel(axis_title_x_cex),
+        size = axis_title_x_cex * base_size,
         margin = margin(t = 10)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(axis_title_y_cex)),
+      axis.title.y = ggplot2::element_text(size = axis_title_y_cex * base_size),
       plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
-      axis.line = ggplot2::element_line(linewidth = rel(0.5)),
-      plot.title = ggplot2::element_text(size = rel(plot_title_cex))
+      axis.line = ggplot2::element_line(linewidth = 0.5),
+      plot.title = ggplot2::element_text(size = plot_title_cex * base_size)
     ) +
     ggplot2::scale_colour_manual(
       values = c("black" = "black", "white" = "white")

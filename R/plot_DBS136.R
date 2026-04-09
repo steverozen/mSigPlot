@@ -96,7 +96,7 @@ plot_DBS136 <- function(
   if (catalog_type == "counts") {
     max_per_class <- tapply(df_stats$value, df_stats$ref, max)
     sum_per_class <- tapply(df_stats$value, df_stats$ref, sum)
-  } else if (catalog_type == "density") {
+  } else if (catalog_type == "muts_per_million") {
     max_per_class <- tapply(df_stats$value * 1e6, df_stats$ref, max)
     max_per_class <- round(max_per_class, 3)
   }
@@ -169,7 +169,7 @@ plot_DBS136 <- function(
                            else 0
                          }))
     maxima_unit <- "(counts)"
-  } else if (catalog_type == "density") {
+  } else if (catalog_type == "muts_per_million") {
     maxima_text <- paste(ref_order, "=",
                          sapply(ref_order, function(r) {
                            if (r %in% names(max_per_class)) max_per_class[r]

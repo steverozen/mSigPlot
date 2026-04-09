@@ -61,17 +61,17 @@ plot_DBS78 <- function(
   # Detect catalog type
   catalog_type <- detect_y_axis_type(df$value, attributes(catalog)$y_axis_type_attr)
 
-  if (catalog_type == "density") {
-    ylabel <- "mut/million"
+  if (catalog_type == "muts_per_million") {
+    ylabel <- "Muts/Million"
     df$value <- df$value * 1e6
     ymax <- max(df$value) * 1.3
   } else if (catalog_type == "counts") {
     ymax <- 4 * ceiling(max(max(df$value) * 1.3, 10) / 4)
-    ylabel <- "counts"
+    ylabel <- "Counts"
   } else {
     ymax <- max(max(df$value) * 1.3, 0.01)
-    ylabel <- ifelse(catalog_type == "counts.signature",
-                     "counts proportion", "density proportion")
+    ylabel <- ifelse(catalog_type == "proportion",
+                     "Proportion", "Density Proportion")
   }
 
   if (!is.null(ylim)) {
@@ -130,7 +130,7 @@ plot_DBS78 <- function(
       limits = c(min(0, ymin * 1.05), ymax),
       expand = c(0, 0),
       oob = scales::oob_keep,
-      labels = if (ylabel == "counts") {
+      labels = if (ylabel == "Counts") {
         scales::label_number(accuracy = 1)
       } else {
         ggplot2::waiver()

@@ -10,6 +10,10 @@
 #'
 #' @export
 plot_guess_pdf <- function(catalog, filename, ...) {
+  n_rows <- nrow(catalog)
+  if (is.null(.plot_dispatch[[as.character(n_rows)]]))
+    stop("Unsupported catalog size: ", n_rows, " rows")
+
   plot_catalog_pdf(catalog, filename, plot_guess,
                    width = 8.2677, height = 14.61613, ...)
 }

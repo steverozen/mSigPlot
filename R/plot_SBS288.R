@@ -13,6 +13,8 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   catalog <- normalize_catalog(catalog, 288, catalog_row_order()$SBS288, "SBS288")
   if (is.null(catalog)) return(NULL)
 
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
+
   rn <- rownames(catalog)
 
   # Split by 2-char strand prefix
@@ -28,6 +30,7 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   make_sub <- function(idx) {
     sub_cat <- catalog[idx, 1, drop = FALSE]
     rownames(sub_cat) <- sub("^[TUN]:", "", rownames(sub_cat))
+    attr(sub_cat, "y_axis_type_attr") <- catalog_type
     sub_cat
   }
 
@@ -56,13 +59,12 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
 
   # different breaks when panels have different physical heights)
   shared_breaks <- pretty(c(global_min, global_max), n = 4)
-  is_counts <- sum(catalog[, 1], na.rm = TRUE) > 1.1
   shared_scale <- scale_y_continuous(
     breaks = shared_breaks,
     limits = c(min(0, global_min * 1.05), global_max),
     expand = c(0, 0),
     oob = scales::oob_keep,
-    labels = if (is_counts) scales::label_number(accuracy = 1) else ggplot2::waiver()
+    labels = if (catalog_type == "counts") scales::label_number(accuracy = 1) else ggplot2::waiver()
   )
   p1 <- suppressMessages(p1 + shared_scale)
   p2 <- suppressMessages(p2 + shared_scale)

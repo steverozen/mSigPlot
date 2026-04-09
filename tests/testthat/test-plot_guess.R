@@ -54,6 +54,16 @@ test_that("plot_guess_pdf works with 89-channel catalogs", {
   expect_true(file.exists(tmp_file))
 })
 
+test_that("plot_guess_pdf errors early for unsupported row counts", {
+  catalog <- data.frame(sample1 = runif(100), sample2 = runif(100))
+  tmp_file <- tempfile(fileext = ".pdf")
+  on.exit(unlink(tmp_file), add = TRUE)
+
+  expect_error(plot_guess_pdf(catalog, tmp_file), "Unsupported catalog size")
+  # PDF should not have been created
+  expect_false(file.exists(tmp_file))
+})
+
 test_that("plot_guess_pdf passes additional arguments", {
   catalog <- data.frame(sample1 = runif(476))
   tmp_file <- tempfile(fileext = ".pdf")
