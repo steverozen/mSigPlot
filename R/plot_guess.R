@@ -13,6 +13,7 @@
 #'   function is used:
 #'   - 1536 rows: calls `plot_SBS1536()`
 #'   - 476 rows: calls `plot_ID476()`
+#'   - 288 rows: calls `plot_SBS288()`
 #'   - 192 rows: calls `plot_SBS192()`
 #'   - 166 rows: calls `plot_ID166()`
 #'   - 144 rows: calls `plot_DBS144()`
@@ -26,8 +27,11 @@
 #' @param filename Character. Path to the output PDF file (`plot_guess_pdf` only).
 #' @param ... Additional arguments passed to the underlying plotting function.
 #'
-#' @return `plot_guess()` returns a ggplot object. `plot_guess_pdf()` returns
-#'   NULL invisibly (called for side effect of creating a PDF file).
+#' @return `plot_guess()` returns a plot object. The exact class depends on
+#'   the dispatched function: most return a ggplot object, SBS288 returns a
+#'   patchwork object, and DBS136/SBS1536 return gtable objects (invisibly).
+#'   `plot_guess_pdf()` returns NULL invisibly (called for side effect of
+#'   creating a PDF file).
 #'
 #' @examples
 #' # Auto-detect a 96-channel catalog and dispatch to plot_SBS96
@@ -37,9 +41,9 @@
 #' names(sig) <- catalog_row_order()$SBS96
 #' plot_guess(sig, plot_title = "Auto-detected SBS96")
 #'
-#' @seealso [plot_SBS96()], [plot_SBS192()], [plot_SBS1536()], [plot_DBS78()],
-#'   [plot_DBS136()], [plot_DBS144()], [plot_ID166()], [plot_ID476()], [plot_ID89()],
-#'   [plot_ID83()]
+#' @seealso [plot_SBS96()], [plot_SBS192()], [plot_SBS288()], [plot_SBS1536()],
+#'   [plot_DBS78()], [plot_DBS136()], [plot_DBS144()], [plot_ID166()],
+#'   [plot_ID476()], [plot_ID89()], [plot_ID83()]
 #'
 #' @name plot_guess
 NULL

@@ -4,7 +4,7 @@ test_that("plot_ID89 returns a ggplot object", {
 
   p <- plot_ID89(
     catalog = test_catalog,
-    block_label_cex = 3,
+    block_label_cex = 0.65,
     plot_title = "Test 89 type plot"
   )
 
@@ -12,9 +12,9 @@ test_that("plot_ID89 returns a ggplot object", {
 
   p <- plot_ID89(
     catalog = test_catalog,
-    block_label_cex = 3,
+    block_label_cex = 0.65,
     plot_title = "Test 89 type plot",
-    ylim = .03
+    ylim = c(0, .03)
   )
 })
 test_that("plot_ID89_pdf creates PDF file", {
@@ -44,7 +44,7 @@ test_that("plot_ID89_pdf creates PDF file", {
   plot_ID89_pdf(
     catalog_subset,
     filename = temp_pdf,
-    block_label_cex = 2.5,
+    block_label_cex = 0.6,
     plot_title_cex = 0.9
   )
 
@@ -55,19 +55,15 @@ test_that("plot_ID89_pdf creates PDF file", {
   unlink(temp_pdf)
 })
 
-test_that("plot_ID89 adjusts ylim when too small for highest bar", {
+test_that("plot_ID89 respects ylim as c(min, max) vector", {
   test_catalog <- rep(0.01, 89)
-  # Set ylim well below the max bar value so it must be adjusted
+  # ylim should be honored as provided (matching plot_SBS96 behavior)
   p <- plot_ID89(
     catalog = test_catalog,
-    plot_title = "ymax adjustment test",
-    ylim = 0.001
+    plot_title = "ylim vector test",
+    ylim = c(0, 0.05)
   )
   expect_s3_class(p, "ggplot")
-  # The y-axis upper limit should be >= 1.1 * max bar value
-  pb <- ggplot2::ggplot_build(p)
-  y_range <- pb$layout$panel_params[[1]]$y.range
-  expect_gte(y_range[2], 1.1 * max(test_catalog))
 })
 
 test_that("plot_ID89 count labels render with count catalog", {

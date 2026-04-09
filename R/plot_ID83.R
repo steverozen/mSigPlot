@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 plot_ID83 <- function(
   catalog,
   plot_title = NULL,
@@ -78,7 +78,7 @@ plot_ID83 <- function(
   df$label <- rownames(catalog)
 
   # Determine catalog type and y-axis label
-  catalog_type <- detect_catalog_type(df$value, attributes(catalog)$catalog.type, ylim)
+  catalog_type <- detect_y_axis_type(df$value, attributes(catalog)$y_axis_type_attr, ylim)
 
   if (catalog_type == "counts") {
     ymax <- 4 * ceiling(max(max(df$value) * 1.3, 10) / 4)
@@ -268,9 +268,8 @@ plot_ID83 <- function(
 
   # Add grid lines that match the y-axis ticks
   if (grid) {
-    # Get the y-axis breaks that ggplot2 will use
-    y_breaks <- ggplot2::ggplot_build(p)$layout$panel_params[[1]]$y$breaks
-    y_breaks <- y_breaks[!is.na(y_breaks) & y_breaks >= 0 & y_breaks <= ymax]
+    y_breaks <- scales::extended_breaks()(c(0, ymax))
+    y_breaks <- y_breaks[y_breaks >= 0 & y_breaks <= ymax]
 
     p <- p +
       geom_hline(
@@ -360,7 +359,7 @@ plot_ID83 <- function(
       y = ymax * 7.4 / 8,
       label = plot_title,
       hjust = 0,
-      # fontface = "bold",
+      fontface = "bold",
       size = plot_title_cex * base_mm
     )
 

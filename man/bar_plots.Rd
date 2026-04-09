@@ -192,15 +192,14 @@ plot_ID89(
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1,
-  count_label_cex = 1.03,
-  block_label_cex = 3,
-  class_label_cex = block_label_cex,
+  count_label_cex = 0.9,
+  block_label_cex = 0.65,
+  class_label_cex = 0.8,
   axis_text_x_cex = 0.7,
   axis_title_x_cex = 0.9,
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  ylab = TRUE,
   show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   num_peak_labels = 0,
@@ -352,10 +351,6 @@ the indel type prefix (\code{plot_ID476}, \code{plot_ID476_right} only).}
 
 \item{stop_at_9}{Logical. If TRUE, cap repeat length labels at 9
 (\code{plot_ID89}, \code{plot_ID476}, \code{plot_ID476_right} only).}
-
-\item{ylab}{Y-axis label control (\code{plot_ID89} only). \code{TRUE} (default)
-auto-detects from data. A character string overrides the label.
-\code{NULL} or \code{FALSE} suppresses the y-axis title.}
 
 \item{show_extra_top_bar}{Logical. Display an extra summary bar above the
 category bar (\code{plot_ID89} only).}

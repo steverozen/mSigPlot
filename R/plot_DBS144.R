@@ -46,9 +46,6 @@
 #'   display them only when the catalog contains counts (sum > 1.1).
 #' @param abundance Numeric vector of per-class abundances for strand bias
 #'   testing (`plot_SBS12` only).
-#' @param ylab Y-axis label control (`plot_ID89` only). `TRUE` (default)
-#'   auto-detects from data. A character string overrides the label.
-#'   `NULL` or `FALSE` suppresses the y-axis title.
 #' @param show_extra_top_bar Logical. Display an extra summary bar above the
 #'   category bar (`plot_ID89` only).
 #' @param plot_complex Logical. Include Complex indel channels
@@ -85,7 +82,7 @@ NULL
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 plot_DBS144 <- function(
   catalog,
   plot_title = NULL,
@@ -115,7 +112,7 @@ plot_DBS144 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
 
   # Collapse 132 entries into 20 bars (10 classes x 2 strands)
   # Class boundaries within the 132-entry reordered vector:

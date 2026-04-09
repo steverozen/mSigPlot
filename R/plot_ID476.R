@@ -9,7 +9,8 @@
 #'
 #' @export
 #'
-#' @import ggplot2 reshape2 dplyr ggrepel
+#' @import ggplot2
+#' @importFrom dplyr filter group_by slice_max ungroup
 #' @importFrom stats aggregate
 plot_ID476 <- function(
   catalog,
@@ -38,15 +39,21 @@ plot_ID476 <- function(
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  y_axis_type_attr <- attributes(catalog)$y_axis_type_attr
   catalog <- catalog[, 1]
 
-  # Determine y-axis label based on sum
-  catalog_type <- detect_catalog_type(catalog)
+  # Determine y-axis label based on catalog type
+  catalog_type <- detect_y_axis_type(catalog, y_axis_type_attr = y_axis_type_attr)
   ylabel <- if (catalog_type == "counts") "Count" else "Proportion"
   Koh476_indeltype = type_476_indel_type()
   my_vector <- Koh476_indeltype$IndelType
   muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
-  muts_basis_melt <- reshape2::melt(muts_basis, "IndelType")
+  muts_basis_melt <- data.frame(
+    IndelType = muts_basis$IndelType,
+    variable  = "Sample",
+    value     = muts_basis$Sample,
+    stringsAsFactors = FALSE
+  )
   muts_basis_melt <- merge(
     Koh476_indeltype,
     muts_basis_melt,

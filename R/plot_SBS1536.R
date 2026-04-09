@@ -9,7 +9,8 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
+#' @importFrom dplyr arrange desc %>%
 #' @importFrom gridExtra grid.arrange
 plot_SBS1536 <- function(
   catalog,
@@ -34,7 +35,7 @@ plot_SBS1536 <- function(
   base_cols <- c("forestgreen", "dodgerblue2", "black", "red")
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
 
   # Sort catalog in plotting order
   rates <- data.frame(value = catalog[, 1], stringsAsFactors = FALSE)

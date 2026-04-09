@@ -71,7 +71,7 @@ Figlabel.
 
 - **Y-axis auto-detection**: If `sum(catalog) < 1.1`, label is
   “Proportion”; otherwise “Count”. Some functions also support a
-  `catalog.type` attribute on the catalog object (`"counts"`,
+  `y_axis_type_attr` attribute on the catalog object (`"counts"`,
   `"counts.signature"`, `"density"`, `"density.signature"`).
 - **`show_counts` parameter**: `NULL` (auto based on catalog type),
   `TRUE` (force), or `FALSE` (suppress). Controls per-class count

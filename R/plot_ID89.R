@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 reshape2 dplyr ggrepel
+#' @import ggplot2
 plot_ID89 <- function(
   catalog,
   plot_title = NULL,
@@ -21,15 +21,14 @@ plot_ID89 <- function(
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1.0,
-  count_label_cex = 1.03,
-  block_label_cex = 3,
-  class_label_cex = block_label_cex,
+  count_label_cex = 0.9,
+  block_label_cex = 0.65,
+  class_label_cex = 0.8,
   axis_text_x_cex = 0.7,
   axis_title_x_cex = 0.9,
   axis_title_y_cex = 0.9,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  ylab = TRUE,
   show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   num_peak_labels = 0,
@@ -40,30 +39,23 @@ plot_ID89 <- function(
   if (is.null(catalog)) {
     return(NULL)
   }
+  base_mm <- base_mm(base_size)
   if (is.null(plot_title)) {
     plot_title <- colnames(catalog)[1] %||% ""
   }
+  y_axis_type_attr <- attributes(catalog)$y_axis_type_attr
   catalog <- catalog[, 1]
 
-  # Resolve ylab parameter
-  if (isTRUE(ylab)) {
-    catalog_type <- detect_catalog_type(catalog, ylim = ylim)
-    ylabel <- if (catalog_type == "counts") "Counts" else "Proportion"
-  } else if (is.character(ylab)) {
-    ylabel <- ylab
-    catalog_type <- detect_catalog_type(catalog, ylim = ylim)
+  # Detect catalog type and set y-axis label
+  catalog_type <- detect_y_axis_type(catalog, y_axis_type_attr = y_axis_type_attr, ylim = ylim)
+  if (catalog_type == "density") {
+    ylabel <- "mut/million"
+    catalog <- catalog * 1e6
+  } else if (catalog_type == "counts") {
+    ylabel <- "Counts"
   } else {
-    # NULL or FALSE: suppress y-axis title
-    if (show_axis_title_y) {
-      warning(
-        "ylab = NULL/FALSE conflicts with show_axis_title_y = TRUE; ",
-        "suppressing y-axis title",
-        call. = FALSE
-      )
-    }
-    show_axis_title_y <- FALSE
-    catalog_type <- detect_catalog_type(catalog, ylim = ylim)
-    ylabel <- if (catalog_type == "counts") "Counts" else "Proportion"
+    ylabel <- ifelse(catalog_type == "counts.signature",
+                     "Proportion", "density proportion")
   }
   # === 1. Define Indel Type Labels and Categories ===
   indel_type_4_figurelabel <- structure(
@@ -310,7 +302,12 @@ plot_ID89 <- function(
   # === 2. Prepare Data for Plotting ===
   my_vector <- indel_type_4_figurelabel$IndelType
   muts_basis <- data.frame(Sample = catalog, IndelType = my_vector)
-  muts_basis_melt <- reshape2::melt(muts_basis, "IndelType")
+  muts_basis_melt <- data.frame(
+    IndelType = muts_basis$IndelType,
+    variable  = "Sample",
+    value     = muts_basis$Sample,
+    stringsAsFactors = FALSE
+  )
   muts_basis_melt <- merge(
     indel_type_4_figurelabel,
     muts_basis_melt,
@@ -329,8 +326,10 @@ plot_ID89 <- function(
   )
   muts_basis_melt$Sample <- as.character(muts_basis_melt$Sample)
 
-  if (!is.null(ylim) && ylim < 1.1 * max(muts_basis_melt$freq)) {
-    ylim <- 1.1 * max(muts_basis_melt$freq)
+  if (!is.null(ylim)) {
+    ymax <- ylim[2]
+  } else {
+    ymax <- 1.1 * max(muts_basis_melt$freq)
   }
 
   # === 3. Define Palettes and Block Positions ===
@@ -376,18 +375,8 @@ plot_ID89 <- function(
   )
 
   top_bar_mult <- if (num_peak_labels > 0) c(1.25, 1.37) else c(1.08, 1.2)
-  blocks$ymin <- ifelse(
-    !is.null(ylim),
-    ylim,
-    max(muts_basis_melt$freq)
-  ) *
-    top_bar_mult[1]
-  blocks$ymax <- ifelse(
-    !is.null(ylim),
-    ylim,
-    max(muts_basis_melt$freq)
-  ) *
-    top_bar_mult[2]
+  blocks$ymin <- ymax * top_bar_mult[1]
+  blocks$ymax <- ymax * top_bar_mult[2]
   del_t_8_label <- if (stop_at_9) "Del 1 T (8-9)" else "Del 1 T (8+)"
   ins_t_8_label <- if (stop_at_9) "Ins 1 T (8-9)" else "Ins 1 T (8+)"
   blocks$labels <- c(
@@ -465,13 +454,9 @@ plot_ID89 <- function(
       limits = c(
         min(0, min(muts_basis_melt$freq) * 1.05),
         if (upper) {
-          ifelse(!is.null(ylim), ylim * top_bar_mult[2], unique(blocks$ymax))
+          ymax * top_bar_mult[2]
         } else {
-          ifelse(
-            !is.null(ylim),
-            ylim * 1.05,
-            max(muts_basis_melt$freq) * 1.05
-          )
+          ymax * 1.05
         }
       ),
       labels = if (identical(ylabel, "Counts")) {
@@ -487,7 +472,7 @@ plot_ID89 <- function(
         ggplot2::element_text(
           angle = 90,
           vjust = 0.5,
-          size = rel(axis_text_x_cex),
+          size = axis_text_x_cex * base_size,
           colour = "black",
           hjust = 1
         )
@@ -500,16 +485,16 @@ plot_ID89 <- function(
         ggplot2::element_blank()
       },
       axis.text.y = ggplot2::element_text(
-        size = rel(axis_text_y_cex),
+        size = axis_text_y_cex * base_size,
         colour = "black"
       ),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
-        size = rel(axis_title_x_cex),
+        size = axis_title_x_cex * base_size,
         margin = margin(t = ifelse(show_axis_text_x, -12, 1), b = 0)
       ),
-      axis.title.y = ggplot2::element_text(size = rel(axis_title_y_cex)),
-      plot.title = ggplot2::element_text(size = rel(plot_title_cex))
+      axis.title.y = ggplot2::element_text(size = axis_title_y_cex * base_size),
+      plot.title = ggplot2::element_text(size = plot_title_cex * base_size)
     ) +
     ggplot2::scale_colour_manual(values = c("black", "white"))
 
@@ -547,7 +532,7 @@ plot_ID89 <- function(
           label = labels,
           colour = cl
         ),
-        size = class_label_cex * base_size / 11,
+        size = class_label_cex * base_mm,
         fontface = "bold",
         inherit.aes = FALSE
       )
@@ -555,7 +540,7 @@ plot_ID89 <- function(
   }
 
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
-  show_counts <- resolve_show_counts(show_counts, if (ylabel == "Counts") "counts" else "counts.signature")
+  show_counts <- resolve_show_counts(show_counts, catalog_type)
 
   # Add count labels
   if (show_counts) {
@@ -572,14 +557,13 @@ plot_ID89 <- function(
     )
     count_label_df <- merge(blocks, counts_by_block, by = "Type")
     count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
-    max_freq <- ifelse(!is.null(ylim), ylim, max(muts_basis_melt$freq))
-    count_label_df$y <- max_freq * 0.9
+    count_label_df$y <- ymax * 0.9
 
     p <- p +
       ggplot2::geom_text(
         data = count_label_df,
         ggplot2::aes(x = x, y = y, label = count),
-        size = count_label_cex * base_size / ggplot2::.pt,
+        size = count_label_cex * base_mm,
         inherit.aes = FALSE
       )
   }

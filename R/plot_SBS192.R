@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 plot_SBS192 <- function(
   catalog,
   plot_title = NULL,
@@ -50,7 +50,7 @@ plot_SBS192 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
 
   values <- cat_reordered
   if (catalog_type == "density") {

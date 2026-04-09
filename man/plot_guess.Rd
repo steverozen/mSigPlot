@@ -16,6 +16,7 @@ function is used:
 \itemize{
 \item 1536 rows: calls \code{plot_SBS1536()}
 \item 476 rows: calls \code{plot_ID476()}
+\item 288 rows: calls \code{plot_SBS288()}
 \item 192 rows: calls \code{plot_SBS192()}
 \item 166 rows: calls \code{plot_ID166()}
 \item 144 rows: calls \code{plot_DBS144()}
@@ -33,8 +34,11 @@ The column names of \code{catalog} are used as plot titles.}
 \item{filename}{Character. Path to the output PDF file (\code{plot_guess_pdf} only).}
 }
 \value{
-\code{plot_guess()} returns a ggplot object. \code{plot_guess_pdf()} returns
-NULL invisibly (called for side effect of creating a PDF file).
+\code{plot_guess()} returns a plot object. The exact class depends on
+the dispatched function: most return a ggplot object, SBS288 returns a
+patchwork object, and DBS136/SBS1536 return gtable objects (invisibly).
+\code{plot_guess_pdf()} returns NULL invisibly (called for side effect of
+creating a PDF file).
 }
 \description{
 Automatically select the appropriate plotting function based on the number
@@ -63,7 +67,7 @@ plot_guess_pdf(sig, filename = "auto_detected.pdf")
 
 }
 \seealso{
-\code{\link[=plot_SBS96]{plot_SBS96()}}, \code{\link[=plot_SBS192]{plot_SBS192()}}, \code{\link[=plot_SBS1536]{plot_SBS1536()}}, \code{\link[=plot_DBS78]{plot_DBS78()}},
-\code{\link[=plot_DBS136]{plot_DBS136()}}, \code{\link[=plot_DBS144]{plot_DBS144()}}, \code{\link[=plot_ID166]{plot_ID166()}}, \code{\link[=plot_ID476]{plot_ID476()}}, \code{\link[=plot_ID89]{plot_ID89()}},
-\code{\link[=plot_ID83]{plot_ID83()}}
+\code{\link[=plot_SBS96]{plot_SBS96()}}, \code{\link[=plot_SBS192]{plot_SBS192()}}, \code{\link[=plot_SBS288]{plot_SBS288()}}, \code{\link[=plot_SBS1536]{plot_SBS1536()}},
+\code{\link[=plot_DBS78]{plot_DBS78()}}, \code{\link[=plot_DBS136]{plot_DBS136()}}, \code{\link[=plot_DBS144]{plot_DBS144()}}, \code{\link[=plot_ID166]{plot_ID166()}},
+\code{\link[=plot_ID476]{plot_ID476()}}, \code{\link[=plot_ID89]{plot_ID89()}}, \code{\link[=plot_ID83]{plot_ID83()}}
 }

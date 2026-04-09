@@ -44,7 +44,7 @@ NULL
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 #' @importFrom gridExtra grid.arrange arrangeGrob
 plot_DBS136 <- function(
   catalog,
@@ -71,7 +71,7 @@ plot_DBS136 <- function(
   mut_type_labels <- paste0(ref_order, ">NN")
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
 
   # Map catalog to 160-position layout using order_DBS136_for_plotting
   plotting_order <- order_DBS136_for_plotting()

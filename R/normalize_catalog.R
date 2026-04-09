@@ -21,7 +21,7 @@ normalize_catalog <- function(
   type_label = ""
 ) {
   original_attrs <- attributes(catalog)
-  catalog_type_attr <- original_attrs$catalog.type
+  y_axis_type_attr <- original_attrs$y_axis_type_attr
 
   if (is.numeric(catalog) && !is.matrix(catalog)) {
     # Named or unnamed numeric vector
@@ -40,9 +40,9 @@ normalize_catalog <- function(
     )
   }
 
-  # Preserve catalog.type attribute from original input
-  if (!is.null(catalog_type_attr)) {
-    attr(catalog, "catalog.type") <- catalog_type_attr
+  # Preserve y_axis_type_attr attribute from original input
+  if (!is.null(y_axis_type_attr)) {
+    attr(catalog, "y_axis_type_attr") <- y_axis_type_attr
   }
 
   if (nrow(catalog) != expected_nrow) {

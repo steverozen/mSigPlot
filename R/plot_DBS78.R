@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 plot_DBS78 <- function(
   catalog,
   plot_title = NULL,
@@ -59,7 +59,7 @@ plot_DBS78 <- function(
   df$label <- rownames(catalog)
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(df$value, attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(df$value, attributes(catalog)$y_axis_type_attr)
 
   if (catalog_type == "density") {
     ylabel <- "mut/million"

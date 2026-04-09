@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 plot_ID166 <- function(
   catalog,
   plot_title = NULL,
@@ -59,7 +59,7 @@ plot_ID166 <- function(
   class_sizes <- c(6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 2, 3, 5)
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
 
   # Genic = rows 1-83, Intergenic = rows 84-166
   genic <- catalog[1:83, 1]

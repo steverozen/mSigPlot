@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @import ggplot2 dplyr
+#' @import ggplot2
 #' @importFrom stats binom.test p.adjust
 plot_SBS12 <- function(
   catalog,
@@ -41,7 +41,7 @@ plot_SBS12 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- detect_catalog_type(catalog[, 1], attributes(catalog)$catalog.type)
+  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
 
   # Collapse 192 bars into 12 (6 classes x 2 strands)
   # In the reordered data: odd = transcribed, even = untranscribed
