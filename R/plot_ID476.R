@@ -17,11 +17,12 @@ plot_ID476 <- function(
   plot_title = NULL,
   base_size = 11,
   plot_title_cex = 1.0,
+  title_outside_plot = FALSE,
   count_label_cex = 0.52,
   class_label_cex = 0.78,
-  axis_text_x_cex = 0.8,
-  axis_title_x_cex = 0.7,
-  axis_title_y_cex = 0.9,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -34,7 +35,8 @@ plot_ID476 <- function(
   vline_labels = c(),
   simplify_labels = FALSE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
   if (is.null(catalog)) return(NULL)
@@ -249,7 +251,6 @@ plot_ID476 <- function(
         ggplot2::waiver()
       }
     ) +
-    ggplot2::ggtitle(plot_title) +
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
     ggplot2::coord_cartesian(ylim = c(min(0, min(muts_basis_melt$freq) * 1.05), max(blocks$ymax)), clip = "off") +
     ggplot2::theme_classic(base_size = base_size) +
@@ -270,12 +271,21 @@ plot_ID476 <- function(
       ),
       axis.title.y = ggplot2::element_text(size = axis_title_y_cex * base_size),
       plot.margin = margin(t = 10, r = 10, b = 80, l = 10),
-      axis.line = ggplot2::element_line(linewidth = 0.5),
-      plot.title = ggplot2::element_text(size = plot_title_cex * base_size)
+      axis.line = ggplot2::element_line(linewidth = 0.5)
     ) +
     ggplot2::scale_colour_manual(
       values = c("black" = "black", "white" = "white")
-    ) +
+    )
+
+  # Grid lines
+  if (grid) {
+    y_breaks <- seq(0, max_freq, max_freq / 4)
+    p <- p +
+      ggplot2::geom_hline(yintercept = y_breaks,
+                          color = "grey35", linewidth = 0.25)
+  }
+
+  p <- p +
     ggplot2::geom_rect(
       data = blocks,
       ggplot2::aes(
@@ -358,6 +368,12 @@ plot_ID476 <- function(
   if (!show_axis_title_y) {
     p <- p + theme(axis.title.y = element_blank())
   }
+
+  # Use blocks$ymin (bottom of the colored-block strip at 1.35*max_freq) so
+  # the title sits in the gap between the tallest bar and the blocks.
+  p <- add_plot_title(p, plot_title, title_outside_plot,
+                      plot_title_cex, base_size,
+                      ymax = min(blocks$ymin), x = 1)
 
   return(p)
 }

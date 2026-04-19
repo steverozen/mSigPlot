@@ -13,7 +13,7 @@
 plot_SBS96 <- function(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -21,13 +21,14 @@ plot_SBS96 <- function(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1.0,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   class_label_cex = 1.1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 1.0,
-  axis_title_y_cex = 1.0,
-  axis_text_y_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -260,16 +261,8 @@ plot_SBS96 <- function(
   }
 
   # Sample name title
-  p <- p +
-    annotate(
-      "text",
-      x = 1,
-      y = if (catalog_type == "counts") ymax * 0.95 else ymax * 0.92,
-      label = plot_title,
-      hjust = 0,
-      fontface = "bold",
-      size = plot_title_cex * base_mm
-    )
+  p <- add_plot_title(p, plot_title, title_outside_plot,
+                      plot_title_cex, base_size, ymax, x = 1)
 
   p <- add_peak_labels(p, df, "x", "value", "label",
                        num_peak_labels = num_peak_labels, peak_label_cex = peak_label_cex,

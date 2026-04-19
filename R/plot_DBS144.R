@@ -22,13 +22,21 @@
 #'   will be checked against [catalog_row_order()].
 #' @param plot_title Character. Title displayed above the plot.
 #' @param filename Character. Path to the output PDF file (\_pdf functions only).
-#' @param grid Logical, draw grid lines (not available in `plot_DBS144`,
-#'   `plot_SBS12`, `plot_ID89`, `plot_ID476`, `plot_ID476_right`, `plot_SBS288`).
+#' @param grid Logical, draw horizontal grid lines at `seq(0, ymax, ymax/4)`
+#'   over the data region. Available in all bar-plot functions except
+#'   `plot_SBS288` (which forwards `grid` to its three `plot_SBS96` panels
+#'   via `...`).
 #' @param upper Logical, draw colored class rectangles and labels above bars
 #'   (not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`).
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
+#' @param title_outside_plot Logical. If FALSE (the default), the title is
+#'   drawn inside the plot panel as an annotation (the `plot_ID83` style).
+#'   If TRUE, the title is drawn above the panel via `ggtitle()`. For
+#'   `plot_SBS288`, TRUE places the overall title above the 3-panel
+#'   composite via `patchwork::plot_annotation()`; FALSE prepends the title
+#'   to each strand label ("Template", "Non-template", "Not-transcribed").
 #' @param count_label_cex Numeric. Multiplier for per-class count labels
 #'   (not available in `plot_DBS144`, `plot_SBS12`).
 #' @param class_label_cex Numeric. Multiplier for major class labels.
@@ -96,11 +104,13 @@ plot_DBS144 <- function(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1.0,
-  axis_title_x_cex = 1.0,
-  axis_title_y_cex = 1.0,
-  axis_text_y_cex = 0.8
+  plot_title_cex = 1.0,
+  title_outside_plot = FALSE,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
+  grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 144, catalog_row_order()$DBS144, "DBS144")
   if (is.null(catalog)) return(NULL)
@@ -197,16 +207,16 @@ plot_DBS144 <- function(
   }
   p <- p + xlab(NULL)
 
+  # Grid lines
+  if (grid) {
+    y_breaks <- seq(0, ymax, ymax / 4)
+    p <- p +
+      geom_hline(yintercept = y_breaks, color = "grey35", linewidth = 0.25)
+  }
+
   # Sample name
-  p <- p +
-    annotate(
-      "text",
-      x = 10, y = ymax,
-      label = plot_title,
-      hjust = 0,
-      fontface = "bold",
-      size = plot_title_cex * base_mm
-    )
+  p <- add_plot_title(p, plot_title, title_outside_plot,
+                      plot_title_cex, base_size, ymax, x = 1)
 
   # Legend
   p <- p +

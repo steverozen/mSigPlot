@@ -51,6 +51,47 @@ resolve_show_counts <- function(show_counts, catalog_type) {
 }
 
 
+#' Add a plot title, inside the panel (annotate) or above it (ggtitle)
+#'
+#' If `title_outside_plot` is FALSE (the default), places `plot_title` inside
+#' the plot area via `annotate("text", ...)` at `y = ymax * y_frac` — the
+#' `plot_ID83` style. If TRUE, places it above the plot via
+#' `ggtitle() + theme(plot.title = ...)`. Title size is always
+#' `plot_title_cex * base_size` (points), normalized to mm for `annotate`.
+#'
+#' @param p A ggplot object.
+#' @param plot_title Character title (NULL or empty = no title added).
+#' @param title_outside_plot Logical. FALSE = inside, TRUE = above.
+#' @param plot_title_cex Numeric size multiplier.
+#' @param base_size Numeric base font size in points.
+#' @param ymax Numeric. Top of the plotting region used to position the
+#'   inside title. Ignored when `title_outside_plot = TRUE`.
+#' @param x Numeric x-coordinate for the inside title.
+#' @param y_frac Numeric. Inside title sits at `ymax * y_frac`.
+#' @param hjust Horizontal justification of the inside title.
+#' @return The ggplot object with the title added.
+#' @keywords internal
+add_plot_title <- function(p, plot_title, title_outside_plot,
+                           plot_title_cex, base_size, ymax,
+                           x = 1, y_frac = 7.4 / 8, hjust = 0) {
+  if (is.null(plot_title) || !nzchar(plot_title)) return(p)
+  if (title_outside_plot) {
+    p +
+      ggplot2::ggtitle(plot_title) +
+      ggplot2::theme(
+        plot.title = ggplot2::element_text(
+          size = plot_title_cex * base_size))
+  } else {
+    p + ggplot2::annotate(
+      "text",
+      x = x, y = ymax * y_frac,
+      label = plot_title, hjust = hjust,
+      fontface = "bold",
+      size = plot_title_cex * base_mm(base_size))
+  }
+}
+
+
 #' Add peak labels with arrows to a ggplot
 #'
 #' Adds `ggrepel::geom_text_repel()` labels with closed arrowhead segments

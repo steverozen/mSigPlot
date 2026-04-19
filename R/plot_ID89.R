@@ -21,18 +21,20 @@ plot_ID89 <- function(
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1.0,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
   if (is.null(catalog)) {
@@ -423,7 +425,6 @@ plot_ID89 <- function(
       limits = indel_positions,
       labels = indel_positions_labels
     ) +
-    ggplot2::ggtitle(plot_title) +
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
     ggplot2::scale_y_continuous(
       limits = c(
@@ -468,8 +469,7 @@ plot_ID89 <- function(
         size = axis_title_x_cex * base_size,
         margin = margin(t = ifelse(show_axis_text_x, -12, 1), b = 0)
       ),
-      axis.title.y = ggplot2::element_text(size = axis_title_y_cex * base_size),
-      plot.title = ggplot2::element_text(size = plot_title_cex * base_size)
+      axis.title.y = ggplot2::element_text(size = axis_title_y_cex * base_size)
     ) +
     ggplot2::scale_colour_manual(values = c("black", "white"))
 
@@ -481,6 +481,14 @@ plot_ID89 <- function(
   }
   if (!show_axis_text_y) {
     p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  }
+
+  # Grid lines
+  if (grid) {
+    y_breaks <- seq(0, ymax, ymax / 4)
+    p <- p +
+      ggplot2::geom_hline(yintercept = y_breaks,
+                          color = "grey35", linewidth = 0.25)
   }
 
   # Add top bar conditionally
@@ -547,6 +555,13 @@ plot_ID89 <- function(
                        num_peak_labels = num_peak_labels,
                        peak_label_cex = peak_label_cex,
                        base_size = base_size)
+
+  # Scale title y by top_bar_mult[1] (bottom of the colored-block strip) so
+  # the title sits in the gap between the tallest bar and the blocks, matching
+  # plot_ID83's visual layout.
+  p <- add_plot_title(p, plot_title, title_outside_plot,
+                      plot_title_cex, base_size,
+                      ymax = ymax * top_bar_mult[1], x = 1)
 
   return(p)
 }

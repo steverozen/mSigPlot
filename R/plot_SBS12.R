@@ -21,11 +21,13 @@ plot_SBS12 <- function(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1.0,
-  axis_title_x_cex = 1.0,
-  axis_title_y_cex = 1.0,
-  axis_text_y_cex = 0.8
+  plot_title_cex = 1.0,
+  title_outside_plot = FALSE,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
+  grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 192, catalog_row_order()$SBS192, "SBS192")
   if (is.null(catalog)) return(NULL)
@@ -177,6 +179,13 @@ plot_SBS12 <- function(
     p <- p + xlab(NULL)
   }
 
+  # Grid lines
+  if (grid) {
+    y_breaks <- seq(0, ymax, ymax / 4)
+    p <- p +
+      geom_hline(yintercept = y_breaks, color = "grey35", linewidth = 0.25)
+  }
+
   # Add asterisks for significant strand bias
   for (k in 1:6) {
     if (asterisks[k] != "") {
@@ -197,15 +206,8 @@ plot_SBS12 <- function(
   }
 
   # Sample name
-  p <- p +
-    annotate(
-      "text",
-      x = 0.5, y = ymax * 1.02,
-      label = plot_title,
-      hjust = 0,
-      fontface = "bold",
-      size = plot_title_cex * base_mm
-    )
+  p <- add_plot_title(p, plot_title, title_outside_plot,
+                      plot_title_cex, base_size, ymax, x = 0.5)
 
   # Legend
   p <- p +

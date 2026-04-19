@@ -41,11 +41,13 @@ plot_DBS144(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
+  grid = FALSE
 )
 
 plot_DBS144_pdf(catalog, filename, ...)
@@ -53,7 +55,7 @@ plot_DBS144_pdf(catalog, filename, ...)
 plot_DBS78(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -61,13 +63,14 @@ plot_DBS78(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   class_label_cex = 0.7,
   axis_text_x_cex = 0.5,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -78,7 +81,7 @@ plot_DBS78_pdf(catalog, filename, ...)
 plot_ID166(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -86,15 +89,16 @@ plot_ID166(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -107,11 +111,12 @@ plot_ID476(
   plot_title = NULL,
   base_size = 11,
   plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.52,
   class_label_cex = 0.78,
-  axis_text_x_cex = 0.8,
-  axis_title_x_cex = 0.7,
-  axis_title_y_cex = 0.9,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -124,7 +129,8 @@ plot_ID476(
   vline_labels = c(),
   simplify_labels = FALSE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 )
 
 plot_ID476_pdf(catalog, filename, ...)
@@ -134,11 +140,12 @@ plot_ID476_right(
   plot_title = NULL,
   base_size = 11,
   plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 1.03,
   class_label_cex = 1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -151,7 +158,8 @@ plot_ID476_right(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 )
 
 plot_ID476_right_pdf(catalog, filename, ...)
@@ -159,7 +167,7 @@ plot_ID476_right_pdf(catalog, filename, ...)
 plot_ID83(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -167,15 +175,16 @@ plot_ID83(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -194,18 +203,20 @@ plot_ID89(
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 )
 
 plot_ID89_pdf(catalog, filename, ...)
@@ -220,11 +231,13 @@ plot_SBS12(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
+  grid = FALSE
 )
 
 plot_SBS12_pdf(catalog, filename, ...)
@@ -232,7 +245,7 @@ plot_SBS12_pdf(catalog, filename, ...)
 plot_SBS192(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -240,13 +253,14 @@ plot_SBS192(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   class_label_cex = 0.9,
   axis_text_x_cex = 0.5,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -254,14 +268,20 @@ plot_SBS192(
 
 plot_SBS192_pdf(catalog, filename, ...)
 
-plot_SBS288(catalog, plot_title = NULL, ...)
+plot_SBS288(
+  catalog,
+  plot_title = NULL,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  ...
+)
 
 plot_SBS288_pdf(catalog, filename, ...)
 
 plot_SBS96(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -269,13 +289,14 @@ plot_SBS96(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   class_label_cex = 1.1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -304,6 +325,13 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{plot_title_cex}{Numeric. Multiplier for the plot title size.}
 
+\item{title_outside_plot}{Logical. If FALSE (the default), the title is
+drawn inside the plot panel as an annotation (the \code{plot_ID83} style).
+If TRUE, the title is drawn above the panel via \code{ggtitle()}. For
+\code{plot_SBS288}, TRUE places the overall title above the 3-panel
+composite via \code{patchwork::plot_annotation()}; FALSE prepends the title
+to each strand label ("Template", "Non-template", "Not-transcribed").}
+
 \item{axis_text_x_cex}{Numeric. Multiplier for x-axis labels.}
 
 \item{axis_title_x_cex}{Numeric. Multiplier for x-axis title size.}
@@ -312,12 +340,14 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{axis_text_y_cex}{Numeric. Multiplier for the y-axis tick label size.}
 
+\item{grid}{Logical, draw horizontal grid lines at \code{seq(0, ymax, ymax/4)}
+over the data region. Available in all bar-plot functions except
+\code{plot_SBS288} (which forwards \code{grid} to its three \code{plot_SBS96} panels
+via \code{...}).}
+
 \item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
 
 \item{...}{Additional arguments passed to \code{plot_SBS96()} (\code{plot_SBS288} only).}
-
-\item{grid}{Logical, draw grid lines (not available in \code{plot_DBS144},
-\code{plot_SBS12}, \code{plot_ID89}, \code{plot_ID476}, \code{plot_ID476_right}, \code{plot_SBS288}).}
 
 \item{upper}{Logical, draw colored class rectangles and labels above bars
 (not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}).}

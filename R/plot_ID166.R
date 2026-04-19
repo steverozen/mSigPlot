@@ -13,7 +13,7 @@
 plot_ID166 <- function(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -21,15 +21,16 @@ plot_ID166 <- function(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1.0,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_x_cex = 1.0,
-  axis_title_y_cex = 1.0,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -336,16 +337,8 @@ plot_ID166 <- function(
   }
 
   # Sample name
-  p <- p +
-    annotate(
-      "text",
-      x = 1.5,
-      y = ymax * 7.4 / 8,
-      label = plot_title,
-      hjust = 0,
-      fontface = "bold",
-      size = plot_title_cex * base_mm
-    )
+  p <- add_plot_title(p, plot_title, title_outside_plot,
+                      plot_title_cex, base_size, ymax, x = 1.5)
 
   # Legend
   p <- p +

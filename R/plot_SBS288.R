@@ -9,7 +9,9 @@
 #' }
 #'
 #' @export
-plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
+plot_SBS288 <- function(catalog, plot_title = NULL,
+                        plot_title_cex = 1.0,
+                        title_outside_plot = FALSE, ...) {
   catalog <- normalize_catalog(catalog, 288, catalog_row_order()$SBS288, "SBS288")
   if (is.null(catalog)) return(NULL)
 
@@ -42,16 +44,30 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   global_max <- max(cat_t[, 1], cat_u[, 1], cat_n[, 1]) * 1.1
   global_min <- min(0, min(cat_t[, 1], cat_u[, 1], cat_n[, 1]))
 
+  # Inside mode: prepend plot_title to each strand label so sample-name and
+  # strand name are both visible inside the top panel. Outside mode: strand
+  # labels stay bare; plot_title goes above the composite via plot_annotation.
+  make_panel_title <- function(strand) {
+    if (!title_outside_plot && !is.null(plot_title) && nzchar(plot_title)) {
+      paste(plot_title, strand)
+    } else {
+      strand
+    }
+  }
+
   # Top panel: upper bars, no x-labels
   # Middle panel: no upper bars, no x-labels
   # Bottom panel: no upper bars, x-labels
-  p1 <- plot_SBS96(cat_t, plot_title = "Template",
+  p1 <- plot_SBS96(cat_t, plot_title = make_panel_title("Template"),
+                   plot_title_cex = plot_title_cex,
                    ylim = c(0, global_max),
                    upper = TRUE, show_axis_text_x = FALSE, ...)
-  p2 <- plot_SBS96(cat_u, plot_title = "Non-template",
+  p2 <- plot_SBS96(cat_u, plot_title = make_panel_title("Non-template"),
+                   plot_title_cex = plot_title_cex,
                    ylim = c(0, global_max),
                    upper = FALSE, show_axis_text_x = FALSE, ...)
-  p3 <- plot_SBS96(cat_n, plot_title = "Not-transcribed",
+  p3 <- plot_SBS96(cat_n, plot_title = make_panel_title("Not-transcribed"),
+                   plot_title_cex = plot_title_cex,
                    ylim = c(0, global_max),
                    upper = FALSE, show_axis_text_x = TRUE, ...)
 
@@ -75,8 +91,11 @@ plot_SBS288 <- function(catalog, plot_title = NULL, ...) {
   combined <- patchwork::wrap_plots(p1, p2, p3, ncol = 1,
                                     heights = c(1.2, 1, 1.4))
 
-  if (!is.null(plot_title)) {
-    combined <- combined + patchwork::plot_annotation(title = plot_title)
+  if (title_outside_plot && !is.null(plot_title) && nzchar(plot_title)) {
+    combined <- combined + patchwork::plot_annotation(
+      title = plot_title,
+      theme = ggplot2::theme(
+        plot.title = ggplot2::element_text(size = plot_title_cex * 11)))
   }
 
   combined

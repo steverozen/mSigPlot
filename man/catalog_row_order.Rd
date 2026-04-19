@@ -26,7 +26,8 @@ SBS288 row names add a strand prefix:
 Catalogs with "stapled" row names (e.g. \verb{A[C>A]A} for SBS96,
 \verb{T:A[C>A]A} for SBS288) are automatically converted to compact format
 by \code{\link[=normalize_catalog]{normalize_catalog()}} before validation, so both formats are
-accepted by all plotting functions.
+accepted by all SBS plotting functions. (Only SBS functions
+use stapled row names.)
 }
 \examples{
 cro <- catalog_row_order()

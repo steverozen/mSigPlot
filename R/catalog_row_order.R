@@ -14,7 +14,8 @@
 #' Catalogs with "stapled" row names (e.g. `A[C>A]A` for SBS96,
 #' `T:A[C>A]A` for SBS288) are automatically converted to compact format
 #' by [normalize_catalog()] before validation, so both formats are
-#' accepted by all plotting functions.
+#' accepted by all SBS plotting functions. (Only SBS functions
+#' use stapled row names.)
 #'
 #' @return A named list with elements: SBS96, SBS192, SBS288, SBS1536, DBS78,
 #'   DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
