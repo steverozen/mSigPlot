@@ -15,3 +15,6 @@
 tests/visual/new/*.png
 /doc/
 /Meta/
+
+# Default-device output from interactive R sessions and tests
+Rplots.pdf
