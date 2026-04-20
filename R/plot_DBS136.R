@@ -14,7 +14,7 @@
 #'   or data.table. If there are row names (or for a vector, names), they
 #'   will be checked against [catalog_row_order()].
 #' @param plot_title Character. Title displayed above the plot.
-#' @param filename Character. Path to the output PDF file (\_pdf functions only).
+#' @param filename Character. Path to the output PDF file (`_pdf` functions only).
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param axis_text_cex Numeric. Multiplier for axis label size.
@@ -24,7 +24,7 @@
 #' @param show_axis_title_x Logical. If FALSE, hide the x-axis description.
 #' @param show_axis_title_y Logical. If FALSE, hide the y-axis description.
 #' @param ... Additional arguments passed to the underlying plot function
-#'   (\_pdf variants only).
+#'   (`_pdf` variants only).
 #'
 #' @return Plot functions return a patchwork object (a composite of ggplot2
 #'   panels), or NULL with a warning if the catalog is invalid (wrong size or

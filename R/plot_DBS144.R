@@ -21,7 +21,7 @@
 #'   or data.table. If there are row names (or for a vector, names), they
 #'   will be checked against [catalog_row_order()].
 #' @param plot_title Character. Title displayed above the plot.
-#' @param filename Character. Path to the output PDF file (\_pdf functions only).
+#' @param filename Character. Path to the output PDF file (`_pdf` functions only).
 #' @param grid Logical, draw horizontal grid lines at `seq(0, ymax, ymax/4)`
 #'   over the data region. Available in all bar-plot functions except
 #'   `plot_SBS288` (which forwards `grid` to its three `plot_SBS96` panels

@@ -15,6 +15,7 @@ utils::globalVariables(c(
   "value",
   "x",
   "y",
+  "count",
   "labels",
   "ref2alt",
   "minus1bs",

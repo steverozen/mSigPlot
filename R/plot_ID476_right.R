@@ -98,8 +98,8 @@ plot_ID476_right <- function(
   blocks$ymin <- max(muts_basis_melt$freq) * 1.35
   blocks$ymax <- max(muts_basis_melt$freq) * 1.47
   blocks$labels <- c(
-    "Del \u22652bp",
-    "Ins \u22652bp",
+    "Del \u22652",
+    "Ins \u22652",
     "Mh",
     "X"
   )

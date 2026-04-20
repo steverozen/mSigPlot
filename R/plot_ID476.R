@@ -107,8 +107,8 @@ plot_ID476 <- function(
     "Del 1 T",
     "Ins 1 C",
     "Ins 1 T",
-    "Del \u22652bp", # \u.... is >= character
-    "Ins \u22652bp",
+    "Del \u22652", # \u.... is >= character
+    "Ins \u22652",
     "Mh",
     "X"
   )
@@ -116,7 +116,7 @@ plot_ID476 <- function(
     "black",
     "black",
     "black",
-    "black",
+    "white",
     "white",
     "white",
     "white",

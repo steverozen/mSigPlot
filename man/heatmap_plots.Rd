@@ -62,10 +62,10 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{show_axis_title_y}{Logical. If FALSE, hide the y-axis description.}
 
-\item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
+\item{filename}{Character. Path to the output PDF file (\verb{_pdf} functions only).}
 
 \item{...}{Additional arguments passed to the underlying plot function
-(\_pdf variants only).}
+(\verb{_pdf} variants only).}
 }
 \value{
 Plot functions return a patchwork object (a composite of ggplot2

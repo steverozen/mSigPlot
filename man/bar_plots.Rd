@@ -345,7 +345,7 @@ over the data region. Available in all bar-plot functions except
 \code{plot_SBS288} (which forwards \code{grid} to its three \code{plot_SBS96} panels
 via \code{...}).}
 
-\item{filename}{Character. Path to the output PDF file (\_pdf functions only).}
+\item{filename}{Character. Path to the output PDF file (\verb{_pdf} functions only).}
 
 \item{...}{Additional arguments passed to \code{plot_SBS96()} (\code{plot_SBS288} only).}
 
