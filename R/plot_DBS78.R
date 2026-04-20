@@ -24,7 +24,7 @@ plot_DBS78 <- function(
   plot_title_cex = 1.0,
   title_outside_plot = FALSE,
   count_label_cex = 0.9,
-  class_label_cex = 0.7,
+  class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
   axis_title_x_cex = 0.8,
   axis_title_y_cex = 0.8,

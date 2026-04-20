@@ -26,7 +26,22 @@ this_script <- tryCatch(
   {
     ca <- commandArgs(trailingOnly = FALSE)
     m  <- regmatches(ca, regexpr("(?<=--file=).+", ca, perl = TRUE))
-    if (length(m)) m[1] else sys.frame(1)$ofile
+    if (length(m)) {
+      m[1]
+    } else {
+      # Walk every active frame looking for source()'s `ofile`. `sys.frame(1)`
+      # alone breaks when source() is called from inside another function
+      # (e.g. RStudio's Source button, or any wrapper).
+      ofile <- NULL
+      for (i in seq_len(sys.nframe())) {
+        f <- sys.frame(i)
+        if (!is.null(f$ofile) && is.character(f$ofile) && nzchar(f$ofile)) {
+          ofile <- f$ofile
+          break
+        }
+      }
+      ofile
+    }
   },
   error = function(e) NULL)
 script_dir <- if (!is.null(this_script) && nzchar(this_script)) {
