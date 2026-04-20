@@ -9,9 +9,10 @@ library(ggplot2)
 
 num_peaks <- 4
 
-base_size_83 <- 8
-base_size_89 <- 8
-base_size_476 <- 8
+base_size <- 9.5
+base_size_83 <- base_size
+base_size_89 <- base_size
+base_size_476 <- base_size
 
 page_w <- 8.5 # letter portrait width  (in)
 page_h <- 11 # letter portrait height (in)

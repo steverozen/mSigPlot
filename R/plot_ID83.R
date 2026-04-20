@@ -17,7 +17,7 @@ plot_ID83 <- function(
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = FALSE,
+  show_axis_title_x = TRUE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
@@ -219,6 +219,7 @@ plot_ID83 <- function(
       axis.ticks.x = element_line(),
       axis.text.x = element_text(size = axis_text_x_cex * base_size,
                                  colour = "black"),
+      axis.title.x = element_text(size = axis_title_x_cex * base_size),
       axis.title.y = element_text(size = axis_title_y_cex * base_size),
       axis.text.y = element_text(size = axis_text_y_cex * base_size),
       plot.margin = margin(
