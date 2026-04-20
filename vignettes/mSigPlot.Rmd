@@ -56,6 +56,21 @@ plot_SBS96(sample(sbs96_df[ ,3, drop = TRUE], replace = FALSE),
 
 The plot above will be unrecognizable.
 
+### Optional styling: horizontal gridlines and an external title
+
+By default `plot_title` is placed inside the plot area. Set
+`title_outside_plot = TRUE` to use a standard ggplot title above the
+panel instead. Set `grid = TRUE` to add horizontal reference lines at
+the y-axis breaks. These options are independent and are supported by
+all bar-plot functions.
+
+```{r sbs96-grid-title-outside}
+plot_SBS96(catalog_sbs96,
+           plot_title = "HepG2 -- SBS96 (grid + external title)",
+           grid = TRUE,
+           title_outside_plot = TRUE)
+```
+
 ## ID83 -- COSMIC indel classification
 
 The 83-channel indel catalog uses the COSMIC classification with

@@ -235,8 +235,14 @@ plot_DBS78 <- function(
       )
   }
 
-  # Sample name
-  p <- add_plot_title(p, plot_title, title_outside_plot,
+  # Sample name.
+  # When title is outside, append a newline so the title does not crowd
+  # the dinucleotide class-label strip above the panel.
+  title_for_helper <- plot_title
+  if (title_outside_plot && !is.null(plot_title) && nzchar(plot_title)) {
+    title_for_helper <- paste0(plot_title, "\n")
+  }
+  p <- add_plot_title(p, title_for_helper, title_outside_plot,
                       plot_title_cex, base_size, ymax, x = 1)
 
   p <- add_peak_labels(p, df, "x", "value", "label",
