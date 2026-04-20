@@ -23,6 +23,7 @@ plot_SBS96 <- function(
   base_size = 11,
   plot_title_cex = 1.0,
   title_outside_plot = FALSE,
+  title_x = 0,
   count_label_cex = 0.9,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -268,7 +269,8 @@ plot_SBS96 <- function(
     title_for_helper <- paste0(plot_title, "\n")
   }
   p <- add_plot_title(p, title_for_helper, title_outside_plot,
-                      plot_title_cex, base_size, ymax, x = 1)
+                      plot_title_cex, base_size, ymax,
+                      x = 0.5 + title_x * 96)
 
   p <- add_peak_labels(p, df, "x", "value", "label",
                        num_peak_labels = num_peak_labels, peak_label_cex = peak_label_cex,

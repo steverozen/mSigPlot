@@ -23,6 +23,7 @@ plot_ID83 <- function(
   base_size = 11,
   plot_title_cex = 1.0,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
@@ -117,7 +118,7 @@ plot_ID83 <- function(
   category_lab <- c(rep(c("C", "T"), 2), rep(c("2", "3", "4", "5+"), 3))
   category_col <- c(
     rep(c("black", "white"), 2),
-    rep(c("black", "black", "black", "white"), 3)
+    rep(c("black", "white", "white", "white"), 3)
   )
   blocks$label <- category_lab
   blocks$label_col <- category_col
@@ -166,39 +167,6 @@ plot_ID83 <- function(
     "5+"
   )
 
-  # Bottom category labels
-  bottom_pos <- c(
-    (blocks$xmin[1] + blocks$xmax[2]) / 2,
-    (blocks$xmin[3] + blocks$xmax[4]) / 2,
-    (blocks$xmin[5] + blocks$xmax[8]) / 2,
-    (blocks$xmin[9] + blocks$xmax[12]) / 2,
-    (blocks$xmin[13] + blocks$xmax[16]) / 2
-  )
-  bottom_lab <- c(
-    "Homopolymer length",
-    "Homopolymer length",
-    "Number of repeat units",
-    "Number of repeat units",
-    "Microhomology length"
-  )
-
-  bottom_labels <- data.frame(
-    x = bottom_pos,
-    y = -ymax * 0.27,
-    label = bottom_lab,
-    stringsAsFactors = FALSE
-  )
-
-  # Blocks for bottom x-axis color strip
-  bottom_blocks <- data.frame(
-    xmin = class_starts - 0.5,
-    xmax = class_ends + 0.5,
-    ymin = -ymax * 0.09,
-    ymax = -ymax * 0.01,
-    fill = indel_class_col,
-    stringsAsFactors = FALSE
-  )
-
   # Resolve show_counts: NULL = auto (counts only), TRUE/FALSE = forced
   show_counts <- resolve_show_counts(show_counts, catalog_type)
 
@@ -228,10 +196,12 @@ plot_ID83 <- function(
     geom_bar(stat = "identity", fill = df$color, width = 0.8) +
     scale_x_continuous(
       limits = c(0.5, 83.5),
+      breaks = 1:83,
+      labels = mut_type,
       expand = c(0, 0)
     ) +
     scale_y_continuous(
-      limits = c(min(-ymax * 0.3, ymin * 1.05), ymax * 1.35),
+      limits = c(min(0, ymin * 1.05), ymax * 1.35),
       breaks = function(x) {
         b <- scales::extended_breaks()(c(0, ymax))
         b[b >= 0]
@@ -243,17 +213,18 @@ plot_ID83 <- function(
       },
       expand = c(0, 0)
     ) +
-    coord_cartesian(ylim = c(min(-ymax * 0.3, ymin * 1.05), ymax * 1.35), clip = "off") +
+    coord_cartesian(ylim = c(min(0, ymin * 1.05), ymax * 1.35), clip = "off") +
     theme_classic(base_size = base_size) +
     theme(
-      axis.line.x = element_blank(),
-      axis.ticks.x = element_blank(),
+      axis.ticks.x = element_line(),
+      axis.text.x = element_text(size = axis_text_x_cex * base_size,
+                                 colour = "black"),
       axis.title.y = element_text(size = axis_title_y_cex * base_size),
       axis.text.y = element_text(size = axis_text_y_cex * base_size),
       plot.margin = margin(
         t = 40 * base_size / 11,
         r = 10,
-        b = 50 * base_size / 11,
+        b = 10 * base_size / 11,
         l = 10
       )
     )
@@ -312,6 +283,7 @@ plot_ID83 <- function(
         aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = label),
         color = blocks$label_col,
         size = block_label_cex * base_mm,
+        fontface = "bold",
         inherit.aes = FALSE
       ) +
       geom_text(
@@ -322,30 +294,10 @@ plot_ID83 <- function(
       )
   }
 
-  # Add x-axis labels
-  if (show_axis_text_x) {
-    p <- p +
-      geom_rect(
-        data = bottom_blocks,
-        aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-        fill = bottom_blocks$fill,
-        inherit.aes = FALSE
-      ) +
-      geom_text(
-        aes(x = x, y = -ymax * 0.15, label = mut_type),
-        size = axis_text_x_cex * base_mm,
-        inherit.aes = FALSE,
-        data = data.frame(x = 1:83, mut_type = mut_type)
-      ) +
-      geom_text(
-        data = bottom_labels,
-        aes(x = x, y = y, label = label),
-        size = bottom_label_cex * base_mm,
-        inherit.aes = FALSE
-      ) +
-      theme(axis.text.x = element_blank())
-  } else {
-    p <- p + theme(axis.text.x = element_blank())
+  # Hide x-axis labels/ticks if requested
+  if (!show_axis_text_x) {
+    p <- p + theme(axis.text.x = element_blank(),
+                   axis.ticks.x = element_blank())
   }
 
   # Add count labels
@@ -362,7 +314,8 @@ plot_ID83 <- function(
 
   # Add sample name
   p <- add_plot_title(p, plot_title, title_outside_plot,
-                      plot_title_cex, base_size, ymax, x = 1.5)
+                      plot_title_cex, base_size, ymax,
+                      x = 0.5 + title_x * 83)
 
   p <- add_peak_labels(p, df, "x", "value", "label",
                        num_peak_labels = num_peak_labels, peak_label_cex = peak_label_cex,

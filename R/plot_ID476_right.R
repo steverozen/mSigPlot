@@ -17,6 +17,7 @@ plot_ID476_right <- function(
   base_size = 11,
   plot_title_cex = 1.0,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 1.03,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -351,7 +352,8 @@ plot_ID476_right <- function(
   # the title sits in the gap between the tallest bar and the blocks.
   p <- add_plot_title(p, plot_title, title_outside_plot,
                       plot_title_cex, base_size,
-                      ymax = min(blocks$ymin), x = 1)
+                      ymax = min(blocks$ymin),
+                      x = 0.5 + title_x * n_channels)
 
   return(p)
 }

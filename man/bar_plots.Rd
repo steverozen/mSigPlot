@@ -91,6 +91,7 @@ plot_ID166(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
@@ -112,6 +113,7 @@ plot_ID476(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.52,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -124,7 +126,7 @@ plot_ID476(
   show_axis_title_y = TRUE,
   show_counts = NULL,
   num_peak_labels = 4,
-  peak_label_cex = 0.52,
+  peak_label_cex = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = FALSE,
@@ -141,6 +143,7 @@ plot_ID476_right(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 1.03,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -177,6 +180,7 @@ plot_ID83(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
@@ -204,6 +208,7 @@ plot_ID89(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
@@ -255,6 +260,7 @@ plot_SBS192(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0,
   count_label_cex = 0.9,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -291,6 +297,7 @@ plot_SBS96(
   base_size = 11,
   plot_title_cex = 1,
   title_outside_plot = FALSE,
+  title_x = 0,
   count_label_cex = 0.9,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
@@ -366,6 +373,14 @@ Not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}.}
 Not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}.}
 
 \item{peak_label_cex}{Numeric. Size multiplier for peak labels.}
+
+\item{title_x}{Numeric fraction in \link{0, 1} giving the horizontal position
+of the inside-panel title, as a fraction of the plot's bar range
+(0 = left edge, 1 = right edge). Ignored when \code{title_outside_plot = TRUE}.
+Default is 0 (far left) for SBS plots and 0.4 (a bit left of center)
+for ID plots, where the far-left corner often collides with ggrepel
+peak labels. Only available in \code{plot_SBS96}, \code{plot_SBS192},
+\code{plot_ID83}, \code{plot_ID89}, \code{plot_ID166}, \code{plot_ID476}, \code{plot_ID476_right}.}
 
 \item{block_label_cex}{Numeric. Multiplier for colored category block labels
 (indel plots only).}

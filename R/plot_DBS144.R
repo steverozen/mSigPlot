@@ -37,6 +37,13 @@
 #'   `plot_SBS288`, TRUE places the overall title above the 3-panel
 #'   composite via `patchwork::plot_annotation()`; FALSE prepends the title
 #'   to each strand label ("Template", "Non-template", "Not-transcribed").
+#' @param title_x Numeric fraction in [0, 1] giving the horizontal position
+#'   of the inside-panel title, as a fraction of the plot's bar range
+#'   (0 = left edge, 1 = right edge). Ignored when `title_outside_plot = TRUE`.
+#'   Default is 0 (far left) for SBS plots and 0.4 (a bit left of center)
+#'   for ID plots, where the far-left corner often collides with ggrepel
+#'   peak labels. Only available in `plot_SBS96`, `plot_SBS192`,
+#'   `plot_ID83`, `plot_ID89`, `plot_ID166`, `plot_ID476`, `plot_ID476_right`.
 #' @param count_label_cex Numeric. Multiplier for per-class count labels
 #'   (not available in `plot_DBS144`, `plot_SBS12`).
 #' @param class_label_cex Numeric. Multiplier for major class labels.
