@@ -245,7 +245,7 @@ plot_ID476 <- function(
       limits = c(0.5, n_channels + 0.5)
     ) +
     ggplot2::scale_y_continuous(
-      expand = expansion(mult = c(0.03, 0)), # No padding at bottom, 5% at top
+      expand = expansion(mult = c(0.08, 0)),
       labels = if (ylabel == "Counts") {
         scales::label_number(accuracy = 1)
       } else {
@@ -260,7 +260,7 @@ plot_ID476 <- function(
         size = axis_text_x_cex * base_size,
         angle = 0,
         hjust = 0,
-        vjust = 8, # Anchor text at bottom (above axis)
+        vjust = 11, # Raised so midline sits ~halfway between axis line and y=0
       ),
       axis.ticks.x = ggplot2::element_line(),
       axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
