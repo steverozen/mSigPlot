@@ -1,3 +1,26 @@
+# Derive ID89 axis Figlabel strings from the canonical IndelType names.
+# Single-base channels (Del(C), Del(T), Ins(C), Ins(T)): drop the Del(..)/Ins(..)
+# wrapper and the ":R" prefix, then pad trailing open-ended repeat ranges
+# "(N,)" to "(N,9)". Multi-base channels (longer Del/Ins/MH): rewrite leading
+# "Del("/"Ins(" to "L(", space-pad the leading length "(N,)" to "(N, )", 9-pad a
+# trailing "R(N,)" to "R(N,9)", and space-pad a trailing "M(N,)" to "M(N, )".
+id89_figlabels <- function(indel_types) {
+  x <- indel_types
+  is_single <- grepl("(Del|Ins)\\([CT]\\)", x)
+  is_multi  <- !is_single & x != "Complex"
+
+  x[is_single] <- gsub("(Del|Ins)\\(([CT])\\)", "\\2", x[is_single])
+  x[is_single] <- gsub(":R", "", x[is_single])
+  x[is_single] <- gsub("\\(([0-9]+),\\)", "(\\1,9)", x[is_single])
+
+  x[is_multi] <- sub("^(Del|Ins)\\(", "L(", x[is_multi])
+  x[is_multi] <- sub("^L\\(([0-9]+),\\)", "L(\\1, )", x[is_multi])
+  x[is_multi] <- sub("R\\(([0-9]+),\\)$", "R(\\1,9)", x[is_multi])
+  x[is_multi] <- sub("M\\(([0-9]+),\\)$", "M(\\1, )", x[is_multi])
+
+  x
+}
+
 #' @rdname bar_plots
 #'
 #' @examples
@@ -75,100 +98,7 @@ plot_ID89 <- function(
         rep("Del(2,):M(1,)", 7),
         "Complex"
       ),
-      Figlabel = c(
-        # Deletion labels
-        "[C1]A",
-        "[C1]T",
-        "[C2]A",
-        "[C2]T",
-        "[C3]A",
-        "[C3]T",
-        "[C(4,5)]A",
-        "[C(4,5)]T",
-        "[C(1,5)]G",
-        "C(6,9)",
-        "A[T(1,4)]A",
-        "A[T(1,4)]C",
-        "A[T(1,4)]G",
-        "C[T(1,4)]A",
-        "C[T(1,4)]C",
-        "C[T(1,4)]G",
-        "G[T(1,4)]A",
-        "G[T(1,4)]C",
-        "G[T(1,4)]G",
-        "A[T(5,7)]A",
-        "A[T(5,7)]C",
-        "A[T(5,7)]G",
-        "C[T(5,7)]A",
-        "C[T(5,7)]C",
-        "C[T(5,7)]G",
-        "G[T(5,7)]A",
-        "G[T(5,7)]C",
-        "G[T(5,7)]G",
-        "A[T(8,9)]A",
-        "A[T(8,9)]C",
-        "A[T(8,9)]G",
-        "C[T(8,9)]A",
-        "C[T(8,9)]C",
-        "C[T(8,9)]G",
-        "G[T(8,9)]A",
-        "G[T(8,9)]C",
-        "G[T(8,9)]G",
-        # Insertion labels
-        "A[C0]A",
-        "A[C0]T",
-        "C(0,3)",
-        "C(4,6)",
-        "C(7,9)",
-        "A[T(0,4)]A",
-        "A[T(0,4)]C",
-        "A[T(0,4)]G",
-        "C[T(0,4)]A",
-        "C[T(0,4)]C",
-        "C[T(0,4)]G",
-        "G[T(0,4)]A",
-        "G[T(0,4)]C",
-        "G[T(0,4)]G",
-        "A[T(5,7)]A",
-        "A[T(5,7)]C",
-        "A[T(5,7)]G",
-        "C[T(5,7)]A",
-        "C[T(5,7)]C",
-        "C[T(5,7)]G",
-        "G[T(5,7)]A",
-        "G[T(5,7)]C",
-        "G[T(5,7)]G",
-        "A[T(8,9)]A",
-        "A[T(8,9)]C",
-        "A[T(8,9)]G",
-        "C[T(8,9)]A",
-        "C[T(8,9)]C",
-        "C[T(8,9)]G",
-        "G[T(8,9)]A",
-        "G[T(8,9)]C",
-        "G[T(8,9)]G",
-        # Longer del/ins/MH/complex
-        "L(2,4):R1",
-        "L(5, ):R1",
-        "L(2,8):U(1,2):R(2,4)",
-        "L(2, ):U(1,2):R(5,9)",
-        "L(3, ):U(3,):R2",
-        "L(3, ):U(3,):R(3,9)",
-        "L(2,4):R0",
-        "L(5, ):R0",
-        "L(2,4):R1",
-        "L(5, ):R1",
-        "L(2, ):R(2,4)",
-        "L(2, ):R(5,9)",
-        "L(2,5):M1",
-        "L(3,5):M2",
-        "L(4,5):M(3,4)",
-        "L(6, ):M1",
-        "L(6, ):M2",
-        "L(6, ):M3",
-        "L(6, ):M(4, )",
-        "Complex"
-      )
+      Figlabel = id89_figlabels(id89_rows)
     ),
     class = "data.frame",
     row.names = c(NA, -89L)
