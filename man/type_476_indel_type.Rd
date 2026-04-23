@@ -7,7 +7,7 @@
 type_476_indel_type()
 }
 \value{
-A 476-row data frame with columns: IndelType, Indel, Indel3, Figlabel.
+A 476-row data frame with columns: IndelType, Indel, Figlabel.
 }
 \description{
 Constructs a data frame mapping 476 indel channels to their type,

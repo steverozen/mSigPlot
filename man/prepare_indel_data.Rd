@@ -10,7 +10,7 @@ prepare_indel_data(catalog, type_table)
 \item{catalog}{Named numeric vector of indel channel values.}
 
 \item{type_table}{Data frame with at least an \code{IndelType} column and
-classification columns (e.g. \code{Indel}, \code{Indel3}, \code{Figlabel}).}
+classification columns (e.g. \code{Indel}, \code{Figlabel}).}
 }
 \value{
 Data frame with columns from \code{type_table} plus \code{Sample} and \code{freq}.
