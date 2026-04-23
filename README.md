@@ -141,12 +141,14 @@ Most bar chart functions also accept `ylim` (y-axis limits), `grid`
 (grid lines), and `upper` (colored class labels above bars).
 See `?plot_SBS96` for the full parameter list.
 
-## Row name handling
+## Your input must have the expected row order
 
 If your catalog has row names matching the canonical mutation type labels,
 mSigPlot validates and reorders them automatically. If row names are absent
-(unnamed vector or sequential integer names), the data is assumed to be in
-canonical order. Use `catalog_row_order()` to inspect the expected order for
+(unnamed vector or sequential integer names or data from a data.table 
+or tibble), the data is assumed to be in
+canonical order. If your rows are in an unexpected order you will got nonsensical plots.
+Use `catalog_row_order()` to see the expected order for
 any catalog type:
 
 ```r
