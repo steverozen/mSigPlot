@@ -12,11 +12,15 @@ id89_figlabels <- function(indel_types) {
   x[is_single] <- gsub("(Del|Ins)\\(([CT])\\)", "\\2", x[is_single])
   x[is_single] <- gsub(":R", "", x[is_single])
   x[is_single] <- gsub("\\(([0-9]+),\\)", "(\\1+)", x[is_single])
+  x[is_single] <- gsub("[][]", "|", x[is_single])
+  x[is_single] <- sub("^\\|", "", x[is_single])
+  x[is_single] <- gsub("\\)\\|", ")", x[is_single])
 
   x[is_multi] <- sub("^(Del|Ins)\\(", "L(", x[is_multi])
   x[is_multi] <- sub("^L\\(([0-9]+),\\)", "L(\\1, )", x[is_multi])
   x[is_multi] <- sub("R\\(([0-9]+),\\)$", "R(\\1+)", x[is_multi])
   x[is_multi] <- sub("M\\(([0-9]+),\\)$", "M(\\1, )", x[is_multi])
+  x[is_multi] <- gsub(":", "", x[is_multi])
 
   x
 }
@@ -29,6 +33,10 @@ id89_figlabels <- function(indel_types) {
 #' sig <- sig / sum(sig)
 #' names(sig) <- catalog_row_order()$ID89
 #' plot_ID89(sig, plot_title = "Example ID89")
+#'
+#' # Label the top 5 peaks on the axis.
+#' plot_ID89(sig, plot_title = "Example ID89 with peak labels",
+#'           num_peak_labels = 5)
 #'
 #' @export
 #'

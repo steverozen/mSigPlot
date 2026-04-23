@@ -35,25 +35,35 @@ plot_ID476_right <- function(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE,
+  stop_at_9 = FALSE,
   grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
-  if (is.null(catalog)) return(NULL)
-  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  if (is.null(catalog)) {
+    return(NULL)
+  }
+  if (is.null(plot_title)) {
+    plot_title <- colnames(catalog)[1] %||% ""
+  }
   y_axis_type_attr <- attributes(catalog)$y_axis_type_attr
   catalog <- catalog[, 1]
 
   # Determine y-axis label based on catalog type
-  catalog_type <- detect_y_axis_type(catalog, y_axis_type_attr = y_axis_type_attr)
+  catalog_type <- detect_y_axis_type(
+    catalog,
+    y_axis_type_attr = y_axis_type_attr
+  )
   if (catalog_type == "muts_per_million") {
     ylabel <- "Muts/Million"
     catalog <- catalog * 1e6
   } else if (catalog_type == "counts") {
     ylabel <- "Counts"
   } else {
-    ylabel <- ifelse(catalog_type == "proportion",
-                     "Proportion", "Density Proportion")
+    ylabel <- ifelse(
+      catalog_type == "proportion",
+      "Proportion",
+      "Density Proportion"
+    )
   }
   Koh476_indeltype <- type_476_indel_type()
   muts_basis_melt <- prepare_indel_data(catalog, Koh476_indeltype)
@@ -133,7 +143,11 @@ plot_ID476_right <- function(
     label_data <- muts_basis_melt |>
       dplyr::filter(freq >= min_threshold) |>
       dplyr::group_by(Indel) |>
-      dplyr::slice_max(order_by = freq, n = num_peak_labels, with_ties = FALSE) |>
+      dplyr::slice_max(
+        order_by = freq,
+        n = num_peak_labels,
+        with_ties = FALSE
+      ) |>
       dplyr::ungroup()
   } else {
     label_data <- muts_basis_melt[0, ] # Empty data frame, no labels
@@ -257,8 +271,11 @@ plot_ID476_right <- function(
   if (grid) {
     y_breaks <- seq(0, max_freq, max_freq / 4)
     p <- p +
-      ggplot2::geom_hline(yintercept = y_breaks,
-                          color = "grey35", linewidth = 0.25)
+      ggplot2::geom_hline(
+        yintercept = y_breaks,
+        color = "grey35",
+        linewidth = 0.25
+      )
   }
 
   p <- p +
@@ -336,10 +353,12 @@ plot_ID476_right <- function(
   }
 
   if (!show_axis_text_x) {
-    p <- p + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+    p <- p +
+      theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
   }
   if (!show_axis_text_y) {
-    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    p <- p +
+      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
   if (!show_axis_title_x) {
     p <- p + theme(axis.title.x = element_blank())
@@ -350,10 +369,15 @@ plot_ID476_right <- function(
 
   # Use blocks$ymin (bottom of the colored-block strip at 1.35*max_freq) so
   # the title sits in the gap between the tallest bar and the blocks.
-  p <- add_plot_title(p, plot_title, title_outside_plot,
-                      plot_title_cex, base_size,
-                      ymax = min(blocks$ymin),
-                      x = 0.5 + title_x * n_channels)
+  p <- add_plot_title(
+    p,
+    plot_title,
+    title_outside_plot,
+    plot_title_cex,
+    base_size,
+    ymax = min(blocks$ymin),
+    x = 0.5 + title_x * n_channels
+  )
 
   return(p)
 }

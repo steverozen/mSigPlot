@@ -478,6 +478,10 @@ sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID89
 plot_ID89(sig, plot_title = "Example ID89")
 
+# Label the top 5 peaks on the axis.
+plot_ID89(sig, plot_title = "Example ID89 with peak labels",
+          num_peak_labels = 5)
+
 set.seed(1)
 sig <- runif(192)
 sig <- sig / sum(sig)

@@ -158,6 +158,20 @@ test_that("plot_ID89 regression", {
   check_regression(hash, "plot_ID89")
 })
 
+test_that("plot_ID89 with peak labels regression", {
+  skip_if_no_pixi()
+  sig_data <- read.table(
+    test_path("fixtures", "type89_liu_et_al_sigs.tsv"),
+    header = TRUE, sep = "\t", row.names = 1, check.names = FALSE
+  )
+  catalog <- as.numeric(sig_data[, 1])
+  p <- plot_ID89(catalog, plot_title = "SBS89_regress_peaks",
+                 num_peak_labels = 5)
+  set.seed(1) # ggrepel uses randomness at render time
+  hash <- render_and_hash(p, "plot_ID89_peaks")
+  check_regression(hash, "plot_ID89_peaks")
+})
+
 test_that("plot_ID476 regression", {
   skip_if_no_pixi()
   sig_data <- read.table(

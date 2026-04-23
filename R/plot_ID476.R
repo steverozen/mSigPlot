@@ -36,25 +36,35 @@ plot_ID476 <- function(
   vline_labels = c(),
   simplify_labels = FALSE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE,
+  stop_at_9 = FALSE,
   grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")
-  if (is.null(catalog)) return(NULL)
-  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  if (is.null(catalog)) {
+    return(NULL)
+  }
+  if (is.null(plot_title)) {
+    plot_title <- colnames(catalog)[1] %||% ""
+  }
   y_axis_type_attr <- attributes(catalog)$y_axis_type_attr
   catalog <- catalog[, 1]
 
   # Determine y-axis label based on catalog type
-  catalog_type <- detect_y_axis_type(catalog, y_axis_type_attr = y_axis_type_attr)
+  catalog_type <- detect_y_axis_type(
+    catalog,
+    y_axis_type_attr = y_axis_type_attr
+  )
   if (catalog_type == "muts_per_million") {
     ylabel <- "Muts/Million"
     catalog <- catalog * 1e6
   } else if (catalog_type == "counts") {
     ylabel <- "Counts"
   } else {
-    ylabel <- ifelse(catalog_type == "proportion",
-                     "Proportion", "Density Proportion")
+    ylabel <- ifelse(
+      catalog_type == "proportion",
+      "Proportion",
+      "Density Proportion"
+    )
   }
   Koh476_indeltype <- type_476_indel_type()
   muts_basis_melt <- prepare_indel_data(catalog, Koh476_indeltype)
@@ -137,7 +147,9 @@ plot_ID476 <- function(
 
   if (!plot_complex) {
     blocks <- blocks[blocks$Type != "Complex", ]
-    indel_mypalette_fill_all <- indel_mypalette_fill_all[names(indel_mypalette_fill_all) != "Complex"]
+    indel_mypalette_fill_all <- indel_mypalette_fill_all[
+      names(indel_mypalette_fill_all) != "Complex"
+    ]
   }
 
   n_channels <- max(muts_basis_melt$x_pos)
@@ -150,7 +162,11 @@ plot_ID476 <- function(
     label_data <- muts_basis_melt |>
       dplyr::filter(freq >= min_threshold) |>
       dplyr::group_by(Indel) |>
-      dplyr::slice_max(order_by = freq, n = num_peak_labels, with_ties = FALSE) |>
+      dplyr::slice_max(
+        order_by = freq,
+        n = num_peak_labels,
+        with_ties = FALSE
+      ) |>
       dplyr::ungroup()
   } else {
     label_data <- muts_basis_melt[0, ] # Empty data frame, no labels
@@ -253,7 +269,10 @@ plot_ID476 <- function(
       }
     ) +
     ggplot2::scale_fill_manual(values = indel_mypalette_fill_all) +
-    ggplot2::coord_cartesian(ylim = c(min(0, min(muts_basis_melt$freq) * 1.05), max(blocks$ymax)), clip = "off") +
+    ggplot2::coord_cartesian(
+      ylim = c(min(0, min(muts_basis_melt$freq) * 1.05), max(blocks$ymax)),
+      clip = "off"
+    ) +
     ggplot2::theme_classic(base_size = base_size) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
@@ -264,7 +283,10 @@ plot_ID476 <- function(
       ),
       axis.ticks.x = ggplot2::element_line(),
       axis.ticks.length.x = unit(-1, "line"), # Negative = upward ticks
-      axis.text.y = ggplot2::element_text(size = axis_text_y_cex * base_size, colour = "black"),
+      axis.text.y = ggplot2::element_text(
+        size = axis_text_y_cex * base_size,
+        colour = "black"
+      ),
       legend.position = "none",
       axis.title.x = ggplot2::element_text(
         size = axis_title_x_cex * base_size,
@@ -282,8 +304,11 @@ plot_ID476 <- function(
   if (grid) {
     y_breaks <- seq(0, max_freq, max_freq / 4)
     p <- p +
-      ggplot2::geom_hline(yintercept = y_breaks,
-                          color = "grey35", linewidth = 0.25)
+      ggplot2::geom_hline(
+        yintercept = y_breaks,
+        color = "grey35",
+        linewidth = 0.25
+      )
   }
 
   p <- p +
@@ -342,8 +367,11 @@ plot_ID476 <- function(
       FUN = sum
     )
     names(counts_by_block) <- c("Type", "count")
-    counts_by_block$count <- ifelse(counts_by_block$count > 0 & counts_by_block$count < 1,
-      signif(counts_by_block$count, 2), round(counts_by_block$count))
+    counts_by_block$count <- ifelse(
+      counts_by_block$count > 0 & counts_by_block$count < 1,
+      signif(counts_by_block$count, 2),
+      round(counts_by_block$count)
+    )
     count_label_df <- merge(blocks, counts_by_block, by = "Type")
     count_label_df$x <- (count_label_df$xmin + count_label_df$xmax) / 2
     count_label_df$y <- max_freq * 1.2
@@ -358,10 +386,12 @@ plot_ID476 <- function(
   }
 
   if (!show_axis_text_x) {
-    p <- p + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+    p <- p +
+      theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
   }
   if (!show_axis_text_y) {
-    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    p <- p +
+      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
   if (!show_axis_title_x) {
     p <- p + theme(axis.title.x = element_blank())
@@ -372,10 +402,15 @@ plot_ID476 <- function(
 
   # Use blocks$ymin (bottom of the colored-block strip at 1.35*max_freq) so
   # the title sits in the gap between the tallest bar and the blocks.
-  p <- add_plot_title(p, plot_title, title_outside_plot,
-                      plot_title_cex, base_size,
-                      ymax = min(blocks$ymin),
-                      x = 0.5 + title_x * n_channels)
+  p <- add_plot_title(
+    p,
+    plot_title,
+    title_outside_plot,
+    plot_title_cex,
+    base_size,
+    ymax = min(blocks$ymin),
+    x = 0.5 + title_x * n_channels
+  )
 
   return(p)
 }
