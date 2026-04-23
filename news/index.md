@@ -1,5 +1,59 @@
 # Changelog
 
+## mSigPlot 2.0.33
+
+- Refactored
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md):
+  the internal `IndelType` column now derives from
+  `catalog_row_order()$ID89` instead of an inline 89-element literal,
+  giving a single source of truth for channel names.
+- New internal helper `id89_figlabels()` derives x-axis tick labels
+  algorithmically from the canonical `IndelType` strings. Open-ended
+  repeat tracts are rendered as `(N+)` (e.g. `T(8+)`, `C(7+)`, `R(5+)`)
+  rather than the former `(8,9)` / `(7,9)` notation; sub-block bracket
+  labels also use the `(N+)` style.
+- Removed the unused `Indel3` column from
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  and from
+  [`type_476_indel_type()`](https://steverozen.github.io/mSigPlot/reference/type_476_indel_type.md)
+  (never read).
+- Changed `stop_at_9` default in
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  from `TRUE` to `FALSE`; the plot data is unchanged, but `(8+)` now
+  communicates that the user must know their upstream trimming.
+- Added a peak-label regression test (`plot_ID89 with peak labels`) and
+  a corresponding `plot_ID89_peaks` entry in `tests/visual/`.
+- Re-blessed regression hashes and visual reference PNGs for `plot_ID89`
+  and `plot_ID89_peaks` to match the new label style.
+
+## mSigPlot 2.0.2
+
+- Unified `plot_title_cex` default at `1.0` and `axis_*_cex` defaults
+  (`axis_text_x_cex = 0.5`, `axis_title_x_cex = 0.8`,
+  `axis_text_y_cex = 0.7`, `axis_title_y_cex = 0.8`) across all bar-plot
+  functions.
+- New `title_outside_plot = FALSE` argument on every bar-plot function.
+  By default the plot title is now drawn inside the panel (in the
+  `plot_ID83` style) via a shared
+  [`add_plot_title()`](https://steverozen.github.io/mSigPlot/reference/add_plot_title.md)
+  helper. Set `TRUE` for the `ggtitle()`-above-the-panel layout
+  previously used by `plot_ID89`, `plot_ID476`, and `plot_ID476_right`.
+- For `plot_SBS288`, `title_outside_plot = FALSE` prepends `plot_title`
+  to each strand label (“Template”, “Non-template”, “Not-transcribed”);
+  `TRUE` keeps the previous
+  [`patchwork::plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html)
+  overall title.
+- `plot_ID89`, `plot_ID476`, and `plot_ID476_right` now position the
+  inside title in the gap between the tallest bar and the colored block
+  strip.
+- New `grid = FALSE` argument on every bar-plot function (added to
+  `plot_SBS12`, `plot_DBS144`, `plot_ID89`, `plot_ID476`,
+  `plot_ID476_right`). Default is now `FALSE` everywhere (previously
+  `TRUE` in `plot_SBS96`, `plot_SBS192`, `plot_DBS78`, `plot_ID83`,
+  `plot_ID166`).
+- Added `development/regenerate_readme_figures.R` for rebuilding the
+  `man/figures/example_*.png` set after visual changes.
+
 ## mSigPlot 2.0.0
 
 - Remove all deprecated functionality

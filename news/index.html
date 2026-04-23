@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.33</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,25 @@
       <small>Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.33" id="msigplot-2033">mSigPlot 2.0.33<a class="anchor" aria-label="anchor" href="#msigplot-2033"></a></h2>
+<ul><li>Refactored <code><a href="../reference/bar_plots.html">plot_ID89()</a></code>: the internal <code>IndelType</code> column now derives from <code>catalog_row_order()$ID89</code> instead of an inline 89-element literal, giving a single source of truth for channel names.</li>
+<li>New internal helper <code>id89_figlabels()</code> derives x-axis tick labels algorithmically from the canonical <code>IndelType</code> strings. Open-ended repeat tracts are rendered as <code>(N+)</code> (e.g. <code>T(8+)</code>, <code>C(7+)</code>, <code>R(5+)</code>) rather than the former <code>(8,9)</code> / <code>(7,9)</code> notation; sub-block bracket labels also use the <code>(N+)</code> style.</li>
+<li>Removed the unused <code>Indel3</code> column from <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> and from <code><a href="../reference/type_476_indel_type.html">type_476_indel_type()</a></code> (never read).</li>
+<li>Changed <code>stop_at_9</code> default in <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> from <code>TRUE</code> to <code>FALSE</code>; the plot data is unchanged, but <code>(8+)</code> now communicates that the user must know their upstream trimming.</li>
+<li>Added a peak-label regression test (<code>plot_ID89 with peak labels</code>) and a corresponding <code>plot_ID89_peaks</code> entry in <code>tests/visual/</code>.</li>
+<li>Re-blessed regression hashes and visual reference PNGs for <code>plot_ID89</code> and <code>plot_ID89_peaks</code> to match the new label style.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.2" id="msigplot-202">mSigPlot 2.0.2<a class="anchor" aria-label="anchor" href="#msigplot-202"></a></h2>
+<ul><li>Unified <code>plot_title_cex</code> default at <code>1.0</code> and <code>axis_*_cex</code> defaults (<code>axis_text_x_cex = 0.5</code>, <code>axis_title_x_cex = 0.8</code>, <code>axis_text_y_cex = 0.7</code>, <code>axis_title_y_cex = 0.8</code>) across all bar-plot functions.</li>
+<li>New <code>title_outside_plot = FALSE</code> argument on every bar-plot function. By default the plot title is now drawn inside the panel (in the <code>plot_ID83</code> style) via a shared <code><a href="../reference/add_plot_title.html">add_plot_title()</a></code> helper. Set <code>TRUE</code> for the <code>ggtitle()</code>-above-the-panel layout previously used by <code>plot_ID89</code>, <code>plot_ID476</code>, and <code>plot_ID476_right</code>.</li>
+<li>For <code>plot_SBS288</code>, <code>title_outside_plot = FALSE</code> prepends <code>plot_title</code> to each strand label (“Template”, “Non-template”, “Not-transcribed”); <code>TRUE</code> keeps the previous <code><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">patchwork::plot_annotation()</a></code> overall title.</li>
+<li>
+<code>plot_ID89</code>, <code>plot_ID476</code>, and <code>plot_ID476_right</code> now position the inside title in the gap between the tallest bar and the colored block strip.</li>
+<li>New <code>grid = FALSE</code> argument on every bar-plot function (added to <code>plot_SBS12</code>, <code>plot_DBS144</code>, <code>plot_ID89</code>, <code>plot_ID476</code>, <code>plot_ID476_right</code>). Default is now <code>FALSE</code> everywhere (previously <code>TRUE</code> in <code>plot_SBS96</code>, <code>plot_SBS192</code>, <code>plot_DBS78</code>, <code>plot_ID83</code>, <code>plot_ID166</code>).</li>
+<li>Added <code>development/regenerate_readme_figures.R</code> for rebuilding the <code>man/figures/example_*.png</code> set after visual changes.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.0" id="msigplot-200">mSigPlot 2.0.0<a class="anchor" aria-label="anchor" href="#msigplot-200"></a></h2>
 <ul><li>Remove all deprecated functionality</li>

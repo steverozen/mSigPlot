@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.33</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
 </h2>
 <p>Every plot function accepts a numeric vector, single-column data.frame, matrix, tibble, or data.table. The easiest entry point is <code><a href="reference/plot_guess.html">plot_guess()</a></code>, which auto-detects the catalog type by row count:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://steverozen.github.io/" class="external-link">mSigPlot</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://steverozen.github.io/mSigPlot">mSigPlot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Auto-detect and plot</span></span>
 <span><span class="fu"><a href="reference/plot_guess.html">plot_guess</a></span><span class="op">(</span><span class="va">my_catalog</span><span class="op">)</span></span>
@@ -285,9 +285,9 @@
 <p>Most bar chart functions also accept <code>ylim</code> (y-axis limits), <code>grid</code> (grid lines), and <code>upper</code> (colored class labels above bars). See <code><a href="reference/bar_plots.html">?plot_SBS96</a></code> for the full parameter list.</p>
 </div>
 <div class="section level2">
-<h2 id="row-name-handling">Row name handling<a class="anchor" aria-label="anchor" href="#row-name-handling"></a>
+<h2 id="your-input-must-have-the-expected-row-order">Your input must have the expected row order<a class="anchor" aria-label="anchor" href="#your-input-must-have-the-expected-row-order"></a>
 </h2>
-<p>If your catalog has row names matching the canonical mutation type labels, mSigPlot validates and reorders them automatically. If row names are absent (unnamed vector or sequential integer names), the data is assumed to be in canonical order. Use <code><a href="reference/catalog_row_order.html">catalog_row_order()</a></code> to inspect the expected order for any catalog type:</p>
+<p>If your catalog has row names matching the canonical mutation type labels, mSigPlot validates and reorders them automatically. If row names are absent (unnamed vector or sequential integer names or data from a data.table or tibble), the data is assumed to be in canonical order. If your rows are in an unexpected order you will got nonsensical plots. Use <code><a href="reference/catalog_row_order.html">catalog_row_order()</a></code> to see the expected order for any catalog type:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS96</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "ACAA" "ACCA" "ACGA" "ACTA" "CCAA" "CCCA"</span></span></code></pre></div>

@@ -8,10 +8,11 @@
 <url><loc>https://steverozen.github.io/mSigPlot/index.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/news/index.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/add_peak_labels.html</loc></url>
+<url><loc>https://steverozen.github.io/mSigPlot/reference/add_plot_title.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/bar_plots.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/base_mm.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/catalog_row_order.html</loc></url>
-<url><loc>https://steverozen.github.io/mSigPlot/reference/detect_catalog_type.html</loc></url>
+<url><loc>https://steverozen.github.io/mSigPlot/reference/detect_y_axis_type.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/heatmap_plots.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/index.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/normalize_catalog.html</loc></url>
@@ -19,9 +20,11 @@
 <url><loc>https://steverozen.github.io/mSigPlot/reference/plot_catalog_pdf.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/plot_guess.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/plot_helpers.html</loc></url>
+<url><loc>https://steverozen.github.io/mSigPlot/reference/prepare_indel_data.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/reorder_DBS144_for_plotting.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/reorder_SBS192_for_plotting.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/resolve_show_counts.html</loc></url>
+<url><loc>https://steverozen.github.io/mSigPlot/reference/type_476_indel_type.html</loc></url>
 <url><loc>https://steverozen.github.io/mSigPlot/reference/unstaple_SBS96_rownames.html</loc></url>
 </urlset>
 

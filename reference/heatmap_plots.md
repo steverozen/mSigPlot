@@ -1,7 +1,8 @@
 # plot_DBS136, plot_DBS136_pdf, plot_SBS1536, plot_SBS1536_pdf
 
 Plot functions for SBS and DBS mutational signature catalogs as
-heatmaps. All functions return ggplot2 objects.
+heatmaps. Plot functions return patchwork objects (composites of ggplot2
+panels).
 
 ## Usage
 
@@ -84,17 +85,21 @@ plot_SBS1536_pdf(catalog, filename, ...)
 
 - filename:
 
-  Character. Path to the output PDF file (\\pdf functions only).
+  Character. Path to the output PDF file (`_pdf` functions only).
 
 - ...:
 
-  Additional arguments passed to the underlying plot function (\\pdf
+  Additional arguments passed to the underlying plot function (`_pdf`
   variants only).
 
 ## Value
 
-Plot functions return a ggplot2 object, or NULL with a warning if the
-catalog is invalid (wrong size or row names). PDF functions return NULL
+Plot functions return a patchwork object (a composite of ggplot2
+panels), or NULL with a warning if the catalog is invalid (wrong size or
+row names). Note: adding ggplot2 layers with `+` (e.g. `+ ggtitle()`)
+applies only to the last sub-plot, not the composite; use
+[`patchwork::plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html)
+for titles/captions on the whole composition. PDF functions return NULL
 invisibly (called for side effect of creating a PDF file), or stop with
 an error if the catalog is invalid.
 

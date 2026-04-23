@@ -25,6 +25,9 @@ plot_guess_pdf(catalog, filename, ...)
   - 476 rows: calls
     [`plot_ID476()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 
+  - 288 rows: calls
+    [`plot_SBS288()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+
   - 192 rows: calls
     [`plot_SBS192()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 
@@ -61,8 +64,14 @@ plot_guess_pdf(catalog, filename, ...)
 
 ## Value
 
-`plot_guess()` returns a ggplot object. `plot_guess_pdf()` returns NULL
-invisibly (called for side effect of creating a PDF file).
+`plot_guess()` returns a plot object. The exact class depends on the
+dispatched function: most return a ggplot object; SBS288, DBS136, and
+SBS1536 return patchwork objects. Note: adding ggplot2 layers with `+`
+to a patchwork object (e.g. `+ ggtitle()`) applies only to the last
+sub-plot, not the composite; use
+[`patchwork::plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html)
+instead. `plot_guess_pdf()` returns NULL invisibly (called for side
+effect of creating a PDF file).
 
 ## Details
 
@@ -75,6 +84,7 @@ high-quality PDF rendering.
 
 [`plot_SBS96()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md),
 [`plot_SBS192()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md),
+[`plot_SBS288()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md),
 [`plot_SBS1536()`](https://steverozen.github.io/mSigPlot/reference/heatmap_plots.md),
 [`plot_DBS78()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md),
 [`plot_DBS136()`](https://steverozen.github.io/mSigPlot/reference/heatmap_plots.md),

@@ -1,7 +1,8 @@
 # plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf, plot_ID166, plot_ID166_pdf, plot_ID476, plot_ID476_pdf, plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf, plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192, plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf
 
 Plot functions for SBS, DBS, and indel mutational signature catalogs as
-bar charts. All functions return ggplot2 objects.
+bar charts. Most functions return ggplot2 objects; `plot_SBS288` returns
+a patchwork object.
 
 ## Usage
 
@@ -15,11 +16,13 @@ plot_DBS144(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
+  grid = FALSE
 )
 
 plot_DBS144_pdf(catalog, filename, ...)
@@ -27,21 +30,22 @@ plot_DBS144_pdf(catalog, filename, ...)
 plot_DBS78(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
   count_label_cex = 0.9,
-  class_label_cex = 0.7,
+  class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -52,23 +56,25 @@ plot_DBS78_pdf(catalog, filename, ...)
 plot_ID166(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -81,11 +87,13 @@ plot_ID476(
   plot_title = NULL,
   base_size = 11,
   plot_title_cex = 1,
-  count_label_cex = 0.52,
-  class_label_cex = 0.78,
-  axis_text_x_cex = 0.8,
-  axis_title_x_cex = 0.7,
-  axis_title_y_cex = 0.9,
+  title_outside_plot = FALSE,
+  title_x = 0.4,
+  count_label_cex = 0.9,
+  class_label_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -93,12 +101,13 @@ plot_ID476(
   show_axis_title_y = TRUE,
   show_counts = NULL,
   num_peak_labels = 4,
-  peak_label_cex = 0.52,
+  peak_label_cex = 0.7,
   label_threshold_denominator = 7,
   vline_labels = c(),
   simplify_labels = FALSE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 )
 
 plot_ID476_pdf(catalog, filename, ...)
@@ -108,11 +117,13 @@ plot_ID476_right(
   plot_title = NULL,
   base_size = 11,
   plot_title_cex = 1,
-  count_label_cex = 1.03,
-  class_label_cex = 1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
+  title_outside_plot = FALSE,
+  title_x = 0.4,
+  count_label_cex = 0.9,
+  class_label_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -125,7 +136,8 @@ plot_ID476_right(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 )
 
 plot_ID476_right_pdf(catalog, filename, ...)
@@ -133,7 +145,7 @@ plot_ID476_right_pdf(catalog, filename, ...)
 plot_ID83(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
@@ -141,15 +153,17 @@ plot_ID83(
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  title_x = 0.4,
   count_label_cex = 0.9,
   block_label_cex = 0.65,
   class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
   bottom_label_cex = 0.65,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -168,20 +182,21 @@ plot_ID89(
   ylim = NULL,
   base_size = 11,
   plot_title_cex = 1,
-  count_label_cex = 1.03,
-  block_label_cex = 3,
-  class_label_cex = block_label_cex,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 0.9,
-  axis_title_y_cex = 0.9,
+  title_outside_plot = FALSE,
+  title_x = 0.4,
+  count_label_cex = 0.9,
+  block_label_cex = 0.65,
+  class_label_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
   axis_text_y_cex = 0.7,
   show_counts = NULL,
-  ylab = TRUE,
-  show_extra_top_bar = FALSE,
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
-  stop_at_9 = TRUE
+  stop_at_9 = TRUE,
+  grid = FALSE
 )
 
 plot_ID89_pdf(catalog, filename, ...)
@@ -192,15 +207,17 @@ plot_SBS12(
   abundance = NULL,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
-  axis_text_x_cex = 1,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
+  grid = FALSE
 )
 
 plot_SBS12_pdf(catalog, filename, ...)
@@ -208,21 +225,23 @@ plot_SBS12_pdf(catalog, filename, ...)
 plot_SBS192(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  title_x = 0,
   count_label_cex = 0.9,
-  class_label_cex = 0.9,
+  class_label_cex = 0.8,
   axis_text_x_cex = 0.5,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -230,26 +249,36 @@ plot_SBS192(
 
 plot_SBS192_pdf(catalog, filename, ...)
 
-plot_SBS288(catalog, plot_title = NULL, ...)
+plot_SBS288(
+  catalog,
+  plot_title = NULL,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  ...
+)
+
+plot_SBS288_pdf(catalog, filename, ...)
 
 plot_SBS96(
   catalog,
   plot_title = NULL,
-  grid = TRUE,
+  grid = FALSE,
   upper = TRUE,
   show_axis_text_x = TRUE,
   show_axis_text_y = TRUE,
-  show_axis_title_x = TRUE,
+  show_axis_title_x = FALSE,
   show_axis_title_y = TRUE,
   ylim = NULL,
   base_size = 11,
-  plot_title_cex = 0.8,
+  plot_title_cex = 1,
+  title_outside_plot = FALSE,
+  title_x = 0,
   count_label_cex = 0.9,
-  class_label_cex = 1.1,
-  axis_text_x_cex = 0.7,
-  axis_title_x_cex = 1,
-  axis_title_y_cex = 1,
-  axis_text_y_cex = 0.8,
+  class_label_cex = 0.8,
+  axis_text_x_cex = 0.5,
+  axis_title_x_cex = 0.8,
+  axis_title_y_cex = 0.8,
+  axis_text_y_cex = 0.7,
   show_counts = NULL,
   num_peak_labels = 0,
   peak_label_cex = 0.7
@@ -299,14 +328,23 @@ plot_SBS96_pdf(catalog, filename, ...)
 
   Numeric. Multiplier for the plot title size.
 
+- title_outside_plot:
+
+  Logical. If FALSE (the default), the title is drawn inside the plot
+  panel as an annotation (the `plot_ID83` style). If TRUE, the title is
+  drawn above the panel via `ggtitle()`. For `plot_SBS288`, TRUE places
+  the overall title above the 3-panel composite via
+  [`patchwork::plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html);
+  FALSE prepends the title to each strand label ("Template",
+  "Non-template", "Not-transcribed").
+
 - axis_text_x_cex:
 
   Numeric. Multiplier for x-axis labels.
 
 - axis_title_x_cex:
 
-  Numeric. Multiplier for x-axis title size. Currently has no effect in
-  some functions.
+  Numeric. Multiplier for x-axis title size.
 
 - axis_title_y_cex:
 
@@ -316,25 +354,29 @@ plot_SBS96_pdf(catalog, filename, ...)
 
   Numeric. Multiplier for the y-axis tick label size.
 
+- grid:
+
+  Logical, draw horizontal grid lines at `seq(0, ymax, ymax/4)` over the
+  data region. Available in all bar-plot functions except `plot_SBS288`
+  (which forwards `grid` to its three `plot_SBS96` panels via `...`).
+
 - filename:
 
-  Character. Path to the output PDF file (\\pdf functions only).
+  Character. Path to the output PDF file (`_pdf` functions only).
 
 - ...:
 
   Additional arguments passed to `plot_SBS96()` (`plot_SBS288` only).
 
-- grid:
-
-  Logical, draw grid lines.
-
 - upper:
 
-  Logical, draw colored class rectangles and labels above bars.
+  Logical, draw colored class rectangles and labels above bars (not
+  available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`).
 
 - count_label_cex:
 
-  Numeric. Multiplier for per-class count labels.
+  Numeric. Multiplier for per-class count labels (not available in
+  `plot_DBS144`, `plot_SBS12`).
 
 - class_label_cex:
 
@@ -344,15 +386,28 @@ plot_SBS96_pdf(catalog, filename, ...)
 
   Logical or NULL. If `TRUE`, always display per-class count labels. If
   `FALSE`, never display them. If `NULL` (the default), display them
-  only when the catalog contains counts (sum \> 1.1).
+  only when the catalog contains counts (sum \> 1.1). Not available in
+  `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
 
 - num_peak_labels:
 
-  Integer. Number of top peaks to label (0 = none).
+  Integer. Number of top peaks to label (0 = none). Not available in
+  `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
 
 - peak_label_cex:
 
   Numeric. Size multiplier for peak labels.
+
+- title_x:
+
+  Numeric fraction in 0, 1 giving the horizontal position of the
+  inside-panel title, as a fraction of the plot's bar range (0 = left
+  edge, 1 = right edge). Ignored when `title_outside_plot = TRUE`.
+  Default is 0 (far left) for SBS plots and 0.4 (a bit left of center)
+  for ID plots, where the far-left corner often collides with ggrepel
+  peak labels. Only available in `plot_SBS96`, `plot_SBS192`,
+  `plot_ID83`, `plot_ID89`, `plot_ID166`, `plot_ID476`,
+  `plot_ID476_right`.
 
 - block_label_cex:
 
@@ -389,17 +444,6 @@ plot_SBS96_pdf(catalog, filename, ...)
   Logical. If TRUE, cap repeat length labels at 9 (`plot_ID89`,
   `plot_ID476`, `plot_ID476_right` only).
 
-- ylab:
-
-  Y-axis label control (`plot_ID89` only). `TRUE` (default) auto-detects
-  from data. A character string overrides the label. `NULL` or `FALSE`
-  suppresses the y-axis title.
-
-- show_extra_top_bar:
-
-  Logical. Display an extra summary bar above the category bar
-  (`plot_ID89` only).
-
 - abundance:
 
   Numeric vector of per-class abundances for strand bias testing
@@ -407,10 +451,11 @@ plot_SBS96_pdf(catalog, filename, ...)
 
 ## Value
 
-Plot functions return a ggplot2 object, or NULL with a warning if the
-catalog is invalid (wrong size or row names). PDF functions return NULL
-invisibly (called for side effect of creating a PDF file), or stop with
-an error if the catalog is invalid.
+Plot functions return a ggplot2 object (or a patchwork object for
+`plot_SBS288`), or NULL with a warning if the catalog is invalid (wrong
+size or row names). PDF functions return NULL invisibly (called for side
+effect of creating a PDF file), or stop with an error if the catalog is
+invalid.
 
 ## Details
 
@@ -487,6 +532,11 @@ sig <- runif(89)
 sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID89
 plot_ID89(sig, plot_title = "Example ID89")
+
+
+# Label the top 5 peaks on the axis.
+plot_ID89(sig, plot_title = "Example ID89 with peak labels",
+          num_peak_labels = 5)
 
 
 set.seed(1)

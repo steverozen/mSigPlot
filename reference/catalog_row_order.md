@@ -15,6 +15,19 @@ catalog_row_order()
 A named list with elements: SBS96, SBS192, SBS288, SBS1536, DBS78,
 DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
 
+## Details
+
+Row names use a compact 4-letter format for SBS types: e.g. `ACAA`
+encodes the trinucleotide context as `<5' base><ref><3' base><alt>`.
+SBS288 row names add a strand prefix: `T:ACAA` (transcribed), `U:ACAA`
+(untranscribed), `N:ACAA` (non-transcribed).
+
+Catalogs with "stapled" row names (e.g. `A[C>A]A` for SBS96, `T:A[C>A]A`
+for SBS288) are automatically converted to compact format by
+[`normalize_catalog()`](https://steverozen.github.io/mSigPlot/reference/normalize_catalog.md)
+before validation, so both formats are accepted by all SBS plotting
+functions. (Only SBS functions use stapled row names.)
+
 ## Examples
 
 ``` r

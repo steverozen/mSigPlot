@@ -150,14 +150,15 @@ Most bar chart functions also accept `ylim` (y-axis limits), `grid`
 [`?plot_SBS96`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
 for the full parameter list.
 
-## Row name handling
+## Your input must have the expected row order
 
 If your catalog has row names matching the canonical mutation type
 labels, mSigPlot validates and reorders them automatically. If row names
-are absent (unnamed vector or sequential integer names), the data is
-assumed to be in canonical order. Use
+are absent (unnamed vector or sequential integer names or data from a
+data.table or tibble), the data is assumed to be in canonical order. If
+your rows are in an unexpected order you will got nonsensical plots. Use
 [`catalog_row_order()`](https://steverozen.github.io/mSigPlot/reference/catalog_row_order.md)
-to inspect the expected order for any catalog type:
+to see the expected order for any catalog type:
 
 ``` r
 head(catalog_row_order()$SBS96)

@@ -35,6 +35,7 @@ context).
   [`plot_SBS192()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS192_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS288()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  [`plot_SBS288_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS96()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   : plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf,
@@ -72,6 +73,7 @@ plots, 136-channel heatmaps, and 144-channel strand-aware bar plots.
   [`plot_SBS192()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS192_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS288()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  [`plot_SBS288_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS96()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   : plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf,
@@ -110,6 +112,7 @@ base context).
   [`plot_SBS192()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS192_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS288()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  [`plot_SBS288_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS96()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   [`plot_SBS96_pdf()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   : plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf,

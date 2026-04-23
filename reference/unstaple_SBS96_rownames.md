@@ -1,17 +1,21 @@
-# Convert SBS96-channel mutations-type identifiers like this `"A[C>A]T" -> "ACTA"`
+# Convert stapled SBS96 row names to compact format
 
-Convert SBS96-channel mutations-type identifiers like this
-`"A[C>A]T" -> "ACTA"`
+Converts names like `"A[C>A]T"` to `"ACTA"` (compact
+`<5' base><ref><3' base><alt>` format).
 
 ## Usage
 
 ``` r
-unstaple_SBS96_rownames(c1)
+unstaple_SBS96_rownames(stapled_names)
 ```
 
 ## Arguments
 
-- c1:
+- stapled_names:
 
-  A vector of character strings with the mutation indicated by e.g.
-  `[C>A]` in the middle.
+  Character vector of stapled mutation type identifiers (e.g.
+  `"A[C>A]T"`).
+
+## Value
+
+Character vector of compact 4-letter identifiers.
