@@ -77,8 +77,6 @@
 #'   vertical reference lines (`plot_ID476`, `plot_ID476_right` only).
 #' @param simplify_labels Logical. Simplify peak labels by removing
 #'   the indel type prefix (`plot_ID476`, `plot_ID476_right` only).
-#' @param stop_at_9 Logical. If TRUE, cap repeat length labels at 9
-#'   (`plot_ID89`, `plot_ID476`, `plot_ID476_right` only).
 #' @param ... Additional arguments passed to `plot_SBS96()` (`plot_SBS288` only).
 #'
 #' @return Plot functions return a ggplot2 object (or a patchwork object for

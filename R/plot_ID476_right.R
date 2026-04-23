@@ -35,7 +35,6 @@ plot_ID476_right <- function(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  stop_at_9 = FALSE,
   grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476")

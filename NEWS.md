@@ -1,3 +1,13 @@
+# mSigPlot 2.0.34
+
+* Removed the `stop_at_9` argument from `plot_ID89()`, `plot_ID476()`, and
+  `plot_ID476_right()`. The package now always uses the "open" `(N+)`
+  repeat-tract label style; users who needed the old `(N-9)` capped style
+  should recognise that their upstream indel classifications may have been
+  trimmed at 9. In `plot_ID89()` the flag is kept as an internal constant
+  (`stop_at_9 <- FALSE`); in the two ID476 variants it was unused and has
+  been dropped cleanly.
+
 # mSigPlot 2.0.33
 
 * Refactored `plot_ID89()`: the internal `IndelType` column now derives from

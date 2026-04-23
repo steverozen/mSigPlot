@@ -57,7 +57,6 @@ plot_ID89 <- function(
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
-  stop_at_9 = FALSE,
   grid = FALSE
 ) {
   catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
@@ -188,6 +187,7 @@ plot_ID89 <- function(
   top_bar_mult <- if (num_peak_labels > 0) c(1.25, 1.37) else c(1.08, 1.2)
   blocks$ymin <- ymax * top_bar_mult[1]
   blocks$ymax <- ymax * top_bar_mult[2]
+  stop_at_9 <- FALSE
   del_t_8_label <- if (stop_at_9) "Del 1 T (8-9)" else "Del 1 T (8+)"
   ins_t_8_label <- if (stop_at_9) "Ins 1 T (8-9)" else "Ins 1 T (8+)"
   blocks$labels <- c(
