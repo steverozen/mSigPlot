@@ -1,9 +1,9 @@
 # Derive ID89 axis Figlabel strings from the canonical IndelType names.
 # Single-base channels (Del(C), Del(T), Ins(C), Ins(T)): drop the Del(..)/Ins(..)
-# wrapper and the ":R" prefix, then pad trailing open-ended repeat ranges
-# "(N,)" to "(N,9)". Multi-base channels (longer Del/Ins/MH): rewrite leading
-# "Del("/"Ins(" to "L(", space-pad the leading length "(N,)" to "(N, )", 9-pad a
-# trailing "R(N,)" to "R(N,9)", and space-pad a trailing "M(N,)" to "M(N, )".
+# wrapper and the ":R" prefix, then rewrite open-ended repeat ranges "(N,)" as
+# "(N+)". Multi-base channels (longer Del/Ins/MH): rewrite leading "Del("/"Ins("
+# to "L(", space-pad the leading length "(N,)" to "(N, )", rewrite a trailing
+# "R(N,)" as "R(N+)", and space-pad a trailing "M(N,)" to "M(N, )".
 id89_figlabels <- function(indel_types) {
   x <- indel_types
   is_single <- grepl("(Del|Ins)\\([CT]\\)", x)
