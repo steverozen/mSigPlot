@@ -1,3 +1,23 @@
+# mSigPlot 2.0.33
+
+* Refactored `plot_ID89()`: the internal `IndelType` column now derives from
+  `catalog_row_order()$ID89` instead of an inline 89-element literal, giving
+  a single source of truth for channel names.
+* New internal helper `id89_figlabels()` derives x-axis tick labels
+  algorithmically from the canonical `IndelType` strings. Open-ended repeat
+  tracts are rendered as `(N+)` (e.g. `T(8+)`, `C(7+)`, `R(5+)`) rather than
+  the former `(8,9)` / `(7,9)` notation; sub-block bracket labels also use
+  the `(N+)` style.
+* Removed the unused `Indel3` column from `plot_ID89()` and from
+  `type_476_indel_type()` (never read).
+* Changed `stop_at_9` default in `plot_ID89()` from `TRUE` to `FALSE`; the
+  plot data is unchanged, but `(8+)` now communicates that the user must
+  know their upstream trimming.
+* Added a peak-label regression test (`plot_ID89 with peak labels`) and a
+  corresponding `plot_ID89_peaks` entry in `tests/visual/`.
+* Re-blessed regression hashes and visual reference PNGs for `plot_ID89`
+  and `plot_ID89_peaks` to match the new label style.
+
 # mSigPlot 2.0.2
 
 * Unified `plot_title_cex` default at `1.0` and `axis_*_cex` defaults
