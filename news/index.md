@@ -1,5 +1,20 @@
 # Changelog
 
+## mSigPlot 2.0.34
+
+- Removed the `stop_at_9` argument from
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md),
+  [`plot_ID476()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md),
+  and
+  [`plot_ID476_right()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md).
+  The package now always uses the “open” `(N+)` repeat-tract label
+  style; users who needed the old `(N-9)` capped style should recognise
+  that their upstream indel classifications may have been trimmed at 9.
+  In
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  the flag is kept as an internal constant (`stop_at_9 <- FALSE`); in
+  the two ID476 variants it was unused and has been dropped cleanly.
+
 ## mSigPlot 2.0.33
 
 - Refactored

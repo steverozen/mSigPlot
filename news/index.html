@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.33</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.34</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,10 @@
       <small>Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.34" id="msigplot-2034">mSigPlot 2.0.34<a class="anchor" aria-label="anchor" href="#msigplot-2034"></a></h2>
+<ul><li>Removed the <code>stop_at_9</code> argument from <code><a href="../reference/bar_plots.html">plot_ID89()</a></code>, <code><a href="../reference/bar_plots.html">plot_ID476()</a></code>, and <code><a href="../reference/bar_plots.html">plot_ID476_right()</a></code>. The package now always uses the “open” <code>(N+)</code> repeat-tract label style; users who needed the old <code>(N-9)</code> capped style should recognise that their upstream indel classifications may have been trimmed at 9. In <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> the flag is kept as an internal constant (<code>stop_at_9 &lt;- FALSE</code>); in the two ID476 variants it was unused and has been dropped cleanly.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.33" id="msigplot-2033">mSigPlot 2.0.33<a class="anchor" aria-label="anchor" href="#msigplot-2033"></a></h2>
 <ul><li>Refactored <code><a href="../reference/bar_plots.html">plot_ID89()</a></code>: the internal <code>IndelType</code> column now derives from <code>catalog_row_order()$ID89</code> instead of an inline 89-element literal, giving a single source of truth for channel names.</li>

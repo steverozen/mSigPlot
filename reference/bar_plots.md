@@ -106,7 +106,6 @@ plot_ID476(
   vline_labels = c(),
   simplify_labels = FALSE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE,
   grid = FALSE
 )
 
@@ -136,7 +135,6 @@ plot_ID476_right(
   vline_labels = c(),
   simplify_labels = TRUE,
   plot_complex = FALSE,
-  stop_at_9 = TRUE,
   grid = FALSE
 )
 
@@ -195,7 +193,6 @@ plot_ID89(
   plot_complex = FALSE,
   num_peak_labels = 0,
   peak_label_cex = 0.7,
-  stop_at_9 = TRUE,
   grid = FALSE
 )
 
@@ -439,11 +436,6 @@ plot_SBS96_pdf(catalog, filename, ...)
   Logical. Include Complex indel channels (`plot_ID89`, `plot_ID476`,
   `plot_ID476_right` only).
 
-- stop_at_9:
-
-  Logical. If TRUE, cap repeat length labels at 9 (`plot_ID89`,
-  `plot_ID476`, `plot_ID476_right` only).
-
 - abundance:
 
   Numeric vector of per-class abundances for strand bias testing
@@ -532,11 +524,6 @@ sig <- runif(89)
 sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID89
 plot_ID89(sig, plot_title = "Example ID89")
-
-
-# Label the top 5 peaks on the axis.
-plot_ID89(sig, plot_title = "Example ID89 with peak labels",
-          num_peak_labels = 5)
 
 
 set.seed(1)
