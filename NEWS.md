@@ -5,6 +5,11 @@
   `Description` to not start with the package name, added trailing slash
   to the pkgdown site URL, and restored the `ubuntu-latest / oldrel-1`
   row to the R-CMD-check GitHub Actions matrix.
+* Wrapped the `plot_ID476`, `plot_ID476_right`, and `plot_SBS1536`
+  examples in `\donttest{}` so the shared `bar_plots` and
+  `heatmap_plots` Rd pages run in under the CRAN 5-second-per-Rd
+  example-runtime limit. The examples are unchanged and remain
+  user-runnable via `example(plot_ID476, run.donttest = TRUE)`.
 
 # mSigPlot 2.0.35
 

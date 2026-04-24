@@ -18,3 +18,4 @@
 ^tests/visual$
 ^doc$
 ^Meta$
+^cran-comments\.md$

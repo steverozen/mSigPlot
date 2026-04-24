@@ -1,11 +1,13 @@
 #' @rdname heatmap_plots
 #'
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' sig <- runif(1536)
 #' sig <- sig / sum(sig)
 #' names(sig) <- catalog_row_order()$SBS1536
 #' plot_SBS1536(sig, plot_title = "Example SBS1536")
+#' }
 #'
 #' @export
 #'

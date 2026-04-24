@@ -448,17 +448,21 @@ sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID166
 plot_ID166(sig, plot_title = "Example ID166 signature")
 
+\donttest{
 set.seed(1)
 sig <- runif(476)
 sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID476
 plot_ID476(sig, plot_title = "Example ID476")
+}
 
+\donttest{
 set.seed(1)
 sig <- runif(476)
 sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID476
 plot_ID476_right(sig, plot_title = "Example ID476 right panel")
+}
 
 set.seed(1)
 sig <- runif(83)

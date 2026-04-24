@@ -1,11 +1,13 @@
 #' @rdname bar_plots
 #'
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' sig <- runif(476)
 #' sig <- sig / sum(sig)
 #' names(sig) <- catalog_row_order()$ID476
 #' plot_ID476(sig, plot_title = "Example ID476")
+#' }
 #'
 #' @export
 #'

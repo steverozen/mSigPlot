@@ -18,3 +18,8 @@ tests/visual/new/*.png
 
 # Default-device output from interactive R sessions and tests
 Rplots.pdf
+
+# R CMD check / devtools::check output directory
+*.Rcheck/
+# Built source tarballs
+*.tar.gz
