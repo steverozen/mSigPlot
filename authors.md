@@ -9,13 +9,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/steverozen/mSigPlot/blob/main/DESCRIPTION)
 
-Rozen S (2026). *mSigPlot: Mutational signature plotting functions*. R
-package version 2.0.36, <https://steverozen.github.io/mSigPlot>.
+Rozen S (2026). *mSigPlot: Plotting Mutational Signatures and Mutational
+Spectra*. R package version 2.0.36,
+<https://steverozen.github.io/mSigPlot/>.
 
     @Manual{,
-      title = {mSigPlot: Mutational signature plotting functions},
+      title = {mSigPlot: Plotting Mutational Signatures and Mutational Spectra},
       author = {Steven Rozen},
       year = {2026},
       note = {R package version 2.0.36},
-      url = {https://steverozen.github.io/mSigPlot},
+      url = {https://steverozen.github.io/mSigPlot/},
     }
