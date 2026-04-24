@@ -1,3 +1,13 @@
+# mSigPlot 2.0.35
+
+* Moved `id89_figlabels()` from `R/plot_ID89.R` to its own file
+  (`R/id89_figlabels.R`) and exported it.
+* Multi-base ID89 figure labels no longer contain colons
+  (e.g. `Del(2,):R(5,)` is now rendered as `L(2, )R(5+)` instead of
+  `L(2, ):R(5+)`). Re-blessed regression hashes and visual reference
+  PNGs for `plot_ID89` / `plot_ID89_peaks`, and regenerated the
+  README `example_ID89.png`.
+
 # mSigPlot 2.0.34
 
 * Removed the `stop_at_9` argument from `plot_ID89()`, `plot_ID476()`, and
