@@ -327,10 +327,10 @@ plot_SBS96_pdf(catalog, filename, ...)
 
 - title_outside_plot:
 
-  Logical. If FALSE (the default), the title is drawn inside the plot
-  panel as an annotation (the `plot_ID83` style). If TRUE, the title is
-  drawn above the panel via `ggtitle()`. For `plot_SBS288`, TRUE places
-  the overall title above the 3-panel composite via
+  Logical. If FALSE, the title is drawn inside the plot panel as an
+  annotation (the `plot_ID83` style). If TRUE, the title is drawn above
+  the panel via `ggtitle()`. For `plot_SBS288`, TRUE places the overall
+  title above the 3-panel composite via
   [`patchwork::plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html);
   FALSE prepends the title to each strand label ("Template",
   "Non-template", "Not-transcribed").
@@ -382,9 +382,9 @@ plot_SBS96_pdf(catalog, filename, ...)
 - show_counts:
 
   Logical or NULL. If `TRUE`, always display per-class count labels. If
-  `FALSE`, never display them. If `NULL` (the default), display them
-  only when the catalog contains counts (sum \> 1.1). Not available in
-  `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
+  `FALSE`, never display them. If `NULL`, display them only when the
+  catalog contains counts (sum \> 1.1). Not available in `plot_DBS144`,
+  `plot_SBS12`, `plot_SBS288`.
 
 - num_peak_labels:
 
@@ -397,7 +397,7 @@ plot_SBS96_pdf(catalog, filename, ...)
 
 - title_x:
 
-  Numeric fraction in 0, 1 giving the horizontal position of the
+  Numeric fraction in \[0, 1\] giving the horizontal position of the
   inside-panel title, as a fraction of the plot's bar range (0 = left
   edge, 1 = right edge). Ignored when `title_outside_plot = TRUE`.
   Default is 0 (far left) for SBS plots and 0.4 (a bit left of center)

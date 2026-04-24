@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.34</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.36</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +35,22 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.36" id="msigplot-2036">mSigPlot 2.0.36<a class="anchor" aria-label="anchor" href="#msigplot-2036"></a></h2>
+<ul><li>Minor adjustments to plot_ID89 x axis text</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.35" id="msigplot-2035">mSigPlot 2.0.35<a class="anchor" aria-label="anchor" href="#msigplot-2035"></a></h2>
+<ul><li>Moved <code><a href="../reference/id89_figlabels.html">id89_figlabels()</a></code> from <code>R/plot_ID89.R</code> to its own file (<code>R/id89_figlabels.R</code>) and exported it.</li>
+<li>Multi-base ID89 figure labels no longer contain colons (e.g. <code>Del(2,):R(5,)</code> is now rendered as <code>L(2, )R(5+)</code> instead of <code>L(2, ):R(5+)</code>). Re-blessed regression hashes and visual reference PNGs for <code>plot_ID89</code> / <code>plot_ID89_peaks</code>, and regenerated the README <code>example_ID89.png</code>.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.34" id="msigplot-2034">mSigPlot 2.0.34<a class="anchor" aria-label="anchor" href="#msigplot-2034"></a></h2>
 <ul><li>Removed the <code>stop_at_9</code> argument from <code><a href="../reference/bar_plots.html">plot_ID89()</a></code>, <code><a href="../reference/bar_plots.html">plot_ID476()</a></code>, and <code><a href="../reference/bar_plots.html">plot_ID476_right()</a></code>. The package now always uses the “open” <code>(N+)</code> repeat-tract label style; users who needed the old <code>(N-9)</code> capped style should recognise that their upstream indel classifications may have been trimmed at 9. In <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> the flag is kept as an internal constant (<code>stop_at_9 &lt;- FALSE</code>); in the two ID476 variants it was unused and has been dropped cleanly.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.33" id="msigplot-2033">mSigPlot 2.0.33<a class="anchor" aria-label="anchor" href="#msigplot-2033"></a></h2>
 <ul><li>Refactored <code><a href="../reference/bar_plots.html">plot_ID89()</a></code>: the internal <code>IndelType</code> column now derives from <code>catalog_row_order()$ID89</code> instead of an inline 89-element literal, giving a single source of truth for channel names.</li>
-<li>New internal helper <code>id89_figlabels()</code> derives x-axis tick labels algorithmically from the canonical <code>IndelType</code> strings. Open-ended repeat tracts are rendered as <code>(N+)</code> (e.g. <code>T(8+)</code>, <code>C(7+)</code>, <code>R(5+)</code>) rather than the former <code>(8,9)</code> / <code>(7,9)</code> notation; sub-block bracket labels also use the <code>(N+)</code> style.</li>
+<li>New internal helper <code><a href="../reference/id89_figlabels.html">id89_figlabels()</a></code> derives x-axis tick labels algorithmically from the canonical <code>IndelType</code> strings. Open-ended repeat tracts are rendered as <code>(N+)</code> (e.g. <code>T(8+)</code>, <code>C(7+)</code>, <code>R(5+)</code>) rather than the former <code>(8,9)</code> / <code>(7,9)</code> notation; sub-block bracket labels also use the <code>(N+)</code> style.</li>
 <li>Removed the unused <code>Indel3</code> column from <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> and from <code><a href="../reference/type_476_indel_type.html">type_476_indel_type()</a></code> (never read).</li>
 <li>Changed <code>stop_at_9</code> default in <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> from <code>TRUE</code> to <code>FALSE</code>; the plot data is unchanged, but <code>(8+)</code> now communicates that the user must know their upstream trimming.</li>
 <li>Added a peak-label regression test (<code>plot_ID89 with peak labels</code>) and a corresponding <code>plot_ID89_peaks</code> entry in <code>tests/visual/</code>.</li>

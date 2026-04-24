@@ -308,6 +308,8 @@ Helper functions for working with catalog data.
 
 - [`catalog_row_order()`](https://steverozen.github.io/mSigPlot/reference/catalog_row_order.md)
   : Return catalog row orders for all supported catalog types
+- [`id89_figlabels()`](https://steverozen.github.io/mSigPlot/reference/id89_figlabels.md)
+  : Derive ID89 figure-axis labels from canonical IndelType strings
 
 # Articles
 

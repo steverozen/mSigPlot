@@ -1,5 +1,21 @@
 # Changelog
 
+## mSigPlot 2.0.36
+
+- Minor adjustments to plot_ID89 x axis text
+
+## mSigPlot 2.0.35
+
+- Moved
+  [`id89_figlabels()`](https://steverozen.github.io/mSigPlot/reference/id89_figlabels.md)
+  from `R/plot_ID89.R` to its own file (`R/id89_figlabels.R`) and
+  exported it.
+- Multi-base ID89 figure labels no longer contain colons
+  (e.g. `Del(2,):R(5,)` is now rendered as `L(2, )R(5+)` instead of
+  `L(2, ):R(5+)`). Re-blessed regression hashes and visual reference
+  PNGs for `plot_ID89` / `plot_ID89_peaks`, and regenerated the README
+  `example_ID89.png`.
+
 ## mSigPlot 2.0.34
 
 - Removed the `stop_at_9` argument from
@@ -22,11 +38,12 @@
   the internal `IndelType` column now derives from
   `catalog_row_order()$ID89` instead of an inline 89-element literal,
   giving a single source of truth for channel names.
-- New internal helper `id89_figlabels()` derives x-axis tick labels
-  algorithmically from the canonical `IndelType` strings. Open-ended
-  repeat tracts are rendered as `(N+)` (e.g. `T(8+)`, `C(7+)`, `R(5+)`)
-  rather than the former `(8,9)` / `(7,9)` notation; sub-block bracket
-  labels also use the `(N+)` style.
+- New internal helper
+  [`id89_figlabels()`](https://steverozen.github.io/mSigPlot/reference/id89_figlabels.md)
+  derives x-axis tick labels algorithmically from the canonical
+  `IndelType` strings. Open-ended repeat tracts are rendered as `(N+)`
+  (e.g. `T(8+)`, `C(7+)`, `R(5+)`) rather than the former `(8,9)` /
+  `(7,9)` notation; sub-block bracket labels also use the `(N+)` style.
 - Removed the unused `Indel3` column from
   [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   and from

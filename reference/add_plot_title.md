@@ -1,8 +1,8 @@
 # Add a plot title, inside the panel (annotate) or above it (ggtitle)
 
-If `title_outside_plot` is FALSE (the default), places `plot_title`
-inside the plot area via `annotate("text", ...)` at `y = ymax * y_frac`
-— the `plot_ID83` style. If TRUE, places it above the plot via
+If `title_outside_plot` is FALSE, places `plot_title` inside the plot
+area via `annotate("text", ...)` at `y = ymax * y_frac` — the
+`plot_ID83` style. If TRUE, places it above the plot via
 `ggtitle() + theme(plot.title = ...)`. Title size is always
 `plot_title_cex * base_size` (points), normalized to mm for `annotate`.
 
