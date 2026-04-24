@@ -1,14 +1,13 @@
 Package: mSigPlot
-Title: Mutational signature plotting functions
+Title: Plotting Mutational Signatures and Mutational Spectra
 Version: 2.0.36
 Authors@R: 
     person("Steven", "Rozen", , "steverozen@pm.me", role = c("aut", "cre"))
-Description: mSigPlot stands for Mutational Signature Plotting. Provides
-   functions for mutational signatures and mutational spectra including 
-   single base substitutions (SBS), doublet base substitutions (DBS), and
-   small insertions and deletions (indels).
+Description: Plotting functions for mutational signatures and mutational
+    spectra, including single base substitutions ('SBS'), doublet base
+    substitutions ('DBS'), and small insertions and deletions (indels).
 License: GPL (>= 3)
-URL: https://steverozen.github.io/mSigPlot,
+URL: https://steverozen.github.io/mSigPlot/,
     https://github.com/steverozen/mSigPlot
 BugReports: https://github.com/steverozen/mSigPlot/issues
 Imports: Cairo,

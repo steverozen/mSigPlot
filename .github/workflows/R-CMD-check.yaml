@@ -23,7 +23,7 @@ jobs:
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-22.04,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release'}
-          # oldrel-1 removed: ggrepel now requires R >= 4.5.0
+          - {os: ubuntu-latest,  r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

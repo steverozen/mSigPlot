@@ -1,6 +1,10 @@
 # mSigPlot 2.0.36
 
 * Minor adjustments to plot_ID89 x axis text
+* CRAN submission prep: revised `Title` to title case, reworded
+  `Description` to not start with the package name, added trailing slash
+  to the pkgdown site URL, and restored the `ubuntu-latest / oldrel-1`
+  row to the R-CMD-check GitHub Actions matrix.
 
 # mSigPlot 2.0.35
 
