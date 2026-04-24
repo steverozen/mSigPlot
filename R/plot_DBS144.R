@@ -31,13 +31,13 @@
 #' @param ylim Optional y-axis limits.
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
-#' @param title_outside_plot Logical. If FALSE (the default), the title is
+#' @param title_outside_plot Logical. If FALSE, the title is
 #'   drawn inside the plot panel as an annotation (the `plot_ID83` style).
 #'   If TRUE, the title is drawn above the panel via `ggtitle()`. For
 #'   `plot_SBS288`, TRUE places the overall title above the 3-panel
 #'   composite via `patchwork::plot_annotation()`; FALSE prepends the title
 #'   to each strand label ("Template", "Non-template", "Not-transcribed").
-#' @param title_x Numeric fraction in [0, 1] giving the horizontal position
+#' @param title_x Numeric fraction in \[0, 1\] giving the horizontal position
 #'   of the inside-panel title, as a fraction of the plot's bar range
 #'   (0 = left edge, 1 = right edge). Ignored when `title_outside_plot = TRUE`.
 #'   Default is 0 (far left) for SBS plots and 0.4 (a bit left of center)
@@ -60,7 +60,7 @@
 #' @param show_axis_title_x Logical. If FALSE, hide the x-axis title.
 #' @param show_axis_title_y Logical. If FALSE, hide the y-axis title.
 #' @param show_counts Logical or NULL. If `TRUE`, always display per-class
-#'   count labels. If `FALSE`, never display them. If `NULL` (the default),
+#'   count labels. If `FALSE`, never display them. If `NULL`,
 #'   display them only when the catalog contains counts (sum > 1.1).
 #'   Not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`.
 #' @param abundance Numeric vector of per-class abundances for strand bias
@@ -117,9 +117,18 @@ plot_DBS144 <- function(
   axis_text_y_cex = 0.7,
   grid = FALSE
 ) {
-  catalog <- normalize_catalog(catalog, 144, catalog_row_order()$DBS144, "DBS144")
-  if (is.null(catalog)) return(NULL)
-  if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""
+  catalog <- normalize_catalog(
+    catalog,
+    144,
+    catalog_row_order()$DBS144,
+    "DBS144"
+  )
+  if (is.null(catalog)) {
+    return(NULL)
+  }
+  if (is.null(plot_title)) {
+    plot_title <- colnames(catalog)[1] %||% ""
+  }
 
   base_mm <- base_mm(base_size)
 
@@ -131,7 +140,10 @@ plot_DBS144 <- function(
   cat_reordered <- catalog[reorder, 1]
 
   # Detect catalog type
-  catalog_type <- detect_y_axis_type(catalog[, 1], attributes(catalog)$y_axis_type_attr)
+  catalog_type <- detect_y_axis_type(
+    catalog[, 1],
+    attributes(catalog)$y_axis_type_attr
+  )
 
   # Collapse 132 entries into 20 bars (10 classes x 2 strands)
   # Class boundaries within the 132-entry reordered vector:
@@ -152,8 +164,11 @@ plot_DBS144 <- function(
     ymax <- 4 * ceiling(max(max(counts_strand) * 1.3, 10) / 4)
     ylabel <- "Counts"
   } else {
-    ylabel <- ifelse(catalog_type == "proportion",
-                     "Proportion", "Density Proportion")
+    ylabel <- ifelse(
+      catalog_type == "proportion",
+      "Proportion",
+      "Density Proportion"
+    )
     ymax <- min(max(counts_strand) * 1.3, 1)
   }
 
@@ -208,7 +223,8 @@ plot_DBS144 <- function(
     p <- p + ylab(NULL)
   }
   if (!show_axis_text_y) {
-    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+    p <- p +
+      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
   p <- p + xlab(NULL)
 
@@ -220,26 +236,54 @@ plot_DBS144 <- function(
   }
 
   # Sample name
-  p <- add_plot_title(p, plot_title, title_outside_plot,
-                      plot_title_cex, base_size, ymax, x = 1)
+  p <- add_plot_title(
+    p,
+    plot_title,
+    title_outside_plot,
+    plot_title_cex,
+    base_size,
+    ymax,
+    x = 1
+  )
 
   # Legend
   p <- p +
-    annotate("rect", xmin = 8, xmax = 8.5,
-             ymin = ymax * 0.92, ymax = ymax * 0.97,
-             fill = strand_col[1]) +
-    annotate("rect", xmin = 8, xmax = 8.5,
-             ymin = ymax * 0.84, ymax = ymax * 0.89,
-             fill = strand_col[2]) +
-    annotate("text", x = 8.7, y = ymax * 0.945,
-             label = "Transcribed strand", hjust = 0,
-             size = plot_title_cex * base_mm * 0.8) +
-    annotate("text", x = 8.7, y = ymax * 0.865,
-             label = "Untranscribed strand", hjust = 0,
-             size = plot_title_cex * base_mm * 0.8)
+    annotate(
+      "rect",
+      xmin = 8,
+      xmax = 8.5,
+      ymin = ymax * 0.92,
+      ymax = ymax * 0.97,
+      fill = strand_col[1]
+    ) +
+    annotate(
+      "rect",
+      xmin = 8,
+      xmax = 8.5,
+      ymin = ymax * 0.84,
+      ymax = ymax * 0.89,
+      fill = strand_col[2]
+    ) +
+    annotate(
+      "text",
+      x = 8.7,
+      y = ymax * 0.945,
+      label = "Transcribed strand",
+      hjust = 0,
+      size = plot_title_cex * base_mm * 0.8
+    ) +
+    annotate(
+      "text",
+      x = 8.7,
+      y = ymax * 0.865,
+      label = "Untranscribed strand",
+      hjust = 0,
+      size = plot_title_cex * base_mm * 0.8
+    )
 
   if (!show_axis_text_x) {
-    p <- p + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+    p <- p +
+      theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
   }
 
   return(p)

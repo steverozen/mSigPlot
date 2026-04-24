@@ -40,7 +40,7 @@ inside title. Ignored when \code{title_outside_plot = TRUE}.}
 The ggplot object with the title added.
 }
 \description{
-If \code{title_outside_plot} is FALSE (the default), places \code{plot_title} inside
+If \code{title_outside_plot} is FALSE, places \code{plot_title} inside
 the plot area via \code{annotate("text", ...)} at \code{y = ymax * y_frac} — the
 \code{plot_ID83} style. If TRUE, places it above the plot via
 \code{ggtitle() + theme(plot.title = ...)}. Title size is always

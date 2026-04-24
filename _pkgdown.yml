@@ -82,6 +82,7 @@ reference:
     desc: Helper functions for working with catalog data.
     contents:
       - catalog_row_order
+      - id89_figlabels
 
 footer:
   structure:

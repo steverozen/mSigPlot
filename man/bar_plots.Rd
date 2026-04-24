@@ -329,7 +329,7 @@ will be checked against \code{\link[=catalog_row_order]{catalog_row_order()}}.}
 
 \item{plot_title_cex}{Numeric. Multiplier for the plot title size.}
 
-\item{title_outside_plot}{Logical. If FALSE (the default), the title is
+\item{title_outside_plot}{Logical. If FALSE, the title is
 drawn inside the plot panel as an annotation (the \code{plot_ID83} style).
 If TRUE, the title is drawn above the panel via \code{ggtitle()}. For
 \code{plot_SBS288}, TRUE places the overall title above the 3-panel
@@ -362,7 +362,7 @@ via \code{...}).}
 \item{class_label_cex}{Numeric. Multiplier for major class labels.}
 
 \item{show_counts}{Logical or NULL. If \code{TRUE}, always display per-class
-count labels. If \code{FALSE}, never display them. If \code{NULL} (the default),
+count labels. If \code{FALSE}, never display them. If \code{NULL},
 display them only when the catalog contains counts (sum > 1.1).
 Not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}.}
 
@@ -371,7 +371,7 @@ Not available in \code{plot_DBS144}, \code{plot_SBS12}, \code{plot_SBS288}.}
 
 \item{peak_label_cex}{Numeric. Size multiplier for peak labels.}
 
-\item{title_x}{Numeric fraction in \link{0, 1} giving the horizontal position
+\item{title_x}{Numeric fraction in [0, 1] giving the horizontal position
 of the inside-panel title, as a fraction of the plot's bar range
 (0 = left edge, 1 = right edge). Ignored when \code{title_outside_plot = TRUE}.
 Default is 0 (far left) for SBS plots and 0.4 (a bit left of center)

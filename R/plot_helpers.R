@@ -30,8 +30,12 @@ base_mm <- function(base_size) {
 #'   `"muts_per_million"`, or `"density_proportion"`.
 #' @keywords internal
 detect_y_axis_type <- function(values, y_axis_type_attr = NULL, ylim = NULL) {
-  if (!is.null(y_axis_type_attr)) return(y_axis_type_attr)
-  if (!is.null(ylim) && max(ylim) > 1.5) return("counts")
+  if (!is.null(y_axis_type_attr)) {
+    return(y_axis_type_attr)
+  }
+  if (!is.null(ylim) && max(ylim) > 1.5) {
+    return("counts")
+  }
   if (sum(abs(values), na.rm = TRUE) >= 1.1) "counts" else "proportion"
 }
 
@@ -46,14 +50,16 @@ detect_y_axis_type <- function(values, y_axis_type_attr = NULL, ylim = NULL) {
 #' @return Logical.
 #' @keywords internal
 resolve_show_counts <- function(show_counts, catalog_type) {
-  if (is.null(show_counts)) return(catalog_type == "counts")
+  if (is.null(show_counts)) {
+    return(catalog_type == "counts")
+  }
   show_counts
 }
 
 
 #' Add a plot title, inside the panel (annotate) or above it (ggtitle)
 #'
-#' If `title_outside_plot` is FALSE (the default), places `plot_title` inside
+#' If `title_outside_plot` is FALSE, places `plot_title` inside
 #' the plot area via `annotate("text", ...)` at `y = ymax * y_frac` — the
 #' `plot_ID83` style. If TRUE, places it above the plot via
 #' `ggtitle() + theme(plot.title = ...)`. Title size is always
@@ -71,23 +77,39 @@ resolve_show_counts <- function(show_counts, catalog_type) {
 #' @param hjust Horizontal justification of the inside title.
 #' @return The ggplot object with the title added.
 #' @keywords internal
-add_plot_title <- function(p, plot_title, title_outside_plot,
-                           plot_title_cex, base_size, ymax,
-                           x = 1, y_frac = 7.4 / 8, hjust = 0) {
-  if (is.null(plot_title) || !nzchar(plot_title)) return(p)
+add_plot_title <- function(
+  p,
+  plot_title,
+  title_outside_plot,
+  plot_title_cex,
+  base_size,
+  ymax,
+  x = 1,
+  y_frac = 7.4 / 8,
+  hjust = 0
+) {
+  if (is.null(plot_title) || !nzchar(plot_title)) {
+    return(p)
+  }
   if (title_outside_plot) {
     p +
       ggplot2::ggtitle(plot_title) +
       ggplot2::theme(
         plot.title = ggplot2::element_text(
-          size = plot_title_cex * base_size))
+          size = plot_title_cex * base_size
+        )
+      )
   } else {
-    p + ggplot2::annotate(
-      "text",
-      x = x, y = ymax * y_frac,
-      label = plot_title, hjust = hjust,
-      fontface = "bold",
-      size = plot_title_cex * base_mm(base_size))
+    p +
+      ggplot2::annotate(
+        "text",
+        x = x,
+        y = ymax * y_frac,
+        label = plot_title,
+        hjust = hjust,
+        fontface = "bold",
+        size = plot_title_cex * base_mm(base_size)
+      )
   }
 }
 
@@ -115,46 +137,55 @@ add_plot_title <- function(p, plot_title, title_outside_plot,
 #'
 #' @importFrom ggrepel geom_text_repel
 add_peak_labels <- function(
-    plot, df, x_col, y_col, label_col,
-    num_peak_labels = 0,
-    peak_label_cex = 0.7,
-    base_size = 11,
-    arrow_length = 0.01,
-    label_threshold_denominator = 7
+  plot,
+  df,
+  x_col,
+  y_col,
+  label_col,
+  num_peak_labels = 0,
+  peak_label_cex = 0.7,
+  base_size = 11,
+  arrow_length = 0.01,
+  label_threshold_denominator = 7
 ) {
-  if (num_peak_labels == 0) return(plot)
+  if (num_peak_labels == 0) {
+    return(plot)
+  }
 
   threshold <- max(abs(df[[y_col]]), na.rm = TRUE) / label_threshold_denominator
   candidates <- df[abs(df[[y_col]]) > threshold, ]
   candidates <- candidates[order(-abs(candidates[[y_col]])), ]
   label_data <- utils::head(candidates, num_peak_labels)
 
-  if (nrow(label_data) == 0) return(plot)
+  if (nrow(label_data) == 0) {
+    return(plot)
+  }
 
-  plot + ggrepel::geom_text_repel(
-    data = label_data,
-    ggplot2::aes(
-      x = .data[[x_col]],
-      y = .data[[y_col]],
-      label = .data[[label_col]]
-    ),
-    size = peak_label_cex * base_size / ggplot2::.pt,
-    nudge_y = max(abs(df[[y_col]]), na.rm = TRUE) * 0.1,
-    direction = "both",
-    segment.color = "gray50",
-    segment.size = 0.13 * base_size / ggplot2::.pt,
-    arrow = grid::arrow(
-      length = grid::unit(arrow_length, "npc"),
-      type = "closed"
-    ),
-    max.overlaps = 50,
-    min.segment.length = 0,
-    box.padding = 1,
-    point.padding = 0.1,
-    force = 2,
-    force_pull = 0.5,
-    inherit.aes = FALSE
-  )
+  plot +
+    ggrepel::geom_text_repel(
+      data = label_data,
+      ggplot2::aes(
+        x = .data[[x_col]],
+        y = .data[[y_col]],
+        label = .data[[label_col]]
+      ),
+      size = peak_label_cex * base_size / ggplot2::.pt,
+      nudge_y = max(abs(df[[y_col]]), na.rm = TRUE) * 0.1,
+      direction = "both",
+      segment.color = "gray50",
+      segment.size = 0.13 * base_size / ggplot2::.pt,
+      arrow = grid::arrow(
+        length = grid::unit(arrow_length, "npc"),
+        type = "closed"
+      ),
+      max.overlaps = 50,
+      min.segment.length = 0,
+      box.padding = 1,
+      point.padding = 0.1,
+      force = 2,
+      force_pull = 0.5,
+      inherit.aes = FALSE
+    )
 }
 
 
@@ -172,8 +203,8 @@ add_peak_labels <- function(
 prepare_indel_data <- function(catalog, type_table) {
   melt_df <- data.frame(
     IndelType = type_table$IndelType,
-    variable  = "Sample",
-    value     = catalog,
+    variable = "Sample",
+    value = catalog,
     stringsAsFactors = FALSE
   )
   merged <- merge(type_table, melt_df, by = "IndelType", all.x = TRUE)
@@ -206,10 +237,13 @@ prepare_indel_data <- function(catalog, type_table) {
 #' @importFrom Cairo CairoPDF
 #' @importFrom grDevices dev.off
 plot_catalog_pdf <- function(
-    catalog, filename, plot_fn,
-    plots_per_page = 5,
-    width = 12, height = 14,
-    ...
+  catalog,
+  filename,
+  plot_fn,
+  plots_per_page = 5,
+  width = 12,
+  height = 14,
+  ...
 ) {
   n_samples <- ncol(catalog)
 
