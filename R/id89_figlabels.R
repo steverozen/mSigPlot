@@ -47,6 +47,7 @@ id89_figlabels <- function(indel_types) {
   x[is_multi] <- sub("M\\(([0-9]+),\\)$", "M(\\1+)", x[is_multi])
   x[is_multi] <- gsub(":", "", x[is_multi])
   x[x == "L(3+)U(3,)R(3+)"] <- "L(3+)U(3+)R(3+)"
+  x[x == "L(3+)U(3,)R2"] <- "L(3+)U(3+)R2"
 
   x
 }

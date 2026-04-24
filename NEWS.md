@@ -1,3 +1,7 @@
+# mSigPlot 2.0.36
+
+* Minor adjustments to plot_ID89 x axis text
+
 # mSigPlot 2.0.35
 
 * Moved `id89_figlabels()` from `R/plot_ID89.R` to its own file
