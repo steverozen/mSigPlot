@@ -159,12 +159,14 @@ of creating a PDF file), or stop with an error if the catalog is invalid.</p>
 <span class="r-in"><span><span class="fu">plot_DBS136</span><span class="op">(</span><span class="va">sig</span>, plot_title <span class="op">=</span> <span class="st">"Example DBS136"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="heatmap_plots-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1536</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sig</span> <span class="op">&lt;-</span> <span class="va">sig</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">sig</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="catalog_row_order.html">catalog_row_order</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">SBS1536</span></span></span>
 <span class="r-in"><span><span class="fu">plot_SBS1536</span><span class="op">(</span><span class="va">sig</span>, plot_title <span class="op">=</span> <span class="st">"Example SBS1536"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="heatmap_plots-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
