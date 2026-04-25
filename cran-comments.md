@@ -25,18 +25,27 @@ Checked on GitHub Actions across a five-entry matrix:
 * ubuntu-latest, R oldrel-1
 
 All jobs run `R CMD check --as-cran` (via
-`r-lib/actions/check-r-package@v2`).
+`r-lib/actions/check-r-package@v2`) with
+`_R_CHECK_CRAN_INCOMING_`, `_R_CHECK_CRAN_INCOMING_REMOTE_`,
+`_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_`, and
+`_R_CHECK_CRAN_INCOMING_USE_ASPELL_` all set to `true`, to match
+CRAN's pretest configuration.
 
 ## R CMD check results
 
-All five GitHub Actions jobs passed.
+All five GitHub Actions jobs passed:
+https://github.com/steverozen/mSigPlot/actions/runs/24932112133
 
-A local `R CMD check --as-cran` on the built tarball with the CRAN
-incoming-feasibility check enabled returns:
+A local `R CMD check --as-cran` under R-devel (r89955, the same
+revision CRAN's pretest used) with the CRAN incoming-feasibility
+checks enabled returns:
 
     0 errors | 0 warnings | 1 note
 
-The single NOTE is the expected "New submission" flag.
+The single NOTE is the expected "New submission" flag. The R-devel
+pretest of 2.0.36 also flagged three invalid file URIs in `README.md`;
+those have been fixed in 2.0.37 and no longer appear in either local
+R-devel or CI output.
 
 ## Downstream dependencies
 
