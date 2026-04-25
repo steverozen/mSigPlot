@@ -28,6 +28,12 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      # Force CRAN incoming-feasibility checks so --as-cran emits the same
+      # NOTEs CRAN's pretest does (e.g. invalid file URIs in README, possibly
+      # misspelled words). r-lib/actions/check-r-package@v2 disables these
+      # by default.
+      _R_CHECK_CRAN_INCOMING_: true
+      _R_CHECK_CRAN_INCOMING_REMOTE_: true
 
     steps:
       - uses: actions/checkout@v4
