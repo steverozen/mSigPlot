@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.36</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.37</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,11 @@
       <small>Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.37" id="msigplot-2037">mSigPlot 2.0.37<a class="anchor" aria-label="anchor" href="#msigplot-2037"></a></h2>
+<ul><li>Replaced three <code>man/*.Rd</code> links in <code>README.md</code> with in-page anchors (<code>#sbs12</code>, <code>#dbs144</code>, <code>#id166</code>) and added the corresponding gallery sections with example figures. CRAN’s R-devel pretest of 2.0.36 flagged the original <code>man/*.Rd</code> links as “Possibly invalid file URIs” because the rendered Rd files are not present in the installed package.</li>
+<li>CI: enabled <code>_R_CHECK_CRAN_INCOMING_</code>, <code>_R_CHECK_CRAN_INCOMING_REMOTE_</code>, <code>_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_</code>, and <code>_R_CHECK_CRAN_INCOMING_USE_ASPELL_</code> in <code>R-CMD-check.yaml</code> so the GitHub matrix runs the same incoming-feasibility checks CRAN’s pretest does.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.36" id="msigplot-2036">mSigPlot 2.0.36<a class="anchor" aria-label="anchor" href="#msigplot-2036"></a></h2>
 <ul><li>Minor adjustments to plot_ID89 x axis text</li>

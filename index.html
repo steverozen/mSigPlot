@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.36</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.37</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,7 +108,7 @@
 </tr>
 <tr class="odd">
 <td>12</td>
-<td><a href="man/plot_SBS12.Rd"><code>plot_SBS12()</code></a></td>
+<td><a href="#sbs12"><code>plot_SBS12()</code></a></td>
 <td>SBS strand bias (from 192-row input)</td>
 <td>Paired bar chart</td>
 </tr>
@@ -132,7 +132,7 @@
 </tr>
 <tr class="odd">
 <td>144</td>
-<td><a href="man/plot_DBS144.Rd"><code>plot_DBS144()</code></a></td>
+<td><a href="#dbs144"><code>plot_DBS144()</code></a></td>
 <td>DBS with transcription strand</td>
 <td>Paired bar chart</td>
 </tr>
@@ -150,7 +150,7 @@
 </tr>
 <tr class="even">
 <td>166</td>
-<td><a href="man/plot_ID166.Rd"><code>plot_ID166()</code></a></td>
+<td><a href="#id166"><code>plot_ID166()</code></a></td>
 <td>Indel 83-type classification, genic/intergenic</td>
 <td>Paired bar chart</td>
 </tr>
@@ -186,6 +186,12 @@
 <p><img src="reference/figures/example_SBS192.png" alt="SBS192 strand-aware mutational spectrum bar plot" width="100%"></p>
 </div>
 <div class="section level3">
+<h3 id="sbs12">SBS12<a class="anchor" aria-label="anchor" href="#sbs12"></a>
+</h3>
+<p>Collapsed strand-bias view of an SBS192 catalog: 6 mutation classes x 2 strands (transcribed vs. untranscribed). Takes a 192-row catalog as input.</p>
+<p><img src="reference/figures/example_SBS12.png" alt="SBS12 strand-bias bar plot" width="60%"></p>
+</div>
+<div class="section level3">
 <h3 id="sbs1536">SBS1536<a class="anchor" aria-label="anchor" href="#sbs1536"></a>
 </h3>
 <p>Pentanucleotide-context SBS shown as six 16x16 heatmaps.</p>
@@ -210,6 +216,12 @@
 <p><img src="reference/figures/example_DBS136.png" alt="DBS136 doublet base substitution heatmap" width="80%"></p>
 </div>
 <div class="section level3">
+<h3 id="dbs144">DBS144<a class="anchor" aria-label="anchor" href="#dbs144"></a>
+</h3>
+<p>Transcription strand-aware DBS profile. Bars are paired: transcribed and untranscribed for each dinucleotide context.</p>
+<p><img src="reference/figures/example_DBS144.png" alt="DBS144 strand-aware doublet base substitution bar plot" width="100%"></p>
+</div>
+<div class="section level3">
 <h3 id="id83">ID83<a class="anchor" aria-label="anchor" href="#id83"></a>
 </h3>
 <p>COSMIC 83-type indel classification covering 1bp deletions/insertions, repeat-mediated indels, and microhomology-mediated deletions.</p>
@@ -220,6 +232,12 @@
 </h3>
 <p>89-type indel classification system.</p>
 <p><img src="reference/figures/example_ID89.png" alt="ID89 indel classification bar plot" width="100%"></p>
+</div>
+<div class="section level3">
+<h3 id="id166">ID166<a class="anchor" aria-label="anchor" href="#id166"></a>
+</h3>
+<p>83-type indel classification split by genic vs. intergenic regions. Bars are paired (genic, intergenic) within each indel class. The example below uses a synthetic catalog derived from COSMIC ID1 (no ID166 data ships with the package).</p>
+<p><img src="reference/figures/example_ID166.png" alt="ID166 genic/intergenic indel bar plot" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="id476">ID476<a class="anchor" aria-label="anchor" href="#id476"></a>
