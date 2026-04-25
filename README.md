@@ -42,14 +42,14 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 |----------|----------|---------------|------------|
 | 96 | [`plot_SBS96()`](#sbs96) | SBS (single-base substitutions) in trinucleotide context | Bar chart |
 | 192 | [`plot_SBS192()`](#sbs192) | SBS in trinucleotide context with transcription strand | Paired bar chart |
-| 12 | [`plot_SBS12()`](man/plot_SBS12.Rd) | SBS strand bias (from 192-row input) | Paired bar chart |
+| 12 | [`plot_SBS12()`](#sbs12) | SBS strand bias (from 192-row input) | Paired bar chart |
 | 1536 | [`plot_SBS1536()`](#sbs1536) | SBS in pentanucleotide context | 2x3 heatmap grid |
 | 78 | [`plot_DBS78()`](#dbs78) | DBS (doublet base substitution) | Bar chart |
 | 136 | [`plot_DBS136()`](#dbs136) | DBS dinucleotide classes | 10-panel heatmap |
-| 144 | [`plot_DBS144()`](man/plot_DBS144.Rd) | DBS with transcription strand | Paired bar chart |
+| 144 | [`plot_DBS144()`](#dbs144) | DBS with transcription strand | Paired bar chart |
 | 83 | [`plot_ID83()`](#id83) | Indel (COSMIC 83 indel-type classification) | Bar chart |
 | 89 | [`plot_ID89()`](#id89) | Indel (89 indel-type classification) | Bar chart |
-| 166 | [`plot_ID166()`](man/plot_ID166.Rd) | Indel 83-type classification, genic/intergenic | Paired bar chart |
+| 166 | [`plot_ID166()`](#id166) | Indel 83-type classification, genic/intergenic | Paired bar chart |
 | 476 | [`plot_ID476()`](#id476) | Indel 476-type classification | Bar chart + peak labels |
 | 288 | [`plot_SBS288()`](#sbs288) | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
 
@@ -71,6 +71,13 @@ Transcription strand-aware SBS profile. Bars are paired: transcribed (blue) and
 untranscribed (red) for each trinucleotide context. Intergenic regions not plotted.
 
 <img src="man/figures/example_SBS192.png" alt="SBS192 strand-aware mutational spectrum bar plot" width="100%" />
+
+### SBS12
+
+Collapsed strand-bias view of an SBS192 catalog: 6 mutation classes x 2
+strands (transcribed vs. untranscribed). Takes a 192-row catalog as input.
+
+<img src="man/figures/example_SBS12.png" alt="SBS12 strand-bias bar plot" width="60%" />
 
 ### SBS1536
 
@@ -101,6 +108,13 @@ a maxima-per-class summary.
 
 <img src="man/figures/example_DBS136.png" alt="DBS136 doublet base substitution heatmap" width="80%" />
 
+### DBS144
+
+Transcription strand-aware DBS profile. Bars are paired: transcribed and
+untranscribed for each dinucleotide context.
+
+<img src="man/figures/example_DBS144.png" alt="DBS144 strand-aware doublet base substitution bar plot" width="100%" />
+
 ### ID83
 
 COSMIC 83-type indel classification covering 1bp deletions/insertions,
@@ -113,6 +127,15 @@ repeat-mediated indels, and microhomology-mediated deletions.
 89-type indel classification system.
 
 <img src="man/figures/example_ID89.png" alt="ID89 indel classification bar plot" width="100%" />
+
+### ID166
+
+83-type indel classification split by genic vs. intergenic regions.
+Bars are paired (genic, intergenic) within each indel class. The example
+below uses a synthetic catalog derived from COSMIC ID1 (no ID166 data
+ships with the package).
+
+<img src="man/figures/example_ID166.png" alt="ID166 genic/intergenic indel bar plot" width="100%" />
 
 ### ID476
 

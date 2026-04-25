@@ -31,6 +31,10 @@ catalog_sbs192 <- data.frame(sample1 = sbs192_df[, 4],
 save_fig(plot_SBS192(catalog_sbs192, plot_title = "HepG2 -- SBS192"),
          "example_SBS192", width = 10, height = 4)
 
+# SBS12 (derived from a 192-row catalog)
+save_fig(plot_SBS12(catalog_sbs192, plot_title = "HepG2 -- SBS12 strand bias"),
+         "example_SBS12", width = 6, height = 4)
+
 # SBS1536
 sbs1536_df <- read.csv(system.file("extdata", "regress.cat.sbs.1536.csv",
                                    package = "mSigPlot"))
@@ -56,6 +60,14 @@ catalog_dbs78 <- data.frame(sample1 = dbs78_df[, 3],
 save_fig(plot_DBS78(catalog_dbs78, plot_title = "HepG2 sample -- DBS78"),
          "example_DBS78", width = 10, height = 4)
 
+# DBS144
+dbs144_df <- read.csv(system.file("extdata", "regress.cat.dbs.144.csv",
+                                  package = "mSigPlot"))
+catalog_dbs144 <- data.frame(sample1 = dbs144_df[, 4],
+                             row.names = catalog_row_order()$DBS144)
+save_fig(plot_DBS144(catalog_dbs144, plot_title = "HepG2 -- DBS144"),
+         "example_DBS144", width = 10, height = 4)
+
 # DBS136
 dbs136_df <- read.csv(system.file("extdata", "regress.cat.dbs.136.csv",
                                   package = "mSigPlot"), row.names = 1)
@@ -80,6 +92,17 @@ id89_sigs <- read.table(system.file("extdata", "type89_liu_et_al_sigs.tsv",
 save_fig(plot_ID89(id89_sigs[, 1, drop = FALSE],
                    plot_title = "ID89 signature"),
          "example_ID89", width = 10, height = 4)
+
+# ID166 (synthetic — no real ID166 data ship with the package).
+# Build by replicating an ID83 signature into genic/intergenic strata.
+set.seed(1)
+id166_genic <- as.numeric(id83_sigs[, "ID1"])
+id166_intergenic <- id166_genic * runif(83, 0.4, 1.6)
+id166_vec <- c(id166_genic, id166_intergenic)
+catalog_id166 <- data.frame(sample1 = id166_vec,
+                            row.names = catalog_row_order()$ID166)
+save_fig(plot_ID166(catalog_id166, plot_title = "Example ID166 (synthetic)"),
+         "example_ID166", width = 10, height = 4)
 
 # ID476
 id476_sigs <- read.table(system.file("extdata", "type476_liu_et_al_sigs.tsv",

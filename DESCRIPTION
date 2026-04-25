@@ -1,6 +1,6 @@
 Package: mSigPlot
 Title: Plotting Mutational Signatures and Mutational Spectra
-Version: 2.0.36
+Version: 2.0.37
 Authors@R: 
     person("Steven", "Rozen", , "steverozen@pm.me", role = c("aut", "cre"))
 Description: Plotting functions for mutational signatures and mutational

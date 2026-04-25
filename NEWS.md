@@ -1,3 +1,17 @@
+# mSigPlot 2.0.37
+
+* Replaced three `man/*.Rd` links in `README.md` with in-page anchors
+  (`#sbs12`, `#dbs144`, `#id166`) and added the corresponding gallery
+  sections with example figures. CRAN's R-devel pretest of 2.0.36
+  flagged the original `man/*.Rd` links as "Possibly invalid file URIs"
+  because the rendered Rd files are not present in the installed
+  package.
+* CI: enabled `_R_CHECK_CRAN_INCOMING_`, `_R_CHECK_CRAN_INCOMING_REMOTE_`,
+  `_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_`, and
+  `_R_CHECK_CRAN_INCOMING_USE_ASPELL_` in `R-CMD-check.yaml` so the
+  GitHub matrix runs the same incoming-feasibility checks CRAN's
+  pretest does.
+
 # mSigPlot 2.0.36
 
 * Minor adjustments to plot_ID89 x axis text
