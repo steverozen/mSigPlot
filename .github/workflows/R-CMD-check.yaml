@@ -34,6 +34,8 @@ jobs:
       # by default.
       _R_CHECK_CRAN_INCOMING_: true
       _R_CHECK_CRAN_INCOMING_REMOTE_: true
+      _R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_: true
+      _R_CHECK_CRAN_INCOMING_USE_ASPELL_: true
 
     steps:
       - uses: actions/checkout@v4
