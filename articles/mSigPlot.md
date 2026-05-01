@@ -8,6 +8,7 @@ base substitutions (DBS), and small insertions and deletions (indels)
 across 10 classification systems.
 
 ``` r
+
 library(mSigPlot)
 ```
 
@@ -19,6 +20,7 @@ If row names are present they will be checked agains
 `catalog_row_order`.
 
 ``` r
+
 sbs96_file <- system.file("extdata", "sbs96_example.csv", package = "mSigPlot")
 sbs96_df <- read.csv(sbs96_file)
 catalog_sbs96 <- data.frame(
@@ -36,6 +38,7 @@ If there are no names or row names be sure the rows are in the order
 expected for plotting.
 
 ``` r
+
 plot_SBS96(sample(sbs96_df[ ,3, drop = TRUE], replace = FALSE), 
   plot_title = "HepG2 sample, mixed up row order -- SBS96")
 ```
@@ -53,6 +56,7 @@ the y-axis breaks. These options are independent and are supported by
 all bar-plot functions.
 
 ``` r
+
 plot_SBS96(catalog_sbs96,
            plot_title = "HepG2 -- SBS96 (grid + external title)",
            grid = TRUE,
@@ -68,6 +72,7 @@ single-base and multi-base deletions, insertions, and microhomology
 deletions.
 
 ``` r
+
 id83_file <- system.file("extdata", "id83_cosmic_v3.5.tsv", package = "mSigPlot")
 id83_sigs <- read.table(id83_file, header = TRUE, sep = "\t",
                         row.names = 1, check.names = FALSE)
@@ -82,6 +87,7 @@ The 89-channel system (Koh et al.) provides a finer decomposition of
 indel types, including optional complex indels.
 
 ``` r
+
 id89_file <- system.file("extdata", "type89_liu_et_al_sigs.tsv",
                          package = "mSigPlot")
 id89_sigs <- read.table(id89_file, header = TRUE, sep = "\t",
@@ -94,6 +100,7 @@ plot_ID89(id89_sigs[, 1, drop = FALSE], plot_title = "ID89 signature")
 One can add arrows to label the tallest peaks for bar-chart-like plots:
 
 ``` r
+
 plot_ID89(id89_sigs[, 1, drop = FALSE], plot_title = "ID89 signature",
           num_peak_labels = 5)
 ```
@@ -106,6 +113,7 @@ The 476-channel system adds flanking base context to the indel
 classification, producing a detailed profile.
 
 ``` r
+
 id476_file <- system.file("extdata", "type476_liu_et_al_sigs.tsv",
                           package = "mSigPlot")
 id476_sigs <- read.table(id476_file, header = TRUE, sep = "\t",
@@ -121,6 +129,7 @@ The right portion of the 476-channel profile (positions 343–476) can be
 plotted separately for a closer look at multi-base indels.
 
 ``` r
+
 plot_ID476_right(id476_sigs[, 1, drop = FALSE],
                  plot_title = "ID476 right panel")
 ```
@@ -133,6 +142,7 @@ The 78-channel DBS catalog covers all dinucleotide substitution classes,
 organized into 10 reference dinucleotide groups.
 
 ``` r
+
 dbs78_file <- system.file("extdata", "dbs78_example.csv", package = "mSigPlot")
 dbs78_df <- read.csv(dbs78_file)
 catalog_dbs78 <- data.frame(
@@ -150,6 +160,7 @@ The 192-channel catalog pairs each of the 96 trinucleotide contexts with
 transcribed and untranscribed strand information.
 
 ``` r
+
 sbs192_file <- system.file("extdata", "regress.cat.sbs.192.csv",
                            package = "mSigPlot")
 sbs192_df <- read.csv(sbs192_file)
@@ -168,6 +179,7 @@ The 144-channel DBS catalog adds transcription strand context to the 78
 dinucleotide substitution types.
 
 ``` r
+
 dbs144_file <- system.file("extdata", "regress.cat.dbs.144.csv",
                            package = "mSigPlot")
 dbs144_df <- read.csv(dbs144_file)
@@ -186,6 +198,7 @@ The 136-channel DBS catalog is displayed as a heatmap of 10 panels (4x4
 grids) rather than a bar chart.
 
 ``` r
+
 dbs136_file <- system.file("extdata", "regress.cat.dbs.136.csv",
                            package = "mSigPlot")
 dbs136_df <- read.csv(dbs136_file, row.names = 1)
@@ -200,6 +213,7 @@ The 1536-channel catalog extends trinucleotide context to
 pentanucleotide context, displayed as a faceted heatmap.
 
 ``` r
+
 sbs1536_file <- system.file("extdata", "regress.cat.sbs.1536.csv",
                             package = "mSigPlot")
 sbs1536_df <- read.csv(sbs1536_file)
@@ -218,6 +232,7 @@ The 288-channel catalog adds three strand categories (transcribed,
 untranscribed, non-transcribed/intergenic) to the 96 SBS channels.
 
 ``` r
+
 sbs288_file <- system.file("extdata", "SBS288_De-Novo_Signatures.txt",
                            package = "mSigPlot")
 sbs288_df <- read.table(sbs288_file, header = TRUE, sep = "\t",
@@ -233,6 +248,7 @@ The 166-channel indel catalog adds genic/intergenic context to the
 83-channel COSMIC classification.
 
 ``` r
+
 set.seed(42)
 sig_id166 <- runif(166)
 sig_id166 <- sig_id166 / sum(sig_id166)
@@ -248,6 +264,7 @@ The SBS12 plot collapses a 192-channel catalog to 12 bars (6 mutation
 classes x 2 strands) to visualize transcription strand bias.
 
 ``` r
+
 plot_SBS12(catalog_sbs192, plot_title = "HepG2 -- SBS12 strand bias")
 ```
 
@@ -260,6 +277,7 @@ If you don’t know (or don’t want to specify) the catalog type,
 detects it from the number of rows:
 
 ``` r
+
 plot_guess(catalog_sbs96, plot_title = "Auto-detected SBS96")
 ```
 
@@ -272,6 +290,7 @@ with 5 plots per page. The auto-dispatch version is
 [`plot_guess_pdf()`](https://steverozen.github.io/mSigPlot/reference/plot_guess.md):
 
 ``` r
+
 sbs96_mat <- as.matrix(sbs96_df[, 3:6])
 rownames(sbs96_mat) <- catalog_row_order()$SBS96
 colnames(sbs96_mat) <- paste0("Sample_", 1:4)

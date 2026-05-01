@@ -7,6 +7,7 @@ systems with bar charts, strand-bias plots, and heatmaps.
 ## Installation
 
 ``` r
+
 # Install from GitHub
 install.packages("remotes")  # if needed
 remotes::install_github("steverozen/mSigPlot")
@@ -20,6 +21,7 @@ matrix, tibble, or data.table. The easiest entry point is
 which auto-detects the catalog type by row count:
 
 ``` r
+
 library(mSigPlot)
 
 # Auto-detect and plot
@@ -34,20 +36,20 @@ plot_guess_pdf(multi_sample_catalog, "output.pdf")
 
 ## Supported catalog types
 
-| Channels | Function                     | Mutation type                                                                                 | Plot style                |
-|----------|------------------------------|-----------------------------------------------------------------------------------------------|---------------------------|
-| 96       | [`plot_SBS96()`](#sbs96)     | SBS (single-base substitutions) in trinucleotide context                                      | Bar chart                 |
-| 192      | [`plot_SBS192()`](#sbs192)   | SBS in trinucleotide context with transcription strand                                        | Paired bar chart          |
-| 12       | [`plot_SBS12()`](#sbs12)     | SBS strand bias (from 192-row input)                                                          | Paired bar chart          |
-| 1536     | [`plot_SBS1536()`](#sbs1536) | SBS in pentanucleotide context                                                                | 2x3 heatmap grid          |
-| 78       | [`plot_DBS78()`](#dbs78)     | DBS (doublet base substitution)                                                               | Bar chart                 |
-| 136      | [`plot_DBS136()`](#dbs136)   | DBS dinucleotide classes                                                                      | 10-panel heatmap          |
-| 144      | [`plot_DBS144()`](#dbs144)   | DBS with transcription strand                                                                 | Paired bar chart          |
-| 83       | [`plot_ID83()`](#id83)       | Indel (COSMIC 83 indel-type classification)                                                   | Bar chart                 |
-| 89       | [`plot_ID89()`](#id89)       | Indel (89 indel-type classification)                                                          | Bar chart                 |
-| 166      | [`plot_ID166()`](#id166)     | Indel 83-type classification, genic/intergenic                                                | Paired bar chart          |
-| 476      | [`plot_ID476()`](#id476)     | Indel 476-type classification                                                                 | Bar chart + peak labels   |
-| 288      | [`plot_SBS288()`](#sbs288)   | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
+| Channels | Function | Mutation type | Plot style |
+|----|----|----|----|
+| 96 | [`plot_SBS96()`](#sbs96) | SBS (single-base substitutions) in trinucleotide context | Bar chart |
+| 192 | [`plot_SBS192()`](#sbs192) | SBS in trinucleotide context with transcription strand | Paired bar chart |
+| 12 | [`plot_SBS12()`](#sbs12) | SBS strand bias (from 192-row input) | Paired bar chart |
+| 1536 | [`plot_SBS1536()`](#sbs1536) | SBS in pentanucleotide context | 2x3 heatmap grid |
+| 78 | [`plot_DBS78()`](#dbs78) | DBS (doublet base substitution) | Bar chart |
+| 136 | [`plot_DBS136()`](#dbs136) | DBS dinucleotide classes | 10-panel heatmap |
+| 144 | [`plot_DBS144()`](#dbs144) | DBS with transcription strand | Paired bar chart |
+| 83 | [`plot_ID83()`](#id83) | Indel (COSMIC 83 indel-type classification) | Bar chart |
+| 89 | [`plot_ID89()`](#id89) | Indel (89 indel-type classification) | Bar chart |
+| 166 | [`plot_ID166()`](#id166) | Indel 83-type classification, genic/intergenic | Paired bar chart |
+| 476 | [`plot_ID476()`](#id476) | Indel 476-type classification | Bar chart + peak labels |
+| 288 | [`plot_SBS288()`](#sbs288) | SBS in trinucleotide context, by template (transcribed), non-template, and intergenic regions | 3-panel stacked bar chart |
 
 Every plot function except `plot_SBS288` has a corresponding `_pdf()`
 variant (e.g.,
@@ -159,17 +161,17 @@ plot](reference/figures/example_ID476.png)
 
 All plot functions share these parameters:
 
-| Parameter           | Description                                                      |
-|---------------------|------------------------------------------------------------------|
-| `catalog`           | Numeric vector, data.frame, matrix, tibble, or data.table        |
-| `plot_title`        | Title above the plot (defaults to column name)                   |
-| `base_size`         | Base font size in points (default 11)                            |
-| `show_counts`       | `TRUE`/`FALSE`/`NULL` (auto-detect) for per-class count labels   |
-| `show_axis_text_x`  | Show or hide x-axis tick labels                                  |
-| `show_axis_text_y`  | Show or hide y-axis tick labels                                  |
-| `show_axis_title_x` | Show or hide the x-axis title                                    |
-| `show_axis_title_y` | Show or hide the y-axis title                                    |
-| `*_cex`             | Multipliers for individual text elements relative to `base_size` |
+| Parameter | Description |
+|----|----|
+| `catalog` | Numeric vector, data.frame, matrix, tibble, or data.table |
+| `plot_title` | Title above the plot (defaults to column name) |
+| `base_size` | Base font size in points (default 11) |
+| `show_counts` | `TRUE`/`FALSE`/`NULL` (auto-detect) for per-class count labels |
+| `show_axis_text_x` | Show or hide x-axis tick labels |
+| `show_axis_text_y` | Show or hide y-axis tick labels |
+| `show_axis_title_x` | Show or hide the x-axis title |
+| `show_axis_title_y` | Show or hide the y-axis title |
+| `*_cex` | Multipliers for individual text elements relative to `base_size` |
 
 Most bar chart functions also accept `ylim` (y-axis limits), `grid`
 (grid lines), and `upper` (colored class labels above bars). See
@@ -187,6 +189,7 @@ your rows are in an unexpected order you will got nonsensical plots. Use
 to see the expected order for any catalog type:
 
 ``` r
+
 head(catalog_row_order()$SBS96)
 #> [1] "ACAA" "ACCA" "ACGA" "ACTA" "CCAA" "CCCA"
 ```
@@ -196,6 +199,7 @@ head(catalog_row_order()$SBS96)
 After installation, access the full documentation for any function:
 
 ``` r
+
 ?plot_SBS96
 ?plot_guess
 ?catalog_row_order
