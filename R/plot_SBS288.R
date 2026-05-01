@@ -1,7 +1,7 @@
 #' @rdname bar_plots
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' set.seed(1)
 #' sig <- runif(288)
 #' names(sig) <- catalog_row_order()$SBS288

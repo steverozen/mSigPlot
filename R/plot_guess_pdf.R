@@ -1,11 +1,11 @@
 #' @rdname plot_guess
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' sig <- matrix(runif(96 * 3), nrow = 96)
 #' rownames(sig) <- catalog_row_order()$SBS96
 #' colnames(sig) <- paste0("Sig", 1:3)
-#' plot_guess_pdf(sig, filename = "auto_detected.pdf")
+#' plot_guess_pdf(sig, filename = tempfile(fileext = ".pdf"))
 #' }
 #'
 #' @export

@@ -1,3 +1,11 @@
+# mSigPlot 2.0.38
+
+* Removed single-quotes around SBS and DBS in `DESCRIPTION` per CRAN
+  reviewer request.
+* Added literature references to `DESCRIPTION`.
+* Changed `\dontrun{}` to `\donttest{}` in examples for `plot_SBS288()`
+  and `plot_guess_pdf()` per CRAN reviewer request.
+
 # mSigPlot 2.0.37
 
 * Replaced three `man/*.Rd` links in `README.md` with in-page anchors

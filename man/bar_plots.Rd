@@ -488,7 +488,7 @@ sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$SBS192
 plot_SBS192(sig, plot_title = "Example SBS192 signature")
 
-\dontrun{
+\donttest{
 set.seed(1)
 sig <- runif(288)
 names(sig) <- catalog_row_order()$SBS288
