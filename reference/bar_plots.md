@@ -544,12 +544,13 @@ names(sig) <- catalog_row_order()$SBS192
 plot_SBS192(sig, plot_title = "Example SBS192 signature")
 
 
-if (FALSE) { # \dontrun{
+# \donttest{
 set.seed(1)
 sig <- runif(288)
 names(sig) <- catalog_row_order()$SBS288
 plot_SBS288(sig, plot_title = "Example SBS288")
-} # }
+
+# }
 
 # Plot a random SBS96 signature (proportions summing to 1)
 set.seed(1)

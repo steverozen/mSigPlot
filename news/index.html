@@ -35,6 +35,12 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.38" id="msigplot-2038">mSigPlot 2.0.38<a class="anchor" aria-label="anchor" href="#msigplot-2038"></a></h2>
+<ul><li>Removed single-quotes around SBS and DBS in <code>DESCRIPTION</code> per CRAN reviewer request.</li>
+<li>Added literature references to <code>DESCRIPTION</code>.</li>
+<li>Changed <code>\dontrun{}</code> to <code>\donttest{}</code> in examples for <code><a href="../reference/bar_plots.html">plot_SBS288()</a></code> and <code><a href="../reference/plot_guess.html">plot_guess_pdf()</a></code> per CRAN reviewer request.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.37" id="msigplot-2037">mSigPlot 2.0.37<a class="anchor" aria-label="anchor" href="#msigplot-2037"></a></h2>
 <ul><li>Replaced three <code>man/*.Rd</code> links in <code>README.md</code> with in-page anchors (<code>#sbs12</code>, <code>#dbs144</code>, <code>#id166</code>) and added the corresponding gallery sections with example figures. CRAN’s R-devel pretest of 2.0.36 flagged the original <code>man/*.Rd</code> links as “Possibly invalid file URIs” because the rendered Rd files are not present in the installed package.</li>
 <li>CI: enabled <code>_R_CHECK_CRAN_INCOMING_</code>, <code>_R_CHECK_CRAN_INCOMING_REMOTE_</code>, <code>_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_</code>, and <code>_R_CHECK_CRAN_INCOMING_USE_ASPELL_</code> in <code>R-CMD-check.yaml</code> so the GitHub matrix runs the same incoming-feasibility checks CRAN’s pretest does.</li>
