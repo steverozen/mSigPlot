@@ -23,7 +23,7 @@
 #' @examples
 #' id89_figlabels(c(
 #'   "[Del(C):R1]A",
-#'   "Del(C):R(6,9)",
+#'   "Del(C):R(6,)",
 #'   "Del(2,4):R1",
 #'   "Del(2,):U(1,2):R(5,)",
 #'   "Del(6,):M(4,)",
@@ -39,7 +39,6 @@ id89_figlabels <- function(indel_types) {
   x[is_single] <- gsub("(Del|Ins)\\(([CT])\\)", "\\2", x[is_single])
   x[is_single] <- gsub(":R", "", x[is_single])
   x[is_single] <- gsub("\\(([0-9]+),\\)", "(\\1+)", x[is_single])
-  x[x == "C(6,9)"] <- "C(6+)"
 
   x[is_multi] <- sub("^(Del|Ins)\\(", "L(", x[is_multi])
   x[is_multi] <- sub("^L\\(([0-9]+),\\)", "L(\\1+)", x[is_multi])

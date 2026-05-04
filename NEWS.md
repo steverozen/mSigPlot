@@ -1,3 +1,12 @@
+# mSigPlot 2.0.39
+
+* Moved stapled row name documentation from `catalog_row_order()` to the
+  `@param catalog` description shared by all bar plot functions, where it
+  is more relevant.
+* For ID89, changed "Del(C):R(6,9)", to "Del(C):R(6,)" for the standard 
+  rownames (catalog_row_order) and patched normalize_catalog.R so that it
+  will accept either to avoid breaking calls with older data.
+
 # mSigPlot 2.0.38
 
 * Removed single-quotes around SBS and DBS in `DESCRIPTION` per CRAN

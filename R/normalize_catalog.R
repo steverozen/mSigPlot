@@ -58,14 +58,24 @@ normalize_catalog <- function(
     return(NULL)
   }
 
-  # Convert stapled SBS row names to canonical form
   rn <- rownames(catalog)
   if (!is.null(rn) && !is.null(canonical_order)) {
-    if (expected_nrow == 96 &&
-        all(grepl("^[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
+    # "Del(C):R(6,9)" was renamed to "Del(C):R(6,)" in v2.0.39
+    if (expected_nrow == 89) {
+      rn <- sub("Del(C):R(6,9)", "Del(C):R(6,)", rn, fixed = TRUE)
+      rownames(catalog) <- rn
+    }
+
+    # Convert stapled SBS row names to canonical form
+    if (
+      expected_nrow == 96 &&
+        all(grepl("^[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))
+    ) {
       rownames(catalog) <- unstaple_SBS96_rownames(rn)
-    } else if (expected_nrow == 288 &&
-               all(grepl("^[TUN]:[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))) {
+    } else if (
+      expected_nrow == 288 &&
+        all(grepl("^[TUN]:[ACGT]\\[[CT]>[ACGT]\\][ACGT]$", rn))
+    ) {
       prefix <- substr(rn, 1, 2)
       stapled <- substring(rn, 3)
       rownames(catalog) <- paste0(prefix, unstaple_SBS96_rownames(stapled))

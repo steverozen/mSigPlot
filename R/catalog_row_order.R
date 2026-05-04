@@ -11,12 +11,6 @@
 #' `T:ACAA` (transcribed), `U:ACAA` (untranscribed), `N:ACAA`
 #' (non-transcribed).
 #'
-#' Catalogs with "stapled" row names (e.g. `A[C>A]A` for SBS96,
-#' `T:A[C>A]A` for SBS288) are automatically converted to compact format
-#' by [normalize_catalog()] before validation, so both formats are
-#' accepted by all SBS plotting functions. (Only SBS functions
-#' use stapled row names.)
-#'
 #' @return A named list with elements: SBS96, SBS192, SBS288, SBS1536, DBS78,
 #'   DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
 #'
@@ -2506,7 +2500,7 @@ catalog_row_order <- function() {
       "[Del(C):R(4,5)]A",
       "[Del(C):R(4,5)]T",
       "[Del(C):R(1,5)]G",
-      "Del(C):R(6,9)",
+      "Del(C):R(6,)",
       "A[Del(T):R(1,4)]A",
       "A[Del(T):R(1,4)]C",
       "A[Del(T):R(1,4)]G",
