@@ -2,7 +2,7 @@
 #'
 #' Returns a named list containing the canonical row ordering for each
 #' catalog type. These are used for validation and ordering of mutation
-#' catalogs. The result is cached after the first call.
+#' catalogs.
 #'
 #' Row names use a compact 4-letter format for SBS types: e.g. `ACAA`
 #' encodes the trinucleotide context as
@@ -21,15 +21,6 @@
 #'
 #' @export
 catalog_row_order <- function() {
-  if (!is.null(.pkg_cache$row_orders)) {
-    return(.pkg_cache$row_orders)
-  }
-  result <- .build_row_orders()
-  .pkg_cache$row_orders <- result
-  result
-}
-
-.build_row_orders <- function() {
   sbs96 <- c(
     "ACAA",
     "ACCA",

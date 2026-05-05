@@ -4,9 +4,6 @@
 #' @name plot_helpers
 NULL
 
-# Package-level cache environment
-.pkg_cache <- new.env(parent = emptyenv())
-
 
 #' Convert base_size (points) to mm for geom_text sizing
 #'
