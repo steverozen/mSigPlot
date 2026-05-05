@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.38</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.39</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,11 @@
       <small>Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.39" id="msigplot-2039">mSigPlot 2.0.39<a class="anchor" aria-label="anchor" href="#msigplot-2039"></a></h2>
+<ul><li>Moved stapled row name documentation from <code><a href="../reference/catalog_row_order.html">catalog_row_order()</a></code> to the <code>@param catalog</code> description shared by all bar plot functions, where it is more relevant.</li>
+<li>For ID89, changed “Del(C):R(6,9)”, to “Del(C):R(6,)” for the standard rownames (catalog_row_order) and patched normalize_catalog.R so that it will accept either to avoid breaking calls with older data.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.38" id="msigplot-2038">mSigPlot 2.0.38<a class="anchor" aria-label="anchor" href="#msigplot-2038"></a></h2>
 <ul><li>Removed single-quotes around SBS and DBS in <code>DESCRIPTION</code> per CRAN reviewer request.</li>
