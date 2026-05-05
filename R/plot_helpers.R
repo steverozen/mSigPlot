@@ -194,7 +194,7 @@ add_peak_labels <- function(
 #'
 #' @param catalog Named numeric vector of indel channel values.
 #' @param type_table Data frame with at least an `IndelType` column and
-#'   classification columns (e.g. `Indel`, `Figlabel`).
+#'   classification columns (e.g. `Indel`).
 #' @return Data frame with columns from `type_table` plus `Sample` and `freq`.
 #' @keywords internal
 prepare_indel_data <- function(catalog, type_table) {

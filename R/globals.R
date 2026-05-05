@@ -9,7 +9,6 @@ utils::globalVariables(c(
   "freq",
   "x_pos",
   "cl",
-  "Figlabel",
   "IndelType",
   "label",
   "value",

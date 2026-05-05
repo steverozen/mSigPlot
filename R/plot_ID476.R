@@ -175,10 +175,10 @@ plot_ID476 <- function(
 
   # Simplify labels if requested
   if (simplify_labels && nrow(label_data) > 0) {
-    label_data$Figlabel <- ifelse(
-      grepl("[ACGT]\\[(Del|Ins)\\([CT]", label_data$Figlabel),
-      sub("^[ACGT]\\[(Del|Ins)\\([CT]\\):", "", label_data$Figlabel),
-      label_data$Figlabel
+    label_data$IndelType <- ifelse(
+      grepl("[ACGT]\\[(Del|Ins)\\([CT]", label_data$IndelType),
+      sub("^[ACGT]\\[(Del|Ins)\\([CT]\\):", "", label_data$IndelType),
+      label_data$IndelType
     )
   }
 
@@ -339,7 +339,7 @@ plot_ID476 <- function(
     ) +
     ggrepel::geom_text_repel(
       data = label_data,
-      ggplot2::aes(x = x_pos, y = freq, label = Figlabel),
+      ggplot2::aes(x = x_pos, y = freq, label = IndelType),
       size = peak_label_cex * base_size / ggplot2::.pt,
       nudge_y = max(muts_basis_melt$freq) * 0.1,
       direction = "both",
