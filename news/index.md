@@ -12,6 +12,8 @@
 
 ## mSigPlot 2.0.38
 
+CRAN release: 2026-05-05
+
 - Removed single-quotes around SBS and DBS in `DESCRIPTION` per CRAN
   reviewer request.
 - Added literature references to `DESCRIPTION`.

@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/steverozen/mSigPlot/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/steverozen/mSigPlot/blob/v2.0.38/DESCRIPTION)
 
 Rozen S (2026). *mSigPlot: Plotting Mutational Signatures and Mutational
 Spectra*. R package version 2.0.39,
