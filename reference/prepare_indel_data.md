@@ -19,7 +19,7 @@ prepare_indel_data(catalog, type_table)
 - type_table:
 
   Data frame with at least an `IndelType` column and classification
-  columns (e.g. `Indel`, `Figlabel`).
+  columns (e.g. `Indel`).
 
 ## Value
 

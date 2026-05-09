@@ -1,5 +1,12 @@
 # Changelog
 
+## mSigPlot 2.0.40
+
+- Updated row names for 476-type plots. Renamed R/type_476_indel_type.R
+  to R/catalog_and_label_order_476.R and the function
+  type_476_indel_type() to catalog_and_label_order_476(). Updated
+  callers and docs.
+
 ## mSigPlot 2.0.39
 
 - Moved stapled row name documentation from
@@ -93,9 +100,7 @@ CRAN release: 2026-05-05
   `(7,9)` notation; sub-block bracket labels also use the `(N+)` style.
 - Removed the unused `Indel3` column from
   [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
-  and from
-  [`type_476_indel_type()`](https://steverozen.github.io/mSigPlot/reference/type_476_indel_type.md)
-  (never read).
+  and from `type_476_indel_type()` (never read).
 - Changed `stop_at_9` default in
   [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
   from `TRUE` to `FALSE`; the plot data is unchanged, but `(8+)` now

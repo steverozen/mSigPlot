@@ -9,7 +9,7 @@ into the compact tick-label style used on the x-axis of plot_ID89()."></head><bo
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.39</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.40</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@ into the compact tick-label style used on the x-axis of plot_ID89()."></head><bo
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Derive ID89 figure-axis labels from canonical IndelType strings</h1>
-      <small class="dont-index">Source: <a href="https://github.com/steverozen/mSigPlot/blob/v2.0.38/R/id89_figlabels.R" class="external-link"><code>R/id89_figlabels.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/R/id89_figlabels.R" class="external-link"><code>R/id89_figlabels.R</code></a></small>
       <div class="d-none name"><code>id89_figlabels.Rd</code></div>
     </div>
 
@@ -77,13 +77,13 @@ space-padded to <code>M(N, )</code>, and all colons are removed.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">id89_figlabels</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"[Del(C):R1]A"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Del(C):R(6,9)"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Del(C):R(6,)"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Del(2,4):R1"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Del(2,):U(1,2):R(5,)"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Del(6,):M(4,)"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Complex"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[C1]A"            "C(6,9)"           "L(2,4)R1"         "L(2+)U(1,2)R(5+)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[C1]A"            "C(6+)"            "L(2,4)R1"         "L(2+)U(1,2)R(5+)"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] "L(6+)M(4+)"       "Complex"         </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

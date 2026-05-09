@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.39</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.40</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +31,13 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/steverozen/mSigPlot/blob/v2.0.38/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.40" id="msigplot-2040">mSigPlot 2.0.40<a class="anchor" aria-label="anchor" href="#msigplot-2040"></a></h2>
+<ul><li>Updated row names for 476-type plots. Renamed R/type_476_indel_type.R to R/catalog_and_label_order_476.R and the function type_476_indel_type() to catalog_and_label_order_476(). Updated callers and docs.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.39" id="msigplot-2039">mSigPlot 2.0.39<a class="anchor" aria-label="anchor" href="#msigplot-2039"></a></h2>
 <ul><li>Moved stapled row name documentation from <code><a href="../reference/catalog_row_order.html">catalog_row_order()</a></code> to the <code>@param catalog</code> description shared by all bar plot functions, where it is more relevant.</li>
@@ -69,7 +73,7 @@
 <h2 class="pkg-version" data-toc-text="2.0.33" id="msigplot-2033">mSigPlot 2.0.33<a class="anchor" aria-label="anchor" href="#msigplot-2033"></a></h2>
 <ul><li>Refactored <code><a href="../reference/bar_plots.html">plot_ID89()</a></code>: the internal <code>IndelType</code> column now derives from <code>catalog_row_order()$ID89</code> instead of an inline 89-element literal, giving a single source of truth for channel names.</li>
 <li>New internal helper <code><a href="../reference/id89_figlabels.html">id89_figlabels()</a></code> derives x-axis tick labels algorithmically from the canonical <code>IndelType</code> strings. Open-ended repeat tracts are rendered as <code>(N+)</code> (e.g. <code>T(8+)</code>, <code>C(7+)</code>, <code>R(5+)</code>) rather than the former <code>(8,9)</code> / <code>(7,9)</code> notation; sub-block bracket labels also use the <code>(N+)</code> style.</li>
-<li>Removed the unused <code>Indel3</code> column from <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> and from <code><a href="../reference/type_476_indel_type.html">type_476_indel_type()</a></code> (never read).</li>
+<li>Removed the unused <code>Indel3</code> column from <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> and from <code>type_476_indel_type()</code> (never read).</li>
 <li>Changed <code>stop_at_9</code> default in <code><a href="../reference/bar_plots.html">plot_ID89()</a></code> from <code>TRUE</code> to <code>FALSE</code>; the plot data is unchanged, but <code>(8+)</code> now communicates that the user must know their upstream trimming.</li>
 <li>Added a peak-label regression test (<code>plot_ID89 with peak labels</code>) and a corresponding <code>plot_ID89_peaks</code> entry in <code>tests/visual/</code>.</li>
 <li>Re-blessed regression hashes and visual reference PNGs for <code>plot_ID89</code> and <code>plot_ID89_peaks</code> to match the new label style.</li>

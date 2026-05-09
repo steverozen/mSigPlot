@@ -11,7 +11,7 @@ returns a patchwork object."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.39</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.40</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ returns a patchwork object."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>plot_DBS144, plot_DBS144_pdf, plot_DBS78, plot_DBS78_pdf, plot_ID166, plot_ID166_pdf, plot_ID476, plot_ID476_pdf, plot_ID476_right, plot_ID476_right_pdf, plot_ID83, plot_ID83_pdf, plot_ID89, plot_ID89_pdf, plot_SBS12, plot_SBS12_pdf, plot_SBS192, plot_SBS192_pdf, plot_SBS288, plot_SBS96, plot_SBS96_pdf</h1>
-      <small class="dont-index">Source: <a href="https://github.com/steverozen/mSigPlot/blob/v2.0.38/R/plot_DBS144.R" class="external-link"><code>R/plot_DBS144.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/v2.0.38/R/plot_DBS144_pdf.R" class="external-link"><code>R/plot_DBS144_pdf.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/v2.0.38/R/plot_DBS78.R" class="external-link"><code>R/plot_DBS78.R</code></a>, and 19 more</small>
+      <small class="dont-index">Source: <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS144.R" class="external-link"><code>R/plot_DBS144.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS144_pdf.R" class="external-link"><code>R/plot_DBS144_pdf.R</code></a>, <a href="https://github.com/steverozen/mSigPlot/blob/main/R/plot_DBS78.R" class="external-link"><code>R/plot_DBS78.R</code></a>, and 19 more</small>
       <div class="d-none name"><code>bar_plots.Rd</code></div>
     </div>
 
@@ -331,7 +331,9 @@ returns a patchwork object.</p>
 <dl><dt id="arg-catalog">catalog<a class="anchor" aria-label="anchor" href="#arg-catalog"></a></dt>
 <dd><p>Numeric vector, single-column data.frame, matrix, tibble,
 or data.table. If there are row names (or for a vector, names), they
-will be checked against <code><a href="catalog_row_order.html">catalog_row_order()</a></code>.</p></dd>
+will be checked against <code><a href="catalog_row_order.html">catalog_row_order()</a></code>. SBS functions also accept
+"stapled" row names (e.g. <code>A[C&gt;A]A</code> for SBS96, <code>T:A[C&gt;A]A</code> for SBS288),
+which are automatically converted to compact format before validation.</p></dd>
 
 
 <dt id="arg-plot-title">plot_title<a class="anchor" aria-label="anchor" href="#arg-plot-title"></a></dt>

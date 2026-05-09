@@ -41,12 +41,12 @@ The `"Complex"` channel is returned unchanged.
 ``` r
 id89_figlabels(c(
   "[Del(C):R1]A",
-  "Del(C):R(6,9)",
+  "Del(C):R(6,)",
   "Del(2,4):R1",
   "Del(2,):U(1,2):R(5,)",
   "Del(6,):M(4,)",
   "Complex"
 ))
-#> [1] "[C1]A"            "C(6,9)"           "L(2,4)R1"         "L(2+)U(1,2)R(5+)"
+#> [1] "[C1]A"            "C(6+)"            "L(2,4)R1"         "L(2+)U(1,2)R(5+)"
 #> [5] "L(6+)M(4+)"       "Complex"         
 ```

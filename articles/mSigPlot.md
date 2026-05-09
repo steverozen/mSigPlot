@@ -119,9 +119,10 @@ id476_file <- system.file("extdata", "type476_liu_et_al_sigs.tsv",
 id476_sigs <- read.table(id476_file, header = TRUE, sep = "\t",
                          row.names = 1, check.names = FALSE)
 plot_ID476(id476_sigs[, 1, drop = FALSE], plot_title = "ID476 signature")
+#> Warning in normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476"):
+#> Row names of catalog do not match canonical ID476 row names; returning NULL
+#> NULL
 ```
-
-![](mSigPlot_files/figure-html/id476-1.png)
 
 ### ID476 right panel
 
@@ -132,9 +133,10 @@ plotted separately for a closer look at multi-base indels.
 
 plot_ID476_right(id476_sigs[, 1, drop = FALSE],
                  plot_title = "ID476 right panel")
+#> Warning in normalize_catalog(catalog, 476, catalog_row_order()$ID476, "ID476"):
+#> Row names of catalog do not match canonical ID476 row names; returning NULL
+#> NULL
 ```
-
-![](mSigPlot_files/figure-html/id476-right-1.png)
 
 ## DBS78 – doublet base substitutions
 

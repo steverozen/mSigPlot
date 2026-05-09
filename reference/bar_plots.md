@@ -292,6 +292,9 @@ plot_SBS96_pdf(catalog, filename, ...)
   data.table. If there are row names (or for a vector, names), they will
   be checked against
   [`catalog_row_order()`](https://steverozen.github.io/mSigPlot/reference/catalog_row_order.md).
+  SBS functions also accept "stapled" row names (e.g. `A[C>A]A` for
+  SBS96, `T:A[C>A]A` for SBS288), which are automatically converted to
+  compact format before validation.
 
 - plot_title:
 
