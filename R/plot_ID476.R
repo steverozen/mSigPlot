@@ -67,7 +67,7 @@ plot_ID476 <- function(
       "Density Proportion"
     )
   }
-  Koh476_indeltype <- type_476_indel_type()
+  Koh476_indeltype <- catalog_and_label_order_476()
   muts_basis_melt <- prepare_indel_data(catalog, Koh476_indeltype)
 
   # Add x position for plotting

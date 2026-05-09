@@ -2573,7 +2573,7 @@ catalog_row_order <- function() {
       "Complex"
     ),
 
-    ID476 = type_476_indel_type()$IndelType
+    ID476 = catalog_and_label_order_476()$IndelType
   )
 }
 

@@ -13,7 +13,7 @@ DBS136, DBS144, ID (83-category COSMIC indels), ID166, ID89, ID476.
 \description{
 Returns a named list containing the canonical row ordering for each
 catalog type. These are used for validation and ordering of mutation
-catalogs. The result is cached after the first call.
+catalogs.
 }
 \details{
 Row names use a compact 4-letter format for SBS types: e.g. \code{ACAA}
@@ -22,12 +22,6 @@ encodes the trinucleotide context as
 SBS288 row names add a strand prefix:
 \code{T:ACAA} (transcribed), \code{U:ACAA} (untranscribed), \code{N:ACAA}
 (non-transcribed).
-
-Catalogs with "stapled" row names (e.g. \verb{A[C>A]A} for SBS96,
-\verb{T:A[C>A]A} for SBS288) are automatically converted to compact format
-by \code{\link[=normalize_catalog]{normalize_catalog()}} before validation, so both formats are
-accepted by all SBS plotting functions. (Only SBS functions
-use stapled row names.)
 }
 \examples{
 cro <- catalog_row_order()

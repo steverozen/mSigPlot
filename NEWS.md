@@ -1,3 +1,9 @@
+# mSigPlot 2.0.40
+
+* Updated row names for 476-type plots. Renamed R/type_476_indel_type.R 
+  to R/catalog_and_label_order_476.R and the function type_476_indel_type()
+  to catalog_and_label_order_476(). Updated callers and docs.
+
 # mSigPlot 2.0.39
 
 * Moved stapled row name documentation from `catalog_row_order()` to the

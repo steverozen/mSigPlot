@@ -33,7 +33,7 @@ The \code{"Complex"} channel is returned unchanged.
 \examples{
 id89_figlabels(c(
   "[Del(C):R1]A",
-  "Del(C):R(6,9)",
+  "Del(C):R(6,)",
   "Del(2,4):R1",
   "Del(2,):U(1,2):R(5,)",
   "Del(6,):M(4,)",
