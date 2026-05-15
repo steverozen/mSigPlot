@@ -318,7 +318,10 @@ plot_SBS96_pdf(catalog, filename, ...)
 
 - ylim:
 
-  Optional y-axis limits.
+  Optional y-axis limits. Either `NULL` (auto) or a length-2 numeric
+  vector `c(ymin, ymax)`, following ggplot2's
+  `scale_y_continuous(limits = ...)` convention. A scalar is rejected
+  with an error.
 
 - base_size:
 

@@ -11,7 +11,7 @@ returns a patchwork object."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.40</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.41</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -357,7 +357,10 @@ which are automatically converted to compact format before validation.</p></dd>
 
 
 <dt id="arg-ylim">ylim<a class="anchor" aria-label="anchor" href="#arg-ylim"></a></dt>
-<dd><p>Optional y-axis limits.</p></dd>
+<dd><p>Optional y-axis limits. Either <code>NULL</code> (auto) or a
+length-2 numeric vector <code>c(ymin, ymax)</code>, following ggplot2's
+<code>scale_y_continuous(limits = ...)</code> convention. A scalar is rejected
+with an error.</p></dd>
 
 
 <dt id="arg-base-size">base_size<a class="anchor" aria-label="anchor" href="#arg-base-size"></a></dt>

@@ -21,7 +21,8 @@ detect_y_axis_type(values, y_axis_type_attr = NULL, ylim = NULL)
 
 - ylim:
 
-  Optional y-axis limits vector.
+  Optional length-2 numeric y-axis limits vector `c(ymin, ymax)`, or
+  NULL.
 
 ## Value
 
