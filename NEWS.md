@@ -1,6 +1,6 @@
 # mSigPlot 2.0.41
 
-* Added error check for scalar and non-numeric values of argument ymax for 
+* Added error check for scalar and non-numeric values of argument ylim for 
   plot_ID* functions. Implemeted in file check_ylim.R.
 * Added tests of same.
 
