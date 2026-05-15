@@ -36,6 +36,7 @@ plot_ID89 <- function(
   peak_label_cex = 0.7,
   grid = FALSE
 ) {
+  check_ylim(ylim)
   catalog <- normalize_catalog(catalog, 89, catalog_row_order()$ID89, "ID89")
   if (is.null(catalog)) {
     return(NULL)

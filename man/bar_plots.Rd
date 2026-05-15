@@ -325,7 +325,10 @@ which are automatically converted to compact format before validation.}
 
 \item{show_axis_title_y}{Logical. If FALSE, hide the y-axis title.}
 
-\item{ylim}{Optional y-axis limits.}
+\item{ylim}{Optional y-axis limits. Either \code{NULL} (auto) or a
+length-2 numeric vector \code{c(ymin, ymax)}, following ggplot2's
+\code{scale_y_continuous(limits = ...)} convention. A scalar is rejected
+with an error.}
 
 \item{base_size}{Numeric. Base font size in points.}
 

@@ -36,6 +36,7 @@ plot_ID166 <- function(
   num_peak_labels = 0,
   peak_label_cex = 0.7
 ) {
+  check_ylim(ylim)
   catalog <- normalize_catalog(catalog, 166, catalog_row_order()$ID166, "ID166")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""

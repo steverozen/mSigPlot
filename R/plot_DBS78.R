@@ -33,6 +33,7 @@ plot_DBS78 <- function(
   num_peak_labels = 0,
   peak_label_cex = 0.7
 ) {
+  check_ylim(ylim)
   catalog <- normalize_catalog(catalog, 78, catalog_row_order()$DBS78, "DBS78")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""

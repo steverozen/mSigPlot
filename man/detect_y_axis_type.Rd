@@ -11,7 +11,8 @@ detect_y_axis_type(values, y_axis_type_attr = NULL, ylim = NULL)
 
 \item{y_axis_type_attr}{The \code{y_axis_type_attr} attribute from the catalog, or NULL.}
 
-\item{ylim}{Optional y-axis limits vector.}
+\item{ylim}{Optional length-2 numeric y-axis limits vector
+\code{c(ymin, ymax)}, or NULL.}
 }
 \value{
 Character string: one of \code{"counts"}, \code{"proportion"},

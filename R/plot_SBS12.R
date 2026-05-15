@@ -29,6 +29,7 @@ plot_SBS12 <- function(
   axis_text_y_cex = 0.7,
   grid = FALSE
 ) {
+  check_ylim(ylim)
   catalog <- normalize_catalog(catalog, 192, catalog_row_order()$SBS192, "SBS192")
   if (is.null(catalog)) return(NULL)
   if (is.null(plot_title)) plot_title <- colnames(catalog)[1] %||% ""

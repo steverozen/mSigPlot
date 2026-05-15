@@ -1,3 +1,9 @@
+# mSigPlot 2.0.41
+
+* Added error check for scalar and non-numeric values of argument ymax for 
+  plot_ID* functions. Implemeted in file check_ylim.R.
+* Added tests of same.
+
 # mSigPlot 2.0.40
 
 * Updated row names for 476-type plots. Renamed R/type_476_indel_type.R 

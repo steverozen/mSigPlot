@@ -15,6 +15,34 @@ base_mm <- function(base_size) {
 }
 
 
+#' Validate a user-supplied `ylim` argument
+#'
+#' Matches ggplot2's scale-limits contract: `ylim` must be `NULL` or a
+#' length-2 numeric vector `c(ymin, ymax)`. A scalar (e.g. `100`) is
+#' rejected, the same way `ggplot2::scale_y_continuous(limits = 100)`
+#' rejects it.
+#'
+#' @param ylim The value supplied by the caller.
+#' @param arg_name Character. Argument name used in the error message;
+#'   defaults to `"ylim"`.
+#' @return `ylim`, invisibly, if valid. Errors otherwise.
+#' @keywords internal
+check_ylim <- function(ylim, arg_name = "ylim") {
+  if (is.null(ylim)) {
+    return(invisible(ylim))
+  }
+  if (!is.numeric(ylim) || length(ylim) != 2L) {
+    stop(
+      "`", arg_name, "` must be a numeric vector of length 2, ",
+      "or NULL. Got length ", length(ylim),
+      ". Use c(ymin, ymax), e.g. c(0, 100).",
+      call. = FALSE
+    )
+  }
+  invisible(ylim)
+}
+
+
 #' Detect y-axis type from data and attributes
 #'
 #' Determines the y-axis type for a catalog. Checks the `y_axis_type_attr`
@@ -22,7 +50,8 @@ base_mm <- function(base_size) {
 #'
 #' @param values Numeric vector of catalog values.
 #' @param y_axis_type_attr The `y_axis_type_attr` attribute from the catalog, or NULL.
-#' @param ylim Optional y-axis limits vector.
+#' @param ylim Optional length-2 numeric y-axis limits vector
+#'   `c(ymin, ymax)`, or NULL.
 #' @return Character string: one of `"counts"`, `"proportion"`,
 #'   `"muts_per_million"`, or `"density_proportion"`.
 #' @keywords internal

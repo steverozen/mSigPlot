@@ -30,7 +30,10 @@
 #'   via `...`).
 #' @param upper Logical, draw colored class rectangles and labels above bars
 #'   (not available in `plot_DBS144`, `plot_SBS12`, `plot_SBS288`).
-#' @param ylim Optional y-axis limits.
+#' @param ylim Optional y-axis limits. Either `NULL` (auto) or a
+#'   length-2 numeric vector `c(ymin, ymax)`, following ggplot2's
+#'   `scale_y_continuous(limits = ...)` convention. A scalar is rejected
+#'   with an error.
 #' @param base_size Numeric. Base font size in points.
 #' @param plot_title_cex Numeric. Multiplier for the plot title size.
 #' @param title_outside_plot Logical. If FALSE, the title is
@@ -119,6 +122,7 @@ plot_DBS144 <- function(
   axis_text_y_cex = 0.7,
   grid = FALSE
 ) {
+  check_ylim(ylim)
   catalog <- normalize_catalog(
     catalog,
     144,
