@@ -1,13 +1,13 @@
 # mSigPlot 2.0.41
 
 * Added error check for scalar and non-numeric values of argument ylim for 
-  plot_ID* functions. Implemeted in file check_ylim.R.
+  plot_ID* functions. Implemented in file check_ylim.R.
 * Added tests of same.
 
 # mSigPlot 2.0.40
 
 * Updated row names for 476-type plots. Renamed R/type_476_indel_type.R 
-  to R/catalog_and_label_order_476.R and the function type_476_indel_type()
+  to R/catalog_and_label_order_476.R and the internal function type_476_indel_type()
   to catalog_and_label_order_476(). Updated callers and docs.
 
 # mSigPlot 2.0.39
