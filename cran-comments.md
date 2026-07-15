@@ -1,12 +1,20 @@
 ## Submission
 
-Resubmission of 2.0.37 as 2.0.38 following CRAN reviewer feedback:
+Resubmission as 2.0.41 following the 2.0.38 CRAN pretest cycle.
+Changes since 2.0.38 (all documented in `NEWS.md`):
 
-* Removed single-quotes around SBS and DBS in the `Description` field
-  of `DESCRIPTION`.
-* Added literature references to the `Description` field.
-* Changed `\dontrun{}` to `\donttest{}` in examples for `plot_SBS288()`
-  and `plot_guess_pdf()`.
+* 2.0.39: Consolidated stapled-row-name documentation onto the shared
+  `@param catalog` description across bar-plot functions; accepted both
+  `Del(C):R(6,9)` and `Del(C):R(6,)` in `normalize_catalog()` for ID89
+  to avoid breaking calls with older data.
+* 2.0.40: Renamed internal helper `type_476_indel_type()` to
+  `catalog_and_label_order_476()` (file rename included) and updated
+  callers and docs; corrected 476-type row-name labels.
+* 2.0.41: Added error-checking for scalar and non-numeric values of
+  the `ymax` / `ylim` argument in `plot_ID*` functions
+  (`R/check_ylim.R`) and matching tests. Fixed two prose typos
+  (`agains` -> `against` in the vignette, `Implemeted` -> `Implemented`
+  in `NEWS.md`).
 
 The package provides publication-quality ggplot2 plotting functions
 for mutational signatures and mutational spectra across ten channel
@@ -31,25 +39,32 @@ All jobs run `R CMD check --as-cran` (via
 `_R_CHECK_CRAN_INCOMING_USE_ASPELL_` all set to `true`, to match
 CRAN's pretest configuration.
 
+Also checked locally under R 4.6.0 (stable) and R-devel on Zorin OS
+18.1 with `devtools::check(cran = TRUE, incoming = TRUE, remote = TRUE)`
+and system `aspell` installed.
+
 ## R CMD check results
 
-All five GitHub Actions jobs passed with 1 NOTE each:
-https://github.com/steverozen/mSigPlot/actions/runs/25197750959
+All five GitHub Actions jobs passed:
+<https://github.com/steverozen/mSigPlot/actions/runs/29381414098>
 
-The single NOTE on every platform is the expected "New submission" flag
-from the CRAN incoming-feasibility check. No misspelled words, no
-invalid file URIs.
+Each of the five jobs reports 1 NOTE with identical content:
 
-A local `R CMD check --as-cran` with the CRAN incoming-feasibility
-checks enabled returns:
+    * checking CRAN incoming feasibility ... NOTE
+    Maintainer: 'Steven Rozen <steverozen@pm.me>'
+    No suitable spell-checker program found
 
-    R-stable: 0 errors | 0 warnings | 2 notes
-    R-devel:  0 errors | 0 warnings | 1 note
+This NOTE reflects the fact that the `r-lib/actions` GitHub runners do
+not install `aspell`, so the incoming-feasibility spell check could
+not run there. On the local check with `aspell` present, no misspelled
+words are reported and no other NOTEs, WARNINGs, or ERRORs are
+raised.
 
-The R-stable run adds one additional NOTE ("unable to verify current
-time") that reflects a local network restriction; it does not appear on
-CI or on CRAN's machines.
+Local `R CMD check --as-cran` with incoming feasibility enabled:
+
+    R-stable (4.6.0): 0 errors | 0 warnings | 0 notes
+    R-devel:          0 errors | 0 warnings | 0 notes
 
 ## Downstream dependencies
 
-This is a new package; there are no downstream dependencies on CRAN.
+There are no downstream dependencies on CRAN.
