@@ -16,7 +16,7 @@ library(mSigPlot)
 
 The 96-channel catalog has one row per trinucleotide mutation context,
 organized into 6 mutation classes (C\>A, C\>G, C\>T, T\>A, T\>C, T\>G).
-If row names are present they will be checked agains
+If row names are present they will be checked against
 `catalog_row_order`.
 
 ``` r
