@@ -35,7 +35,11 @@ jobs:
       _R_CHECK_CRAN_INCOMING_: true
       _R_CHECK_CRAN_INCOMING_REMOTE_: true
       _R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_: true
-      _R_CHECK_CRAN_INCOMING_USE_ASPELL_: true
+      # _R_CHECK_CRAN_INCOMING_USE_ASPELL_ is intentionally NOT set here:
+      # the r-lib/actions runners do not install system aspell/hunspell, so
+      # enabling it produces a "No suitable spell-checker program found"
+      # NOTE on every job. Spelling is covered locally by
+      # devtools::spell_check() during the /cran-submit skill.
 
     steps:
       - uses: actions/checkout@v4
