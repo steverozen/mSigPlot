@@ -2,6 +2,8 @@
 
 ## mSigPlot 2.0.41
 
+CRAN release: 2026-07-15
+
 - Added error check for scalar and non-numeric values of argument ylim
   for plot_ID\* functions. Implemented in file check_ylim.R.
 - Added tests of same.
