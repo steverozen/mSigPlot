@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">mSigPlot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.41</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.42</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,6 +116,23 @@
 <div class="section level3">
 <h3 id="test-data">Test Data<a class="anchor" aria-label="anchor" href="#test-data"></a></h3>
 <p><code>tests/testthat/fixtures/</code> contains TSV signature files (COSMIC v3.5 ID, type89 and type476 Liu et al signatures).</p>
+</div>
+<div class="section level3">
+<h3 id="visual-regression-tests">Visual Regression Tests<a class="anchor" aria-label="anchor" href="#visual-regression-tests"></a></h3>
+<p>Plot appearance is guarded by two independent systems. A change to a label, colour, or layout normally requires re-blessing <strong>both</strong>. Full procedure: <code>tests/visual/README.md</code>.</p>
+<p><strong>1. PNG-hash tests</strong> (automated, run by <code>devtools::test()</code>)</p>
+<p>Code in <code>tests/testthat/test-regression-plots.R</code>, baselines in <code>tests/testthat/fixtures/reference_hashes/*.hash</code> (SHA-256 of the raw pixel buffer via <code>tests/testthat/hash_png.py</code>). Needs <code>pixi</code> on <code>PATH</code>, otherwise the tests skip rather than fail. SBS1536 and DBS136 are excluded, their hashes are not stable across Cairo and font versions.</p>
+<p>Re-bless:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">rm</span> tests/testthat/fixtures/reference_hashes/plot_ID89.hash</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"devtools::test(filter='regression')"</span>   <span class="co"># recreates the hash, test SKIPs</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">"devtools::test(filter='regression')"</span>   <span class="co"># now it PASSes</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">git</span> add tests/testthat/fixtures/reference_hashes/</span></code></pre></div>
+<p><strong>2. Eyeball PNGs</strong> (manual, never run by the test suite)</p>
+<p><code>tests/visual/generate_visual_tests.R</code> renders one PNG per plot type into <code>tests/visual/new/</code> (git-ignored). The blessed baseline is <code>tests/visual/reference/</code> (committed). The generator never writes to <code>reference/</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">Rscript</span> tests/visual/generate_visual_tests.R                    <span class="co"># regenerate new/</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">tests/visual/promote_visual_tests.sh</span> plot_ID89 plot_ID89_peaks  <span class="co"># after looking at them</span></span></code></pre></div>
+<p>Promote only the plots the change was meant to affect, <code>new/</code> can hold stale PNGs from an earlier session. <code>tests/visual</code> is in <code>.Rbuildignore</code>.</p>
+<p>No <code>*_pdf()</code> function has a visual reference, <code>test-plot_89.R</code> only checks that a PDF file gets created.</p>
 </div>
 </div>
 <div class="section level2">

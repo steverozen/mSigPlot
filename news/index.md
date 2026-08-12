@@ -1,5 +1,10 @@
 # Changelog
 
+## mSigPlot 2.0.42
+
+- Corrected the top bar label for plot_ID89(); the second block changed
+  from an incorrect “Del 1 T(2-4)” to a correct “Del 1 T(1-4)”.
+
 ## mSigPlot 2.0.41
 
 CRAN release: 2026-07-15
