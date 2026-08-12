@@ -170,7 +170,7 @@ plot_ID89 <- function(
   ins_t_8_label <- if (stop_at_9) "Ins 1 T (8-9)" else "Ins 1 T (8+)"
   blocks$labels <- c(
     "Del 1 C",
-    "Del 1 T (2-4)",
+    "Del 1 T (1-4)",
     "Del 1 T (5-7)",
     del_t_8_label,
     "Ins 1 C",
