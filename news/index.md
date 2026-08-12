@@ -14,6 +14,13 @@
   `tests/visual/new/` PNGs to `tests/visual/reference/`.
 - Removed a stray committed `tests/testthat/tests/visual/` directory,
   left behind by an earlier run of the visual test generator.
+- Wrapped the
+  [`plot_DBS144()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  and
+  [`plot_ID166()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md)
+  examples in `\donttest{}` so the merged `bar_plots` help page runs its
+  examples in under the 5 second CRAN threshold. Both are still checked
+  under `--run-donttest`.
 
 ## mSigPlot 2.0.41
 

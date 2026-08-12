@@ -40,6 +40,7 @@
 <li>Re-blessed the regression hashes and the visual reference PNGs for <code>plot_ID89</code> and <code>plot_ID89_peaks</code>.</li>
 <li>Documented both visual regression systems (PNG hashes and eyeball PNGs) in <code>CLAUDE.md</code> and in a new <code>tests/visual/README.md</code>. Added <code>tests/visual/promote_visual_tests.sh</code> for selective promotion of <code>tests/visual/new/</code> PNGs to <code>tests/visual/reference/</code>.</li>
 <li>Removed a stray committed <code>tests/testthat/tests/visual/</code> directory, left behind by an earlier run of the visual test generator.</li>
+<li>Wrapped the <code><a href="../reference/bar_plots.html">plot_DBS144()</a></code> and <code><a href="../reference/bar_plots.html">plot_ID166()</a></code> examples in <code>\donttest{}</code> so the merged <code>bar_plots</code> help page runs its examples in under the 5 second CRAN threshold. Both are still checked under <code>--run-donttest</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.41" id="msigplot-2041">mSigPlot 2.0.41<a class="anchor" aria-label="anchor" href="#msigplot-2041"></a></h2><p class="text-muted">CRAN release: 2026-07-15</p>
