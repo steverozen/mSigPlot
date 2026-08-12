@@ -2,8 +2,18 @@
 
 ## mSigPlot 2.0.42
 
-- Corrected the top bar label for plot_ID89(); the second block changed
-  from an incorrect “Del 1 T(2-4)” to a correct “Del 1 T(1-4)”.
+- Corrected the top bar label for
+  [`plot_ID89()`](https://steverozen.github.io/mSigPlot/reference/bar_plots.md).
+  The second block changed from an incorrect “Del 1 T (2-4)” to a
+  correct “Del 1 T (1-4)”.
+- Re-blessed the regression hashes and the visual reference PNGs for
+  `plot_ID89` and `plot_ID89_peaks`.
+- Documented both visual regression systems (PNG hashes and eyeball
+  PNGs) in `CLAUDE.md` and in a new `tests/visual/README.md`. Added
+  `tests/visual/promote_visual_tests.sh` for selective promotion of
+  `tests/visual/new/` PNGs to `tests/visual/reference/`.
+- Removed a stray committed `tests/testthat/tests/visual/` directory,
+  left behind by an earlier run of the visual test generator.
 
 ## mSigPlot 2.0.41
 
