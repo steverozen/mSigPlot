@@ -96,11 +96,13 @@ NULL
 #' @rdname bar_plots
 #'
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' sig <- runif(144)
 #' sig <- sig / sum(sig)
 #' names(sig) <- catalog_row_order()$DBS144
 #' plot_DBS144(sig, plot_title = "Example DBS144 signature")
+#' }
 #'
 #' @export
 #'

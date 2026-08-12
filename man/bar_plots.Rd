@@ -435,11 +435,13 @@ Functions in this family:
 Each has a corresponding \verb{_pdf()} variant for multi-sample PDF export.
 }
 \examples{
+\donttest{
 set.seed(1)
 sig <- runif(144)
 sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$DBS144
 plot_DBS144(sig, plot_title = "Example DBS144 signature")
+}
 
 set.seed(1)
 sig <- runif(78)
@@ -447,11 +449,13 @@ sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$DBS78
 plot_DBS78(sig, plot_title = "Example DBS78 signature")
 
+\donttest{
 set.seed(1)
 sig <- runif(166)
 sig <- sig / sum(sig)
 names(sig) <- catalog_row_order()$ID166
 plot_ID166(sig, plot_title = "Example ID166 signature")
+}
 
 \donttest{
 set.seed(1)
