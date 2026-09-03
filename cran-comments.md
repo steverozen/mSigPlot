@@ -53,14 +53,14 @@ only domain vocabulary (mutational-signature terminology such as
 misspellings.
 
 Also checked locally under R 4.6.0 (stable) and R-devel
-(2026-04-23 r89955) on Zorin OS 18.1 with
+(2026-04-23 r89955) on Zorin OS 18.1 (rechecked 2026-09-02) with
 `devtools::check(cran = TRUE, incoming = TRUE, remote = TRUE)`.
 
 ## R CMD check results
 
 All five GitHub Actions jobs passed with no NOTEs, WARNINGs, or
 ERRORs:
-<https://github.com/steverozen/mSigPlot/actions/runs/31560645890>
+<https://github.com/steverozen/mSigPlot/actions/runs/33705823042>
 
 Each of the five jobs reports:
 
